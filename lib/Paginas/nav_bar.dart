@@ -1,5 +1,6 @@
 import 'package:drugenius/Paginas/Farmacocinetica.dart';
 import 'package:drugenius/Paginas/other_page.dart';
+import 'package:drugenius/Paginas/configuracion.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
@@ -203,7 +204,7 @@ class NavBar extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                const Farmacocinetica(), // Reemplaza con la pantalla deseada
+                Configuracion(), // Reemplaza con la pantalla deseada
           ),
         );
         break;

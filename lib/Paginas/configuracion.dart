@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Configuracion extends StatelessWidget {
-  const Configuracion({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    //final themeProvider = context.read<ThemeProvider>();
+    //final daltonismProvider = context.read<DaltonismProvider>();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Configuración'),
+      ),
+      body: Column(
+        children: [
+          SwitchListTile(
+            title: const Text('Modo Oscuro'),
+            value: false,
+            onChanged: (value) {},
+          ),
+          SwitchListTile(
+            title: const Text('Modo Daltonismo'),
+            value: false,
+            onChanged: (value) {},
+          ),
+        ],
+      ),
+    );
   }
 }
