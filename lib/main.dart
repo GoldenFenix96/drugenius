@@ -2,6 +2,7 @@
 
 import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Paginas/Farmacocinetica.dart';
+import 'package:drugenius/Paginas/drug_input.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:drugenius/Paginas/other_page.dart';
@@ -70,6 +71,13 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                           ElevatedButton(
                                             onPressed: () {
                                               // Acción cuando se presiona el botón
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const DrugInput(), // Reemplaza con la pantalla deseada
+                                                ),
+                                              );
                                             },
                                             style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
