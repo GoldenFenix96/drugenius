@@ -1,6 +1,7 @@
 import 'package:drugenius/Paginas/Farmacocinetica.dart';
 import 'package:drugenius/Paginas/other_page.dart';
 import 'package:drugenius/Paginas/configuracion.dart';
+import 'package:drugenius/main.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
@@ -27,63 +28,69 @@ class NavBar extends StatelessWidget {
                     fit: BoxFit.fill)),
           ),
           buildMenuItem(
+            text: "Inicio",
+            icon: Icons.home,
+            onClicked: () => selectedItem(context, 0),
+          ),
+          const SizedBox(height: 10),
+          buildMenuItem(
             text: "Generalidades",
             icon: Icons.bloodtype,
-            onClicked: () => selectedItem(context, 0),
+            onClicked: () => selectedItem(context, 1),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Medicamentos",
             icon: Icons.medication_liquid_outlined,
-            onClicked: () => selectedItem(context, 1),
+            onClicked: () => selectedItem(context, 2),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Farmacocinética",
             icon: Icons.healing_outlined,
-            onClicked: () => selectedItem(context, 2),
+            onClicked: () => selectedItem(context, 3),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Videos y Podcasts",
             icon: Icons.ondemand_video_outlined,
-            onClicked: () => selectedItem(context, 3),
+            onClicked: () => selectedItem(context, 4),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Evaluaciones",
             icon: Icons.quiz_outlined,
-            onClicked: () => selectedItem(context, 4),
+            onClicked: () => selectedItem(context, 5),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Juegos",
             icon: Icons.sports_esports_outlined,
-            onClicked: () => selectedItem(context, 5),
+            onClicked: () => selectedItem(context, 6),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Calculadora de Dosis",
             icon: Icons.calculate_outlined,
-            onClicked: () => selectedItem(context, 6),
+            onClicked: () => selectedItem(context, 7),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Foro de Discusión",
             icon: Icons.forum_outlined,
-            onClicked: () => selectedItem(context, 7),
+            onClicked: () => selectedItem(context, 8),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Perfil",
             icon: Icons.account_circle,
-            onClicked: () => selectedItem(context, 8),
+            onClicked: () => selectedItem(context, 9),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Configuración",
             icon: Icons.settings,
-            onClicked: () => selectedItem(context, 9),
+            onClicked: () => selectedItem(context, 10),
           ),
         ],
       ),
@@ -114,7 +121,7 @@ class NavBar extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                const Otherpage(), // Reemplaza con la pantalla deseada
+                const DrugeniusMenu(), // Reemplaza con la pantalla deseada
           ),
         );
         break;
@@ -134,7 +141,7 @@ class NavBar extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                const Farmacocinetica(), // Reemplaza con la pantalla deseada
+                const Otherpage(), // Reemplaza con la pantalla deseada
           ),
         );
         break;
@@ -200,6 +207,16 @@ class NavBar extends StatelessWidget {
         break;
 
       case 9:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                const Farmacocinetica(), // Reemplaza con la pantalla deseada
+          ),
+        );
+        break;
+
+      case 10:
         Navigator.push(
           context,
           MaterialPageRoute(
