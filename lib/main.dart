@@ -3,6 +3,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Paginas/Farmacocinetica.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
+import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:drugenius/Paginas/other_page.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Paginas/Nav_Bar.dart';
@@ -10,7 +11,7 @@ import 'package:drugenius/Paginas/Nav_Bar.dart';
 //import 'package:carousel_slider/carousel_slider.dart';
 
 void main() {
-  runApp(const MaterialApp(home: DrugeniusMenu()));
+  runApp(const MaterialApp(home: LogginPage()));
 }
 
 class DrugeniusMenu extends StatefulWidget {

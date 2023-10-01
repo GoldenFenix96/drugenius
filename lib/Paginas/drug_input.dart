@@ -1,0 +1,316 @@
+import 'package:card_swiper/card_swiper.dart';
+import 'package:flutter/material.dart';
+import 'package:drugenius/Componentes/my_imagepicker.dart';
+import 'package:drugenius/Componentes/my_textfield_general.dart';
+import 'package:drugenius/Componentes/my_formfield_general.dart';
+import 'package:drugenius/Componentes/my_dropdown_general.dart';
+
+class DrugInput extends StatefulWidget {
+  const DrugInput({Key? key}) : super(key: key);
+
+  @override
+  _DrugInputState createState() => _DrugInputState();
+}
+
+class _DrugInputState extends State<DrugInput> {
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Text(
+          "Ingreso de medicamentos",
+          style: TextStyle(fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
+        backgroundColor: Color.fromRGBO(253, 200, 66, 1),
+        elevation: 0,
+      ),
+      body: Container(
+        //FONDO
+        decoration: BoxDecoration(
+          /*
+          image: DecorationImage(
+            image: AssetImage("assets/images/background.jpg"),
+            fit: BoxFit.cover,
+          ),
+          */
+          color: Color.fromARGB(255, 255, 253, 244),
+        ),
+        //FIN FONDO
+        child: ListView(
+          children: [
+            Center(
+              child: Column(
+                children: [
+                  //TXT DRUG INPUT
+
+                  //FIN TXT DRUG INPUT
+                  SizedBox(height: 25.0),
+                  //TXT BIENVENIDA
+                  SizedBox(
+                    child: Center(
+                      child: Text(
+                        "Rellene los siguientes campos con la información del medicamento",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          //fontFamily: 'Montserrat',
+                          fontSize: 18.0,
+                          color: Color(0xffbebcbc),
+                        ),
+                      ),
+                    ),
+                  ),
+                  //FIN TXT BIENVENIDA
+                  SizedBox(height: 30.0),
+                  //TXT INPUT
+                  _imagenMedicamento(),
+                  SizedBox(height: 15.0),
+                  _grupoMedicamento(),
+                  SizedBox(height: 15.0),
+                  _subgrupoFarmacologico(),
+                  SizedBox(height: 15.0),
+                  _nombreMedicamento(),
+                  SizedBox(height: 15.0),
+                  _otroNombreMedicamento(),
+                  SizedBox(height: 15.0),
+                  _presentacionMedicamento(),
+                  SizedBox(height: 15.0),
+                  _mecanismosDeAccion(),
+                  SizedBox(height: 15.0),
+                  _receptoresMedicamento(),
+                  SizedBox(height: 15.0),
+                  _usoTerapeutico(),
+                  SizedBox(height: 15.0),
+                  _efectosAdversos(),
+                  SizedBox(height: 15.0),
+                  _contraIndicacionesMedicamento(),
+                  SizedBox(height: 15.0),
+                  _posologiaMedicamento(),
+                  SizedBox(height: 15.0),
+                  _recomendacionesMedicamentos(),
+                  SizedBox(height: 15.0),
+                  _casosClinicos(),
+                  SizedBox(height: 15.0),
+                  _cuadroBasico(),
+                  SizedBox(height: 15.0),
+                  _farmacocineticaMedicamento(),
+                  //FIN TXT INPUT
+                  SizedBox(height: 30.0),
+                  //BOTON
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 25.0,
+                    ),
+                    child: SizedBox(
+                      width: size.width * 1,
+                      height: 55.0,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: const Text(
+                          "Guardar medicamento",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            //fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        style: ButtonStyle(
+                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromRGBO(253, 200, 66, 1),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  //FIN BOTON
+                  SizedBox(height: 15.0),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _nombreMedicamento() {
+    return myTextFieldGeneral(
+        labelTxt: "Nombre del medicamento",
+        hintText: "Paracetamol",
+        onChanged: (value) {});
+  }
+
+  _mecanismosDeAccion() {
+    return myTextFieldGeneral(
+      labelTxt: "Mecanismos de acción",
+      hintText: "Inhibición de enzimas",
+      onChanged: (value) {},
+    );
+  }
+
+  _receptoresMedicamento() {
+    return textFormFieldGeneral(
+      labelTxt: "Receptores",
+      hintText: "Ejemplo...",
+      onChanged: (value) {},
+    );
+  }
+
+  _usoTerapeutico() {
+    return textFormFieldGeneral(
+      labelTxt: "Uso terapéutico",
+      hintText: "Ejemplo...",
+      onChanged: (value) {},
+    );
+  }
+
+  _efectosAdversos() {
+    return textFormFieldGeneral(
+      labelTxt: "Efectos adversos",
+      hintText: "Ejemplo...",
+      onChanged: (value) {},
+    );
+  }
+
+  _posologiaMedicamento() {
+    return myTextFieldGeneral(
+      labelTxt: "Posología",
+      hintText: "Ejemplo...",
+      onChanged: (value) {},
+    );
+  }
+
+  _recomendacionesMedicamentos() {
+    return textFormFieldGeneral(
+      labelTxt: "Recomendaciones",
+      hintText: "Ejemplo...",
+      onChanged: (value) {},
+    );
+  }
+
+  _casosClinicos() {
+    return textFormFieldGeneral(
+      labelTxt: "Casos clínicos",
+      hintText: "Ejemplo...",
+      onChanged: (value) {},
+    );
+  }
+
+  _farmacocineticaMedicamento() {
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: 25.0,
+            ),
+            alignment: Alignment.topLeft,
+            child: Text(
+              "Farmacocinética",
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 25.0,
+              ),
+              child: ImagePickerWidget(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _cuadroBasico() {
+    return textFormFieldGeneral(
+      labelTxt: "Cuadro básico",
+      hintText: "Ejemplo...",
+      onChanged: (value) {},
+    );
+  }
+
+  _grupoMedicamento() {
+    List grupo = ['AINES', 'OTROS'];
+    return myDropDown(
+      list: grupo,
+      hintText: "Seleccione un grupo",
+    );
+  }
+
+  _subgrupoFarmacologico() {
+    List subgrupo = [
+      'SALICILATOS',
+      'DERIV DEL ÁCIDO ACÉTICO',
+      'PARAAMINOFEROL',
+      'DERIV DEL ÁCIDO PROPIÓNICO'
+    ];
+    return myDropDown(
+      list: subgrupo,
+      hintText: "Seleccione un sub-grupo",
+    );
+  }
+
+  _otroNombreMedicamento() {
+    return myTextFieldGeneral(
+      labelTxt: "Otro nombre",
+      hintText: "Aspirina",
+      onChanged: (value) {},
+    );
+  }
+
+  _presentacionMedicamento() {
+    return textFormFieldGeneral(
+      labelTxt: "Presentación del farmáco",
+      hintText: "Tableta  (500mg). Tableta soluble o efervescente (300mg)...",
+      onChanged: (value) {},
+    );
+  }
+
+  _contraIndicacionesMedicamento() {
+    return textFormFieldGeneral(
+      labelTxt: "Contraindicaciones",
+      hintText:
+          "Hipersensibilidad al fármaco, úlcera péptica o gastritis activas, hipoprotrombinemia, niños menores de 6 años....",
+      onChanged: (value) {},
+    );
+  }
+
+  Widget _imagenMedicamento() {
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(
+              horizontal: 25.0,
+            ),
+            alignment: Alignment.topLeft,
+            child: Text(
+              "Imagen del medicamento",
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 25.0,
+              ),
+              child: ImagePickerWidget(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Resto de tu código de funciones _grupoMedicamento(), _subgrupoFarmacologico(), etc.
+}
