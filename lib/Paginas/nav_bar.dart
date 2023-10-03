@@ -1,5 +1,6 @@
 import 'package:drugenius/Paginas/Farmacocinetica.dart';
 import 'package:drugenius/Paginas/configuracion.dart';
+import 'package:drugenius/Paginas/juegos.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/perfil.dart';
 import 'package:drugenius/main.dart';
@@ -117,6 +118,7 @@ class NavBar extends StatelessWidget {
     Navigator.of(context).pop();
 
     switch (index) {
+      //Home
       case 0:
         Navigator.push(
           context,
@@ -126,7 +128,7 @@ class NavBar extends StatelessWidget {
           ),
         );
         break;
-
+      //Generalidades
       case 1:
         Navigator.push(
           context,
@@ -136,7 +138,7 @@ class NavBar extends StatelessWidget {
           ),
         );
         break;
-
+      //Medicamentos
       case 2:
         Navigator.push(
           context,
@@ -146,7 +148,7 @@ class NavBar extends StatelessWidget {
           ),
         );
         break;
-
+      //Farmacocinética
       case 3:
         Navigator.push(
           context,
@@ -156,7 +158,7 @@ class NavBar extends StatelessWidget {
           ),
         );
         break;
-
+      //Videos y Podcasts
       case 4:
         Navigator.push(
           context,
@@ -166,7 +168,7 @@ class NavBar extends StatelessWidget {
           ),
         );
         break;
-
+      //Evaluaciones
       case 5:
         Navigator.push(
           context,
@@ -176,17 +178,16 @@ class NavBar extends StatelessWidget {
           ),
         );
         break;
-
+      //Juegos
       case 6:
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                const Farmacocinetica(), // Reemplaza con la pantalla deseada
+            builder: (context) => Juegos(), // Reemplaza con la pantalla deseada
           ),
         );
         break;
-
+      //Calculadora de Dosis
       case 7:
         Navigator.push(
           context,
@@ -196,7 +197,7 @@ class NavBar extends StatelessWidget {
           ),
         );
         break;
-
+      //Foro de Discusión
       case 8:
         Navigator.push(
           context,
@@ -206,7 +207,7 @@ class NavBar extends StatelessWidget {
           ),
         );
         break;
-
+      //Perfil
       case 9:
         Navigator.push(
           context,
@@ -216,7 +217,7 @@ class NavBar extends StatelessWidget {
           ),
         );
         break;
-
+      //Configuración
       case 10:
         Navigator.push(
           context,
