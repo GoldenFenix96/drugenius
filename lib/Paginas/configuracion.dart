@@ -2,11 +2,8 @@ import 'package:drugenius/Paginas/Nav_Bar.dart';
 import 'package:flutter/material.dart';
 
 class Configuracion extends StatelessWidget {
-<<<<<<< HEAD
   const Configuracion({super.key});
 
-=======
->>>>>>> a24fccd36752f674ed260fcf0f2e0ec32061bc8a
   @override
   Widget build(BuildContext context) {
     return Scaffold(

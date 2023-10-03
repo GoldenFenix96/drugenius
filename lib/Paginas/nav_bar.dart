@@ -1,13 +1,7 @@
 import 'package:drugenius/Paginas/Farmacocinetica.dart';
-<<<<<<< HEAD
 import 'package:drugenius/Paginas/configuracion.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
-import 'package:drugenius/Paginas/medicamentos.dart';
-=======
-import 'package:drugenius/Paginas/other_page.dart';
-import 'package:drugenius/Paginas/configuracion.dart';
 import 'package:drugenius/main.dart';
->>>>>>> a24fccd36752f674ed260fcf0f2e0ec32061bc8a
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
@@ -127,11 +121,7 @@ class NavBar extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) =>
-<<<<<<< HEAD
-                const ListMedicamentos(), // Reemplaza con la pantalla deseada
-=======
                 const DrugeniusMenu(), // Reemplaza con la pantalla deseada
->>>>>>> a24fccd36752f674ed260fcf0f2e0ec32061bc8a
           ),
         );
         break;
@@ -141,7 +131,7 @@ class NavBar extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                const Medicamentos(), // Reemplaza con la pantalla deseada
+                const ListMedicamentos(), // Reemplaza con la pantalla deseada
           ),
         );
         break;
@@ -151,7 +141,7 @@ class NavBar extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                const Otherpage(), // Reemplaza con la pantalla deseada
+                const ListMedicamentos(), // Reemplaza con la pantalla deseada
           ),
         );
         break;
@@ -231,7 +221,7 @@ class NavBar extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                Configuracion(), // Reemplaza con la pantalla deseada
+                const Configuracion(), // Reemplaza con la pantalla deseada
           ),
         );
         break;
