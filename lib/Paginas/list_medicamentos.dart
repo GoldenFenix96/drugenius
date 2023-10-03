@@ -1,4 +1,5 @@
 import 'package:drugenius/Paginas/Nav_Bar.dart';
+import 'package:drugenius/Paginas/drug_input.dart';
 import 'package:drugenius/Paginas/medicamentos.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class ListMedicamentos extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      const ListMedicamentos(), // Reemplaza con la pantalla deseada
+                      const DrugInput(), // Reemplaza con la pantalla deseada
                 ),
               );
             },

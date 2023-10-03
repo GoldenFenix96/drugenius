@@ -18,6 +18,7 @@ class _DrugInputState extends State<DrugInput> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        //automaticallyImplyLeading: false,
         title: const Text(
           "Ingreso de medicamentos",
           style: TextStyle(fontWeight: FontWeight.bold),
