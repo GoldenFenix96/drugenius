@@ -88,6 +88,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                                   1), // Establece la forma circular
                                               padding: const EdgeInsets.all(
                                                   0), // Color de fondo
+                                              elevation: 10,
                                             ),
                                             child: Container(
                                               width: 110,
@@ -145,6 +146,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                                   1), // Establece la forma circular
                                               padding: const EdgeInsets.all(
                                                   0), // Color de fondo
+                                              elevation: 10,
                                             ),
                                             child: Container(
                                               width: 110,
@@ -206,6 +208,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                                   1), // Establece la forma circular
                                               padding: const EdgeInsets.all(
                                                   0), // Color de fondo
+                                              elevation: 10,
                                             ),
                                             child: Container(
                                               width: 110,
@@ -257,6 +260,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                                   1), // Establece la forma circular
                                               padding: const EdgeInsets.all(
                                                   0), // Color de fondo
+                                              elevation: 10,
                                             ),
                                             child: Container(
                                               width: 110,
@@ -315,6 +319,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                                   1), // Establece la forma circular
                                               padding: const EdgeInsets.all(
                                                   0), // Color de fondo
+                                              elevation: 10,
                                             ),
                                             child: Container(
                                               width: 110,
@@ -365,6 +370,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                                   1), // Establece la forma circular
                                               padding: const EdgeInsets.all(
                                                   0), // Color de fondo
+                                              elevation: 10,
                                             ),
                                             child: Container(
                                               width: 110,

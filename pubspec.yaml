@@ -32,6 +32,7 @@ dependencies:
     sdk: flutter
   card_swiper : ^3.0.0
   carousel_slider: ^4.2.1
+<<<<<<< HEAD
   google_fonts: ^6.1.0
   image_picker: ^0.8.6
   path_provider: ^2.0.8
@@ -39,6 +40,9 @@ dependencies:
   dotted_border: ^2.1.0
   iconsax: ^0.0.8
   cached_network_image: ^3.3.0
+=======
+  provider: ^5.0.0
+>>>>>>> a24fccd36752f674ed260fcf0f2e0ec32061bc8a
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

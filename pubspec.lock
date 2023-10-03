@@ -352,6 +352,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+<<<<<<< HEAD
   mime:
     dependency: transitive
     description:
@@ -368,6 +369,16 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+=======
+  nested:
+    dependency: transitive
+    description:
+      name: nested
+      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+>>>>>>> a24fccd36752f674ed260fcf0f2e0ec32061bc8a
   path:
     dependency: transitive
     description:
@@ -376,6 +387,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.3"
+<<<<<<< HEAD
   path_drawing:
     dependency: transitive
     description:
@@ -464,6 +476,16 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+=======
+  provider:
+    dependency: "direct main"
+    description:
+      name: provider
+      sha256: "59471e0a4595e264625d3496af567ac85bdae1148ec985aff1e0555786f53ecf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.0"
+>>>>>>> a24fccd36752f674ed260fcf0f2e0ec32061bc8a
   sky_engine:
     dependency: transitive
     description: flutter
@@ -599,4 +621,8 @@ packages:
     version: "1.0.3"
 sdks:
   dart: ">=3.1.2 <4.0.0"
+<<<<<<< HEAD
   flutter: ">=3.10.0"
+=======
+  flutter: ">=1.16.0"
+>>>>>>> a24fccd36752f674ed260fcf0f2e0ec32061bc8a
