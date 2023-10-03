@@ -137,14 +137,6 @@ class LogginPage extends StatelessWidget {
                             ),
                           );
                         },
-                        child: const Text(
-                          "Iniciar sesión",
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                              //fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600),
-                        ),
                         style: ButtonStyle(
                           shape: MaterialStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
@@ -155,6 +147,14 @@ class LogginPage extends StatelessWidget {
                           backgroundColor: MaterialStateProperty.all<Color>(
                             const Color.fromRGBO(253, 200, 66, 1),
                           ),
+                        ),
+                        child: const Text(
+                          "Iniciar sesión",
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                              //fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
                     ),

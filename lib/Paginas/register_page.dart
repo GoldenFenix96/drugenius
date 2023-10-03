@@ -94,15 +94,6 @@ class RegisterPage extends StatelessWidget {
                     height: 50.0,
                     child: ElevatedButton(
                       onPressed: () => {},
-                      child: const Text(
-                        "Registrarse",
-                        style: TextStyle(
-                          //fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                          color: Colors.black,
-                        ),
-                      ),
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<OutlinedBorder>(
                           RoundedRectangleBorder(
@@ -112,6 +103,15 @@ class RegisterPage extends StatelessWidget {
                         ),
                         backgroundColor: MaterialStateProperty.all<Color>(
                           const Color.fromRGBO(253, 200, 66, 1),
+                        ),
+                      ),
+                      child: const Text(
+                        "Registrarse",
+                        style: TextStyle(
+                          //fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                          color: Colors.black,
                         ),
                       ),
                     ),
