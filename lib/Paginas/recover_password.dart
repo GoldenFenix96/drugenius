@@ -10,13 +10,13 @@ class RecoverPassword extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Center(child: Text("")),
-        backgroundColor: Color.fromARGB(0, 255, 255, 255),
+        title: const Center(child: Text("")),
+        backgroundColor: const Color.fromARGB(0, 255, 255, 255),
         elevation: 0,
       ),
       body: Container(
         //FONDO
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -39,9 +39,9 @@ class RecoverPassword extends StatelessWidget {
                   child: Image.asset("assets/images/drugenius_logo.png"),
                 ),
                 //FIN LOGO
-                SizedBox(height: 50.0),
+                const SizedBox(height: 50.0),
                 //TXT RECUPERACIÓN
-                SizedBox(
+                const SizedBox(
                   child: Center(
                     child: Text(
                       "Recuperaciónde contraseña",
@@ -55,13 +55,13 @@ class RecoverPassword extends StatelessWidget {
                   ),
                 ),
                 //FIN TXT RECUPERACIÓN
-                SizedBox(height: 30.0),
+                const SizedBox(height: 30.0),
                 //TXT RECUPERACIÓN CORREO
                 Container(
-                  margin: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(
                     horizontal: 25.0,
                   ),
-                  child: SizedBox(
+                  child: const SizedBox(
                     child: Center(
                       child: Text(
                         "Ingrese su correo electrónico. Si el correo coincide con alguna cuenta se le enviará un enlace de recuperación.",
@@ -76,16 +76,16 @@ class RecoverPassword extends StatelessWidget {
                   ),
                 ),
                 //FIN TXT RECUPERACIÓN CORREO
-                SizedBox(height: 30.0),
+                const SizedBox(height: 30.0),
 
                 //TXT FIELD CORREO
                 _myTextFieldCorreo(),
                 //FIN TXT FIELD CORREO
 
-                SizedBox(height: 30.0),
+                const SizedBox(height: 30.0),
                 //BOTÓN
                 Container(
-                  margin: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(
                     horizontal: 25.0,
                   ),
                   child: SizedBox(
@@ -110,14 +110,14 @@ class RecoverPassword extends StatelessWidget {
                           ),
                         ),
                         backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromRGBO(253, 200, 66, 1),
+                          const Color.fromRGBO(253, 200, 66, 1),
                         ),
                       ),
                     ),
                   ),
                 ),
                 //FIN BOTÓN
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
               ],
             ),
           ],

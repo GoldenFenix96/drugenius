@@ -13,13 +13,13 @@ class LogginPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Center(child: Text("")),
-        backgroundColor: Color.fromARGB(0, 255, 255, 255),
+        title: const Center(child: Text("")),
+        backgroundColor: const Color.fromARGB(0, 255, 255, 255),
         elevation: 0,
       ),
       body: Container(
         //FONDO
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           /*
           image: DecorationImage(
             image: AssetImage("assets/images/background.jpg"),
@@ -49,9 +49,9 @@ class LogginPage extends StatelessWidget {
                     child: Image.asset("assets/images/drugenius_logo.png"),
                   ),
                   //FIN LOGO
-                  SizedBox(height: 50.0),
+                  const SizedBox(height: 50.0),
                   //TXT INICIO DE SESIÓN
-                  SizedBox(
+                  const SizedBox(
                     child: Text(
                       "Inicio de sesión",
                       style: TextStyle(
@@ -62,9 +62,9 @@ class LogginPage extends StatelessWidget {
                     ),
                   ),
                   //FIN TXT INICIO DE SESIÓN
-                  SizedBox(height: 30.0),
+                  const SizedBox(height: 30.0),
                   //TXT BIENVENIDA
-                  SizedBox(
+                  const SizedBox(
                     height: 25.0,
                     child: Text(
                       "¡Bienvenido! Ingrese sus datos",
@@ -76,15 +76,15 @@ class LogginPage extends StatelessWidget {
                     ),
                   ),
                   //FIN TXT BIENVENIDA
-                  SizedBox(height: 30.0),
+                  const SizedBox(height: 30.0),
                   //TXT FIELD CORREO
                   _myTextFieldCorreo(),
                   //FIN TXT FIELD CORREO
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   //TXT FIELD CONTRASEÑA
                   _myTextFieldPassword(),
                   //FIN TXT FIELD CONTRASEÑA
-                  SizedBox(height: 30.0),
+                  const SizedBox(height: 30.0),
                   //TXT RECUPERACION DE CONTRASEÑA
                   SizedBox(
                     child: InkWell(
@@ -93,13 +93,13 @@ class LogginPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RecoverPassword(),
+                            builder: (context) => const RecoverPassword(),
                           ),
                         );
                       },
                       child: SizedBox(
                         width: size.width * 0.85,
-                        child: Align(
+                        child: const Align(
                           alignment: Alignment.centerRight,
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
@@ -119,10 +119,10 @@ class LogginPage extends StatelessWidget {
                   ),
                   //FIN TXT RECUPERACION DE CONTRASEÑA
 
-                  SizedBox(height: 30.0),
+                  const SizedBox(height: 30.0),
                   //BOTÓN
                   Container(
-                    margin: EdgeInsets.symmetric(
+                    margin: const EdgeInsets.symmetric(
                       horizontal: 25.0,
                     ),
                     child: SizedBox(
@@ -133,7 +133,7 @@ class LogginPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => DrugeniusMenu(),
+                              builder: (context) => const DrugeniusMenu(),
                             ),
                           );
                         },
@@ -153,20 +153,20 @@ class LogginPage extends StatelessWidget {
                             ),
                           ),
                           backgroundColor: MaterialStateProperty.all<Color>(
-                            Color.fromRGBO(253, 200, 66, 1),
+                            const Color.fromRGBO(253, 200, 66, 1),
                           ),
                         ),
                       ),
                     ),
                   ),
                   //FIN BOTÓN
-                  SizedBox(height: 50.0),
+                  const SizedBox(height: 50.0),
                   //REGISTRO
                   SizedBox(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           "¿No tienes cuenta? ",
                           style: TextStyle(
                             fontSize: 15.0,
@@ -185,7 +185,7 @@ class LogginPage extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Text(
+                          child: const Text(
                             'Regístrate aquí',
                             style: TextStyle(
                               //fontFamily: 'Montserrat',

@@ -9,13 +9,13 @@ class RegisterPage extends StatelessWidget {
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Center(child: Text("")),
-        backgroundColor: Color.fromARGB(0, 255, 255, 255),
+        title: const Center(child: Text("")),
+        backgroundColor: const Color.fromARGB(0, 255, 255, 255),
         elevation: 0,
       ),
       body: Container(
         //FONDO
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -39,9 +39,9 @@ class RegisterPage extends StatelessWidget {
                 ),
                 //FIN LOGO
 
-                SizedBox(height: 50.0),
+                const SizedBox(height: 50.0),
                 //TXT REGISTRO
-                SizedBox(
+                const SizedBox(
                   child: Text(
                     "Registro",
                     style: TextStyle(
@@ -51,9 +51,9 @@ class RegisterPage extends StatelessWidget {
                   ),
                 ),
                 //FIN TXT REGISTRO
-                SizedBox(height: 30.0),
+                const SizedBox(height: 30.0),
                 //TXT RELLENAR
-                SizedBox(
+                const SizedBox(
                   height: 25.0,
                   child: Text(
                     "Rellene los siguientes datos",
@@ -66,27 +66,27 @@ class RegisterPage extends StatelessWidget {
                   ),
                 ),
                 //FIN TXT RELLERNAR
-                SizedBox(height: 30.0),
+                const SizedBox(height: 30.0),
 
                 //TXT FIELD NOMBRE
                 _myTextFliedName(),
                 //FIN TXT FIELD NOMBRE
 
-                SizedBox(height: 15.0),
+                const SizedBox(height: 15.0),
 
                 //TXT FIELD CORREO
                 _myTextFieldCorreo(),
                 //FIN FIELD TXT CORREO
 
-                SizedBox(height: 15.0),
+                const SizedBox(height: 15.0),
 
                 //TXT FIELD CONTRASEÑA
                 _myTextFieldPassword(),
                 //FIN TXT FIELD CONTRASEÑA
-                SizedBox(height: 30.0),
+                const SizedBox(height: 30.0),
                 //BOTÓN
                 Container(
-                  margin: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(
                     horizontal: 25.0,
                   ),
                   child: SizedBox(
@@ -111,14 +111,14 @@ class RegisterPage extends StatelessWidget {
                           ),
                         ),
                         backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromRGBO(253, 200, 66, 1),
+                          const Color.fromRGBO(253, 200, 66, 1),
                         ),
                       ),
                     ),
                   ),
                 ),
                 //FIN BOTÓN
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
               ],
             ),
           ],
