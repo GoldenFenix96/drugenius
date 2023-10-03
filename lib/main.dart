@@ -35,16 +35,26 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         home: Scaffold(
             drawer: const NavBar(),
             appBar: AppBar(
-              backgroundColor: const Color.fromARGB(255, 84, 132, 160),
+              backgroundColor: Color.fromARGB(255, 253, 200, 66),
+              elevation: 0,
               title: Image.network(
                 'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // URL de la imagen en internet
                 width: 300, // Ancho de la imagen
                 height: 200, // Altura de la imagen
               ),
             ),
-            //drawer: navigationDrawer(),
             body: Container(
-                color: const Color.fromARGB(255, 255, 255, 255),
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color.fromRGBO(255, 255, 255, 1),
+                      Color.fromRGBO(253, 200, 66, 0.143),
+                    ],
+                    stops: [0.1, 0.9],
+                  ),
+                ),
                 child: ListView(
                   children: [
                     Center(

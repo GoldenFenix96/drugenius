@@ -1,3 +1,4 @@
+import 'package:drugenius/Paginas/Nav_Bar.dart';
 import 'package:drugenius/Paginas/medicamentos.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +12,21 @@ class ListMedicamentos extends StatelessWidget {
         title: const Text("Listado de Medicamentos",
             style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             textAlign: TextAlign.center),
-        backgroundColor: const Color.fromARGB(255, 84, 132, 160),
+        backgroundColor: const Color.fromRGBO(253, 200, 66, 1),
         actions: [
           // Agrega un icono de búsqueda en la AppBar
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const ListMedicamentos(), // Reemplaza con la pantalla deseada
+                ),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
@@ -27,6 +40,7 @@ class ListMedicamentos extends StatelessWidget {
           ),
         ],
       ),
+      drawer: const NavBar(),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 20.0),
         children: <Widget>[
