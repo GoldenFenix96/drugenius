@@ -35,7 +35,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         home: Scaffold(
             drawer: const NavBar(),
             appBar: AppBar(
-              backgroundColor: Color.fromARGB(255, 253, 200, 66),
+              backgroundColor: const Color.fromARGB(255, 253, 200, 66),
               elevation: 0,
               title: Image.network(
                 'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // URL de la imagen en internet

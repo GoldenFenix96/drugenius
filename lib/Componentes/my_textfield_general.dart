@@ -20,31 +20,31 @@ class myTextFieldGeneral extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 25.0,
       ),
       child: TextField(
         keyboardType: keyboardType,
         obscureText: obscureText,
         decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
             color: Color.fromARGB(255, 204, 204, 204),
           )),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
-          fillColor: Color.fromARGB(255, 204, 204, 204),
+          fillColor: const Color.fromARGB(255, 204, 204, 204),
           filled: true,
           prefixIcon: Icon(icon),
           labelText: labelTxt,
           hintText: hintText,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             //fontFamily: 'Montserrat',
             fontWeight: FontWeight.w400,
           ),
           labelStyle: TextStyle(
             //fontFamily: 'Montserrat',
-            color: Color.fromARGB(255, 33, 33, 33),
+            color: const Color.fromARGB(255, 33, 33, 33),
             fontWeight: fontWeight,
           ),
         ),
