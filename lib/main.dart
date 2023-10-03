@@ -5,7 +5,6 @@ import 'package:drugenius/Paginas/Farmacocinetica.dart';
 import 'package:drugenius/Paginas/drug_input.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/loggin_page.dart';
-import 'package:drugenius/Paginas/other_page.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Paginas/Nav_Bar.dart';
 
@@ -432,7 +431,7 @@ Widget swiperBox() {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        const Otherpage(), // Reemplaza con la pantalla deseada
+                        const ListMedicamentos(), // Reemplaza con la pantalla deseada
                   ),
                 );
                 break;
@@ -442,7 +441,7 @@ Widget swiperBox() {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        const Otherpage(), // Reemplaza con la pantalla deseada
+                        const ListMedicamentos(), // Reemplaza con la pantalla deseada
                   ),
                 );
                 break;

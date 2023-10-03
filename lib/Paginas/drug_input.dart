@@ -1,4 +1,3 @@
-import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Componentes/my_imagepicker.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
@@ -19,17 +18,17 @@ class _DrugInputState extends State<DrugInput> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Ingreso de medicamentos",
           style: TextStyle(fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
-        backgroundColor: Color.fromRGBO(253, 200, 66, 1),
+        backgroundColor: const Color.fromRGBO(253, 200, 66, 1),
         elevation: 0,
       ),
       body: Container(
         //FONDO
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           /*
           image: DecorationImage(
             image: AssetImage("assets/images/background.jpg"),
@@ -47,9 +46,9 @@ class _DrugInputState extends State<DrugInput> {
                   //TXT DRUG INPUT
 
                   //FIN TXT DRUG INPUT
-                  SizedBox(height: 25.0),
+                  const SizedBox(height: 25.0),
                   //TXT BIENVENIDA
-                  SizedBox(
+                  const SizedBox(
                     child: Center(
                       child: Text(
                         "Rellene los siguientes campos con la información del medicamento",
@@ -63,44 +62,44 @@ class _DrugInputState extends State<DrugInput> {
                     ),
                   ),
                   //FIN TXT BIENVENIDA
-                  SizedBox(height: 30.0),
+                  const SizedBox(height: 30.0),
                   //TXT INPUT
                   _imagenMedicamento(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _grupoMedicamento(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _subgrupoFarmacologico(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _nombreMedicamento(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _otroNombreMedicamento(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _presentacionMedicamento(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _mecanismosDeAccion(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _receptoresMedicamento(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _usoTerapeutico(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _efectosAdversos(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _contraIndicacionesMedicamento(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _posologiaMedicamento(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _recomendacionesMedicamentos(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _casosClinicos(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _cuadroBasico(),
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                   _farmacocineticaMedicamento(),
                   //FIN TXT INPUT
-                  SizedBox(height: 30.0),
+                  const SizedBox(height: 30.0),
                   //BOTON
                   Container(
-                    margin: EdgeInsets.symmetric(
+                    margin: const EdgeInsets.symmetric(
                       horizontal: 25.0,
                     ),
                     child: SizedBox(
@@ -124,14 +123,14 @@ class _DrugInputState extends State<DrugInput> {
                             ),
                           ),
                           backgroundColor: MaterialStateProperty.all<Color>(
-                            Color.fromRGBO(253, 200, 66, 1),
+                            const Color.fromRGBO(253, 200, 66, 1),
                           ),
                         ),
                       ),
                     ),
                   ),
                   //FIN BOTON
-                  SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
                 ],
               ),
             ),
@@ -209,21 +208,21 @@ class _DrugInputState extends State<DrugInput> {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.symmetric(
+            margin: const EdgeInsets.symmetric(
               horizontal: 25.0,
             ),
             alignment: Alignment.topLeft,
-            child: Text(
+            child: const Text(
               "Farmacocinética",
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
             child: Container(
-              margin: EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                 horizontal: 25.0,
               ),
-              child: ImagePickerWidget(),
+              child: const ImagePickerWidget(),
             ),
           ),
         ],
@@ -290,21 +289,21 @@ class _DrugInputState extends State<DrugInput> {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.symmetric(
+            margin: const EdgeInsets.symmetric(
               horizontal: 25.0,
             ),
             alignment: Alignment.topLeft,
-            child: Text(
+            child: const Text(
               "Imagen del medicamento",
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
             child: Container(
-              margin: EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                 horizontal: 25.0,
               ),
-              child: ImagePickerWidget(),
+              child: const ImagePickerWidget(),
             ),
           ),
         ],

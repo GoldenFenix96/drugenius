@@ -8,12 +8,12 @@ class myDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 25.0,
       ),
       child: Center(
         child: DropdownButtonFormField(
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
               color: Color.fromARGB(255, 204, 204, 204),
@@ -26,7 +26,7 @@ class myDropDown extends StatelessWidget {
           ),
           hint: Text(
             hintText,
-            style: TextStyle(
+            style: const TextStyle(
               //fontFamily: 'Montserrat',
               fontWeight: FontWeight.normal,
             ),

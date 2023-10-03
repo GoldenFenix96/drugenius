@@ -1,5 +1,6 @@
 import 'package:drugenius/Paginas/Farmacocinetica.dart';
-import 'package:drugenius/Paginas/other_page.dart';
+import 'package:drugenius/Paginas/list_medicamentos.dart';
+import 'package:drugenius/Paginas/medicamentos.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
@@ -113,7 +114,7 @@ class NavBar extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                const Otherpage(), // Reemplaza con la pantalla deseada
+                const ListMedicamentos(), // Reemplaza con la pantalla deseada
           ),
         );
         break;
@@ -123,7 +124,7 @@ class NavBar extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                const Otherpage(), // Reemplaza con la pantalla deseada
+                const Medicamentos(), // Reemplaza con la pantalla deseada
           ),
         );
         break;
