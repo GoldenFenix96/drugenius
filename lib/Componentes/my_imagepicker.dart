@@ -37,19 +37,18 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
               const Text("No se ha seleccionado ninguna imagen"),
             if (_selectedImage.isNotEmpty)
               Container(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 204, 204, 204),
-                  borderRadius: BorderRadius.circular(20),
-                ),
                 width: double.infinity,
                 height: 300.0,
                 child: Swiper(
                   viewportFraction: 0.8,
                   scale: 0.9,
                   itemBuilder: (BuildContext context, int index) {
-                    return Image.file(
-                      _selectedImage[index]!,
-                      fit: BoxFit.fill,
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.file(
+                        _selectedImage[index]!,
+                        fit: BoxFit.cover,
+                      ),
                     );
                   },
                   itemCount: _selectedImage.length,
