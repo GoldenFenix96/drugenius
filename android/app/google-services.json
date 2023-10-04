@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "767810510644",
+    "project_id": "drugenius-44d32",
+    "storage_bucket": "drugenius-44d32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767810510644:android:f8d8cc159f8d5e57250f61",
+        "android_client_info": {
+          "package_name": "com.example.drugenius"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjwq_QjjSt0jgLGfzqPWHNwv-oE3uzFXQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
