@@ -435,57 +435,60 @@ Widget swiperBox() {
       viewportFraction: 1,
       scale: 1,
       itemBuilder: (BuildContext context, index) {
-        return ElevatedButton(
-          onPressed: () {
-            // Navegación basada en el índice seleccionado
-            switch (index) {
-              case 0:
-                // Acción cuando se presiona el botón correspondiente al ítem 0
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const Farmacocinetica(), // Reemplaza con la pantalla deseada
-                  ),
-                );
-                break;
-              case 1:
-                // Acción cuando se presiona el botón correspondiente al ítem 1
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const ListMedicamentos(), // Reemplaza con la pantalla deseada
-                  ),
-                );
-                break;
-              case 2:
-                // Acción cuando se presiona el botón correspondiente al ítem 2
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const ListMedicamentos(), // Reemplaza con la pantalla deseada
-                  ),
-                );
-                break;
-              default:
-                // Acción por defecto o para otros ítems si es necesario
-                break;
-            }
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromARGB(
-                255, 255, 255, 255), // Color de fondo del botón
-          ),
-          child: Column(
-            children: [
-              Image.network(
-                images2[index], // URL de la imagen
-                fit: BoxFit
-                    .cover, // Ajusta la imagen para cubrir todo el espacio disponible
-              ),
-            ],
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(100.0),
+          child: ElevatedButton(
+            onPressed: () {
+              // Navegación basada en el índice seleccionado
+              switch (index) {
+                case 0:
+                  // Acción cuando se presiona el botón correspondiente al ítem 0
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const Farmacocinetica(), // Reemplaza con la pantalla deseada
+                    ),
+                  );
+                  break;
+                case 1:
+                  // Acción cuando se presiona el botón correspondiente al ítem 1
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const ListMedicamentos(), // Reemplaza con la pantalla deseada
+                    ),
+                  );
+                  break;
+                case 2:
+                  // Acción cuando se presiona el botón correspondiente al ítem 2
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const ListMedicamentos(), // Reemplaza con la pantalla deseada
+                    ),
+                  );
+                  break;
+                default:
+                  // Acción por defecto o para otros ítems si es necesario
+                  break;
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(
+                  255, 255, 255, 255), // Color de fondo del botón
+            ),
+            child: Column(
+              children: [
+                Image.network(
+                  images2[index], // URL de la imagen
+                  fit: BoxFit
+                      .cover, // Ajusta la imagen para cubrir todo el espacio disponible
+                ),
+              ],
+            ),
           ),
         );
       },
