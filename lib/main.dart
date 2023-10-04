@@ -9,9 +9,15 @@ import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Paginas/Nav_Bar.dart';
 
-//import 'package:carousel_slider/carousel_slider.dart';
+//importaciones de FireBase
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MaterialApp(home: LogginPage()));
 }
 

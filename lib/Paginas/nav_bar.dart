@@ -183,7 +183,8 @@ class NavBar extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Juegos(), // Reemplaza con la pantalla deseada
+            builder: (context) =>
+                const Juegos(), // Reemplaza con la pantalla deseada
           ),
         );
         break;
