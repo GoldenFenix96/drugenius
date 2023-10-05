@@ -157,7 +157,7 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   _receptoresMedicamento() {
-    return textFormFieldGeneral(
+    return TextFormFieldGeneral(
       labelTxt: "Receptores",
       hintText: "Ejemplo...",
       onChanged: (value) {},
@@ -165,7 +165,7 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   _usoTerapeutico() {
-    return textFormFieldGeneral(
+    return TextFormFieldGeneral(
       labelTxt: "Uso terapéutico",
       hintText: "Ejemplo...",
       onChanged: (value) {},
@@ -173,7 +173,7 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   _efectosAdversos() {
-    return textFormFieldGeneral(
+    return TextFormFieldGeneral(
       labelTxt: "Efectos adversos",
       hintText: "Ejemplo...",
       onChanged: (value) {},
@@ -189,7 +189,7 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   _recomendacionesMedicamentos() {
-    return textFormFieldGeneral(
+    return TextFormFieldGeneral(
       labelTxt: "Recomendaciones",
       hintText: "Ejemplo...",
       onChanged: (value) {},
@@ -197,7 +197,7 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   _casosClinicos() {
-    return textFormFieldGeneral(
+    return TextFormFieldGeneral(
       labelTxt: "Casos clínicos",
       hintText: "Ejemplo...",
       onChanged: (value) {},
@@ -232,7 +232,7 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   _cuadroBasico() {
-    return textFormFieldGeneral(
+    return TextFormFieldGeneral(
       labelTxt: "Cuadro básico",
       hintText: "Ejemplo...",
       onChanged: (value) {},
@@ -241,7 +241,7 @@ class _DrugInputState extends State<DrugInput> {
 
   _grupoMedicamento() {
     List grupo = ['AINES', 'OTROS'];
-    return myDropDown(
+    return MyDropDown(
       list: grupo,
       hintText: "Seleccione un grupo",
     );
@@ -254,7 +254,7 @@ class _DrugInputState extends State<DrugInput> {
       'PARAAMINOFEROL',
       'DERIV DEL ÁCIDO PROPIÓNICO'
     ];
-    return myDropDown(
+    return MyDropDown(
       list: subgrupo,
       hintText: "Seleccione un sub-grupo",
     );
@@ -269,7 +269,7 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   _presentacionMedicamento() {
-    return textFormFieldGeneral(
+    return TextFormFieldGeneral(
       labelTxt: "Presentación del farmáco",
       hintText: "Tableta  (500mg). Tableta soluble o efervescente (300mg)...",
       onChanged: (value) {},
@@ -277,7 +277,7 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   _contraIndicacionesMedicamento() {
-    return textFormFieldGeneral(
+    return TextFormFieldGeneral(
       labelTxt: "Contraindicaciones",
       hintText:
           "Hipersensibilidad al fármaco, úlcera péptica o gastritis activas, hipoprotrombinemia, niños menores de 6 años....",

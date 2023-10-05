@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthService {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<User?> singUpWithEmailAndPassword(
       String email, String password) async {
@@ -10,6 +10,7 @@ class FirebaseAuthService {
           email: email, password: password);
       return credential.user;
     } catch (e) {
+      // ignore: avoid_print
       print("Ha ocurrido un error");
     }
     return null;
@@ -22,6 +23,7 @@ class FirebaseAuthService {
           email: email, password: password);
       return credential.user;
     } catch (e) {
+      // ignore: avoid_print
       print("Ha ocurrido un error");
     }
     return null;

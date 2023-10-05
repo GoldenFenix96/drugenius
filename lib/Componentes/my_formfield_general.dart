@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class textFormFieldGeneral extends StatelessWidget {
+class TextFormFieldGeneral extends StatelessWidget {
   final String labelTxt;
   final String hintText;
   final Function onChanged;
   final IconData icon;
-  const textFormFieldGeneral({
+  const TextFormFieldGeneral({
     required this.labelTxt,
     required this.hintText,
     required this.onChanged,
@@ -15,7 +15,7 @@ class textFormFieldGeneral extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 25.0,
       ),
       child: TextFormField(
@@ -23,22 +23,22 @@ class textFormFieldGeneral extends StatelessWidget {
         maxLines: 10,
         keyboardType: TextInputType.multiline,
         decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
             color: Color.fromARGB(255, 204, 204, 204),
           )),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
-          fillColor: Color.fromARGB(255, 204, 204, 204),
+          fillColor: const Color.fromARGB(255, 204, 204, 204),
           filled: true,
           prefixIcon: Icon(icon),
           labelText: labelTxt,
           hintText: hintText,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             //fontFamily: 'Montserrat',
             fontWeight: FontWeight.w400,
           ),
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
             //fontFamily: 'Montserrat',
             color: Color.fromARGB(255, 33, 33, 33),
           ),

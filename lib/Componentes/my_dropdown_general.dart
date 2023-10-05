@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-class myDropDown extends StatelessWidget {
+class MyDropDown extends StatelessWidget {
   final List list;
   final String hintText;
-  const myDropDown({required this.list, required this.hintText});
+  const MyDropDown({required this.list, required this.hintText});
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 25.0,
@@ -33,8 +32,8 @@ class myDropDown extends StatelessWidget {
           ),
           items: list.map((name) {
             return DropdownMenuItem(
-              child: Text(name),
               value: name,
+              child: Text(name),
             );
           }).toList(),
           onChanged: (value) {
