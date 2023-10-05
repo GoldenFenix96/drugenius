@@ -12,8 +12,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final FirebaseAuthService _auth = FirebaseAuthService();
-
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -190,56 +188,16 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _singUp() async {
-    String username = _usernameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
+    FirebaseAuthService fas = FirebaseAuthService();
 
-    User? user = await _auth.singUpWithEmailAndPassword(email, password);
+    User? user = await fas.singUpWithEmailAndPassword(email, password);
 
     if (user != null) {
-      AlertDialog(
-        title: const Text('AlertDialog Title'),
-        content: const SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text('Ha ocurrido un error'),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('Approve'),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const LogginPage(), // Reemplaza con la pantalla deseada
-                ),
-              );
-            },
-          ),
-        ],
-      );
+      print("El usuario ha sido creado");
     } else {
-      AlertDialog(
-        title: const Text('AlertDialog Title'),
-        content: const SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text('Ha ocurrido un error'),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('Approve'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
+      print("Ha ocurrido un error inesperado");
     }
   }
 }
