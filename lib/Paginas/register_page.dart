@@ -1,4 +1,4 @@
-import 'package:drugenius/Firebase_Auth_Implements/firebase_auth_services.dart';
+import 'package:drugenius/Firebase_Services/firebase_auth_services.dart';
 import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
