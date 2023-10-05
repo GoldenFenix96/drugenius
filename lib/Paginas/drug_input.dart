@@ -11,6 +11,8 @@ class DrugInput extends StatefulWidget {
   _DrugInputState createState() => _DrugInputState();
 }
 
+final TextEditingController _usernameController = TextEditingController();
+
 class _DrugInputState extends State<DrugInput> {
   @override
   Widget build(BuildContext context) {
@@ -143,6 +145,7 @@ class _DrugInputState extends State<DrugInput> {
 
   _nombreMedicamento() {
     return myTextFieldGeneral(
+        controller: _usernameController,
         labelTxt: "Nombre del medicamento",
         hintText: "Paracetamol",
         onChanged: (value) {});
@@ -150,6 +153,7 @@ class _DrugInputState extends State<DrugInput> {
 
   _mecanismosDeAccion() {
     return myTextFieldGeneral(
+      controller: _usernameController,
       labelTxt: "Mecanismos de acción",
       hintText: "Inhibición de enzimas",
       onChanged: (value) {},
@@ -182,6 +186,7 @@ class _DrugInputState extends State<DrugInput> {
 
   _posologiaMedicamento() {
     return myTextFieldGeneral(
+      controller: _usernameController,
       labelTxt: "Posología",
       hintText: "Ejemplo...",
       onChanged: (value) {},
@@ -262,6 +267,7 @@ class _DrugInputState extends State<DrugInput> {
 
   _otroNombreMedicamento() {
     return myTextFieldGeneral(
+      controller: _usernameController,
       labelTxt: "Otro nombre",
       hintText: "Aspirina",
       onChanged: (value) {},

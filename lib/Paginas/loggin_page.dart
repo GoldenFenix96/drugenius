@@ -4,6 +4,9 @@ import 'package:drugenius/Paginas/recover_password.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
 import 'package:drugenius/main.dart';
 
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
+
 class LogginPage extends StatelessWidget {
   const LogginPage({super.key});
 
@@ -212,6 +215,7 @@ class LogginPage extends StatelessWidget {
 
   _myTextFieldCorreo() {
     return myTextFieldGeneral(
+      controller: _emailController,
       hintText: "ejemplo@test.com",
       icon: Icons.email_outlined,
       keyboardType: TextInputType.emailAddress,
@@ -223,6 +227,7 @@ class LogginPage extends StatelessWidget {
 
   _myTextFieldPassword() {
     return myTextFieldGeneral(
+      controller: _passwordController,
       icon: Icons.lock_outline_rounded,
       labelTxt: "Contraseña",
       obscureText: true,

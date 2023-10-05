@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
 
+final TextEditingController _usernameController = TextEditingController();
+
 class RecoverPassword extends StatelessWidget {
   const RecoverPassword({super.key});
 
@@ -128,6 +130,7 @@ class RecoverPassword extends StatelessWidget {
 
   _myTextFieldCorreo() {
     return myTextFieldGeneral(
+      controller: _usernameController,
       hintText: "ejemplo@test.com",
       icon: Icons.email_outlined,
       keyboardType: TextInputType.emailAddress,

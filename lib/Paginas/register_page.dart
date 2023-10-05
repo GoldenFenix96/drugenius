@@ -1,3 +1,6 @@
+import 'package:drugenius/Firebase_Auth_Implements/firebase_auth_services.dart';
+import 'package:drugenius/Paginas/loggin_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
 
@@ -9,6 +12,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -88,6 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 30.0),
 
                 //TXT FIELD NOMBRE
+
                 _myTextFliedName(),
                 //FIN TXT FIELD NOMBRE
 
@@ -112,7 +118,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     width: size.width * 1,
                     height: 50.0,
                     child: ElevatedButton(
-                      onPressed: () => {},
+                      onPressed: () => {
+                        _singUp(),
+                      },
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<OutlinedBorder>(
                           RoundedRectangleBorder(
@@ -148,6 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _myTextFliedName() {
     return myTextFieldGeneral(
+      controller: _usernameController,
       hintText: "Juan Goméz",
       icon: Icons.person_outlined,
       keyboardType: TextInputType.name,
@@ -159,6 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _myTextFieldCorreo() {
     return myTextFieldGeneral(
+      controller: _emailController,
       hintText: "ejemplo@test.com",
       icon: Icons.email_outlined,
       keyboardType: TextInputType.emailAddress,
@@ -170,11 +180,66 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _myTextFieldPassword() {
     return myTextFieldGeneral(
+      controller: _passwordController,
       icon: Icons.lock_outline_rounded,
       labelTxt: "Contraseña",
       obscureText: true,
       fontWeight: FontWeight.w700,
       onChanged: (value) {},
     );
+  }
+
+  void _singUp() async {
+    String username = _usernameController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.singUpWithEmailAndPassword(email, password);
+
+    if (user != null) {
+      AlertDialog(
+        title: const Text('AlertDialog Title'),
+        content: const SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Ha ocurrido un error'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Approve'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const LogginPage(), // Reemplaza con la pantalla deseada
+                ),
+              );
+            },
+          ),
+        ],
+      );
+    } else {
+      AlertDialog(
+        title: const Text('AlertDialog Title'),
+        content: const SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Ha ocurrido un error'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Approve'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    }
   }
 }

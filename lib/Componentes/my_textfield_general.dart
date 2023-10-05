@@ -16,6 +16,7 @@ class myTextFieldGeneral extends StatelessWidget {
     required this.onChanged,
     this.obscureText = false,
     this.fontWeight = FontWeight.normal,
+    required TextEditingController controller,
   });
   @override
   Widget build(BuildContext context) {
