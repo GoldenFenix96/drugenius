@@ -209,7 +209,10 @@ class _RegisterPageState extends State<RegisterPage> {
       labelTxt: "Contraseña",
       obscureText: true,
       fontWeight: FontWeight.w700,
-      onChanged: (value) {},
+      onChanged: (value) {
+        // Actualiza el valor del controlador cuando el usuario escribe en el campo de contraseña
+        _passwordController.text = value;
+      },
     );
   }
 }

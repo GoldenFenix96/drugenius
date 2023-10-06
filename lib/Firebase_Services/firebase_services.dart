@@ -16,24 +16,6 @@ class Firebase_services {
     return documentSnapshot;
   }
 
-  Future<void> agregarUsuario(
-      String nombre, String correo, String contrasena) async {
-    try {
-      // Crea un nuevo documento en la colección 'Usuarios'
-      await db.collection('Usuarios').add({
-        'Nombre': nombre,
-        'Correo': correo,
-        'Contraseña': contrasena,
-        // Puedes agregar otros campos aquí si es necesario
-      });
-
-      print('Usuario agregado con éxito a Firestore');
-    } catch (e) {
-      // Maneja los errores según tus necesidades
-      print('Error al agregar usuario a Firestore: $e');
-    }
-  }
-
   Future<User?> signUpAndCreateProfile(
       String email, String password, String nombre) async {
     try {
@@ -50,6 +32,7 @@ class Firebase_services {
       await db.collection('Usuarios').doc(userId).set({
         'Nombre': nombre,
         'Correo': email,
+        'Contraseña': password,
         // Puedes agregar otros campos aquí si es necesario
       });
 
