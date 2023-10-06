@@ -1,4 +1,5 @@
 import 'package:drugenius/Paginas/Farmacocinetica.dart';
+import 'package:drugenius/Paginas/audio.dart';
 import 'package:drugenius/Paginas/configuracion.dart';
 import 'package:drugenius/Paginas/juegos.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
@@ -164,7 +165,7 @@ class NavBar extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                const Farmacocinetica(), // Reemplaza con la pantalla deseada
+                const MyAudioPlayer(), // Reemplaza con la pantalla deseada
           ),
         );
         break;

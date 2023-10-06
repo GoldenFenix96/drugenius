@@ -1,12 +1,53 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:drugenius/Firebase_Services/firebase_services.dart';
 import 'package:drugenius/Paginas/drug_input.dart';
 import 'package:drugenius/Paginas/nav_bar.dart';
 import 'package:flutter/material.dart';
 
-class Perfil extends StatelessWidget {
+class Perfil extends StatefulWidget {
   const Perfil({super.key});
 
-  void main() {
-    runApp(const MaterialApp(home: Perfil()));
+  @override
+  State<Perfil> createState() => _Perfil();
+}
+
+class _Perfil extends State<Perfil> {
+  String nombre = '';
+  String correo = '';
+  String contrasena = '';
+
+  @override
+  void initState() {
+    super.initState();
+    cargarDatosUsuario();
+  }
+
+  Future<void> cargarDatosUsuario() async {
+    try {
+      // Reemplaza 'usuarioId' con el ID del usuario que deseas consultar
+      String usuarioId = 'B5fKKcT0BRiM75DT8pku';
+
+      DocumentSnapshot<Object?> usuarioSnapshot =
+          await getUsuarioPorId(usuarioId);
+
+      if (usuarioSnapshot.exists) {
+        final data = usuarioSnapshot.data() as Map<String, dynamic>?;
+
+        if (data != null) {
+          setState(() {
+            nombre = data['Nombre'] ?? '';
+            correo = data['Correo'] ?? '';
+            contrasena = data['Contraseña'] ?? '';
+          });
+        } else {
+          print('El documento no contiene datos.');
+        }
+      } else {
+        print('El usuario con ID $usuarioId no existe.');
+      }
+    } catch (e) {
+      print('Error al cargar datos del usuario: $e');
+    }
   }
 
   @override
@@ -77,12 +118,12 @@ class Perfil extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.fromLTRB(40, 0.0, 40.0, 0),
-                        child: const TextField(
-                          keyboardType: TextInputType.text,
-                          obscureText: false,
-                        ),
-                      ),
+                          margin: const EdgeInsets.fromLTRB(40, 0.0, 40.0, 0),
+                          child: TextField(
+                            keyboardType: TextInputType.text,
+                            obscureText: false,
+                            controller: TextEditingController(text: nombre),
+                          )),
                       const SizedBox(height: 20.0),
                       Container(
                         margin: const EdgeInsets.fromLTRB(40, 10.0, 40.0, 0),
@@ -94,9 +135,10 @@ class Perfil extends StatelessWidget {
                       ),
                       Container(
                         margin: const EdgeInsets.fromLTRB(40, 0.0, 40.0, 0),
-                        child: const TextField(
+                        child: TextField(
                           keyboardType: TextInputType.emailAddress,
                           obscureText: false,
+                          controller: TextEditingController(text: correo),
                         ),
                       ),
                       const SizedBox(height: 20.0),
@@ -110,9 +152,10 @@ class Perfil extends StatelessWidget {
                       ),
                       Container(
                         margin: const EdgeInsets.fromLTRB(40, 0.0, 40.0, 0),
-                        child: const TextField(
+                        child: TextField(
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: true,
+                          controller: TextEditingController(text: contrasena),
                         ),
                       ),
                       const SizedBox(height: 20.0),
