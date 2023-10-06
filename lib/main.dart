@@ -3,7 +3,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Paginas/Farmacocinetica.dart';
 import 'package:drugenius/Paginas/drug_input.dart';
-import 'package:drugenius/Paginas/juegos.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:flutter/material.dart';
@@ -270,7 +269,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const Juegos(), // Reemplaza con la pantalla deseada
+                                                      const Farmacocinetica(),// Reemplaza con la pantalla deseada
                                                 ),
                                               );
                                             },
