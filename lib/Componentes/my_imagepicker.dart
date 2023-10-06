@@ -40,6 +40,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                 width: double.infinity,
                 height: 300.0,
                 child: Swiper(
+                  loop: false,
                   viewportFraction: 0.8,
                   scale: 0.9,
                   itemBuilder: (BuildContext context, int index) {

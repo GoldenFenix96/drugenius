@@ -46,8 +46,13 @@ class _DrugInputState extends State<DrugInput> {
             Center(
               child: Column(
                 children: [
+                  const SizedBox(height: 25.0),
                   //TXT DRUG INPUT
-
+                  const SizedBox(
+                    height: 150,
+                    width: 150,
+                    child: Center(child: Image(image: AssetImage("assets/images/btn_add.png"),),),
+                  ),
                   //FIN TXT DRUG INPUT
                   const SizedBox(height: 25.0),
                   //TXT BIENVENIDA
