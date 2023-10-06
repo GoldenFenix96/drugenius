@@ -13,7 +13,7 @@ class ListMedicamentos extends StatelessWidget {
         title: const Text("Listado de Medicamentos",
             style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             textAlign: TextAlign.center),
-        backgroundColor: const Color.fromRGBO(253, 200, 66, 1),
+        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
         actions: [
           // Agrega un icono de búsqueda en la AppBar
           IconButton(
@@ -187,7 +187,7 @@ class ListMedicamentos extends StatelessWidget {
                   const SizedBox(width: 10),
                   const SizedBox(
                     child: Text(
-                      'Senosidos',
+                      'Senósidos',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18.0,

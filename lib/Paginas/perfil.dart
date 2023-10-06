@@ -3,6 +3,9 @@ import 'package:drugenius/Firebase_Services/firebase_services.dart';
 import 'package:drugenius/Paginas/drug_input.dart';
 import 'package:drugenius/Paginas/nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({super.key});
@@ -55,7 +58,7 @@ class _Perfil extends State<Perfil> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 253, 200, 66),
+          backgroundColor: const Color.fromARGB(255, 85, 145, 214),
           elevation: 0,
           title: Image.network(
             'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // URL de la imagen en internet
@@ -100,13 +103,15 @@ class _Perfil extends State<Perfil> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(
                               75), // Ajusta el radio según tu necesidad
-                          child: Image.network(
-                            'https://i.ibb.co/bvgjvQs/Yo.jpg',
+                          child: Image(image: AssetImage("assets/images/equipo-medico.png"))
+                          /*Image.AssetImage(
+                            "assets/images/equipo-medico.png",
                             width: 150, // Ancho de la imagen
                             height: 150, // Alto de la imagen
                             fit: BoxFit
-                                .cover, // Ajusta la forma en que la imagen se ajusta dentro del contenedor
-                          ),
+                                .cover,),// Ajusta la forma en que la imagen se ajusta dentro del contenedor
+                                */
+                          
                         ),
                       ),
                       const SizedBox(height: 30.0),

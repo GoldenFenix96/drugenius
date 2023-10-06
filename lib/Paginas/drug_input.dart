@@ -26,7 +26,7 @@ class _DrugInputState extends State<DrugInput> {
           style: TextStyle(fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
-        backgroundColor: const Color.fromRGBO(253, 200, 66, 1),
+        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
         elevation: 0,
       ),
       body: Container(
@@ -306,7 +306,7 @@ class _DrugInputState extends State<DrugInput> {
             ),
             alignment: Alignment.topLeft,
             child: const Text(
-              "Imagen del medicamento",
+              "Imágen del medicamento",
             ),
           ),
           const SizedBox(height: 10),

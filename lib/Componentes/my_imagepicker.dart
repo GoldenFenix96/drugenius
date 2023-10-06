@@ -34,7 +34,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
           children: [
             const SizedBox(height: 20),
             if (_selectedImage.isEmpty)
-              const Text("No se ha seleccionado ninguna imagen"),
+              const Text("No se ha seleccionado ninguna imágen"),
             if (_selectedImage.isNotEmpty)
               Container(
                 width: double.infinity,

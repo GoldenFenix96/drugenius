@@ -46,7 +46,7 @@ class RecoverPassword extends StatelessWidget {
                 const SizedBox(
                   child: Center(
                     child: Text(
-                      "Recuperaciónde contraseña",
+                      "Recuperación de contraseña",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 30,

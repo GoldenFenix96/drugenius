@@ -17,7 +17,7 @@ class Medicamentos extends StatelessWidget {
         title: const Text("Paracetamol",
             style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             textAlign: TextAlign.center),
-        backgroundColor: const Color.fromARGB(255, 84, 132, 160),
+        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(25.0, 20.0, 25.0, 20.0),
