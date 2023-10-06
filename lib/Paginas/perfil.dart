@@ -26,7 +26,7 @@ class _Perfil extends State<Perfil> {
   Future<void> cargarDatosUsuario() async {
     try {
       // Reemplaza 'usuarioId' con el ID del usuario que deseas consultar
-      String usuarioId = 'B5fKKcT0BRiM75DT8pku';
+      String usuarioId = 'KtNyWuxeuyS6LIgAHciR8WrMn2I2';
 
       DocumentSnapshot<Object?> usuarioSnapshot =
           await fs.getUsuarioPorId(usuarioId);
