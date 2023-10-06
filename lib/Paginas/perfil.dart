@@ -12,6 +12,7 @@ class Perfil extends StatefulWidget {
 }
 
 class _Perfil extends State<Perfil> {
+  Firebase_services fs = Firebase_services();
   String nombre = '';
   String correo = '';
   String contrasena = '';
@@ -28,7 +29,7 @@ class _Perfil extends State<Perfil> {
       String usuarioId = 'B5fKKcT0BRiM75DT8pku';
 
       DocumentSnapshot<Object?> usuarioSnapshot =
-          await getUsuarioPorId(usuarioId);
+          await fs.getUsuarioPorId(usuarioId);
 
       if (usuarioSnapshot.exists) {
         final data = usuarioSnapshot.data() as Map<String, dynamic>?;

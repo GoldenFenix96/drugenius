@@ -1,6 +1,5 @@
-import 'package:drugenius/Firebase_Services/firebase_auth_services.dart';
+import 'package:drugenius/Firebase_Services/firebase_services.dart';
 import 'package:drugenius/Paginas/loggin_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
 
@@ -12,16 +11,43 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nombreController = TextEditingController();
 
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
+  Firebase_services fs = Firebase_services();
+
+  Future<void> _registrarUsuario() async {
+    final email = _emailController.text;
+    final password = _passwordController.text;
+    final nombre = _nombreController.text;
+
+    print('Nombre: $nombre');
+    print('Contraseña: $password');
+    print('Email: $email');
+    try {
+      // Obtén el contexto antes de entrar al bloque try-catch
+      final currentContext = context;
+
+      // Llama a tu función de registro desde AuthService
+      final user = await fs.signUpAndCreateProfile(email, password, nombre);
+
+      if (user != null) {
+        // Registro exitoso, redirige a otra pantalla o realiza acciones necesarias
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const LogginPage()));
+      } else {
+        // Registro fallido, muestra un mensaje de error
+        ScaffoldMessenger.of(currentContext).showSnackBar(
+          const SnackBar(
+            content: Text('Ha ocurrido un error al registrar al usuario.'),
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error al registrar usuario: $e');
+      // Maneja el error según tus necesidades
+    }
   }
 
   @override
@@ -117,7 +143,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     height: 50.0,
                     child: ElevatedButton(
                       onPressed: () => {
-                        _singUp(),
+                        _registrarUsuario(),
                       },
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -154,7 +180,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _myTextFliedName() {
     return myTextFieldGeneral(
-      controller: _usernameController,
+      controller: _nombreController,
       hintText: "Juan Goméz",
       icon: Icons.person_outlined,
       keyboardType: TextInputType.name,
@@ -185,19 +211,5 @@ class _RegisterPageState extends State<RegisterPage> {
       fontWeight: FontWeight.w700,
       onChanged: (value) {},
     );
-  }
-
-  void _singUp() async {
-    String email = _emailController.text;
-    String password = _passwordController.text;
-    FirebaseAuthService fas = FirebaseAuthService();
-
-    User? user = await fas.singUpWithEmailAndPassword(email, password);
-
-    if (user != null) {
-      print("El usuario ha sido creado");
-    } else {
-      print("Ha ocurrido un error inesperado");
-    }
   }
 }

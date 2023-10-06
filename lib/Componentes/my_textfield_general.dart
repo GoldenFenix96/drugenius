@@ -8,7 +8,9 @@ class myTextFieldGeneral extends StatelessWidget {
   final IconData icon;
   final bool obscureText;
   final FontWeight fontWeight;
+  final TextEditingController? controller;
   const myTextFieldGeneral({
+    super.key,
     this.hintText = "",
     this.icon = Icons.text_format_outlined,
     this.keyboardType = TextInputType.text,
@@ -16,7 +18,7 @@ class myTextFieldGeneral extends StatelessWidget {
     required this.onChanged,
     this.obscureText = false,
     this.fontWeight = FontWeight.normal,
-    required TextEditingController controller,
+    this.controller,
   });
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class myTextFieldGeneral extends StatelessWidget {
       child: TextField(
         keyboardType: keyboardType,
         obscureText: obscureText,
+        controller: controller ?? TextEditingController(),
         decoration: InputDecoration(
           enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
