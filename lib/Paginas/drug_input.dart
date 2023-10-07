@@ -1,3 +1,4 @@
+import 'package:drugenius/Componentes/my_checkbpx_general.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Componentes/my_imagepicker.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
@@ -51,7 +52,11 @@ class _DrugInputState extends State<DrugInput> {
                   const SizedBox(
                     height: 150,
                     width: 150,
-                    child: Center(child: Image(image: AssetImage("assets/images/btn_add.png"),),),
+                    child: Center(
+                      child: Image(
+                        image: AssetImage("assets/images/btn_add.png"),
+                      ),
+                    ),
                   ),
                   //FIN TXT DRUG INPUT
                   const SizedBox(height: 25.0),
@@ -242,10 +247,26 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   _cuadroBasico() {
-    return TextFormFieldGeneral(
-      labelTxt: "Cuadro básico",
-      hintText: "Ejemplo...",
-      onChanged: (value) {},
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 25.0,
+            ),
+            alignment: Alignment.topLeft,
+            child: const Text(
+              "Cuadro básico",
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            child: Container(
+              child: const MyCheckBox(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
