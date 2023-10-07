@@ -37,432 +37,422 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-            drawer: const NavBar(),
-            appBar: AppBar(
-              backgroundColor: const Color.fromARGB(255, 85, 145, 214),
-              elevation: 0,
-              title: Image.network(
-                'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // URL de la imagen en internet
-                width: 300, // Ancho de la imagen
-                height: 200, // Altura de la imagen
-              ),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        drawer: const NavBar(),
+        appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+          elevation: 0,
+          title: Image.network(
+            'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // URL de la imagen en internet
+            width: 300, // Ancho de la imagen
+            height: 200, // Altura de la imagen
+          ),
+        ),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromRGBO(255, 255, 255, 1),
+                Color.fromRGBO(253, 200, 66, 0.143),
+              ],
+              stops: [0.1, 0.9],
             ),
-            body: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color.fromRGBO(255, 255, 255, 1),
-                      Color.fromRGBO(253, 200, 66, 0.143),
+          ),
+          child: ListView(
+            children: [
+              Center(
+                child: Container(
+                  color: const Color.fromARGB(0, 255, 255, 255),
+                  margin: const EdgeInsets.fromLTRB(
+                      20.0, 20.0, 20.0, 30.0), // Margen alrededor de la Column
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      // Fila 1
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Container(
+                              color: Color.fromARGB(0, 233, 159, 159),
+                              width: 140,
+                              height: 160,
+                              child: Column(
+
+                                  // Primer Container
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const DrugInput(), // Reemplaza con la pantalla deseada
+                                          ),
+                                        );
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+
+                                        backgroundColor: const Color.fromRGBO(
+                                            255, 255, 255, 1),
+                                        // Establece la forma circular
+                                        padding: const EdgeInsets.all(0),
+                                        elevation: 10,
+
+                                        side: const BorderSide(
+                                          color: Color.fromARGB(
+                                              255, 145, 152, 252),
+                                        ),
+                                      ),
+                                      child: Container(
+                                        width: 110,
+                                        height: 110,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape
+                                              .circle, // Establece la forma circular
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              'https://i.ibb.co/74M1Zv2/Generalidades.png', // URL de la imagen en internet
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    // Texto debajo del primer Container
+                                    // Espacio entre los contenedores
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      'Generalidades',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                  ])),
+
+                          // Espacio entre los contenedores
+                          Container(
+                              color: const Color.fromARGB(0, 255, 255, 255),
+                              width: 140,
+                              height: 160,
+                              child: Column(
+                                  // Primer Container
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ListMedicamentos(), // Reemplaza con la pantalla deseada
+                                          ),
+                                        );
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+
+                                        backgroundColor: const Color.fromRGBO(
+                                            255, 255, 255, 1),
+                                        // Establece la forma circular
+                                        padding: const EdgeInsets.all(0),
+                                        elevation: 10,
+
+                                        side: const BorderSide(
+                                          color: Color.fromARGB(
+                                              255, 145, 152, 252),
+                                        ),
+                                      ),
+                                      child: Container(
+                                        width: 110,
+                                        height: 110,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape
+                                              .circle, // Establece la forma circular
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              'https://i.ibb.co/DgQd0Bt/Medicamentos.png', // URL de la imagen en internet
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    // Texto debajo del primer Container
+                                    // Espacio entre los contenedores
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      'Medicamentos',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                  ])),
+                        ],
+                      ),
+                      const SizedBox(height: 5), // Espacio entre las filas
+                      // Fila 2
+                      swiperBox(),
+                      const SizedBox(height: 5), // Espacio entre las filas
+                      // Fila 3
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Container(
+                              color: const Color.fromARGB(0, 255, 255, 255),
+                              width: 140,
+                              height: 160,
+                              child: Column(
+                                  // Primer Container
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+
+                                        backgroundColor: const Color.fromRGBO(
+                                            255, 255, 255, 1),
+                                        // Establece la forma circular
+                                        padding: const EdgeInsets.all(0),
+                                        elevation: 10,
+
+                                        side: const BorderSide(
+                                          color: Color.fromARGB(
+                                              255, 145, 152, 252),
+                                        ),
+                                      ),
+                                      child: Container(
+                                        width: 110,
+                                        height: 110,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape
+                                              .circle, // Establece la forma circular
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              'https://i.ibb.co/KqMrc9H/Evaluaciones.png',
+                                              // URL de la imagen en internet
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    // Texto debajo del primer Container
+                                    // Espacio entre los contenedores
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      'Evaluaciones',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                  ])),
+                          // Segundo Container
+                          Container(
+                              color: const Color.fromARGB(0, 255, 255, 255),
+                              width: 140,
+                              height: 160,
+                              child: Column(
+                                  // Primer Container
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const Farmacocinetica(), // Reemplaza con la pantalla deseada
+                                          ),
+                                        );
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+
+                                        backgroundColor: const Color.fromRGBO(
+                                            255, 255, 255, 1),
+                                        // Establece la forma circular
+                                        padding: const EdgeInsets.all(0),
+                                        elevation: 10,
+
+                                        side: const BorderSide(
+                                          color: Color.fromARGB(
+                                              255, 145, 152, 252),
+                                        ),
+                                      ),
+                                      child: Container(
+                                        width: 110,
+                                        height: 110,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape
+                                              .circle, // Establece la forma circular
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              'https://i.ibb.co/tP1Lw7v/Juegos.png', // URL de la imagen en internet
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    // Texto debajo del primer Container
+                                    // Espacio entre los contenedores
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      'Juegos',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                  ])),
+                        ],
+                      ),
+
+                      const SizedBox(height: 5), // Espacio entre las filas
+                      // Fila 4
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Container(
+                              color: const Color.fromARGB(0, 255, 255, 255),
+                              width: 140,
+                              height: 160,
+                              child: Column(
+                                  // Primer Container
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+
+                                        backgroundColor: const Color.fromRGBO(
+                                            255, 255, 255, 1),
+                                        // Establece la forma circular
+                                        padding: const EdgeInsets.all(0),
+                                        elevation: 10,
+
+                                        side: const BorderSide(
+                                          color: Color.fromARGB(
+                                              255, 145, 152, 252),
+                                        ),
+                                      ),
+                                      child: Container(
+                                        width: 110,
+                                        height: 110,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape
+                                              .circle, // Establece la forma circular
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                                'https://i.ibb.co/zZv1TH1/multimedia.png'), // URL de la imagen en internet
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    // Texto debajo del primer Container
+                                    // Espacio entre los contenedores
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      'Podcast y Videos',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                  ])),
+                          // Segundo Container
+                          Container(
+                              color: const Color.fromARGB(0, 255, 255, 255),
+                              width: 140,
+                              height: 160,
+                              child: Column(
+                                  // Primer Container
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+
+                                        backgroundColor: const Color.fromRGBO(
+                                            255, 255, 255, 1),
+                                        // Establece la forma circular
+                                        padding: const EdgeInsets.all(0),
+                                        elevation: 10,
+
+                                        side: const BorderSide(
+                                          color: Color.fromARGB(
+                                              255, 145, 152, 252),
+                                        ),
+                                      ),
+                                      child: Container(
+                                        width: 110,
+                                        height: 110,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape
+                                              .circle, // Establece la forma circular
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              'https://i.ibb.co/NVcvYJ7/charla-3.png', // URL de la imagen en internet
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    // Texto debajo del primer Container
+                                    // Espacio entre los contenedores
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      'Foro de Discusión',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                  ])),
+                        ],
+                      ),
                     ],
-                    stops: [0.1, 0.9],
                   ),
                 ),
-                child: ListView(
-                  children: [
-                    Center(
-                      child: Container(
-                        color: const Color.fromARGB(0, 255, 255, 255),
-                        margin: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0,
-                            30.0), // Margen alrededor de la Column
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            // Fila 1
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                Container(
-                                    color: Color.fromARGB(0, 233, 159, 159),
-                                    width: 140,
-                                    height: 160,
-                                    child: Column(
-
-                                        // Primer Container
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              // Acción cuando se presiona el botón
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const DrugInput(), // Reemplaza con la pantalla deseada
-                                                ),
-                                              );
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-
-                                              backgroundColor:
-                                                  const Color.fromRGBO(
-                                                      255, 255, 255, 1),
-                                              // Establece la forma circular
-                                              padding: const EdgeInsets.all(0),
-                                              elevation: 10,
-
-                                              side: const BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 145, 152, 252),
-                                              ),
-                                            ),
-                                            child: Container(
-                                              width: 110,
-                                              height: 110,
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape
-                                                    .circle, // Establece la forma circular
-                                                image: DecorationImage(
-                                                  image: NetworkImage(
-                                                    'https://i.ibb.co/74M1Zv2/Generalidades.png', // URL de la imagen en internet
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          // Texto debajo del primer Container
-                                          // Espacio entre los contenedores
-                                          const SizedBox(height: 5),
-                                          const Text(
-                                            'Generalidades',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black),
-                                          ),
-                                        ])),
-
-                                // Espacio entre los contenedores
-                                Container(
-                                    color:
-                                        const Color.fromARGB(0, 255, 255, 255),
-                                    width: 140,
-                                    height: 160,
-                                    child: Column(
-                                        // Primer Container
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const ListMedicamentos(), // Reemplaza con la pantalla deseada
-                                                ),
-                                              );
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-
-                                              backgroundColor:
-                                                  const Color.fromRGBO(
-                                                      255, 255, 255, 1),
-                                              // Establece la forma circular
-                                              padding: const EdgeInsets.all(0),
-                                              elevation: 10,
-
-                                              side: const BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 145, 152, 252),
-                                              ),
-                                            ),
-                                            child: Container(
-                                              width: 110,
-                                              height: 110,
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape
-                                                    .circle, // Establece la forma circular
-                                                image: DecorationImage(
-                                                  image: NetworkImage(
-                                                    'https://i.ibb.co/DgQd0Bt/Medicamentos.png', // URL de la imagen en internet
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          // Texto debajo del primer Container
-                                          // Espacio entre los contenedores
-                                          const SizedBox(height: 5),
-                                          const Text(
-                                            'Medicamentos',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black),
-                                          ),
-                                        ])),
-                              ],
-                            ),
-                            const SizedBox(
-                                height: 5), // Espacio entre las filas
-                            // Fila 2
-                            swiperBox(),
-                            const SizedBox(
-                                height: 5), // Espacio entre las filas
-                            // Fila 3
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                Container(
-                                    color:
-                                        const Color.fromARGB(0, 255, 255, 255),
-                                    width: 140,
-                                    height: 160,
-                                    child: Column(
-                                        // Primer Container
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              // Acción cuando se presiona el botón
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-
-                                              backgroundColor:
-                                                  const Color.fromRGBO(
-                                                      255, 255, 255, 1),
-                                              // Establece la forma circular
-                                              padding: const EdgeInsets.all(0),
-                                              elevation: 10,
-
-                                              side: const BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 145, 152, 252),
-                                              ),
-                                            ),
-                                            child: Container(
-                                              width: 110,
-                                              height: 110,
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape
-                                                    .circle, // Establece la forma circular
-                                                image: DecorationImage(
-                                                  image: NetworkImage(
-                                                    'https://i.ibb.co/KqMrc9H/Evaluaciones.png',
-                                                    // URL de la imagen en internet
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          // Texto debajo del primer Container
-                                          // Espacio entre los contenedores
-                                          const SizedBox(height: 5),
-                                          const Text(
-                                            'Evaluaciones',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black),
-                                          ),
-                                        ])),
-                                // Segundo Container
-                                Container(
-                                    color:
-                                        const Color.fromARGB(0, 255, 255, 255),
-                                    width: 140,
-                                    height: 160,
-                                    child: Column(
-                                        // Primer Container
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              // Acción cuando se presiona el botón
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const Farmacocinetica(), // Reemplaza con la pantalla deseada
-                                                ),
-                                              );
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-
-                                              backgroundColor:
-                                                  const Color.fromRGBO(
-                                                      255, 255, 255, 1),
-                                              // Establece la forma circular
-                                              padding: const EdgeInsets.all(0),
-                                              elevation: 10,
-
-                                              side: const BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 145, 152, 252),
-                                              ),
-                                            ),
-                                            child: Container(
-                                              width: 110,
-                                              height: 110,
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape
-                                                    .circle, // Establece la forma circular
-                                                image: DecorationImage(
-                                                  image: NetworkImage(
-                                                    'https://i.ibb.co/tP1Lw7v/Juegos.png', // URL de la imagen en internet
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          // Texto debajo del primer Container
-                                          // Espacio entre los contenedores
-                                          const SizedBox(height: 5),
-                                          const Text(
-                                            'Juegos',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black),
-                                          ),
-                                        ])),
-                              ],
-                            ),
-
-                            const SizedBox(
-                                height: 5), // Espacio entre las filas
-                            // Fila 4
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                Container(
-                                    color:
-                                        const Color.fromARGB(0, 255, 255, 255),
-                                    width: 140,
-                                    height: 160,
-                                    child: Column(
-                                        // Primer Container
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              // Acción cuando se presiona el botón
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-
-                                              backgroundColor:
-                                                  const Color.fromRGBO(
-                                                      255, 255, 255, 1),
-                                              // Establece la forma circular
-                                              padding: const EdgeInsets.all(0),
-                                              elevation: 10,
-
-                                              side: const BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 145, 152, 252),
-                                              ),
-                                            ),
-                                            child: Container(
-                                              width: 110,
-                                              height: 110,
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape
-                                                    .circle, // Establece la forma circular
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                        'assets/images/multimedia.png')),
-                                              ),
-                                            ),
-                                          ),
-                                          // Texto debajo del primer Container
-                                          // Espacio entre los contenedores
-                                          const SizedBox(height: 5),
-                                          const Text(
-                                            'Podcast y Videos',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black),
-                                          ),
-                                        ])),
-                                // Segundo Container
-                                Container(
-                                    color:
-                                        const Color.fromARGB(0, 255, 255, 255),
-                                    width: 140,
-                                    height: 160,
-                                    child: Column(
-                                        // Primer Container
-                                        children: [
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              // Acción cuando se presiona el botón
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-
-                                              backgroundColor:
-                                                  const Color.fromRGBO(
-                                                      255, 255, 255, 1),
-                                              // Establece la forma circular
-                                              padding: const EdgeInsets.all(0),
-                                              elevation: 10,
-
-                                              side: const BorderSide(
-                                                color: Color.fromARGB(
-                                                    255, 145, 152, 252),
-                                              ),
-                                            ),
-                                            child: Container(
-                                              width: 110,
-                                              height: 110,
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape
-                                                    .circle, // Establece la forma circular
-                                                image: DecorationImage(
-                                                  image: NetworkImage(
-                                                    'https://i.ibb.co/NVcvYJ7/charla-3.png', // URL de la imagen en internet
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          // Texto debajo del primer Container
-                                          // Espacio entre los contenedores
-                                          const SizedBox(height: 5),
-                                          const Text(
-                                            'Foro de Discusión',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black),
-                                          ),
-                                        ])),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ))));
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
