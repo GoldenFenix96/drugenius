@@ -76,11 +76,9 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: <Widget>[
                                 Container(
-                                    color:
-                                        Color.fromARGB(0, 233, 159, 159),
+                                    color: Color.fromARGB(0, 233, 159, 159),
                                     width: 140,
                                     height: 160,
-                                
                                     child: Column(
 
                                         // Primer Container
@@ -96,34 +94,28 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                                 ),
                                               );
                                             },
-
                                             style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
-                     
-                                                          ),
-          
-                                              backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-                                               // Establece la forma circular
-                                              padding: const EdgeInsets.all(
-                                                  0), 
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+
+                                              backgroundColor:
+                                                  const Color.fromRGBO(
+                                                      255, 255, 255, 1),
+                                              // Establece la forma circular
+                                              padding: const EdgeInsets.all(0),
                                               elevation: 10,
 
-                                              
-                                                side:
-
-                                              const BorderSide(color:
-                                        Color.fromARGB(255, 145, 152, 252),),
-                                              
+                                              side: const BorderSide(
+                                                color: Color.fromARGB(
+                                                    255, 145, 152, 252),
+                                              ),
                                             ),
-                                            
                                             child: Container(
                                               width: 110,
                                               height: 110,
                                               decoration: const BoxDecoration(
-                                                
                                                 shape: BoxShape
                                                     .circle, // Establece la forma circular
                                                 image: DecorationImage(
@@ -168,24 +160,21 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                             },
                                             style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
-                     
-                                                          ),
-          
-                                              backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-                                               // Establece la forma circular
-                                              padding: const EdgeInsets.all(
-                                                  0), 
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+
+                                              backgroundColor:
+                                                  const Color.fromRGBO(
+                                                      255, 255, 255, 1),
+                                              // Establece la forma circular
+                                              padding: const EdgeInsets.all(0),
                                               elevation: 10,
 
-                                              
-                                                side:
-
-                                              const BorderSide(color:
-                                        Color.fromARGB(255, 145, 152, 252),),
-                                              
+                                              side: const BorderSide(
+                                                color: Color.fromARGB(
+                                                    255, 145, 152, 252),
+                                              ),
                                             ),
                                             child: Container(
                                               width: 110,
@@ -239,24 +228,21 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                             },
                                             style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
-                     
-                                                          ),
-          
-                                              backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-                                               // Establece la forma circular
-                                              padding: const EdgeInsets.all(
-                                                  0), 
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+
+                                              backgroundColor:
+                                                  const Color.fromRGBO(
+                                                      255, 255, 255, 1),
+                                              // Establece la forma circular
+                                              padding: const EdgeInsets.all(0),
                                               elevation: 10,
 
-                                              
-                                                side:
-
-                                              const BorderSide(color:
-                                        Color.fromARGB(255, 145, 152, 252),),
-                                              
+                                              side: const BorderSide(
+                                                color: Color.fromARGB(
+                                                    255, 145, 152, 252),
+                                              ),
                                             ),
                                             child: Container(
                                               width: 110,
@@ -301,30 +287,27 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const Farmacocinetica(),// Reemplaza con la pantalla deseada
+                                                      const Farmacocinetica(), // Reemplaza con la pantalla deseada
                                                 ),
                                               );
                                             },
                                             style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
-                     
-                                                          ),
-          
-                                              backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-                                               // Establece la forma circular
-                                              padding: const EdgeInsets.all(
-                                                  0), 
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+
+                                              backgroundColor:
+                                                  const Color.fromRGBO(
+                                                      255, 255, 255, 1),
+                                              // Establece la forma circular
+                                              padding: const EdgeInsets.all(0),
                                               elevation: 10,
 
-                                              
-                                                side:
-
-                                              const BorderSide(color:
-                                        Color.fromARGB(255, 145, 152, 252),),
-                                              
+                                              side: const BorderSide(
+                                                color: Color.fromARGB(
+                                                    255, 145, 152, 252),
+                                              ),
                                             ),
                                             child: Container(
                                               width: 110,
@@ -375,24 +358,21 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                             },
                                             style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
-                     
-                                                          ),
-          
-                                              backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-                                               // Establece la forma circular
-                                              padding: const EdgeInsets.all(
-                                                  0), 
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+
+                                              backgroundColor:
+                                                  const Color.fromRGBO(
+                                                      255, 255, 255, 1),
+                                              // Establece la forma circular
+                                              padding: const EdgeInsets.all(0),
                                               elevation: 10,
 
-                                              
-                                                side:
-
-                                              const BorderSide(color:
-                                        Color.fromARGB(255, 145, 152, 252),),
-                                              
+                                              side: const BorderSide(
+                                                color: Color.fromARGB(
+                                                    255, 145, 152, 252),
+                                              ),
                                             ),
                                             child: Container(
                                               width: 110,
@@ -401,7 +381,9 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                                 shape: BoxShape
                                                     .circle, // Establece la forma circular
                                                 image: DecorationImage(
-                                                  image: AssetImage('assets/images/multimedia.png')
+                                                  image: NetworkImage(
+                                                    'https://i.ibb.co/zZv1TH1/multimedia.png', // URL de la imagen en internet
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -433,24 +415,21 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                             },
                                             style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
-                     
-                                                          ),
-          
-                                              backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-                                               // Establece la forma circular
-                                              padding: const EdgeInsets.all(
-                                                  0), 
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+
+                                              backgroundColor:
+                                                  const Color.fromRGBO(
+                                                      255, 255, 255, 1),
+                                              // Establece la forma circular
+                                              padding: const EdgeInsets.all(0),
                                               elevation: 10,
 
-                                              
-                                                side:
-
-                                              const BorderSide(color:
-                                        Color.fromARGB(255, 145, 152, 252),),
-                                              
+                                              side: const BorderSide(
+                                                color: Color.fromARGB(
+                                                    255, 145, 152, 252),
+                                              ),
                                             ),
                                             child: Container(
                                               width: 110,

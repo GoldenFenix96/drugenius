@@ -20,7 +20,8 @@ class NavBar extends StatelessWidget {
             accountEmail: Text('rcsanchez96@gmail.com'),
             currentAccountPicture: CircleAvatar(
               radius: 52,
-              backgroundImage: NetworkImage("https://i.ibb.co/bvgjvQs/Yo.jpg"),
+              backgroundImage:
+                  NetworkImage("https://i.ibb.co/JQ2sqXr/equipo-medico.png"),
             ),
             decoration: BoxDecoration(
                 color: Color.fromARGB(255, 41, 130, 172),

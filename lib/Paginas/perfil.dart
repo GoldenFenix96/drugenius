@@ -101,7 +101,7 @@ class _Perfil extends State<Perfil> {
                           borderRadius: BorderRadius.circular(
                               75), // Ajusta el radio según tu necesidad
                           child: Image.network(
-                            'https://i.ibb.co/bvgjvQs/Yo.jpg',
+                            'https://i.ibb.co/JQ2sqXr/equipo-medico.png',
                             width: 150, // Ancho de la imagen
                             height: 150, // Alto de la imagen
                             fit: BoxFit
