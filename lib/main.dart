@@ -71,6 +71,8 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
+                      //swiperBox(),
+                      //SizedBox(height: 20),
                       // Fila 1
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -203,7 +205,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                       ),
                       const SizedBox(height: 5), // Espacio entre las filas
                       // Fila 2
-                      swiperBox(),
+                      //swiperBox(),
                       const SizedBox(height: 5), // Espacio entre las filas
                       // Fila 3
                       Row(
@@ -378,13 +380,15 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                     // Texto debajo del primer Container
                                     // Espacio entre los contenedores
                                     const SizedBox(height: 5),
-                                    const Text(
-                                      'Podcast y Videos',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
+                                    Expanded(
+                                      child: const Text(
+                                        'Podcast y Videos',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
                                     ),
                                   ])),
                           // Segundo Container
@@ -433,13 +437,15 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                     // Texto debajo del primer Container
                                     // Espacio entre los contenedores
                                     const SizedBox(height: 5),
-                                    const Text(
-                                      'Foro de Discusión',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
+                                    Expanded(
+                                      child: const Text(
+                                        'Foro de Discusión',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
                                     ),
                                   ])),
                         ],
@@ -457,6 +463,38 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
 }
 
 Widget swiperBox() {
+  return SizedBox(
+    width: double.infinity,
+    height: 181.0,
+    child: Swiper(
+      viewportFraction: 1,
+      scale: 1,
+      itemBuilder: (BuildContext context, index) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Image.network(
+                  images2[index], // URL de la imagen
+                  fit: BoxFit
+                      .cover, // Ajusta la imagen para cubrir todo el espacio disponible
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+      itemCount: images2.length,
+      pagination: const SwiperPagination(),
+
+      autoplay: true, // Habilita la reproducción automática
+      autoplayDelay:
+          5000, // Establece el tiempo de espera entre transiciones (en milisegundos)
+    ),
+  );
+
+  /*
   return SizedBox(
     width: double.infinity,
     height: 181.0,
@@ -506,6 +544,7 @@ Widget swiperBox() {
               }
             },
             style: ElevatedButton.styleFrom(
+              maximumSize: Size.fromHeight(100),
               backgroundColor: const Color.fromARGB(
                   255, 255, 255, 255), // Color de fondo del botón
             ),
@@ -529,4 +568,5 @@ Widget swiperBox() {
           5000, // Establece el tiempo de espera entre transiciones (en milisegundos)
     ),
   );
+  */
 }
