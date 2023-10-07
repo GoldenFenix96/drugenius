@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 
 
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class generalidades extends StatefulWidget {
+  const generalidades({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<generalidades> createState() => _generalidades();
 }
 
-class _MyAppState extends State<MyApp> {
+class _generalidades extends State<generalidades> {
       //currentIndex
   int _paginaActual = 0; 
   int _nuevo = 0;// Índice de la página actual
