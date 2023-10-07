@@ -1,0 +1,1 @@
+//agregacion de generalidades
