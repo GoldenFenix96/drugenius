@@ -1,3 +1,6 @@
+import 'package:drugenius/Clases/id_usuarios.dart';
+import 'package:drugenius/Firebase_Services/firebase_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Paginas/register_page.dart';
 import 'package:drugenius/Paginas/recover_password.dart';
@@ -6,6 +9,8 @@ import 'package:drugenius/main.dart';
 
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
+
+Firebase_services fs = Firebase_services();
 
 class LogginPage extends StatelessWidget {
   const LogginPage({super.key});
@@ -23,12 +28,6 @@ class LogginPage extends StatelessWidget {
       body: Container(
         //FONDO
         decoration: const BoxDecoration(
-          /*
-          image: DecorationImage(
-            image: AssetImage("assets/images/background.jpg"),
-            fit: BoxFit.cover,
-          ),
-          */
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -133,12 +132,7 @@ class LogginPage extends StatelessWidget {
                       height: 55.0,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const DrugeniusMenu(),
-                            ),
-                          );
+                          _singUp(context);
                         },
                         style: ButtonStyle(
                           shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -234,5 +228,21 @@ class LogginPage extends StatelessWidget {
       onChanged: (value) {},
       fontWeight: FontWeight.w700,
     );
+  }
+
+  void _singUp(BuildContext context) async {
+    String email = _emailController.text;
+    String pass = _passwordController.text;
+
+    User? user = await fs.singInWithEmailAndPassword(email, pass);
+
+    if (user != null) {
+      UserStateManager().userId = user.uid; // Guarda el ID del usuario
+      print("Inicio de sesión exitoso");
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => DrugeniusMenu()));
+    } else {
+      print("Ocurrió un error");
+    }
   }
 }

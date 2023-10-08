@@ -42,4 +42,17 @@ class Firebase_services {
       return null;
     }
   }
+
+  Future<User?> singInWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      UserCredential credential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      return credential.user;
+    } catch (e) {
+      // ignore: avoid_print
+      print("Ha ocurrido un error");
+    }
+    return null;
+  }
 }

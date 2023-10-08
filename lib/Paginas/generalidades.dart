@@ -1,6 +1,7 @@
 //agregacion de generalidades
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields, prefer_interpolation_to_compose_strings, avoid_unnecessary_containers, camel_case_types
 
+import 'package:drugenius/Paginas/nav_bar.dart';
 import 'package:flutter/material.dart';
 
 class generalidades extends StatefulWidget {
@@ -13,7 +14,6 @@ class generalidades extends StatefulWidget {
 class _generalidades extends State<generalidades> {
   //currentIndex
   int _paginaActual = 0;
-  int _nuevo = 0; // Índice de la página actual
   //_pages
   List<Widget> _paginas = [
     paginaIntrodFarmacologia(),
@@ -35,9 +35,10 @@ class _generalidades extends State<generalidades> {
       title: 'Generalidades',
       home: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color.fromARGB(255, 207, 187, 4),
+            backgroundColor: const Color.fromARGB(255, 85, 145, 214),
             title: const Text('Generalidades'),
           ),
+          drawer: const NavBar(),
           //pages   currentIndex
           body: _paginas[
               _paginaActual], // Muestra la página actual según el índice
@@ -47,7 +48,7 @@ class _generalidades extends State<generalidades> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.align_horizontal_left_sharp),
                   label: 'Introduccion',
-                  backgroundColor: Color.fromARGB(255, 207, 187, 4)),
+                  backgroundColor: const Color.fromARGB(255, 85, 145, 214)),
               BottomNavigationBarItem(
                 icon: Icon(Icons.align_horizontal_left_sharp),
                 label: 'Farmacodinamia',

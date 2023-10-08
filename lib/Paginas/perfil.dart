@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:drugenius/Clases/id_usuarios.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 import 'package:drugenius/Paginas/drug_input.dart';
 import 'package:drugenius/Paginas/nav_bar.dart';
@@ -10,6 +11,8 @@ class Perfil extends StatefulWidget {
   @override
   State<Perfil> createState() => _Perfil();
 }
+
+String? userId = UserStateManager().userId;
 
 class _Perfil extends State<Perfil> {
   Firebase_services fs = Firebase_services();
@@ -25,26 +28,26 @@ class _Perfil extends State<Perfil> {
 
   Future<void> cargarDatosUsuario() async {
     try {
-      // Reemplaza 'usuarioId' con el ID del usuario que deseas consultar
-      String usuarioId = 'KtNyWuxeuyS6LIgAHciR8WrMn2I2';
+      // Verifica que userId no sea nulo antes de usarlo
+      if (userId != null) {
+        DocumentSnapshot<Object?> usuarioSnapshot = await fs.getUsuarioPorId(
+            userId!); // Agrega el operador '!' aquí para indicar que userId no es nulo
+        if (usuarioSnapshot.exists) {
+          final data = usuarioSnapshot.data() as Map<String, dynamic>?;
 
-      DocumentSnapshot<Object?> usuarioSnapshot =
-          await fs.getUsuarioPorId(usuarioId);
-
-      if (usuarioSnapshot.exists) {
-        final data = usuarioSnapshot.data() as Map<String, dynamic>?;
-
-        if (data != null) {
-          setState(() {
-            nombre = data['Nombre'] ?? '';
-            correo = data['Correo'] ?? '';
-            contrasena = data['Contraseña'] ?? '';
-          });
+          if (data != null) {
+            setState(() {
+              nombre = data['Nombre'] ?? '';
+              correo = data['Correo'] ?? '';
+              contrasena = data['Contraseña'] ?? '';
+            });
+          } else {
+            print('El documento no contiene datos.');
+          }
         } else {
-          print('El documento no contiene datos.');
+          print('El usuario con ID $userId no existe.');
         }
-      } else {
-        print('El usuario con ID $usuarioId no existe.');
+        // Resto del código aquí...
       }
     } catch (e) {
       print('Error al cargar datos del usuario: $e');

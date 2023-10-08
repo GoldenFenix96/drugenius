@@ -2,7 +2,7 @@
 
 import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Paginas/Farmacocinetica.dart';
-import 'package:drugenius/Paginas/drug_input.dart';
+import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +78,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           Container(
-                              color: Color.fromARGB(0, 233, 159, 159),
+                              color: const Color.fromARGB(0, 233, 159, 159),
                               width: 140,
                               height: 160,
                               child: Column(
@@ -92,7 +92,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                const DrugInput(), // Reemplaza con la pantalla deseada
+                                                const generalidades(), // Reemplaza con la pantalla deseada
                                           ),
                                         );
                                       },
@@ -380,8 +380,8 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                     // Texto debajo del primer Container
                                     // Espacio entre los contenedores
                                     const SizedBox(height: 5),
-                                    Expanded(
-                                      child: const Text(
+                                    const Expanded(
+                                      child: Text(
                                         'Podcast y Videos',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
@@ -437,8 +437,8 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                     // Texto debajo del primer Container
                                     // Espacio entre los contenedores
                                     const SizedBox(height: 5),
-                                    Expanded(
-                                      child: const Text(
+                                    const Expanded(
+                                      child: Text(
                                         'Foro de Discusión',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
