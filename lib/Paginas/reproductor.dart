@@ -213,6 +213,7 @@ class _DesingExampleState extends State<DesingExample> {
       backgroundColor: const Color(0xff16161e),
       body: audioPlayer.builderRealtimePlayingInfos(
           builder: (context, realtimePlayingInfos) {
+        // ignore: unnecessary_null_comparison
         if (realtimePlayingInfos != null) {
           return Column(
             children: [

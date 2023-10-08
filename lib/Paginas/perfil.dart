@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drugenius/Clases/id_usuarios.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
-import 'package:drugenius/Paginas/drug_input.dart';
 import 'package:drugenius/Paginas/nav_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +10,10 @@ class Perfil extends StatefulWidget {
   @override
   State<Perfil> createState() => _Perfil();
 }
+
+TextEditingController _correoController = TextEditingController();
+TextEditingController _nombreController = TextEditingController();
+TextEditingController _contrasenaController = TextEditingController();
 
 String? userId = UserStateManager().userId;
 
@@ -40,6 +43,10 @@ class _Perfil extends State<Perfil> {
               nombre = data['Nombre'] ?? '';
               correo = data['Correo'] ?? '';
               contrasena = data['Contraseña'] ?? '';
+
+              _nombreController.text = nombre;
+              _correoController.text = correo;
+              _contrasenaController.text = contrasena;
             });
           } else {
             print('El documento no contiene datos.');
@@ -51,6 +58,42 @@ class _Perfil extends State<Perfil> {
       }
     } catch (e) {
       print('Error al cargar datos del usuario: $e');
+    }
+  }
+
+  Future<void> _actualizarUsuario() async {
+    String nombre = _nombreController.text;
+    String correo = _correoController.text;
+    String contrasena = _contrasenaController.text;
+
+    print('Nombre: $nombre');
+    print('Contraseña: $contrasena');
+    print('Email: $correo');
+
+    try {
+      // Obtén el contexto antes de entrar al bloque try-catch
+      final currentContext = context;
+
+      // Llama a tu función de actualización desde AuthService
+      final user = await fs.updateProfile(userId!, correo, contrasena, nombre);
+
+      if (user != null) {
+        ScaffoldMessenger.of(currentContext).showSnackBar(
+          const SnackBar(
+            content: Text('Actualizacion exitosa del usuario.'),
+          ),
+        );
+      } else {
+        // Actualización fallida, muestra un mensaje de error
+        ScaffoldMessenger.of(currentContext).showSnackBar(
+          const SnackBar(
+            content: Text('Ha ocurrido un error al actualizar el usuario.'),
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error al actualizar usuario: $e');
+      // Maneja el error según tus necesidades
     }
   }
 
@@ -126,7 +169,8 @@ class _Perfil extends State<Perfil> {
                           child: TextField(
                             keyboardType: TextInputType.text,
                             obscureText: false,
-                            controller: TextEditingController(text: nombre),
+                            controller:
+                                _nombreController, // Utiliza el controlador _nombreController
                           )),
                       const SizedBox(height: 20.0),
                       Container(
@@ -142,7 +186,7 @@ class _Perfil extends State<Perfil> {
                         child: TextField(
                           keyboardType: TextInputType.emailAddress,
                           obscureText: false,
-                          controller: TextEditingController(text: correo),
+                          controller: _correoController,
                         ),
                       ),
                       const SizedBox(height: 20.0),
@@ -159,21 +203,14 @@ class _Perfil extends State<Perfil> {
                         child: TextField(
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: true,
-                          controller: TextEditingController(text: contrasena),
+                          controller: _contrasenaController,
                         ),
                       ),
                       const SizedBox(height: 20.0),
                       ElevatedButton(
-                          onPressed: () {
-                            // Acción cuando se presiona el botón
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const DrugInput(), // Reemplaza con la pantalla deseada
-                              ),
-                            );
-                          },
+                          onPressed: () => {
+                                _actualizarUsuario(),
+                              },
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8)),

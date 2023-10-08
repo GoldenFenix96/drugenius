@@ -20,7 +20,7 @@ class _MyCheckBoxState extends State<MyCheckBox> {
         horizontal: 25.0,
       ),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 204, 204, 204),
+        color: const Color.fromARGB(255, 204, 204, 204),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(

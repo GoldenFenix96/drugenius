@@ -55,4 +55,37 @@ class Firebase_services {
     }
     return null;
   }
+
+  Future<User?> updateProfile(
+      String userId, String email, String password, String nombre) async {
+    try {
+      // 1. Actualiza el perfil en Firebase Authentication
+      await _auth.currentUser!.updateEmail(email);
+      await _auth.currentUser!.updatePassword(password);
+
+      // 2. Actualiza la información adicional en Firestore
+      await db.collection('Usuarios').doc(userId).update({
+        'Nombre': nombre,
+        'Correo': email,
+        'Contraseña': password,
+      });
+
+      return _auth.currentUser;
+    } catch (e) {
+      print("Ha ocurrido un error al actualizar el perfil: $e");
+      return null;
+    }
+  }
+
+  Future<void> deleteUsuario(String userId) async {
+    try {
+      // 1. Elimina al usuario de Firebase Authentication
+      await _auth.currentUser!.delete();
+
+      // 2. Elimina la información del usuario en Firestore
+      await db.collection('Usuarios').doc(userId).delete();
+    } catch (e) {
+      print("Ha ocurrido un error al dar de baja al usuario: $e");
+    }
+  }
 }
