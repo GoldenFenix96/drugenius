@@ -102,8 +102,8 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                               BorderRadius.circular(10),
                                         ),
 
-                                        backgroundColor: const Color.fromRGBO(
-                                            255, 255, 255, 1),
+                                        backgroundColor: const Color.fromARGB(
+                                            210, 252, 248, 192),
                                         // Establece la forma circular
                                         padding: const EdgeInsets.all(0),
                                         elevation: 10,
@@ -164,8 +164,8 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                               BorderRadius.circular(10),
                                         ),
 
-                                        backgroundColor: const Color.fromRGBO(
-                                            255, 255, 255, 1),
+                                        backgroundColor: const Color.fromARGB(
+                                            210, 252, 248, 192),
                                         // Establece la forma circular
                                         padding: const EdgeInsets.all(0),
                                         elevation: 10,
@@ -228,8 +228,8 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                               BorderRadius.circular(10),
                                         ),
 
-                                        backgroundColor: const Color.fromRGBO(
-                                            255, 255, 255, 1),
+                                        backgroundColor: const Color.fromARGB(
+                                            210, 252, 248, 192),
                                         // Establece la forma circular
                                         padding: const EdgeInsets.all(0),
                                         elevation: 10,
@@ -291,8 +291,8 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                               BorderRadius.circular(10),
                                         ),
 
-                                        backgroundColor: const Color.fromRGBO(
-                                            255, 255, 255, 1),
+                                        backgroundColor: const Color.fromARGB(
+                                            210, 252, 248, 192),
                                         // Establece la forma circular
                                         padding: const EdgeInsets.all(0),
                                         elevation: 10,
@@ -353,8 +353,8 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                               BorderRadius.circular(10),
                                         ),
 
-                                        backgroundColor: const Color.fromRGBO(
-                                            255, 255, 255, 1),
+                                        backgroundColor: const Color.fromARGB(
+                                            210, 252, 248, 192),
                                         // Establece la forma circular
                                         padding: const EdgeInsets.all(0),
                                         elevation: 10,
@@ -409,8 +409,8 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                               BorderRadius.circular(10),
                                         ),
 
-                                        backgroundColor: const Color.fromRGBO(
-                                            255, 255, 255, 1),
+                                        backgroundColor: const Color.fromARGB(
+                                            210, 252, 248, 192),
                                         // Establece la forma circular
                                         padding: const EdgeInsets.all(0),
                                         elevation: 10,
