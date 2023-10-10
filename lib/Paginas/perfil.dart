@@ -207,19 +207,57 @@ class _Perfil extends State<Perfil> {
                         ),
                       ),
                       const SizedBox(height: 20.0),
-                      ElevatedButton(
-                          onPressed: () => {
-                                _actualizarUsuario(),
-                              },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            backgroundColor: const Color.fromARGB(
-                                255, 14, 26, 138), // Color de fondo
-                            padding: const EdgeInsets.all(10),
-                            elevation: 10,
-                          ),
-                          child: const Text("Actualizar Datos")),
+                      SizedBox(
+                        height: 55.0,
+                        child: ElevatedButton(
+                            onPressed: () => showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    title: const Text(
+                                        '¿Desea confirmar la actualización de sus datos?'),
+                                    content: const Text(
+                                        'Al actualizar tus datos, se sobrescribirán los datos actuales.'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'Cancel'),
+                                        child: const Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          _actualizarUsuario()
+                                              .whenComplete(() => {
+                                                    Navigator.pop(
+                                                        context, 'OK'),
+                                                  });
+                                        },
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                            /*{
+                                  _actualizarUsuario(),
+                                },*/
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              backgroundColor:
+                                  const Color.fromRGBO(253, 200, 66, 1),
+                              padding: const EdgeInsets.all(10),
+                              elevation: 10,
+                            ),
+                            child: const Text(
+                              "Actualizar Datos",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
+                                //fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )),
+                      ),
                     ],
                   ),
                 )
