@@ -17,15 +17,52 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Firebase_services fs = Firebase_services();
 
-  Future<void> _registrarUsuario() async {
+  Future<bool> _registrarUsuario() async {
     final email = _emailController.text;
     final password = _passwordController.text;
     final nombre = _nombreController.text;
 
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Debe ingresar un correo electrónico'),
+        ),
+      );
+      return true;
+    } else {
+      if (password.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Debe ingresar una contraseña'),
+          ),
+        );
+        return true;
+      } else {
+        if (nombre.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Debe ingresar un nombre'),
+            ),
+          );
+          return true;
+        }
+      }
+    }
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
     print('Nombre: $nombre');
     print('Contraseña: $password');
     print('Email: $email');
+
     try {
+      //Navigator.pop(context);
       // Obtén el contexto antes de entrar al bloque try-catch
       final currentContext = context;
 
@@ -33,10 +70,12 @@ class _RegisterPageState extends State<RegisterPage> {
       final user = await fs.signUpAndCreateProfile(email, password, nombre);
 
       if (user != null) {
+        Navigator.pop(context);
         // Registro exitoso, redirige a otra pantalla o realiza acciones necesarias
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const LogginPage()));
       } else {
+        Navigator.pop(context);
         // Registro fallido, muestra un mensaje de error
         ScaffoldMessenger.of(currentContext).showSnackBar(
           const SnackBar(
@@ -44,9 +83,11 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         );
       }
+      return true;
     } catch (e) {
       print('Error al registrar usuario: $e');
       // Maneja el error según tus necesidades
+      return false;
     }
   }
 

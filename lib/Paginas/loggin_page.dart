@@ -230,19 +230,62 @@ class LogginPage extends StatelessWidget {
     );
   }
 
-  void _singUp(BuildContext context) async {
+  Future<bool> _singUp(BuildContext context) async {
     String email = _emailController.text;
     String pass = _passwordController.text;
+
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Debe ingresar un correo electrónico'),
+        ),
+      );
+      return true;
+    } else {
+      if (pass.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Debe ingresar una contraseña'),
+          ),
+        );
+        return true;
+      }
+    }
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        });
 
     User? user = await fs.singInWithEmailAndPassword(email, pass);
 
     if (user != null) {
+      Navigator.pop(context);
       UserStateManager().userId = user.uid; // Guarda el ID del usuario
       print("Inicio de sesión exitoso");
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => DrugeniusMenu()));
     } else {
-      print("Ocurrió un error");
+      Navigator.pop(context);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+                title: const Text('Error'),
+                content: const Text('No se pudo iniciar sesión'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'Aceptar'),
+                    child: const Text('Aceptar'),
+                  ),
+                ],
+              ));
+      return true;
+      //print("Ocurrió un error");
     }
+    //await new Future.delayed(const Duration(seconds: 1));
+    return true;
   }
 }
