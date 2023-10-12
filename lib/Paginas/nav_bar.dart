@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drugenius/Clases/id_usuarios.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 import 'package:drugenius/Paginas/Farmacocinetica.dart';
+import 'package:drugenius/Paginas/blank_page.dart';
 import 'package:drugenius/Paginas/configuracion.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
@@ -208,7 +209,7 @@ void selectedItem(BuildContext context, int index) {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              const Farmacocinetica(), // Reemplaza con la pantalla deseada
+              const BlankPage(), // Reemplaza con la pantalla deseada
         ),
       );
       break;
@@ -218,7 +219,7 @@ void selectedItem(BuildContext context, int index) {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              const DesingExample(), // Reemplaza con la pantalla deseada
+              const BlankPage(), // Reemplaza con la pantalla deseada
         ),
       );
       break;
@@ -228,7 +229,7 @@ void selectedItem(BuildContext context, int index) {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              const Farmacocinetica(), // Reemplaza con la pantalla deseada
+              const BlankPage(), // Reemplaza con la pantalla deseada
         ),
       );
       break;
@@ -238,7 +239,7 @@ void selectedItem(BuildContext context, int index) {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              const Farmacocinetica(), // Reemplaza con la pantalla deseada
+              const BlankPage(), // Reemplaza con la pantalla deseada
         ),
       );
       break;
@@ -248,7 +249,7 @@ void selectedItem(BuildContext context, int index) {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              const Farmacocinetica(), // Reemplaza con la pantalla deseada
+              const BlankPage(), // Reemplaza con la pantalla deseada
         ),
       );
       break;
@@ -258,7 +259,7 @@ void selectedItem(BuildContext context, int index) {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              const Farmacocinetica(), // Reemplaza con la pantalla deseada
+              const BlankPage(), // Reemplaza con la pantalla deseada
         ),
       );
       break;

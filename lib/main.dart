@@ -13,17 +13,16 @@ import 'package:drugenius/Paginas/Nav_Bar.dart';
 //importaciones de FireBase
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'Paginas/blank_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp( MaterialApp(home:   SplashScreen()));
+  runApp(MaterialApp(home: SplashScreen()));
 }
-
 
 class DrugeniusMenu extends StatefulWidget {
   const DrugeniusMenu({super.key});
@@ -225,6 +224,14 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                   children: [
                                     ElevatedButton(
                                       onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const BlankPage(), // Reemplaza con la pantalla deseada
+                                          ),
+                                        );
+
                                         // Acción cuando se presiona el botón
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -281,14 +288,14 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                   children: [
                                     ElevatedButton(
                                       onPressed: () {
-                                        // Acción cuando se presiona el botón
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                const Farmacocinetica(), // Reemplaza con la pantalla deseada
+                                                const BlankPage(), // Reemplaza con la pantalla deseada
                                           ),
                                         );
+                                        // Acción cuando se presiona el botón
                                       },
                                       style: ElevatedButton.styleFrom(
                                         shape: RoundedRectangleBorder(
@@ -350,6 +357,13 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                   children: [
                                     ElevatedButton(
                                       onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const BlankPage(), // Reemplaza con la pantalla deseada
+                                          ),
+                                        );
                                         // Acción cuando se presiona el botón
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -406,6 +420,13 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                                   children: [
                                     ElevatedButton(
                                       onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const BlankPage(), // Reemplaza con la pantalla deseada
+                                          ),
+                                        );
                                         // Acción cuando se presiona el botón
                                       },
                                       style: ElevatedButton.styleFrom(

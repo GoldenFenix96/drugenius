@@ -39,10 +39,9 @@ class _Perfil extends State<Perfil> {
 
   Future<void> cargarDatosUsuario() async {
     try {
-
       // Obtén el usuario actualmente autenticado
       //final User? user = FirebaseAuth.instance.currentUser;
-      
+
       // Verifica que userId no sea nulo antes de usarlo
       if (userId != null) {
         //userId = user.uid;
@@ -60,7 +59,6 @@ class _Perfil extends State<Perfil> {
               _nombreController.text = nombre;
               _correoController.text = correo;
               _contrasenaController.text = contrasena;
-              
             });
           } else {
             print('El documento no contiene datos.');
@@ -89,12 +87,12 @@ class _Perfil extends State<Perfil> {
 
     try {
       // Obtén el contexto antes de entrar al bloque try-catch
-      
+
       //final User currentUser = FirebaseAuth.instance.currentUser.uid;
 
       // Llama a tu función de actualización desde AuthService
       final user = await fs.updateProfile(userId!, correo, contrasena, nombre);
-       //print('id: $userId');
+      //print('id: $userId');
       if (user != null) {
         ScaffoldMessenger.of(currentContext).showSnackBar(
           const SnackBar(
@@ -116,7 +114,7 @@ class _Perfil extends State<Perfil> {
       if (e is FirebaseAuthException) {
         final errorCode = e.code;
         print('Error al actualizar usuario - Código de error: $errorCode');
-        
+
         if (errorCode == 'requires-recent-login') {
           ScaffoldMessenger.of(currentContext).showSnackBar(
             const SnackBar(
@@ -240,7 +238,6 @@ class _Perfil extends State<Perfil> {
                           controller: _contrasenaController,
                         ),
                       ),
-                      
                       const SizedBox(height: 20.0),
                       SizedBox(
                         height: 55.0,
@@ -262,15 +259,19 @@ class _Perfil extends State<Perfil> {
                                       TextButton(
                                         onPressed: () {
                                           if (_singUp(context) == false) {
-                                            ScaffoldMessenger.of(context).showSnackBar(
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
                                               SnackBar(
-                                                content: Text('Debe ingresar su contraseña actual primero'),
+                                                content: Text(
+                                                    'Debe ingresar su contraseña actual primero'),
                                               ),
                                             );
                                           } else {
-                                            _actualizarUsuario().whenComplete(() => {
-                                              Navigator.pop(context, 'OK'),
-                                            });
+                                            _actualizarUsuario()
+                                                .whenComplete(() => {
+                                                      Navigator.pop(
+                                                          context, 'OK'),
+                                                    });
                                           }
                                         },
                                         child: const Text('OK'),
@@ -299,41 +300,58 @@ class _Perfil extends State<Perfil> {
                               ),
                             )),
                       ),
-                      SizedBox( child: ElevatedButton(onPressed: () {
-                        showDialog(context: context, builder: (BuildContext context) =>
-                        AlertDialog(
-                           title: const Text(
-                              '¿Desea cerrar sesión?'),
-                              content: const Text(
-                              'Su sesión se cerrará.'),
-                  actions:<Widget>[
-                                          TextButton(
-                            onPressed: () =>
-                                Navigator.pop(context, 'Cancel'),
-                            child: const Text('Cancel'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () =>{
-                                          FirebaseAuth.instance.signOut(),
-                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SplashScreen())),
-                                          //Navigator.popUntil(context, ModalRoute.withName('/LogginPage')),
-                                          
-                                        },
-                                        child: const Text('Aceptar'),
-                                      ),
-                                        ],
-                        ) );
-                      },
-                      child: const Text("Cerrar sesión"),
-                      style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              backgroundColor:
-                                  Color.fromARGB(255, 253, 141, 66),
-                              padding: const EdgeInsets.all(10),
-                              elevation: 10,
-                            ),
+                      SizedBox(
+                        height: 20,
                       ),
+                      SizedBox(
+                        height: 55.0,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                      title:
+                                          const Text('¿Desea cerrar sesión?'),
+                                      content:
+                                          const Text('Su sesión se cerrará.'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'Cancel'),
+                                          child: const Text('Cancel'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => {
+                                            FirebaseAuth.instance.signOut(),
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SplashScreen())),
+                                            //Navigator.popUntil(context, ModalRoute.withName('/LogginPage')),
+                                          },
+                                          child: const Text('Aceptar'),
+                                        ),
+                                      ],
+                                    ));
+                          },
+                          child: const Text(
+                            "Cerrar sesión",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                              //fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            backgroundColor: Color.fromARGB(255, 253, 141, 66),
+                            padding: const EdgeInsets.all(10),
+                            elevation: 10,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -341,17 +359,14 @@ class _Perfil extends State<Perfil> {
               ],
             )));
   }
-  
+
   Future<bool> _singUp(BuildContext context) async {
     String email = FirebaseAuth.instance.currentUser!.email.toString();
     String pass = _contrasenaControllerActual.text;
 
-      if (pass.isEmpty) {
-        return false;
-      }
-    
-
-    
+    if (pass.isEmpty) {
+      return false;
+    }
 
     User? user = await fs.singInWithEmailAndPassword(email, pass);
 
@@ -360,19 +375,16 @@ class _Perfil extends State<Perfil> {
       UserStateManager().userId = user.uid; // Guarda el ID del usuario
       print("Inicio de sesión exitoso");
       return true;
-      
     } else {
       print("Ocurrió un error");
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('ERROR'),
-          ),);
+        SnackBar(
+          content: Text('ERROR'),
+        ),
+      );
       return true;
-      
     }
     //await new Future.delayed(const Duration(seconds: 1));
     //return true;
   }
-  
-  
 }
