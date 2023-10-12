@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 
 
 class generalidades extends StatefulWidget {
+  const generalidades({Key? key}) : super(key: key);
   @override
-  _PopupMenuButtonGeneralidades createState() => _PopupMenuButtonGeneralidades();
+State<generalidades> createState() => _generalidadesState();
 }
 
-class _PopupMenuButtonGeneralidades extends State<generalidades> {
+class _generalidadesState extends State<generalidades> {
+
 
   int _selectedPageIndex = 0;
   final List<Widget> _pages = [
