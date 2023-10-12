@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drugenius/Clases/id_usuarios.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 import 'package:drugenius/Paginas/nav_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Perfil extends StatefulWidget {
@@ -15,7 +16,8 @@ TextEditingController _correoController = TextEditingController();
 TextEditingController _nombreController = TextEditingController();
 TextEditingController _contrasenaController = TextEditingController();
 
-String? userId = UserStateManager().userId;
+//String? userId = UserStateManager().userId;
+String? userId = FirebaseAuth.instance.currentUser?.uid;
 
 class _Perfil extends State<Perfil> {
   Firebase_services fs = Firebase_services();
@@ -31,8 +33,13 @@ class _Perfil extends State<Perfil> {
 
   Future<void> cargarDatosUsuario() async {
     try {
+
+      // Obtén el usuario actualmente autenticado
+      //final User? user = FirebaseAuth.instance.currentUser;
+      
       // Verifica que userId no sea nulo antes de usarlo
       if (userId != null) {
+        //userId = user.uid;
         DocumentSnapshot<Object?> usuarioSnapshot = await fs.getUsuarioPorId(
             userId!); // Agrega el operador '!' aquí para indicar que userId no es nulo
         if (usuarioSnapshot.exists) {
@@ -69,14 +76,18 @@ class _Perfil extends State<Perfil> {
     print('Nombre: $nombre');
     print('Contraseña: $contrasena');
     print('Email: $correo');
+    print('id: $userId');
+
+    final currentContext = context;
 
     try {
       // Obtén el contexto antes de entrar al bloque try-catch
-      final currentContext = context;
+      
+      //final User currentUser = FirebaseAuth.instance.currentUser.uid;
 
       // Llama a tu función de actualización desde AuthService
       final user = await fs.updateProfile(userId!, correo, contrasena, nombre);
-
+       //print('id: $userId');
       if (user != null) {
         ScaffoldMessenger.of(currentContext).showSnackBar(
           const SnackBar(
@@ -92,8 +103,24 @@ class _Perfil extends State<Perfil> {
         );
       }
     } catch (e) {
-      print('Error al actualizar usuario: $e');
+      final errorCode = e.hashCode;
+      print('Error al actualizar usuario: $errorCode');
       // Maneja el error según tus necesidades
+      if (e is FirebaseAuthException) {
+        final errorCode = e.code;
+        print('Error al actualizar usuario - Código de error: $errorCode');
+        
+        if (errorCode == 'requires-recent-login') {
+          ScaffoldMessenger.of(currentContext).showSnackBar(
+            const SnackBar(
+              content: Text('Debe iniciar sesión de nuevo.'),
+            ),
+          );
+          // Realiza acciones relacionadas con este error
+        } else if (errorCode == 'otro-codigo-de-error') {
+          // Otras acciones basadas en otros códigos de error
+        }
+      }
     }
   }
 

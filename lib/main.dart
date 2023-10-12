@@ -5,20 +5,25 @@ import 'package:drugenius/Paginas/Farmacocinetica.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/loggin_page.dart';
+import 'package:drugenius/splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Paginas/Nav_Bar.dart';
 
 //importaciones de FireBase
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'firebase_options.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MaterialApp(home: LogginPage()));
+  runApp( MaterialApp(home:   LogginPage()));
 }
+
 
 class DrugeniusMenu extends StatefulWidget {
   const DrugeniusMenu({super.key});

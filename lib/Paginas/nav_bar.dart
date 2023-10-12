@@ -8,6 +8,7 @@ import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/perfil.dart';
 import 'package:drugenius/Paginas/reproductor.dart';
 import 'package:drugenius/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NavBar extends StatefulWidget {
@@ -33,8 +34,11 @@ class _NavBarState extends State<NavBar> {
 
   Future<void> cargarDatosUsuario() async {
     try {
+      // Obtén el usuario actualmente autenticado
+      final User? user = FirebaseAuth.instance.currentUser;
       // Verifica que userId no sea nulo antes de usarlo
-      if (userId != null) {
+      if (user != null) {
+        userId = user.uid;
         DocumentSnapshot<Object?> usuarioSnapshot = await fs.getUsuarioPorId(
             userId!); // Agrega el operador '!' aquí para indicar que userId no es nulo
         if (usuarioSnapshot.exists) {
