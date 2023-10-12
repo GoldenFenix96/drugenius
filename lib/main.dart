@@ -21,7 +21,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp( MaterialApp(home:   LogginPage()));
+  runApp( MaterialApp(home:   SplashScreen()));
 }
 
 

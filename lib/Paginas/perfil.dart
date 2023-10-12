@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drugenius/Clases/id_usuarios.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
+import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:drugenius/Paginas/nav_bar.dart';
+import 'package:drugenius/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../main.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({super.key});
@@ -15,6 +19,7 @@ class Perfil extends StatefulWidget {
 TextEditingController _correoController = TextEditingController();
 TextEditingController _nombreController = TextEditingController();
 TextEditingController _contrasenaController = TextEditingController();
+TextEditingController _contrasenaControllerActual = TextEditingController();
 
 //String? userId = UserStateManager().userId;
 String? userId = FirebaseAuth.instance.currentUser?.uid;
@@ -24,6 +29,7 @@ class _Perfil extends State<Perfil> {
   String nombre = '';
   String correo = '';
   String contrasena = '';
+  String contrasenaActual = '';
 
   @override
   void initState() {
@@ -54,6 +60,7 @@ class _Perfil extends State<Perfil> {
               _nombreController.text = nombre;
               _correoController.text = correo;
               _contrasenaController.text = contrasena;
+              
             });
           } else {
             print('El documento no contiene datos.');
@@ -233,6 +240,7 @@ class _Perfil extends State<Perfil> {
                           controller: _contrasenaController,
                         ),
                       ),
+                      
                       const SizedBox(height: 20.0),
                       SizedBox(
                         height: 55.0,
@@ -253,11 +261,17 @@ class _Perfil extends State<Perfil> {
                                       ),
                                       TextButton(
                                         onPressed: () {
-                                          _actualizarUsuario()
-                                              .whenComplete(() => {
-                                                    Navigator.pop(
-                                                        context, 'OK'),
-                                                  });
+                                          if (_singUp(context) == false) {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(
+                                                content: Text('Debe ingresar su contraseña actual primero'),
+                                              ),
+                                            );
+                                          } else {
+                                            _actualizarUsuario().whenComplete(() => {
+                                              Navigator.pop(context, 'OK'),
+                                            });
+                                          }
                                         },
                                         child: const Text('OK'),
                                       ),
@@ -285,10 +299,80 @@ class _Perfil extends State<Perfil> {
                               ),
                             )),
                       ),
+                      SizedBox( child: ElevatedButton(onPressed: () {
+                        showDialog(context: context, builder: (BuildContext context) =>
+                        AlertDialog(
+                           title: const Text(
+                              '¿Desea cerrar sesión?'),
+                              content: const Text(
+                              'Su sesión se cerrará.'),
+                  actions:<Widget>[
+                                          TextButton(
+                            onPressed: () =>
+                                Navigator.pop(context, 'Cancel'),
+                            child: const Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>{
+                                          FirebaseAuth.instance.signOut(),
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SplashScreen())),
+                                          //Navigator.popUntil(context, ModalRoute.withName('/LogginPage')),
+                                          
+                                        },
+                                        child: const Text('Aceptar'),
+                                      ),
+                                        ],
+                        ) );
+                      },
+                      child: const Text("Cerrar sesión"),
+                      style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              backgroundColor:
+                                  Color.fromARGB(255, 253, 141, 66),
+                              padding: const EdgeInsets.all(10),
+                              elevation: 10,
+                            ),
+                      ),
+                      ),
                     ],
                   ),
                 )
               ],
             )));
   }
+  
+  Future<bool> _singUp(BuildContext context) async {
+    String email = FirebaseAuth.instance.currentUser!.email.toString();
+    String pass = _contrasenaControllerActual.text;
+
+      if (pass.isEmpty) {
+        return false;
+      }
+    
+
+    
+
+    User? user = await fs.singInWithEmailAndPassword(email, pass);
+
+    if (user != null) {
+      Navigator.pop(context);
+      UserStateManager().userId = user.uid; // Guarda el ID del usuario
+      print("Inicio de sesión exitoso");
+      return true;
+      
+    } else {
+      print("Ocurrió un error");
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('ERROR'),
+          ),);
+      return true;
+      
+    }
+    //await new Future.delayed(const Duration(seconds: 1));
+    //return true;
+  }
+  
+  
 }
