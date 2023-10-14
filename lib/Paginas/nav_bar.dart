@@ -1,13 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drugenius/Clases/id_usuarios.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
-import 'package:drugenius/Paginas/Farmacocinetica.dart';
 import 'package:drugenius/Paginas/blank_page.dart';
 import 'package:drugenius/Paginas/configuracion.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/perfil.dart';
-import 'package:drugenius/Paginas/reproductor.dart';
 import 'package:drugenius/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

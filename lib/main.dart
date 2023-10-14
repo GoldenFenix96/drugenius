@@ -1,10 +1,8 @@
 // ignore_for_file: empty_constructor_bodies
 
 import 'package:card_swiper/card_swiper.dart';
-import 'package:drugenius/Paginas/Farmacocinetica.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
-import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:drugenius/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
