@@ -4,13 +4,11 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/splash_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Paginas/Nav_Bar.dart';
 
 //importaciones de FireBase
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'Paginas/blank_page.dart';
 import 'firebase_options.dart';
 

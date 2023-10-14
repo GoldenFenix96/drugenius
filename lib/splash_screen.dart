@@ -4,8 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'Paginas/loggin_page.dart';
 
 import 'main.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key});
@@ -31,9 +29,7 @@ class SplashScreen extends StatelessWidget {
   // Marca la función como `async`
   Future<bool> isUserAuthenticated() async {
     var user = FirebaseAuth.instance.currentUser;
-    if (user == null){
-      
-    }
+    if (user == null) {}
     return user != null;
   }
 }

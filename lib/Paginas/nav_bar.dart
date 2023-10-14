@@ -6,6 +6,7 @@ import 'package:drugenius/Paginas/configuracion.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/perfil.dart';
+import 'package:drugenius/Paginas/prueba_med.dart';
 import 'package:drugenius/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -226,8 +227,7 @@ void selectedItem(BuildContext context, int index) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              const BlankPage(), // Reemplaza con la pantalla deseada
+          builder: (context) => Prueba(), // Reemplaza con la pantalla deseada
         ),
       );
       break;
