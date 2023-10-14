@@ -1,7 +1,11 @@
+import 'package:drugenius/Firebase_Services/firebase_services.dart';
+import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
 
-final TextEditingController _usernameController = TextEditingController();
+final TextEditingController _emailController = TextEditingController();
+
+Firebase_services fs = Firebase_services();
 
 class RecoverPassword extends StatelessWidget {
   const RecoverPassword({super.key});
@@ -9,6 +13,7 @@ class RecoverPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    String email;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -94,7 +99,43 @@ class RecoverPassword extends StatelessWidget {
                     width: size.width * 1,
                     height: 50.0,
                     child: ElevatedButton(
-                      onPressed: () => {},
+                      onPressed: () async {
+                        email = _emailController.text;
+                        if (email.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content:
+                                  Text('Debe ingresar un correo electrónico'),
+                            ),
+                          );
+                        } else {
+                          try {
+                            // Llama a la función para solicitar el restablecimiento de la contraseña
+                            await fs.resetPassword(email);
+                            // Mostrar un SnackBar o un mensaje de éxito si lo deseas
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                    'Se ha enviado un correo para restablecer la contraseña.'),
+                              ),
+                            );
+                            // Luego, realiza la navegación a la página de inicio de sesión
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LogginPage(),
+                              ),
+                            );
+                          } catch (e) {
+                            // Maneja cualquier error que pueda ocurrir durante el proceso
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Ha ocurrido un error: $e'),
+                              ),
+                            );
+                          }
+                        }
+                      },
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<OutlinedBorder>(
                           RoundedRectangleBorder(
@@ -130,7 +171,7 @@ class RecoverPassword extends StatelessWidget {
 
   _myTextFieldCorreo() {
     return myTextFieldGeneral(
-      controller: _usernameController,
+      controller: _emailController,
       hintText: "ejemplo@test.com",
       icon: Icons.email_outlined,
       keyboardType: TextInputType.emailAddress,

@@ -37,7 +37,6 @@ class _Perfil extends State<Perfil> {
   Future<void> cargarDatosUsuario() async {
     try {
       // Obtén el usuario actualmente autenticado
-      //final User? user = FirebaseAuth.instance.currentUser;
 
       // Verifica que userId no sea nulo antes de usarlo
       if (userId != null) {
@@ -258,7 +257,7 @@ class _Perfil extends State<Perfil> {
                                           if (_singUp(context) == false) {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
-                                              SnackBar(
+                                              const SnackBar(
                                                 content: Text(
                                                     'Debe ingresar su contraseña actual primero'),
                                               ),
@@ -297,7 +296,7 @@ class _Perfil extends State<Perfil> {
                               ),
                             )),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       SizedBox(
@@ -324,7 +323,7 @@ class _Perfil extends State<Perfil> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        SplashScreen())),
+                                                        const SplashScreen())),
                                             //Navigator.popUntil(context, ModalRoute.withName('/LogginPage')),
                                           },
                                           child: const Text('Aceptar'),
@@ -344,7 +343,8 @@ class _Perfil extends State<Perfil> {
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
-                            backgroundColor: Color.fromARGB(255, 253, 141, 66),
+                            backgroundColor:
+                                const Color.fromARGB(255, 253, 141, 66),
                             padding: const EdgeInsets.all(10),
                             elevation: 10,
                           ),
@@ -375,7 +375,7 @@ class _Perfil extends State<Perfil> {
     } else {
       print("Ocurrió un error");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('ERROR'),
         ),
       );

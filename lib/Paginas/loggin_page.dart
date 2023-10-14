@@ -18,15 +18,13 @@ class LogginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-
     final size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async {
         // Muestra un mensaje de confirmación
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('¿Desea salir de la aplicación?'),
+            content: const Text('¿Desea salir de la aplicación?'),
             action: SnackBarAction(
               label: 'Sí',
               onPressed: () {
@@ -142,7 +140,7 @@ class LogginPage extends StatelessWidget {
                       ),
                     ),
                     //FIN TXT RECUPERACION DE CONTRASEÑA
-    
+
                     const SizedBox(height: 30.0),
                     //BOTÓN
                     Container(
@@ -211,8 +209,8 @@ class LogginPage extends StatelessWidget {
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 77, 77, 77),
-                                decoration:
-                                    TextDecoration.underline, // Subraya el texto
+                                decoration: TextDecoration
+                                    .underline, // Subraya el texto
                               ),
                             ),
                           ),
@@ -259,7 +257,7 @@ class LogginPage extends StatelessWidget {
 
     if (email.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Debe ingresar un correo electrónico'),
         ),
       );
@@ -267,7 +265,7 @@ class LogginPage extends StatelessWidget {
     } else {
       if (pass.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Debe ingresar una contraseña'),
           ),
         );
@@ -278,7 +276,7 @@ class LogginPage extends StatelessWidget {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         });
@@ -289,7 +287,8 @@ class LogginPage extends StatelessWidget {
       Navigator.pop(context);
       UserStateManager().userId = user.uid; // Guarda el ID del usuario
       print("Inicio de sesión exitoso");
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DrugeniusMenu()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const DrugeniusMenu()));
       //Navigator.popUntil(context, ModalRoute.withName('/DrugeniusMenu'));
     } else {
       Navigator.pop(context);
