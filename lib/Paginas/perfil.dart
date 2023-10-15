@@ -263,11 +263,10 @@ class _Perfil extends State<Perfil> {
                                               ),
                                             );
                                           } else {
-                                            _actualizarUsuario()
-                                                .whenComplete(() => {
-                                                      Navigator.pop(
-                                                          context, 'OK'),
-                                                    });
+                                            _actualizarUsuario().whenComplete(
+                                              () =>
+                                                  Navigator.pop(context, 'OK'),
+                                            );
                                           }
                                         },
                                         child: const Text('OK'),
