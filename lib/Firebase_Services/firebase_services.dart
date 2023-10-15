@@ -88,4 +88,14 @@ class Firebase_services {
       print("Ha ocurrido un error al dar de baja al usuario: $e");
     }
   }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      // Éxito: se envió un enlace de restablecimiento de contraseña al correo electrónico del usuario.
+    } catch (e) {
+      // Error: no se pudo enviar el enlace de restablecimiento de contraseña.
+      print("Error al enviar el enlace de restablecimiento de contraseña: $e");
+    }
+  }
 }
