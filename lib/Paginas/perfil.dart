@@ -330,6 +330,14 @@ class _Perfil extends State<Perfil> {
                                       ],
                                     ));
                           },
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            backgroundColor:
+                                const Color.fromARGB(255, 253, 141, 66),
+                            padding: const EdgeInsets.all(10),
+                            elevation: 10,
+                          ),
                           child: const Text(
                             "Cerrar sesión",
                             style: TextStyle(
@@ -338,14 +346,6 @@ class _Perfil extends State<Perfil> {
                               //fontFamily: 'Montserrat',
                               fontWeight: FontWeight.w600,
                             ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            backgroundColor:
-                                const Color.fromARGB(255, 253, 141, 66),
-                            padding: const EdgeInsets.all(10),
-                            elevation: 10,
                           ),
                         ),
                       ),
