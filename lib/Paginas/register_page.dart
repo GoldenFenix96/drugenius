@@ -98,6 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        foregroundColor: Color.fromARGB(255, 0, 0, 0),
         title: const Center(child: Text("")),
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
         elevation: 0,

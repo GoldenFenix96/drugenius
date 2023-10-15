@@ -1,6 +1,7 @@
 // ignore_for_file: empty_constructor_bodies
 
 import 'package:card_swiper/card_swiper.dart';
+import 'package:drugenius/Componentes/my_button_general.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/loggin_page.dart';
@@ -45,6 +46,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         drawer: const NavBar(),
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+          foregroundColor: const Color.fromARGB(255, 255, 255, 255),
           elevation: 0,
           title: Image.network(
             'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // URL de la imagen en internet
@@ -75,270 +77,44 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       //swiperBox(),
-                      //SizedBox(height: 20),
+                      SizedBox(
+                        child: Text(
+                          '¡Bienvenido!',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
                       // Fila 1
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Container(
-                              color: const Color.fromARGB(0, 233, 159, 159),
-                              width: 140,
-                              height: 160,
-                              child: Column(
-
-                                  // Primer Container
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        // Acción cuando se presiona el botón
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const generalidades(), // Reemplaza con la pantalla deseada
-                                          ),
-                                        );
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-
-                                        backgroundColor: const Color.fromARGB(
-                                            210, 252, 248, 192),
-                                        // Establece la forma circular
-                                        padding: const EdgeInsets.all(0),
-                                        elevation: 10,
-
-                                        side: const BorderSide(
-                                          color: Color.fromARGB(
-                                              255, 145, 152, 252),
-                                        ),
-                                      ),
-                                      child: Container(
-                                        width: 110,
-                                        height: 110,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape
-                                              .circle, // Establece la forma circular
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                              'https://i.ibb.co/74M1Zv2/Generalidades.png', // URL de la imagen en internet
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    // Texto debajo del primer Container
-                                    // Espacio entre los contenedores
-                                    const SizedBox(height: 5),
-                                    const Text(
-                                      'Generalidades',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                    ),
-                                  ])),
-
+                          _btnGeneralidades(),
                           // Espacio entre los contenedores
-                          Container(
-                              color: const Color.fromARGB(0, 255, 255, 255),
-                              width: 140,
-                              height: 160,
-                              child: Column(
-                                  // Primer Container
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ListMedicamentos(), // Reemplaza con la pantalla deseada
-                                          ),
-                                        );
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-
-                                        backgroundColor: const Color.fromARGB(
-                                            210, 252, 248, 192),
-                                        // Establece la forma circular
-                                        padding: const EdgeInsets.all(0),
-                                        elevation: 10,
-
-                                        side: const BorderSide(
-                                          color: Color.fromARGB(
-                                              255, 145, 152, 252),
-                                        ),
-                                      ),
-                                      child: Container(
-                                        width: 110,
-                                        height: 110,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape
-                                              .circle, // Establece la forma circular
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                              'https://i.ibb.co/DgQd0Bt/Medicamentos.png', // URL de la imagen en internet
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    // Texto debajo del primer Container
-                                    // Espacio entre los contenedores
-                                    const SizedBox(height: 5),
-                                    const Text(
-                                      'Medicamentos',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                    ),
-                                  ])),
+                          _btnMedicamentos(),
                         ],
                       ),
                       const SizedBox(height: 5), // Espacio entre las filas
                       // Fila 2
-                      //swiperBox(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          _btnEvaluaciones(),
+                          // Segundo Container
+                          _btnJuegos(),
+                        ],
+                      ),
+
                       const SizedBox(height: 5), // Espacio entre las filas
                       // Fila 3
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Container(
-                              color: const Color.fromARGB(0, 255, 255, 255),
-                              width: 140,
-                              height: 160,
-                              child: Column(
-                                  // Primer Container
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const BlankPage(), // Reemplaza con la pantalla deseada
-                                          ),
-                                        );
-
-                                        // Acción cuando se presiona el botón
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-
-                                        backgroundColor: const Color.fromARGB(
-                                            210, 252, 248, 192),
-                                        // Establece la forma circular
-                                        padding: const EdgeInsets.all(0),
-                                        elevation: 10,
-
-                                        side: const BorderSide(
-                                          color: Color.fromARGB(
-                                              255, 145, 152, 252),
-                                        ),
-                                      ),
-                                      child: Container(
-                                        width: 110,
-                                        height: 110,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape
-                                              .circle, // Establece la forma circular
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                              'https://i.ibb.co/KqMrc9H/Evaluaciones.png',
-                                              // URL de la imagen en internet
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    // Texto debajo del primer Container
-                                    // Espacio entre los contenedores
-                                    const SizedBox(height: 5),
-                                    const Text(
-                                      'Evaluaciones',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                    ),
-                                  ])),
+                          _btnPodcastVideos(),
                           // Segundo Container
-                          Container(
-                              color: const Color.fromARGB(0, 255, 255, 255),
-                              width: 140,
-                              height: 160,
-                              child: Column(
-                                  // Primer Container
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const BlankPage(), // Reemplaza con la pantalla deseada
-                                          ),
-                                        );
-                                        // Acción cuando se presiona el botón
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-
-                                        backgroundColor: const Color.fromARGB(
-                                            210, 252, 248, 192),
-                                        // Establece la forma circular
-                                        padding: const EdgeInsets.all(0),
-                                        elevation: 10,
-
-                                        side: const BorderSide(
-                                          color: Color.fromARGB(
-                                              255, 145, 152, 252),
-                                        ),
-                                      ),
-                                      child: Container(
-                                        width: 110,
-                                        height: 110,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape
-                                              .circle, // Establece la forma circular
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                              'https://i.ibb.co/tP1Lw7v/Juegos.png', // URL de la imagen en internet
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    // Texto debajo del primer Container
-                                    // Espacio entre los contenedores
-                                    const SizedBox(height: 5),
-                                    const Text(
-                                      'Juegos',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black),
-                                    ),
-                                  ])),
+                          _btnForo(),
                         ],
                       ),
 
@@ -347,132 +123,9 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Container(
-                              color: const Color.fromARGB(0, 255, 255, 255),
-                              width: 140,
-                              height: 160,
-                              child: Column(
-                                  // Primer Container
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const BlankPage(), // Reemplaza con la pantalla deseada
-                                          ),
-                                        );
-                                        // Acción cuando se presiona el botón
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-
-                                        backgroundColor: const Color.fromARGB(
-                                            210, 252, 248, 192),
-                                        // Establece la forma circular
-                                        padding: const EdgeInsets.all(0),
-                                        elevation: 10,
-
-                                        side: const BorderSide(
-                                          color: Color.fromARGB(
-                                              255, 145, 152, 252),
-                                        ),
-                                      ),
-                                      child: Container(
-                                        width: 110,
-                                        height: 110,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape
-                                              .circle, // Establece la forma circular
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                                'https://i.ibb.co/zZv1TH1/multimedia.png'), // URL de la imagen en internet
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    // Texto debajo del primer Container
-                                    // Espacio entre los contenedores
-                                    const SizedBox(height: 5),
-                                    const Expanded(
-                                      child: Text(
-                                        'Podcast y Videos',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                    ),
-                                  ])),
+                          _btnCalculadora(),
                           // Segundo Container
-                          Container(
-                              color: const Color.fromARGB(0, 255, 255, 255),
-                              width: 140,
-                              height: 160,
-                              child: Column(
-                                  // Primer Container
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const BlankPage(), // Reemplaza con la pantalla deseada
-                                          ),
-                                        );
-                                        // Acción cuando se presiona el botón
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-
-                                        backgroundColor: const Color.fromARGB(
-                                            210, 252, 248, 192),
-                                        // Establece la forma circular
-                                        padding: const EdgeInsets.all(0),
-                                        elevation: 10,
-
-                                        side: const BorderSide(
-                                          color: Color.fromARGB(
-                                              255, 145, 152, 252),
-                                        ),
-                                      ),
-                                      child: Container(
-                                        width: 110,
-                                        height: 110,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape
-                                              .circle, // Establece la forma circular
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                              'https://i.ibb.co/NVcvYJ7/charla-3.png', // URL de la imagen en internet
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    // Texto debajo del primer Container
-                                    // Espacio entre los contenedores
-                                    const SizedBox(height: 5),
-                                    const Expanded(
-                                      child: Text(
-                                        'Foro de Discusión',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                    ),
-                                  ])),
+                          _btnFarmacocinetica(),
                         ],
                       ),
                     ],
@@ -482,6 +135,289 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  _btnGeneralidades() {
+    return Container(
+      color: const Color.fromARGB(0, 233, 159, 159),
+      width: 140,
+      height: 160,
+      child: Column(
+        // Primer Container
+        children: [
+          MyButtonHome(
+            imageNet: 'https://i.ibb.co/74M1Zv2/Generalidades.png',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const generalidades(), // Reemplaza con la pantalla deseada
+                ),
+              );
+            },
+          ),
+          // Texto debajo del primer Container
+          // Espacio entre los contenedores
+          const SizedBox(height: 5),
+          const Text(
+            'Generalidades',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _btnMedicamentos() {
+    return Container(
+      color: const Color.fromARGB(0, 255, 255, 255),
+      width: 140,
+      height: 160,
+      child: Column(
+        // Primer Container
+        children: [
+          MyButtonHome(
+              imageNet: 'https://i.ibb.co/DgQd0Bt/Medicamentos.png',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const ListMedicamentos(), // Reemplaza con la pantalla deseada
+                  ),
+                );
+              }),
+          // Texto debajo del primer Container
+          // Espacio entre los contenedores
+          const SizedBox(height: 5),
+          const Text(
+            'Medicamentos',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _btnEvaluaciones() {
+    return Container(
+      color: const Color.fromARGB(0, 255, 255, 255),
+      width: 140,
+      height: 160,
+      child: Column(
+        // Primer Container
+        children: [
+          MyButtonHome(
+              imageNet: 'https://i.ibb.co/KqMrc9H/Evaluaciones.png',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const BlankPage(), // Reemplaza con la pantalla deseada
+                  ),
+                );
+              }),
+          // Texto debajo del primer Container
+          // Espacio entre los contenedores
+          const SizedBox(height: 5),
+          const Text(
+            'Evaluaciones',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _btnJuegos() {
+    return Container(
+      color: const Color.fromARGB(0, 255, 255, 255),
+      width: 140,
+      height: 160,
+      child: Column(
+        // Primer Container
+        children: [
+          MyButtonHome(
+            imageNet: 'https://i.ibb.co/tP1Lw7v/Juegos.png',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const BlankPage(), // Reemplaza con la pantalla deseada
+                ),
+              );
+            },
+          ),
+          // Texto debajo del primer Container
+          // Espacio entre los contenedores
+          const SizedBox(height: 5),
+          const Text(
+            'Juegos',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _btnPodcastVideos() {
+    return Container(
+      color: const Color.fromARGB(0, 255, 255, 255),
+      width: 140,
+      height: 160,
+      child: Column(
+        // Primer Container
+        children: [
+          MyButtonHome(
+            imageNet: 'https://i.ibb.co/9w3nnRj/Microphone-2368447.png',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const BlankPage(), // Reemplaza con la pantalla deseada
+                ),
+              );
+            },
+          ),
+          // Texto debajo del primer Container
+          // Espacio entre los contenedores
+          const SizedBox(height: 5),
+          const Expanded(
+            child: Text(
+              'Podcast y Videos',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _btnForo() {
+    return Container(
+      color: const Color.fromARGB(0, 255, 255, 255),
+      width: 140,
+      height: 160,
+      child: Column(
+        // Primer Container
+        children: [
+          MyButtonHome(
+              imageNet: 'https://i.ibb.co/NVcvYJ7/charla-3.png',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const BlankPage(), // Reemplaza con la pantalla deseada
+                  ),
+                );
+              }),
+          // Texto debajo del primer Container
+          // Espacio entre los contenedores
+          const SizedBox(height: 5),
+          const Expanded(
+            child: Text(
+              'Foro de Discusión',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _btnCalculadora() {
+    return Container(
+      color: const Color.fromARGB(0, 255, 255, 255),
+      width: 140,
+      height: 160,
+      child: Column(
+        // Primer Container
+        children: [
+          MyButtonHome(
+              imageNet: 'https://i.ibb.co/x7GbYcM/calculator-7739181.png',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const BlankPage(), // Reemplaza con la pantalla deseada
+                  ),
+                );
+              }),
+          // Texto debajo del primer Container
+          // Espacio entre los contenedores
+          const SizedBox(height: 5),
+          const Expanded(
+            child: Text(
+              'Calculadora de dosis',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _btnFarmacocinetica() {
+    return Container(
+      color: const Color.fromARGB(0, 255, 255, 255),
+      width: 140,
+      height: 160,
+      child: Column(
+        // Primer Container
+        children: [
+          MyButtonHome(
+              imageNet: 'https://i.ibb.co/x7GbYcM/calculator-7739181.png',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const BlankPage(), // Reemplaza con la pantalla deseada
+                  ),
+                );
+              }),
+          // Texto debajo del primer Container
+          // Espacio entre los contenedores
+          const SizedBox(height: 5),
+          const Expanded(
+            child: Text(
+              'Farmacocinética',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
+            ),
+          ),
+        ],
       ),
     );
   }

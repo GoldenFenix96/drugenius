@@ -22,6 +22,7 @@ class _DrugInputState extends State<DrugInput> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         //automaticallyImplyLeading: false,
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: const Text(
           "Ingreso de medicamentos",
           style: TextStyle(fontWeight: FontWeight.bold),

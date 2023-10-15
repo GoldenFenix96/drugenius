@@ -22,6 +22,7 @@ class LogginPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Center(child: Text("")),
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
         elevation: 0,

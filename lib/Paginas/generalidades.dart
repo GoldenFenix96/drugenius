@@ -22,6 +22,7 @@ class _generalidadesState extends State<generalidades> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
         backgroundColor: const Color.fromARGB(255, 85, 145, 214),
         title: Text('Generalidades'),
         actions: <Widget>[

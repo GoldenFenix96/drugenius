@@ -10,6 +10,7 @@ class ListMedicamentos extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: const Text("Listado de Medicamentos",
             style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             textAlign: TextAlign.center),

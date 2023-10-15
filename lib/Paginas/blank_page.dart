@@ -9,20 +9,34 @@ class BlankPage extends StatelessWidget {
       extendBodyBehindAppBar: false,
       appBar: AppBar(
         //automaticallyImplyLeading: false,
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: const Text(
           "Página en construcción",
           style: TextStyle(fontWeight: FontWeight.bold),
-          textAlign: TextAlign.center,
         ),
         backgroundColor: const Color.fromARGB(255, 85, 145, 214),
       ),
       body: Container(
         child: Center(
-          child: SizedBox(
-            width: 200,
-            height: 200,
-            child: Image.network(
-                'https://icones.pro/wp-content/uploads/2022/02/services-parametres-et-icone-d-engrenage-gris.png'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 200,
+                height: 200,
+                child: Image.asset('assets/images/construccion.png'),
+              ),
+              SizedBox(height: 15),
+              Center(
+                child: Text(
+                  'Página en construcción',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              )
+            ],
           ),
         ),
       ),
