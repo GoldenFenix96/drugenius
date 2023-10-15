@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drugenius/Clases/id_usuarios.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
+import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:drugenius/Paginas/nav_bar.dart';
+import 'package:drugenius/main.dart';
 import 'package:drugenius/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -127,6 +129,7 @@ class _Perfil extends State<Perfil> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 85, 145, 214),
@@ -186,169 +189,212 @@ class _Perfil extends State<Perfil> {
                       const SizedBox(height: 30.0),
                       Container(
                         margin: const EdgeInsets.fromLTRB(40, 10.0, 40.0, 0),
-                        alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "Nombre:",
-                          style: TextStyle(fontWeight: FontWeight.w600),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start, // Cambia a MainAxisAlignment.start
+                          crossAxisAlignment: CrossAxisAlignment
+                              .start, // Alinea el contenido a la izquierda
+                          children: [
+                            const Text(
+                              "  Nombre:",
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                            _textfieldNombre(),
+                          ],
                         ),
                       ),
-                      Container(
-                          margin: const EdgeInsets.fromLTRB(40, 0.0, 40.0, 0),
-                          child: TextField(
-                            keyboardType: TextInputType.text,
-                            obscureText: false,
-                            controller:
-                                _nombreController, // Utiliza el controlador _nombreController
-                          )),
-                      const SizedBox(height: 20.0),
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(40, 10.0, 40.0, 0),
-                        alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "Correo Electrónico:",
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(40, 0.0, 40.0, 0),
-                        child: TextField(
-                          keyboardType: TextInputType.emailAddress,
-                          obscureText: false,
-                          controller: _correoController,
-                        ),
-                      ),
-                      const SizedBox(height: 20.0),
+                      const SizedBox(height: 15.0),
                       Container(
                         margin: const EdgeInsets.fromLTRB(40, 10.0, 40.0, 0),
                         alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "Contraseña:",
-                          style: TextStyle(fontWeight: FontWeight.w600),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start, // Cambia a MainAxisAlignment.start
+                          crossAxisAlignment: CrossAxisAlignment
+                              .start, // Alinea el contenido a la izquierda
+                          children: [
+                            const Text(
+                              "  Correo Electrónico:",
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                            _textfieldCorreo(),
+                          ],
                         ),
+                      ),
+                      const SizedBox(height: 15.0),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(40, 10.0, 40.0, 0),
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start, // Cambia a MainAxisAlignment.start
+                          crossAxisAlignment: CrossAxisAlignment
+                              .start, // Alinea el contenido a la izquierda
+                          children: [
+                            const Text(
+                              "  Contraseña:",
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                            _textfieldPassword(),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 15.0),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(40, 10.0, 40.0, 0),
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start, // Cambia a MainAxisAlignment.start
+                          crossAxisAlignment: CrossAxisAlignment
+                              .start, // Alinea el contenido a la izquierda
+                          children: [
+                            const Text(
+                              "Contraseña actual:",
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                            _textfieldPasswordActual()
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 25.0),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(40, 10.0, 40.0, 0),
+                        child: SizedBox(
+                          width: size.width * 1,
+                          height: 55.0,
+                          child: ElevatedButton(
+                              onPressed: () => {
+                                    if (_contrasenaControllerActual
+                                        .text.isEmpty)
+                                      {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                                'Ingrese su contraseña actual para actualizar los datos'),
+                                          ),
+                                        )
+                                      }
+                                    else
+                                      {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                AlertDialog(
+                                                    title: const Text(
+                                                        '¿Desea actaualizar sus datos?'),
+                                                    content: const Text(
+                                                        'Sus datos actuales se modificarán.'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                context,
+                                                                'Cancel'),
+                                                        child: const Text(
+                                                            'Cancel'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () => {
+                                                          _singUp(context)
+                                                              .whenComplete(
+                                                                  () => {
+                                                                        _actualizarUsuario(),
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'Aceptar'),
+                                                                      })
+                                                        },
+                                                        child: const Text(
+                                                            'Aceptar'),
+                                                      ),
+                                                    ]))
+                                      }
+                                  },
+                              /*{
+                                    _actualizarUsuario(),
+                                  },*/
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                                backgroundColor:
+                                    const Color.fromRGBO(253, 200, 66, 1),
+                                padding: const EdgeInsets.all(10),
+                              ),
+                              child: const Text(
+                                "Actualizar Datos",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  //fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 15,
                       ),
                       Container(
-                        margin: const EdgeInsets.fromLTRB(40, 0.0, 40.0, 0),
-                        child: TextField(
-                          keyboardType: TextInputType.visiblePassword,
-                          obscureText: true,
-                          controller: _contrasenaController,
-                        ),
-                      ),
-                      const SizedBox(height: 20.0),
-                      SizedBox(
-                        height: 55.0,
-                        child: ElevatedButton(
-                            onPressed: () => showDialog(
+                        margin: const EdgeInsets.fromLTRB(40, 10.0, 40.0, 0),
+                        child: SizedBox(
+                          width: size.width * 1,
+                          height: 55.0,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              showDialog(
                                   context: context,
                                   builder: (BuildContext context) =>
                                       AlertDialog(
-                                    title: const Text(
-                                        '¿Desea confirmar la actualización de sus datos?'),
-                                    content: const Text(
-                                        'Al actualizar tus datos, se sobrescribirán los datos actuales.'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context, 'Cancel'),
-                                        child: const Text('Cancel'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          if (_singUp(context) == false) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                content: Text(
-                                                    'Debe ingresar su contraseña actual primero'),
-                                              ),
-                                            );
-                                          } else {
-                                            _actualizarUsuario().whenComplete(
-                                              () =>
-                                                  Navigator.pop(context, 'OK'),
-                                            );
-                                          }
-                                        },
-                                        child: const Text('OK'),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                            /*{
-                                  _actualizarUsuario(),
-                                },*/
+                                        title:
+                                            const Text('¿Desea cerrar sesión?'),
+                                        content:
+                                            const Text('Su sesión se cerrará.'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                context, 'Cancel'),
+                                            child: const Text('Cancel'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () async => {
+                                              signOut(context),
+
+                                              /*
+                                              Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const SplashScreen())),
+                                              //Navigator.popUntil(context, ModalRoute.withName('/LogginPage')),
+                                              */
+                                            },
+                                            child: const Text('Aceptar'),
+                                          ),
+                                        ],
+                                      ));
+                            },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
                               backgroundColor:
-                                  const Color.fromRGBO(253, 200, 66, 1),
+                                  const Color.fromARGB(255, 253, 141, 66),
                               padding: const EdgeInsets.all(10),
-                              elevation: 10,
                             ),
                             child: const Text(
-                              "Actualizar Datos",
+                              "Cerrar sesión",
                               style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.black,
                                 //fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.w600,
                               ),
-                            )),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        height: 55.0,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) => AlertDialog(
-                                      title:
-                                          const Text('¿Desea cerrar sesión?'),
-                                      content:
-                                          const Text('Su sesión se cerrará.'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(context, 'Cancel'),
-                                          child: const Text('Cancel'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () => {
-                                            FirebaseAuth.instance.signOut(),
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const SplashScreen())),
-                                            //Navigator.popUntil(context, ModalRoute.withName('/LogginPage')),
-                                          },
-                                          child: const Text('Aceptar'),
-                                        ),
-                                      ],
-                                    ));
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            backgroundColor:
-                                const Color.fromARGB(255, 253, 141, 66),
-                            padding: const EdgeInsets.all(10),
-                            elevation: 10,
-                          ),
-                          child: const Text(
-                            "Cerrar sesión",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                              //fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
                       ),
+                      const SizedBox(height: 15.0),
                     ],
                   ),
                 )
@@ -360,16 +406,14 @@ class _Perfil extends State<Perfil> {
     String email = FirebaseAuth.instance.currentUser!.email.toString();
     String pass = _contrasenaControllerActual.text;
 
-    if (pass.isEmpty) {
-      return false;
-    }
-
     User? user = await fs.singInWithEmailAndPassword(email, pass);
 
     if (user != null) {
-      Navigator.pop(context);
+      //Navigator.pop(context);
       UserStateManager().userId = user.uid; // Guarda el ID del usuario
       print("Inicio de sesión exitoso");
+      _contrasenaControllerActual.text =
+          ''; //Limpia lo que hay en _contrasenaControllerActual
       return true;
     } else {
       print("Ocurrió un error");
@@ -382,5 +426,145 @@ class _Perfil extends State<Perfil> {
     }
     //await new Future.delayed(const Duration(seconds: 1));
     //return true;
+  }
+
+  _textfieldNombre() {
+    return Container(
+      child: TextField(
+        decoration: const InputDecoration(
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              borderSide: BorderSide(
+                color: Color.fromARGB(255, 204, 204, 204),
+              )),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
+          fillColor: Color.fromARGB(144, 255, 255, 255),
+          filled: true,
+          prefixIcon: Icon(Icons.person_outlined),
+          labelStyle: TextStyle(
+            color: Color.fromARGB(255, 33, 33, 33),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        keyboardType: TextInputType.text,
+        obscureText: false,
+        controller:
+            _nombreController, // Utiliza el controlador _nombreController
+      ),
+    );
+  }
+
+  _textfieldCorreo() {
+    return Container(
+      child: TextField(
+        decoration: const InputDecoration(
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              borderSide: BorderSide(
+                color: Color.fromARGB(255, 204, 204, 204),
+              )),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
+          fillColor: Color.fromARGB(95, 255, 255, 255),
+          filled: true,
+          prefixIcon: Icon(Icons.email_outlined),
+          labelStyle: TextStyle(
+            color: Color.fromARGB(255, 33, 33, 33),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        keyboardType: TextInputType.emailAddress,
+        readOnly: true,
+        //enabled: false,
+        obscureText: false,
+        controller: _correoController,
+      ),
+    );
+  }
+
+  _textfieldPassword() {
+    return Container(
+      child: TextField(
+        decoration: const InputDecoration(
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              borderSide: BorderSide(
+                color: Color.fromARGB(255, 204, 204, 204),
+              )),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
+          fillColor: Color.fromARGB(144, 255, 255, 255),
+          filled: true,
+          prefixIcon: Icon(Icons.lock_outline_rounded),
+          labelStyle: TextStyle(
+            color: Color.fromARGB(255, 33, 33, 33),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        keyboardType: TextInputType.visiblePassword,
+        obscureText: true,
+        controller: _contrasenaController,
+      ),
+    );
+  }
+
+  _textfieldPasswordActual() {
+    return Container(
+      child: TextField(
+        decoration: const InputDecoration(
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              borderSide: BorderSide(
+                color: Color.fromARGB(255, 204, 204, 204),
+              )),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
+          fillColor: Color.fromARGB(144, 255, 255, 255),
+          filled: true,
+          prefixIcon: Icon(Icons.lock_outline_rounded),
+          labelStyle: TextStyle(
+            color: Color.fromARGB(255, 33, 33, 33),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        keyboardType: TextInputType.visiblePassword,
+        obscureText: true,
+        controller: _contrasenaControllerActual,
+      ),
+    );
+  }
+}
+
+void signOut(BuildContext context) async {
+  try {
+    await FirebaseAuth.instance.signOut();
+    // El cierre de sesión se ha realizado con éxito
+    // Puedes realizar acciones aquí
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        // Set the name here
+        settings: RouteSettings(
+          name: "/FisrtPage",
+        ),
+        builder: (context) => LogginPage(),
+      ),
+    );
+
+    print("Cierre de sesión exitoso");
+  } catch (e) {
+    // Ocurrió un error al cerrar la sesión
+    // Puedes manejar el error aquí
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Error al cerrar sesión'),
+      ),
+    );
+    print("Error al cerrar sesión: $e");
   }
 }

@@ -18,7 +18,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MaterialApp(home: LogginPage()));
+  runApp(const MaterialApp(
+    home: SplashScreen(),
+  ));
 }
 
 class DrugeniusMenu extends StatefulWidget {
