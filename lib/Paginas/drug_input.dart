@@ -107,7 +107,7 @@ class _DrugInputState extends State<DrugInput> {
                   const SizedBox(height: 15.0),
                   _cuadroBasico(),
                   const SizedBox(height: 15.0),
-                  _farmacocineticaMedicamento(),
+                  //_farmacocineticaMedicamento(),
                   //FIN TXT INPUT
                   const SizedBox(height: 30.0),
                   //BOTON
