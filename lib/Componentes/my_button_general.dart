@@ -27,7 +27,7 @@ class MyButtonHome extends StatelessWidget {
         width: 110,
         height: 110,
         decoration: BoxDecoration(
-          shape: BoxShape.circle, // Establece la forma circular
+          //shape: BoxShape.circle, // Establece la forma circular
           image: DecorationImage(
             image: NetworkImage(imageNet),
           ),

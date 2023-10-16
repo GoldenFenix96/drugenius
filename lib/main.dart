@@ -282,7 +282,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-            imageNet: 'https://i.ibb.co/9w3nnRj/Microphone-2368447.png',
+            imageNet: 'https://i.ibb.co/gvKB3ky/Microphone-2368447.png',
             onPressed: () {
               Navigator.push(
                 context,
@@ -357,7 +357,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-              imageNet: 'https://i.ibb.co/x7GbYcM/calculator-7739181.png',
+              imageNet: 'https://i.ibb.co/RBtCRNQ/Calculator-7739181.png',
               onPressed: () {
                 Navigator.push(
                   context,
@@ -394,7 +394,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-              imageNet: 'https://i.ibb.co/x7GbYcM/calculator-7739181.png',
+              imageNet: 'https://i.ibb.co/MN7LQJZ/Drugs-4320344.png',
               onPressed: () {
                 Navigator.push(
                   context,

@@ -133,6 +133,7 @@ class _Perfil extends State<Perfil> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+          foregroundColor: const Color.fromARGB(255, 255, 255, 255),
           elevation: 0,
           title: Image.network(
             'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // URL de la imagen en internet
@@ -203,7 +204,7 @@ class _Perfil extends State<Perfil> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 15.0),
+                      const SizedBox(height: 10.0),
                       Container(
                         margin: const EdgeInsets.fromLTRB(40, 10.0, 40.0, 0),
                         alignment: Alignment.centerLeft,
@@ -221,7 +222,7 @@ class _Perfil extends State<Perfil> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 15.0),
+                      const SizedBox(height: 10.0),
                       Container(
                         margin: const EdgeInsets.fromLTRB(40, 10.0, 40.0, 0),
                         alignment: Alignment.centerLeft,
@@ -239,7 +240,7 @@ class _Perfil extends State<Perfil> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 15.0),
+                      const SizedBox(height: 10.0),
                       Container(
                         margin: const EdgeInsets.fromLTRB(40, 10.0, 40.0, 0),
                         alignment: Alignment.centerLeft,
@@ -333,9 +334,7 @@ class _Perfil extends State<Perfil> {
                               )),
                         ),
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
+                      const SizedBox(height: 10),
                       Container(
                         margin: const EdgeInsets.fromLTRB(40, 10.0, 40.0, 0),
                         child: SizedBox(

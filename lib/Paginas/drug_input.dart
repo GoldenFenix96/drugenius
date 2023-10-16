@@ -25,7 +25,6 @@ class _DrugInputState extends State<DrugInput> {
         foregroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: const Text(
           "Ingreso de medicamentos",
-          style: TextStyle(fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
         backgroundColor: const Color.fromARGB(255, 85, 145, 214),

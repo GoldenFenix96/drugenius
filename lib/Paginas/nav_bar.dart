@@ -227,7 +227,8 @@ void selectedItem(BuildContext context, int index) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => Prueba(), // Reemplaza con la pantalla deseada
+          //builder: (context) => Prueba(), // Reemplaza con la pantalla deseada
+          builder: (context) => BlankPage(),
         ),
       );
       break;

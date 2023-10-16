@@ -10,10 +10,7 @@ class BlankPage extends StatelessWidget {
       appBar: AppBar(
         //automaticallyImplyLeading: false,
         foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-        title: const Text(
-          "Página en construcción",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        title: const Text("Página en construcción"),
         backgroundColor: const Color.fromARGB(255, 85, 145, 214),
       ),
       body: Container(

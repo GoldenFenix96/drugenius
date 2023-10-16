@@ -18,6 +18,7 @@ class Medicamentos extends StatelessWidget {
             style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             textAlign: TextAlign.center),
         backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(25.0, 20.0, 25.0, 20.0),
