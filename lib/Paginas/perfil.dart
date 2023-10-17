@@ -3,8 +3,6 @@ import 'package:drugenius/Clases/id_usuarios.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:drugenius/Paginas/nav_bar.dart';
-import 'package:drugenius/main.dart';
-import 'package:drugenius/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

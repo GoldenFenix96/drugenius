@@ -4,7 +4,6 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Componentes/my_button_general.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
-import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:drugenius/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Paginas/Nav_Bar.dart';
