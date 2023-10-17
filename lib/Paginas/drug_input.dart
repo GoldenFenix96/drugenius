@@ -91,8 +91,6 @@ class _DrugInputState extends State<DrugInput> {
                   const SizedBox(height: 15.0),
                   _mecanismosDeAccion(),
                   const SizedBox(height: 15.0),
-                  _receptoresMedicamento(),
-                  const SizedBox(height: 15.0),
                   _usoTerapeutico(),
                   const SizedBox(height: 15.0),
                   _efectosAdversos(),
@@ -101,13 +99,10 @@ class _DrugInputState extends State<DrugInput> {
                   const SizedBox(height: 15.0),
                   _posologiaMedicamento(),
                   const SizedBox(height: 15.0),
-                  _recomendacionesMedicamentos(),
-                  const SizedBox(height: 15.0),
-                  _casosClinicos(),
-                  const SizedBox(height: 15.0),
                   _cuadroBasico(),
                   const SizedBox(height: 15.0),
-                  //_farmacocineticaMedicamento(),
+                  //_imagenFarmacocinetica(),
+                  _farmacocineticaMedicamento(),
                   //FIN TXT INPUT
                   const SizedBox(height: 30.0),
                   //BOTON
@@ -203,22 +198,6 @@ class _DrugInputState extends State<DrugInput> {
     );
   }
 
-  _recomendacionesMedicamentos() {
-    return TextFormFieldGeneral(
-      labelTxt: "Recomendaciones",
-      hintText: "Ejemplo...",
-      onChanged: (value) {},
-    );
-  }
-
-  _casosClinicos() {
-    return TextFormFieldGeneral(
-      labelTxt: "Casos clínicos",
-      hintText: "Ejemplo...",
-      onChanged: (value) {},
-    );
-  }
-
   _farmacocineticaMedicamento() {
     return Container(
       child: Column(
@@ -270,12 +249,89 @@ class _DrugInputState extends State<DrugInput> {
     );
   }
 
+  List<String> grupo = ['AINES'];
+
   _grupoMedicamento() {
-    List grupo = ['AINES', 'OTROS'];
-    return MyDropDown(
-      list: grupo,
-      hintText: "Seleccione un grupo",
+    return Column(
+      children: [
+        MyDropDown(
+          list: grupo,
+          hintText: "Seleccione un grupo",
+        ),
+        const SizedBox(height: 15.0),
+        Container(
+          width: MediaQuery.of(context).size.width * 1,
+          height: 55.0,
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
+          ),
+          child: ElevatedButton(
+            onPressed: () {
+              _agregarGrupo(context);
+            },
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all<OutlinedBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                      10.0), // Cambia el radio de la esquina para personalizar la forma
+                ),
+              ),
+              backgroundColor: MaterialStateProperty.all<Color>(
+                const Color.fromARGB(255, 240, 240, 240),
+              ),
+            ),
+            child: const Text(
+              "Agregar otro grupo",
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                //fontFamily: 'Montserrat',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+      ],
     );
+  }
+
+  _agregarGrupo(BuildContext context) async {
+    String nuevoGrupo = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        String nuevoGrupo = ''; // Inicializar con una cadena vacía
+        return AlertDialog(
+          title: const Text("Agregar nuevo grupo"),
+          content: TextField(
+            onChanged: (value) {
+              nuevoGrupo = value;
+            },
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context,
+                    ''); // Usar una cadena vacía en caso de cancelación
+              },
+              child: const Text("Cancelar"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, nuevoGrupo);
+              },
+              child: const Text("Agregar"),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (nuevoGrupo.isNotEmpty) {
+      setState(() {
+        grupo.add(nuevoGrupo);
+      });
+    }
   }
 
   _subgrupoFarmacologico() {
@@ -328,6 +384,33 @@ class _DrugInputState extends State<DrugInput> {
             alignment: Alignment.topLeft,
             child: const Text(
               "Imágen del medicamento",
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            child: Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 25.0,
+              ),
+              child: const ImagePickerWidget(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _imagenFarmacocinetica() {
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 25.0,
+            ),
+            alignment: Alignment.topLeft,
+            child: const Text(
+              "Farmacocinetica",
             ),
           ),
           const SizedBox(height: 10),

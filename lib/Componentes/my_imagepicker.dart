@@ -57,7 +57,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                   control: SwiperControl(),
                 ),
               ),
-            SizedBox(height: 15.0),
+            const SizedBox(height: 15.0),
             SizedBox(
               width: size.width * 1,
               height: 55.0,
@@ -80,7 +80,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                     ),
                   ),
                   backgroundColor: MaterialStateProperty.all<Color>(
-                    Color.fromARGB(255, 240, 240, 240),
+                    const Color.fromARGB(255, 240, 240, 240),
                   ),
                 ),
               ),

@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class Firebase_services {
   FirebaseFirestore db = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final storage = FirebaseStorage.instance;
 
   Future<DocumentSnapshot<Object?>> getUsuarioPorId(String userId) async {
     // Obtiene una referencia al documento de usuario específico
@@ -96,6 +100,74 @@ class Firebase_services {
     } catch (e) {
       // Error: no se pudo enviar el enlace de restablecimiento de contraseña.
       print("Error al enviar el enlace de restablecimiento de contraseña: $e");
+    }
+  }
+
+  //Medicamentos
+
+  //Agregar medicamentos
+  Future<String?> addMedication(
+      String nombre,
+      String grupo,
+      String subgrupo,
+      String otroNombre,
+      String presentacion,
+      String mecanismoAccion,
+      String usoTerapeutico,
+      String efectos,
+      String contraindicaciones,
+      String posologia,
+      String cuadroBasico,
+      List<String> images,
+      List<String> farmacocinetica) async {
+    try {
+      // 1. Agregar el medicamento a Firestore
+      DocumentReference documentReference =
+          await db.collection('Medicamentos').add({
+        'Nombre': nombre,
+        'Grupo': grupo,
+        'Subgrupo': subgrupo,
+        'Otro Nombre': otroNombre,
+        'Presentación': presentacion,
+        'Mecanismo de Acción': mecanismoAccion,
+        'Uso Terapeutico': usoTerapeutico,
+        'Efectos': efectos,
+        'Contraindicaciones': contraindicaciones,
+        'Posología': posologia,
+        'Cuadro Básico': cuadroBasico,
+      });
+
+      // 2. Almacenar las imágenes en Storage
+      for (int i = 0; i < images.length; i++) {
+        await uploadImageToStorage(documentReference.id, images[i] as File);
+      }
+
+      // 3. Almacenar las imágenes de farmacocinetica en Storage
+      for (int i = 0; i < farmacocinetica.length; i++) {
+        await uploadImageToStorage(
+            documentReference.id, farmacocinetica[i] as File);
+      }
+
+      return documentReference.id;
+    } catch (e) {
+      print("Ha ocurrido un error al agregar el medicamento: $e");
+      return null;
+    }
+  }
+
+  //Agregar imagenes del medicamento
+  Future<void> uploadImageToStorage(String medicationId, File imageFile) async {
+    try {
+      final storage = FirebaseStorage.instance;
+      final storageReference = storage.ref().child(
+          'medications/$medicationId/${DateTime.now().millisecondsSinceEpoch}.jpg');
+      await storageReference.putFile(imageFile);
+
+      final imageUrl = await storageReference.getDownloadURL();
+
+      print('Imagen cargada y URL de descarga: $imageUrl');
+    } catch (e) {
+      print("Ha ocurrido un error al cargar la imagen: $e");
     }
   }
 }
