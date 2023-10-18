@@ -55,8 +55,11 @@ class _DrugInputState extends State<DrugInput> {
   Future<bool> _registrarMedicamento() async {
     final nombre = nombreController.text;
     final otroNombre = otroNombreController.text;
-    final grupo = selectedGrupo;
-    final subgrupo = selectedSubGrupo;
+    String grupo = selectedGrupo ??
+        ""; // Si selectedGrupo es nulo, asigna una cadena vacía
+    String subgrupo = selectedSubGrupo ??
+        ""; // Si selectedSubGrupo es nulo, asigna una cadena vacía
+
     final presentacion = presentacionController.text;
     final mecanismos = mecanismosController.text;
     final uso = usoTeraController.text;
@@ -64,6 +67,17 @@ class _DrugInputState extends State<DrugInput> {
     final contraindicaciones = contraController.text;
     final posologia = posologiaController.text;
     final cuadro = selectedCuadros;
+
+    print('Nombre: $nombre');
+    print('Otro Nombre: $otroNombre');
+    print('Grupo: $grupo');
+    print('Sub grupo: $subgrupo');
+    print('Presentacion: $presentacion');
+    print('Mecanismos de Acción: $mecanismos');
+    print('Uso pedagogico: $uso');
+    print('Efectos Adversos: $efectos');
+    print('Contraindicaciones: $contraindicaciones');
+    print('Posología: $posologia');
 
     if (nombre.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -81,73 +95,55 @@ class _DrugInputState extends State<DrugInput> {
         );
         return true;
       } else {
-        if (grupo!.isEmpty) {
+        if (presentacion.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Debe seleccionar un grupo'),
+              content:
+                  Text('Debe ingresar la presentanción de los medicamentos'),
             ),
           );
           return true;
         } else {
-          if (subgrupo!.isEmpty) {
+          if (mecanismos.isEmpty) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('Debe seleccionar un grupo'),
+                content: Text('Debe ingresar los mecanismos de acción'),
               ),
             );
             return true;
           } else {
-            if (presentacion.isEmpty) {
+            if (uso.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text(
-                      'Debe ingresar la presentanción de los medicamentos'),
+                  content: Text('Debe ingresar los usos pedagogicos'),
                 ),
               );
               return true;
             } else {
-              if (mecanismos.isEmpty) {
+              if (efectos.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text('Debe ingresar los mecanismos de acción'),
+                    content: Text('Debe ingresar los efectos adversos'),
                   ),
                 );
                 return true;
               } else {
-                if (uso.isEmpty) {
+                if (contraindicaciones.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text('Debe ingresar los usos pedagogicos'),
+                      content: Text('Debe ingresar las contraindicaciones'),
                     ),
                   );
                   return true;
                 } else {
-                  if (efectos.isEmpty) {
+                  if (posologia.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Debe ingresar los efectos adversos'),
+                        content:
+                            Text('Debe ingresar la posología del medicamento'),
                       ),
                     );
                     return true;
-                  } else {
-                    if (contraindicaciones.isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Debe ingresar las contraindicaciones'),
-                        ),
-                      );
-                      return true;
-                    } else {
-                      if (posologia.isEmpty) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                                'Debe ingresar la posología del medicamento'),
-                          ),
-                        );
-                        return true;
-                      }
-                    }
                   }
                 }
               }
@@ -157,6 +153,9 @@ class _DrugInputState extends State<DrugInput> {
       }
     }
 
+    setSelectedImages(imagenes); // Para imágenes regulares
+    setSelectedImages2(farmacocinetica); // Para imágenes de farmacocinética
+
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -164,17 +163,6 @@ class _DrugInputState extends State<DrugInput> {
             child: CircularProgressIndicator(),
           );
         });
-
-    print('Nombre: $nombre');
-    print('Otro Nombre: $otroNombre');
-    print('Grupo: $grupo');
-    print('Sub grupo: $subgrupo');
-    print('Presentacion: $presentacion');
-    print('Mecanismos de Acción: $mecanismos');
-    print('Uso pedagogico: $uso');
-    print('Efectos Adversos: $efectos');
-    print('Contraindicaciones: $contraindicaciones');
-    print('Posología: $posologia');
 
     try {
       // Obtén el contexto antes de entrar al bloque try-catch
@@ -317,7 +305,9 @@ class _DrugInputState extends State<DrugInput> {
                       width: size.width * 1,
                       height: 55.0,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _registrarMedicamento();
+                        },
                         style: ButtonStyle(
                           shape: MaterialStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(

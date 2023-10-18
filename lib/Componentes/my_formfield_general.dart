@@ -25,6 +25,7 @@ class TextFormFieldGeneral extends StatelessWidget {
         minLines: 2,
         maxLines: 10,
         keyboardType: TextInputType.multiline,
+        controller: controller,
         decoration: InputDecoration(
           enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
