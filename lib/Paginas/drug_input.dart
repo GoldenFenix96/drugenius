@@ -178,16 +178,9 @@ class _DrugInputState extends State<DrugInput> {
     );
   }
 
-  _receptoresMedicamento() {
-    return TextFormFieldGeneral(
-      labelTxt: "Receptores",
-      hintText: "Ejemplo...",
-      onChanged: (value) {},
-    );
-  }
-
   _usoTerapeutico() {
     return TextFormFieldGeneral(
+      controller: usoTeraController,
       labelTxt: "Uso terapéutico",
       hintText: "Ejemplo...",
       onChanged: (value) {},
@@ -196,6 +189,7 @@ class _DrugInputState extends State<DrugInput> {
 
   _efectosAdversos() {
     return TextFormFieldGeneral(
+      controller: efectosController,
       labelTxt: "Efectos adversos",
       hintText: "Ejemplo...",
       onChanged: (value) {},

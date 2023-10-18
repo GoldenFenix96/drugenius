@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class MyDropDown extends StatelessWidget {
   final List list;
   final String hintText;
-  const MyDropDown({required this.list, required this.hintText});
+  final TextEditingController? controller;
+  const MyDropDown(
+      {super.key, required this.list, required this.hintText, this.controller});
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -5,11 +5,14 @@ class TextFormFieldGeneral extends StatelessWidget {
   final String hintText;
   final Function onChanged;
   final IconData icon;
+  final TextEditingController? controller;
   const TextFormFieldGeneral({
+    super.key,
     required this.labelTxt,
     required this.hintText,
     required this.onChanged,
     this.icon = Icons.text_format_outlined,
+    this.controller,
   });
 
   @override
