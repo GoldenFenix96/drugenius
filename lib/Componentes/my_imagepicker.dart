@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerWidget extends StatefulWidget {
-  const ImagePickerWidget({Key? key}) : super(key: key);
+  final Function(List<File?>) updateImagenes;
+  const ImagePickerWidget({Key? key, required this.updateImagenes})
+      : super(key: key);
 
   @override
   _ImagePickerWidgetState createState() => _ImagePickerWidgetState();
@@ -28,8 +30,12 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     final List<File?> selectedImages = List.from(_selectedImage);
     selectedImages.add(File(returnedImage.path));
 
+    widget.updateImagenes(selectedImages);
+
     // Llama a la función para pasar las rutas de las imágenes de vuelta al widget principal
     _setSelectedImages(selectedImages);
+
+    widget.updateImagenes(selectedImages);
   }
 
   @override

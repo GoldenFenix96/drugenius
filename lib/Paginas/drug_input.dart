@@ -17,9 +17,9 @@ class DrugInput extends StatefulWidget {
   _DrugInputState createState() => _DrugInputState();
 }
 
-List<File> imagenes = [];
+List<File?> imagenes = [];
 
-List<File> farmacocinetica = [];
+List<File?> farmacocinetica = [];
 
 List<Map> selectedCuadros = [];
 final TextEditingController otroNombreController = TextEditingController();
@@ -80,7 +80,27 @@ class _DrugInputState extends State<DrugInput> {
     }
   }
 
-  Future<bool> _registrarMedicamento() async {
+  void updateImagenes(List<File?> nuevasImagenes) {
+    // Actualiza la lista de imágenes en tu frame principal con las nuevas imágenes
+    setState(() {
+      imagenes = nuevasImagenes;
+    });
+  }
+
+  void updateImagenesFarmacocinetica(List<File?> nuevasFarmacocinetica) {
+    // Actualiza la lista de imágenes en tu frame principal con las nuevas imágenes
+    setState(() {
+      farmacocinetica = nuevasFarmacocinetica;
+    });
+  }
+
+  void validarImagenesFarmacocinetica(List<File> farmacocinetica) {
+    for (int i = 0; i < farmacocinetica.length; i++) {
+      print('Ruta de la imagen $i: ${farmacocinetica[i].path}');
+    }
+  }
+
+  Future<void> _registrarMedicamento() async {
     final nombre = nombreController.text;
     final otroNombre = otroNombreController.text;
 
@@ -90,6 +110,10 @@ class _DrugInputState extends State<DrugInput> {
     final efectos = efectosController.text;
     final contraindicaciones = contraController.text;
     final posologia = posologiaController.text;
+    print("Salto de linea para las imagenes de los medicamentos XD");
+    validarImagenes(imagenes.whereType<File>().toList());
+    print("Salto de linea para las farmacocinetica XD");
+    validarImagenesFarmacocinetica(farmacocinetica.whereType<File>().toList());
 
     print('Nombre: $nombre');
     print('Otro Nombre: $otroNombre');
@@ -108,7 +132,6 @@ class _DrugInputState extends State<DrugInput> {
           content: Text('Debe ingresar el nombre del medicamentos'),
         ),
       );
-      return true;
     } else {
       if (otroNombre.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -116,7 +139,6 @@ class _DrugInputState extends State<DrugInput> {
             content: Text('Debe ingresar otro nombre para el medicamento'),
           ),
         );
-        return true;
       } else {
         if (presentacion.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -125,7 +147,6 @@ class _DrugInputState extends State<DrugInput> {
                   Text('Debe ingresar la presentanción de los medicamentos'),
             ),
           );
-          return true;
         } else {
           if (mecanismos.isEmpty) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -133,7 +154,6 @@ class _DrugInputState extends State<DrugInput> {
                 content: Text('Debe ingresar los mecanismos de acción'),
               ),
             );
-            return true;
           } else {
             if (uso.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -141,7 +161,6 @@ class _DrugInputState extends State<DrugInput> {
                   content: Text('Debe ingresar los usos pedagogicos'),
                 ),
               );
-              return true;
             } else {
               if (efectos.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -149,7 +168,6 @@ class _DrugInputState extends State<DrugInput> {
                     content: Text('Debe ingresar los efectos adversos'),
                   ),
                 );
-                return true;
               } else {
                 if (contraindicaciones.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -157,7 +175,6 @@ class _DrugInputState extends State<DrugInput> {
                       content: Text('Debe ingresar las contraindicaciones'),
                     ),
                   );
-                  return true;
                 } else {
                   if (posologia.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -166,7 +183,6 @@ class _DrugInputState extends State<DrugInput> {
                             Text('Debe ingresar la posología del medicamento'),
                       ),
                     );
-                    return true;
                   }
                 }
               }
@@ -178,9 +194,8 @@ class _DrugInputState extends State<DrugInput> {
 
     validarCheck(selectedCuadros);
 
-    setSelectedImages(imagenes); // Para imágenes regulares
-    setSelectedImages2(farmacocinetica); // Para imágenes de farmacocinética
-    validarImagenes(imagenes);
+    //setSelectedImages(imagenes); // Para imágenes regulares
+    //setSelectedImages2(farmacocinetica); // Para imágenes de farmacocinética
 
     showDialog(
         context: context,
@@ -195,7 +210,7 @@ class _DrugInputState extends State<DrugInput> {
       final currentContext = context;
 
       // Llama a tu función de registro
-      final resultadoRegistro = fs.addMedication(
+      final resultadoRegistro = await fs.addMedication(
           nombre,
           selectedGrupo!,
           selectedSubGrupo!,
@@ -208,25 +223,33 @@ class _DrugInputState extends State<DrugInput> {
           posologia,
           selectedCuadros.cast<Map>());
 
-      if (resultadoRegistro != "") {
+      if (resultadoRegistro != null) {
+        // Guardar imágenes en Firebase Storage y URLs en Firestore
+        for (int i = 0; i < imagenes.length; i++) {
+          final imageFile = imagenes[i];
+          await fs.uploadImageToStorageAndFirestore(
+              resultadoRegistro, imageFile!);
+        }
+
+        // Continúa con cualquier otra lógica o navegación necesaria
         Navigator.pop(context);
-        // Registro exitoso, redirige a otra pantalla o realiza acciones necesarias
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const ListMedicamentos()));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ListMedicamentos(),
+          ),
+        );
       } else {
-        Navigator.pop(context);
         // Registro fallido, muestra un mensaje de error
         ScaffoldMessenger.of(currentContext).showSnackBar(
           const SnackBar(
-            content: Text('Ha ocurrido un error al registrar al usuario.'),
+            content: Text('Ha ocurrido un error al registrar el medicamento.'),
           ),
         );
       }
-      return true;
     } catch (e) {
-      print('Error al registrar usuario: $e');
+      print('Error al registrar medicamento: $e');
       // Maneja el error según tus necesidades
-      return false;
     }
   }
 
@@ -248,12 +271,6 @@ class _DrugInputState extends State<DrugInput> {
       body: Container(
         //FONDO
         decoration: const BoxDecoration(
-          /*
-          image: DecorationImage(
-            image: AssetImage("assets/images/background.jpg"),
-            fit: BoxFit.cover,
-          ),
-          */
           color: Color.fromARGB(255, 255, 253, 244),
         ),
         //FIN FONDO
@@ -428,7 +445,8 @@ class _DrugInputState extends State<DrugInput> {
               margin: const EdgeInsets.symmetric(
                 horizontal: 25.0,
               ),
-              child: const FarmacocineticaPickerWidget(),
+              child: FarmacocineticaPickerWidget(
+                  updateImagenes: updateImagenesFarmacocinetica),
             ),
           ),
         ],
@@ -622,7 +640,7 @@ class _DrugInputState extends State<DrugInput> {
               margin: const EdgeInsets.symmetric(
                 horizontal: 25.0,
               ),
-              child: const ImagePickerWidget(),
+              child: ImagePickerWidget(updateImagenes: updateImagenes),
             ),
           ),
         ],
