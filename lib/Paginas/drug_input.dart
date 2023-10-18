@@ -30,7 +30,8 @@ final TextEditingController efectosController = TextEditingController();
 final TextEditingController contraController = TextEditingController();
 final TextEditingController posologiaController = TextEditingController();
 final TextEditingController cuadroController = TextEditingController();
-
+String? selectedGrupo;
+String? selectedSubGrupo;
 Firebase_services fs = Firebase_services();
 
 class _DrugInputState extends State<DrugInput> {
@@ -52,13 +53,19 @@ class _DrugInputState extends State<DrugInput> {
     });
   }
 
+  void validar(String selectedGrupo) {
+    if (selectedGrupo != null) // Verifica si se ha seleccionado un grupo
+      Text('Grupo seleccionado: $selectedGrupo');
+  }
+
+  void validar2(String selectedSubGrupo) {
+    if (selectedSubGrupo != null) // Verifica si se ha seleccionado un grupo
+      Text('Grupo seleccionado: $selectedSubGrupo');
+  }
+
   Future<bool> _registrarMedicamento() async {
     final nombre = nombreController.text;
     final otroNombre = otroNombreController.text;
-    String grupo = selectedGrupo ??
-        ""; // Si selectedGrupo es nulo, asigna una cadena vacía
-    String subgrupo = selectedSubGrupo ??
-        ""; // Si selectedSubGrupo es nulo, asigna una cadena vacía
 
     final presentacion = presentacionController.text;
     final mecanismos = mecanismosController.text;
@@ -70,8 +77,8 @@ class _DrugInputState extends State<DrugInput> {
 
     print('Nombre: $nombre');
     print('Otro Nombre: $otroNombre');
-    print('Grupo: $grupo');
-    print('Sub grupo: $subgrupo');
+    print('Grupo: $selectedGrupo');
+    print('Sub grupo: $selectedSubGrupo');
     print('Presentacion: $presentacion');
     print('Mecanismos de Acción: $mecanismos');
     print('Uso pedagogico: $uso');
@@ -171,8 +178,8 @@ class _DrugInputState extends State<DrugInput> {
       // Llama a tu función de registro
       final resultadoRegistro = fs.addMedication(
           nombre,
-          grupo,
-          subgrupo,
+          selectedGrupo!,
+          selectedSubGrupo!,
           otroNombre,
           presentacion,
           mecanismos,
@@ -441,7 +448,7 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   List<String> grupo = ['AINES'];
-  String? selectedGrupo;
+
   _grupoMedicamento() {
     return Column(
       children: [
@@ -452,6 +459,7 @@ class _DrugInputState extends State<DrugInput> {
             // Actualiza el valor seleccionado en la variable 'selectedGrupo'
             setState(() {
               selectedGrupo = value;
+              print("selectedGrupo: $selectedGrupo");
             });
           },
         ),
@@ -487,8 +495,6 @@ class _DrugInputState extends State<DrugInput> {
           ),
         ),
         const SizedBox(height: 20),
-        if (selectedGrupo != null) // Verifica si se ha seleccionado un grupo
-          Text('Grupo seleccionado: $selectedGrupo'),
       ],
     );
   }
@@ -531,7 +537,6 @@ class _DrugInputState extends State<DrugInput> {
     }
   }
 
-  String? selectedSubGrupo;
   _subgrupoFarmacologico() {
     List subgrupo = [
       'SALICILATOS',
@@ -543,9 +548,9 @@ class _DrugInputState extends State<DrugInput> {
       list: subgrupo,
       hintText: "Seleccione un sub-grupo",
       onChanged: (value) {
-        // Actualiza el valor seleccionado en la variable 'selectedSubGrupo'
         setState(() {
-          selectedGrupo = value;
+          selectedSubGrupo = value;
+          validar2(selectedSubGrupo!);
         });
       },
     );
