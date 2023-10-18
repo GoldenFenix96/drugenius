@@ -117,8 +117,6 @@ class Firebase_services {
     String efectos,
     String contraindicaciones,
     String posologia,
-    List<File> images,
-    List<File> farmacocinetica,
     List<Map> cuadroBasico,
   ) async {
     try {
@@ -137,17 +135,7 @@ class Firebase_services {
         'Posología': posologia,
       });
 
-      // 2. Almacenar las imágenes en Storage
-      for (int i = 0; i < images.length; i++) {
-        await uploadImageToStorage(documentReference.id, images[i]);
-      }
-
-      // 3. Almacenar las imágenes de farmacocinetica en Storage
-      for (int i = 0; i < farmacocinetica.length; i++) {
-        await uploadImageToStorage(documentReference.id, farmacocinetica[i]);
-      }
-
-      // 4. Almacenar los datos del cuadro básico en Firestore
+      // 2. Almacenar los datos del cuadro básico en Firestore
       final cuadroBasicoCollection = db
           .collection('Medicamentos')
           .doc(documentReference.id)
@@ -168,18 +156,56 @@ class Firebase_services {
   }
 
   //Agregar imagenes del medicamento
-  Future<void> uploadImageToStorage(String medicationId, File imageFile) async {
+  Future<void> uploadImageToStorageAndFirestore(
+      String documentId, File imageFile) async {
     try {
-      final storage = FirebaseStorage.instance;
-      final storageReference = storage.ref().child(
-          'medications/$medicationId/${DateTime.now().millisecondsSinceEpoch}.jpg');
-      await storageReference.putFile(imageFile);
+      // Subir la imagen a Firebase Storage
+      final storageReference = FirebaseStorage.instance
+          .ref()
+          .child('$documentId/${DateTime.now()}.png');
+      final uploadTask = storageReference.putFile(imageFile);
+      final TaskSnapshot storageTaskSnapshot = await uploadTask;
 
-      final imageUrl = await storageReference.getDownloadURL();
+      // Obtener la URL de la imagen en Firebase Storage
+      final imageUrl = await storageTaskSnapshot.ref.getDownloadURL();
 
-      print('Imagen cargada y URL de descarga: $imageUrl');
+      // Almacenar la URL de la imagen en Firestore
+      final cuadroBasicoCollection = FirebaseFirestore.instance
+          .collection('Medicamentos')
+          .doc(documentId)
+          .collection('Imagenes'); // Cambia 'Imagenes' al nombre que desees
+      await cuadroBasicoCollection.add({
+        'imageUrl': imageUrl,
+      });
     } catch (e) {
-      print("Ha ocurrido un error al cargar la imagen: $e");
+      print("Error al cargar la imagen: $e");
+    }
+  }
+
+//Agregar imagenes de farmacocinetica del medicamento
+  Future<void> subirFarmacocinetica(String documentId, File imageFile) async {
+    try {
+      // Subir la imagen a Firebase Storage
+      final storageReference = FirebaseStorage.instance
+          .ref()
+          .child('$documentId/${DateTime.now()}.png');
+      final uploadTask = storageReference.putFile(imageFile);
+      final TaskSnapshot storageTaskSnapshot = await uploadTask;
+
+      // Obtener la URL de la imagen en Firebase Storage
+      final imageUrl = await storageTaskSnapshot.ref.getDownloadURL();
+
+      // Almacenar la URL de la imagen en Firestore
+      final cuadroBasicoCollection = FirebaseFirestore.instance
+          .collection('Medicamentos')
+          .doc(documentId)
+          .collection(
+              'Farmacocinetica'); // Cambia 'Imagenes' al nombre que desees
+      await cuadroBasicoCollection.add({
+        'imageUrl': imageUrl,
+      });
+    } catch (e) {
+      print("Error al cargar la imagen: $e");
     }
   }
 }

@@ -74,6 +74,12 @@ class _DrugInputState extends State<DrugInput> {
     }
   }
 
+  void validarImagenes(List<File> imagenes) {
+    for (int i = 0; i < imagenes.length; i++) {
+      print('Ruta de la imagen $i: ${imagenes[i].path}');
+    }
+  }
+
   Future<bool> _registrarMedicamento() async {
     final nombre = nombreController.text;
     final otroNombre = otroNombreController.text;
@@ -174,6 +180,7 @@ class _DrugInputState extends State<DrugInput> {
 
     setSelectedImages(imagenes); // Para imágenes regulares
     setSelectedImages2(farmacocinetica); // Para imágenes de farmacocinética
+    validarImagenes(imagenes);
 
     showDialog(
         context: context,
@@ -199,8 +206,6 @@ class _DrugInputState extends State<DrugInput> {
           efectos,
           contraindicaciones,
           posologia,
-          imagenes.cast<File>(),
-          farmacocinetica,
           selectedCuadros.cast<Map>());
 
       if (resultadoRegistro != "") {

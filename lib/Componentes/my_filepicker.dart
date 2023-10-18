@@ -186,13 +186,6 @@ class _ImagePickerState extends State<ImagePicker> {
                           const SizedBox(
                             height: 20,
                           ),
-                          // MaterialButton(
-                          //   minWidth: double.infinity,
-                          //   height: 45,
-                          //   onPressed: () {},
-                          //   color: Colors.black,
-                          //   child: Text('Upload', style: TextStyle(color: Colors.white),),
-                          // )
                         ],
                       ))
                   : Container(),
