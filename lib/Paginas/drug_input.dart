@@ -262,6 +262,7 @@ class _DrugInputState extends State<DrugInput> {
     return Column(
       children: [
         MyDropDown(
+          controller: grupoController,
           list: grupo,
           hintText: "Seleccione un grupo",
         ),
@@ -349,6 +350,7 @@ class _DrugInputState extends State<DrugInput> {
       'DERIV DEL ÁCIDO PROPIÓNICO'
     ];
     return MyDropDown(
+      controller: grupoController,
       list: subgrupo,
       hintText: "Seleccione un sub-grupo",
     );
@@ -365,6 +367,7 @@ class _DrugInputState extends State<DrugInput> {
 
   _presentacionMedicamento() {
     return TextFormFieldGeneral(
+      controller: presentacionController,
       labelTxt: "Presentación del farmáco",
       hintText: "Tableta  (500mg). Tableta soluble o efervescente (300mg)...",
       onChanged: (value) {},
@@ -373,6 +376,7 @@ class _DrugInputState extends State<DrugInput> {
 
   _contraIndicacionesMedicamento() {
     return TextFormFieldGeneral(
+      controller: contraController,
       labelTxt: "Contraindicaciones",
       hintText:
           "Hipersensibilidad al fármaco, úlcera péptica o gastritis activas, hipoprotrombinemia, niños menores de 6 años....",
@@ -406,33 +410,5 @@ class _DrugInputState extends State<DrugInput> {
       ),
     );
   }
-
-  Widget _imagenFarmacocinetica() {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 25.0,
-            ),
-            alignment: Alignment.topLeft,
-            child: const Text(
-              "Farmacocinetica",
-            ),
-          ),
-          const SizedBox(height: 10),
-          Container(
-            child: Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 25.0,
-              ),
-              child: const ImagePickerWidget(),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   // Resto de tu código de funciones _grupoMedicamento(), _subgrupoFarmacologico(), etc.
 }
