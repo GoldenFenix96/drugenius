@@ -1,22 +1,24 @@
-// ignore_for_file: sort_child_properties_last
 import 'dart:io';
+
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ImagePickerWidget extends StatefulWidget {
-  const ImagePickerWidget({Key? key}) : super(key: key);
+class FarmacocineticaPickerWidget extends StatefulWidget {
+  const FarmacocineticaPickerWidget({Key? key}) : super(key: key);
 
   @override
-  _ImagePickerWidgetState createState() => _ImagePickerWidgetState();
+  _FarmacocineticaPickerWidgetState createState() =>
+      _FarmacocineticaPickerWidgetState();
 }
 
-class _ImagePickerWidgetState extends State<ImagePickerWidget> {
-  List<File?> _selectedImage = [];
+class _FarmacocineticaPickerWidgetState
+    extends State<FarmacocineticaPickerWidget> {
+  List<File?> _selectedImages = [];
 
   void _setSelectedImages(List<File?> selectedImages) {
     setState(() {
-      _selectedImage = selectedImages;
+      _selectedImages = selectedImages;
     });
   }
 
@@ -25,7 +27,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (returnedImage == null) return;
 
-    final List<File?> selectedImages = List.from(_selectedImage);
+    final List<File?> selectedImages = List.from(_selectedImages);
     selectedImages.add(File(returnedImage.path));
 
     // Llama a la función para pasar las rutas de las imágenes de vuelta al widget principal
@@ -40,9 +42,10 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            if (_selectedImage.isEmpty)
-              const Text("No se ha seleccionado ninguna imágen"),
-            if (_selectedImage.isNotEmpty)
+            if (_selectedImages.isEmpty)
+              const Text(
+                  "No se ha seleccionado ninguna imagen de farmacocinética"),
+            if (_selectedImages.isNotEmpty)
               Container(
                 width: double.infinity,
                 height: 300.0,
@@ -54,12 +57,12 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                     return ClipRRect(
                       borderRadius: BorderRadius.circular(10.0),
                       child: Image.file(
-                        _selectedImage[index]!,
+                        _selectedImages[index]!,
                         fit: BoxFit.cover,
                       ),
                     );
                   },
-                  itemCount: _selectedImage.length,
+                  itemCount: _selectedImages.length,
                   pagination: const SwiperPagination(),
                   control: const SwiperControl(),
                 ),
@@ -70,24 +73,22 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
               height: 55.0,
               child: ElevatedButton(
                 onPressed: () => _pickImageFromGallery(),
-                child: const Text(
-                  "Agregar imágen",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    //fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<OutlinedBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Cambia el radio de la esquina para personalizar la forma
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                   backgroundColor: MaterialStateProperty.all<Color>(
                     const Color.fromARGB(255, 240, 240, 240),
+                  ),
+                ),
+                child: const Text(
+                  "Agregar imagen de farmacocinética",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),

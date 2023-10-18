@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:drugenius/Componentes/farmaco_picker.dart';
 import 'package:drugenius/Componentes/my_checkbpx_general.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
+import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Componentes/my_imagepicker.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
@@ -13,9 +17,11 @@ class DrugInput extends StatefulWidget {
   _DrugInputState createState() => _DrugInputState();
 }
 
+List<File> imagenes = [];
+
+List<File> farmacocinetica = [];
+
 final TextEditingController otroNombreController = TextEditingController();
-final TextEditingController grupoController = TextEditingController();
-final TextEditingController subgrupoController = TextEditingController();
 final TextEditingController nombreController = TextEditingController();
 final TextEditingController presentacionController = TextEditingController();
 final TextEditingController mecanismosController = TextEditingController();
@@ -28,6 +34,190 @@ final TextEditingController cuadroController = TextEditingController();
 Firebase_services fs = Firebase_services();
 
 class _DrugInputState extends State<DrugInput> {
+  void setSelectedImages(List<File?> selectedImages) {
+    setState(() {
+      imagenes = selectedImages
+          .map((image) => image?.path ?? '')
+          .cast<File>()
+          .toList();
+    });
+  }
+
+  void setSelectedImages2(List<File?> selectedImages) {
+    setState(() {
+      farmacocinetica = selectedImages
+          .map((image) => image?.path ?? '')
+          .cast<File>()
+          .toList();
+    });
+  }
+
+  Future<bool> _registrarMedicamento() async {
+    final nombre = nombreController.text;
+    final otroNombre = otroNombreController.text;
+    final grupo = selectedGrupo;
+    final subgrupo = selectedSubGrupo;
+    final presentacion = presentacionController.text;
+    final mecanismos = mecanismosController.text;
+    final uso = usoTeraController.text;
+    final efectos = efectosController.text;
+    final contraindicaciones = contraController.text;
+    final posologia = posologiaController.text;
+    final cuadro = selectedCuadros;
+
+    if (nombre.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Debe ingresar el nombre del medicamentos'),
+        ),
+      );
+      return true;
+    } else {
+      if (otroNombre.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Debe ingresar otro nombre para el medicamento'),
+          ),
+        );
+        return true;
+      } else {
+        if (grupo!.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Debe seleccionar un grupo'),
+            ),
+          );
+          return true;
+        } else {
+          if (subgrupo!.isEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Debe seleccionar un grupo'),
+              ),
+            );
+            return true;
+          } else {
+            if (presentacion.isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                      'Debe ingresar la presentanción de los medicamentos'),
+                ),
+              );
+              return true;
+            } else {
+              if (mecanismos.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Debe ingresar los mecanismos de acción'),
+                  ),
+                );
+                return true;
+              } else {
+                if (uso.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Debe ingresar los usos pedagogicos'),
+                    ),
+                  );
+                  return true;
+                } else {
+                  if (efectos.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Debe ingresar los efectos adversos'),
+                      ),
+                    );
+                    return true;
+                  } else {
+                    if (contraindicaciones.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Debe ingresar las contraindicaciones'),
+                        ),
+                      );
+                      return true;
+                    } else {
+                      if (posologia.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                                'Debe ingresar la posología del medicamento'),
+                          ),
+                        );
+                        return true;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    print('Nombre: $nombre');
+    print('Otro Nombre: $otroNombre');
+    print('Grupo: $grupo');
+    print('Sub grupo: $subgrupo');
+    print('Presentacion: $presentacion');
+    print('Mecanismos de Acción: $mecanismos');
+    print('Uso pedagogico: $uso');
+    print('Efectos Adversos: $efectos');
+    print('Contraindicaciones: $contraindicaciones');
+    print('Posología: $posologia');
+
+    try {
+      // Obtén el contexto antes de entrar al bloque try-catch
+      final currentContext = context;
+
+      // Llama a tu función de registro
+      final resultadoRegistro = fs.addMedication(
+          nombre,
+          grupo,
+          subgrupo,
+          otroNombre,
+          presentacion,
+          mecanismos,
+          uso,
+          efectos,
+          contraindicaciones,
+          posologia,
+          imagenes.cast<File>(),
+          farmacocinetica,
+          cuadro.cast<Map>());
+
+      if (resultadoRegistro != "") {
+        Navigator.pop(context);
+        // Registro exitoso, redirige a otra pantalla o realiza acciones necesarias
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const ListMedicamentos()));
+      } else {
+        Navigator.pop(context);
+        // Registro fallido, muestra un mensaje de error
+        ScaffoldMessenger.of(currentContext).showSnackBar(
+          const SnackBar(
+            content: Text('Ha ocurrido un error al registrar al usuario.'),
+          ),
+        );
+      }
+      return true;
+    } catch (e) {
+      print('Error al registrar usuario: $e');
+      // Maneja el error según tus necesidades
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -224,7 +414,7 @@ class _DrugInputState extends State<DrugInput> {
               margin: const EdgeInsets.symmetric(
                 horizontal: 25.0,
               ),
-              child: const ImagePickerWidget(),
+              child: const FarmacocineticaPickerWidget(),
             ),
           ),
         ],
@@ -232,6 +422,7 @@ class _DrugInputState extends State<DrugInput> {
     );
   }
 
+  List<Map> selectedCuadros = [];
   _cuadroBasico() {
     return Container(
       child: Column(
@@ -247,8 +438,11 @@ class _DrugInputState extends State<DrugInput> {
           ),
           const SizedBox(height: 10),
           Container(
-            child: Container(
-              child: const MyCheckBox(),
+            child: MyCheckBox(
+              onCheckBoxChanged: (List<Map> items) {
+                // Cuando se selecciona o deselecciona un elemento en MyCheckBox
+                selectedCuadros = items;
+              },
             ),
           ),
         ],
@@ -257,14 +451,19 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   List<String> grupo = ['AINES'];
-
+  String? selectedGrupo;
   _grupoMedicamento() {
     return Column(
       children: [
         MyDropDown(
-          controller: grupoController,
           list: grupo,
           hintText: "Seleccione un grupo",
+          onChanged: (value) {
+            // Actualiza el valor seleccionado en la variable 'selectedGrupo'
+            setState(() {
+              selectedGrupo = value;
+            });
+          },
         ),
         const SizedBox(height: 15.0),
         Container(
@@ -280,8 +479,7 @@ class _DrugInputState extends State<DrugInput> {
             style: ButtonStyle(
               shape: MaterialStateProperty.all<OutlinedBorder>(
                 RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                      10.0), // Cambia el radio de la esquina para personalizar la forma
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
               backgroundColor: MaterialStateProperty.all<Color>(
@@ -293,13 +491,14 @@ class _DrugInputState extends State<DrugInput> {
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.black,
-                //fontFamily: 'Montserrat',
                 fontWeight: FontWeight.w600,
               ),
             ),
           ),
         ),
         const SizedBox(height: 20),
+        if (selectedGrupo != null) // Verifica si se ha seleccionado un grupo
+          Text('Grupo seleccionado: $selectedGrupo'),
       ],
     );
   }
@@ -342,6 +541,7 @@ class _DrugInputState extends State<DrugInput> {
     }
   }
 
+  String? selectedSubGrupo;
   _subgrupoFarmacologico() {
     List subgrupo = [
       'SALICILATOS',
@@ -350,9 +550,14 @@ class _DrugInputState extends State<DrugInput> {
       'DERIV DEL ÁCIDO PROPIÓNICO'
     ];
     return MyDropDown(
-      controller: grupoController,
       list: subgrupo,
       hintText: "Seleccione un sub-grupo",
+      onChanged: (value) {
+        // Actualiza el valor seleccionado en la variable 'selectedSubGrupo'
+        setState(() {
+          selectedGrupo = value;
+        });
+      },
     );
   }
 

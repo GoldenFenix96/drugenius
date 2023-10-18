@@ -107,19 +107,20 @@ class Firebase_services {
 
   //Agregar medicamentos
   Future<String?> addMedication(
-      String nombre,
-      String grupo,
-      String subgrupo,
-      String otroNombre,
-      String presentacion,
-      String mecanismoAccion,
-      String usoTerapeutico,
-      String efectos,
-      String contraindicaciones,
-      String posologia,
-      String cuadroBasico,
-      List<String> images,
-      List<String> farmacocinetica) async {
+    String nombre,
+    String grupo,
+    String subgrupo,
+    String otroNombre,
+    String presentacion,
+    String mecanismoAccion,
+    String usoTerapeutico,
+    String efectos,
+    String contraindicaciones,
+    String posologia,
+    List<File> images,
+    List<File> farmacocinetica,
+    List<Map> cuadroBasico,
+  ) async {
     try {
       // 1. Agregar el medicamento a Firestore
       DocumentReference documentReference =
@@ -134,18 +135,29 @@ class Firebase_services {
         'Efectos': efectos,
         'Contraindicaciones': contraindicaciones,
         'Posología': posologia,
-        'Cuadro Básico': cuadroBasico,
       });
 
       // 2. Almacenar las imágenes en Storage
       for (int i = 0; i < images.length; i++) {
-        await uploadImageToStorage(documentReference.id, images[i] as File);
+        await uploadImageToStorage(documentReference.id, images[i]);
       }
 
       // 3. Almacenar las imágenes de farmacocinetica en Storage
       for (int i = 0; i < farmacocinetica.length; i++) {
-        await uploadImageToStorage(
-            documentReference.id, farmacocinetica[i] as File);
+        await uploadImageToStorage(documentReference.id, farmacocinetica[i]);
+      }
+
+      // 4. Almacenar los datos del cuadro básico en Firestore
+      final cuadroBasicoCollection = db
+          .collection('Medicamentos')
+          .doc(documentReference.id)
+          .collection('CuadroBasico');
+
+      for (int i = 0; i < cuadroBasico.length; i++) {
+        await cuadroBasicoCollection.add({
+          'name': cuadroBasico[i]['name'],
+          'isChecked': cuadroBasico[i]['isChecked'],
+        });
       }
 
       return documentReference.id;

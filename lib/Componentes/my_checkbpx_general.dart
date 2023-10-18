@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MyCheckBox extends StatefulWidget {
-  const MyCheckBox({super.key});
+  final Function(List<Map>) onCheckBoxChanged;
+
+  MyCheckBox({required this.onCheckBoxChanged, Key? key}) : super(key: key);
 
   @override
   State<MyCheckBox> createState() => _MyCheckBoxState();
@@ -12,7 +14,7 @@ class _MyCheckBoxState extends State<MyCheckBox> {
     {'name': 'ESTADOS UNIDOS (FDA)', 'isChecked': false},
     {'name': 'ESPAÑA', 'isChecked': false},
     {'name': 'OMS', 'isChecked': false},
-    {'name': 'MÉXICO', 'isChecked': true},
+    {'name': 'MÉXICO', 'isChecked': false},
   ];
 
   @override
