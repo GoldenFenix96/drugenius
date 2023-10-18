@@ -10,6 +10,10 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
+List<String> imagenes = [];
+
+List<String> farmacocinetica = [];
+
 class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -24,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     if (email.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Debe ingresar un correo electrónico'),
         ),
       );
@@ -32,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
     } else {
       if (password.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Debe ingresar una contraseña'),
           ),
         );
@@ -40,7 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
       } else {
         if (nombre.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text('Debe ingresar un nombre'),
             ),
           );
@@ -52,7 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         });
@@ -98,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        foregroundColor: Color.fromARGB(255, 0, 0, 0),
+        foregroundColor: const Color.fromARGB(255, 0, 0, 0),
         title: const Center(child: Text("")),
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
         elevation: 0,

@@ -53,8 +53,8 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                     );
                   },
                   itemCount: _selectedImage.length,
-                  pagination: SwiperPagination(),
-                  control: SwiperControl(),
+                  pagination: const SwiperPagination(),
+                  control: const SwiperControl(),
                 ),
               ),
             const SizedBox(height: 15.0),

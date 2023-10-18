@@ -1,4 +1,5 @@
 import 'package:drugenius/Componentes/my_checkbpx_general.dart';
+import 'package:drugenius/Firebase_Services/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Componentes/my_imagepicker.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
@@ -12,7 +13,19 @@ class DrugInput extends StatefulWidget {
   _DrugInputState createState() => _DrugInputState();
 }
 
-final TextEditingController _usernameController = TextEditingController();
+final TextEditingController otroNombreController = TextEditingController();
+final TextEditingController grupoController = TextEditingController();
+final TextEditingController subgrupoController = TextEditingController();
+final TextEditingController nombreController = TextEditingController();
+final TextEditingController presentacionController = TextEditingController();
+final TextEditingController mecanismosController = TextEditingController();
+final TextEditingController usoTeraController = TextEditingController();
+final TextEditingController efectosController = TextEditingController();
+final TextEditingController contraController = TextEditingController();
+final TextEditingController posologiaController = TextEditingController();
+final TextEditingController cuadroController = TextEditingController();
+
+Firebase_services fs = Firebase_services();
 
 class _DrugInputState extends State<DrugInput> {
   @override
@@ -150,7 +163,7 @@ class _DrugInputState extends State<DrugInput> {
 
   _nombreMedicamento() {
     return myTextFieldGeneral(
-        controller: _usernameController,
+        controller: nombreController,
         labelTxt: "Nombre del medicamento",
         hintText: "Paracetamol",
         onChanged: (value) {});
@@ -158,7 +171,7 @@ class _DrugInputState extends State<DrugInput> {
 
   _mecanismosDeAccion() {
     return myTextFieldGeneral(
-      controller: _usernameController,
+      controller: mecanismosController,
       labelTxt: "Mecanismos de acción",
       hintText: "Inhibición de enzimas",
       onChanged: (value) {},
@@ -191,7 +204,7 @@ class _DrugInputState extends State<DrugInput> {
 
   _posologiaMedicamento() {
     return myTextFieldGeneral(
-      controller: _usernameController,
+      controller: posologiaController,
       labelTxt: "Posología",
       hintText: "Ejemplo...",
       onChanged: (value) {},
@@ -349,7 +362,7 @@ class _DrugInputState extends State<DrugInput> {
 
   _otroNombreMedicamento() {
     return myTextFieldGeneral(
-      controller: _usernameController,
+      controller: otroNombreController,
       labelTxt: "Otro nombre",
       hintText: "Aspirina",
       onChanged: (value) {},

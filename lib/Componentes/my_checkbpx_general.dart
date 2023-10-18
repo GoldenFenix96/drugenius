@@ -44,7 +44,7 @@ class _MyCheckBoxState extends State<MyCheckBox> {
                     items.any((item) => item['isChecked']);
                 if (!atLeastOneSelected) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text('Selecciona al menos un elemento'),
                     ),
                   );

@@ -76,7 +76,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       //swiperBox(),
-                      SizedBox(
+                      const SizedBox(
                         child: Text(
                           '¡Bienvenido!',
                           style: TextStyle(
@@ -85,7 +85,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       // Fila 1
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
