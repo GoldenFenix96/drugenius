@@ -54,10 +54,22 @@ class _DrugInputState extends State<DrugInput> {
     });
   }
 
+  List<Map> selectedCuadros = [
+    {'name': 'ESTADOS UNIDOS (FDA)', 'isChecked': false},
+    {'name': 'ESPAÑA', 'isChecked': false},
+    {'name': 'OMS', 'isChecked': false},
+    {'name': 'MÉXICO', 'isChecked': true},
+  ];
+
   void validarCheck(List<Map> selectedCuadros) {
     for (int i = 0; i < selectedCuadros.length; i++) {
-      if (selectedCuadros[i]['isChecked']) {
-        print("Name: ${selectedCuadros[i]['name']}");
+      final nombre = selectedCuadros[i]['name'];
+      final isChecked = selectedCuadros[i]['isChecked'];
+
+      if (isChecked) {
+        print("Nombre: $nombre, Estado: isChecked");
+      } else {
+        print("Nombre: $nombre, Estado: no isChecked");
       }
     }
   }
@@ -72,7 +84,6 @@ class _DrugInputState extends State<DrugInput> {
     final efectos = efectosController.text;
     final contraindicaciones = contraController.text;
     final posologia = posologiaController.text;
-    final cuadro = selectedCuadros;
 
     print('Nombre: $nombre');
     print('Otro Nombre: $otroNombre');
@@ -159,6 +170,8 @@ class _DrugInputState extends State<DrugInput> {
       }
     }
 
+    validarCheck(selectedCuadros);
+
     setSelectedImages(imagenes); // Para imágenes regulares
     setSelectedImages2(farmacocinetica); // Para imágenes de farmacocinética
 
@@ -188,7 +201,7 @@ class _DrugInputState extends State<DrugInput> {
           posologia,
           imagenes.cast<File>(),
           farmacocinetica,
-          cuadro.cast<Map>());
+          selectedCuadros.cast<Map>());
 
       if (resultadoRegistro != "") {
         Navigator.pop(context);
@@ -434,18 +447,12 @@ class _DrugInputState extends State<DrugInput> {
           const SizedBox(height: 10),
           Container(
             child: MyCheckBox(
-              onCheckBoxChanged: (List<Map> items) {
-                // Cuando se selecciona o deselecciona un elemento en MyCheckBox
-                selectedCuadros = items;
+              items: selectedCuadros,
+              onCheckBoxChanged: (items) {
+                setState(() {
+                  selectedCuadros = items;
+                });
                 validarCheck(selectedCuadros);
-
-                for (int i = 0; i < items.length; i++) {
-                  if (items[i]['isChecked']) {
-                    print("Name: ${items[i]['name']}");
-                  }
-                }
-
-                print("Checkbox changed!"); // Agrega esta impresión de prueba
               },
             ),
           ),
