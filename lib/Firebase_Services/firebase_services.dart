@@ -151,7 +151,7 @@ class Firebase_services {
       final cuadroBasicoCollection = db
           .collection('Medicamentos')
           .doc(documentReference.id)
-          .collection('CuadroBasico');
+          .collection('Cuadro Básico');
 
       for (int i = 0; i < cuadroBasico.length; i++) {
         await cuadroBasicoCollection.add({

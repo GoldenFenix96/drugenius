@@ -14,7 +14,7 @@ class _MyCheckBoxState extends State<MyCheckBox> {
     {'name': 'ESTADOS UNIDOS (FDA)', 'isChecked': false},
     {'name': 'ESPAÑA', 'isChecked': false},
     {'name': 'OMS', 'isChecked': false},
-    {'name': 'MÉXICO', 'isChecked': false},
+    {'name': 'MÉXICO', 'isChecked': true},
   ];
 
   @override

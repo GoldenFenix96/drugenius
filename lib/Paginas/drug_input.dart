@@ -21,6 +21,7 @@ List<File> imagenes = [];
 
 List<File> farmacocinetica = [];
 
+List<Map> selectedCuadros = [];
 final TextEditingController otroNombreController = TextEditingController();
 final TextEditingController nombreController = TextEditingController();
 final TextEditingController presentacionController = TextEditingController();
@@ -53,14 +54,12 @@ class _DrugInputState extends State<DrugInput> {
     });
   }
 
-  void validar(String selectedGrupo) {
-    if (selectedGrupo != null) // Verifica si se ha seleccionado un grupo
-      Text('Grupo seleccionado: $selectedGrupo');
-  }
-
-  void validar2(String selectedSubGrupo) {
-    if (selectedSubGrupo != null) // Verifica si se ha seleccionado un grupo
-      Text('Grupo seleccionado: $selectedSubGrupo');
+  void validarCheck(List<Map> selectedCuadros) {
+    for (int i = 0; i < selectedCuadros.length; i++) {
+      if (selectedCuadros[i]['isChecked']) {
+        print("Name: ${selectedCuadros[i]['name']}");
+      }
+    }
   }
 
   Future<bool> _registrarMedicamento() async {
@@ -419,7 +418,6 @@ class _DrugInputState extends State<DrugInput> {
     );
   }
 
-  List<Map> selectedCuadros = [];
   _cuadroBasico() {
     return Container(
       child: Column(
@@ -439,6 +437,15 @@ class _DrugInputState extends State<DrugInput> {
               onCheckBoxChanged: (List<Map> items) {
                 // Cuando se selecciona o deselecciona un elemento en MyCheckBox
                 selectedCuadros = items;
+                validarCheck(selectedCuadros);
+
+                for (int i = 0; i < items.length; i++) {
+                  if (items[i]['isChecked']) {
+                    print("Name: ${items[i]['name']}");
+                  }
+                }
+
+                print("Checkbox changed!"); // Agrega esta impresión de prueba
               },
             ),
           ),
