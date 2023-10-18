@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 class MyDropDown extends StatelessWidget {
   final List list;
   final String hintText;
-  const MyDropDown(
-      {super.key,
-      required this.list,
-      required this.hintText,
-      required Null Function(dynamic value) onChanged});
+  final Null Function(dynamic value)
+      onChanged; // Cambio en la firma del parámetro
+  const MyDropDown({
+    super.key,
+    required this.list,
+    required this.hintText,
+    required this.onChanged, // Actualización en la firma del parámetro
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,11 +22,13 @@ class MyDropDown extends StatelessWidget {
         child: DropdownButtonFormField(
           decoration: const InputDecoration(
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-              color: Color.fromARGB(255, 204, 204, 204),
-            )),
+              borderSide: BorderSide(
+                color: Color.fromARGB(255, 204, 204, 204),
+              ),
+            ),
             focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
+              borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
+            ),
             fillColor: Color.fromARGB(255, 204, 204, 204),
             filled: true,
             prefixIcon: Icon(Icons.text_format_outlined),
@@ -41,7 +47,8 @@ class MyDropDown extends StatelessWidget {
             );
           }).toList(),
           onChanged: (value) {
-            print(value);
+            // Llama a la función onChanged pasando el valor seleccionado
+            onChanged(value);
           },
         ),
       ),

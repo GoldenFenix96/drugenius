@@ -550,7 +550,7 @@ class _DrugInputState extends State<DrugInput> {
       onChanged: (value) {
         setState(() {
           selectedSubGrupo = value;
-          validar2(selectedSubGrupo!);
+          print("selectedSubGrupo: $selectedSubGrupo");
         });
       },
     );
