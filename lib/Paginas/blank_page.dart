@@ -24,8 +24,8 @@ class BlankPage extends StatelessWidget {
                 height: 200,
                 child: Image.asset('assets/images/construccion.png'),
               ),
-              SizedBox(height: 15),
-              Center(
+              const SizedBox(height: 15),
+              const Center(
                 child: Text(
                   'Página en construcción',
                   style: TextStyle(

@@ -236,7 +236,7 @@ class _DrugInputState extends State<DrugInput> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const ListMedicamentos(),
+            builder: (context) => ListMedicamentos(),
           ),
         );
       } else {
