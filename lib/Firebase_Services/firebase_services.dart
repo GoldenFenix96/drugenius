@@ -208,4 +208,32 @@ class Firebase_services {
       print("Error al cargar la imagen: $e");
     }
   }
+
+  //Listar medicamentos
+  Future<List<Map<String, dynamic>>?> getMedicamentos() async {
+    try {
+      final QuerySnapshot medicamentosQuery =
+          await db.collection('Medicamentos').get();
+      final medicamentos =
+          await Future.wait(medicamentosQuery.docs.map((medicamentoDoc) async {
+        final imagenSnapshot = await medicamentoDoc.reference
+            .collection('Imagenes')
+            .limit(1)
+            .get();
+        String imagenUrl = ''; // URL de la imagen
+        if (imagenSnapshot.docs.isNotEmpty) {
+          imagenUrl = imagenSnapshot.docs[0].get('imageUrl');
+        }
+        return {
+          'id': medicamentoDoc.id,
+          'nombre': medicamentoDoc['Nombre'],
+          'imagenUrl': imagenUrl,
+        };
+      }));
+      return medicamentos;
+    } catch (e) {
+      print('Error al obtener los medicamentos: $e');
+      return null; // Manejo de errores
+    }
+  }
 }
