@@ -14,7 +14,7 @@ class _AddMultiState extends State<AddMulti> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 85, 145, 214),
+        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
         elevation: 10,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -38,7 +38,7 @@ class Medicamentos extends StatelessWidget {
           const ExpansionTile(
             title: SizedBox(
               child: Text(
-                'Mecanismos de acción',
+                'Otros Nombres',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               ),
             ),
@@ -56,7 +56,61 @@ class Medicamentos extends StatelessWidget {
           const ExpansionTile(
             title: SizedBox(
               child: Text(
-                'Receptores',
+                'Grupo',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+              ),
+            ),
+            children: <Widget>[
+              ListTile(
+                title: Text(
+                  'Es un fármaco seguro para tratar una amplia variedad de problemas. Pero si se da en dosis muy altas puede hacer que el niño se ponga muy enfermo.',
+                  style: TextStyle(fontSize: 14.0),
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          const ExpansionTile(
+            title: SizedBox(
+              child: Text(
+                'Sub grupo',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+              ),
+            ),
+            children: <Widget>[
+              ListTile(
+                title: Text(
+                  'Es un fármaco seguro para tratar una amplia variedad de problemas. Pero si se da en dosis muy altas puede hacer que el niño se ponga muy enfermo.',
+                  style: TextStyle(fontSize: 14.0),
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          const ExpansionTile(
+            title: SizedBox(
+              child: Text(
+                'Presentación del fármaco',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+              ),
+            ),
+            children: <Widget>[
+              ListTile(
+                title: Text(
+                  'Es un fármaco seguro para tratar una amplia variedad de problemas. Pero si se da en dosis muy altas puede hacer que el niño se ponga muy enfermo.',
+                  style: TextStyle(fontSize: 14.0),
+                  textAlign: TextAlign.justify,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          const ExpansionTile(
+            title: SizedBox(
+              child: Text(
+                'Mecanismo de acción',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               ),
             ),
@@ -92,7 +146,7 @@ class Medicamentos extends StatelessWidget {
           const ExpansionTile(
             title: SizedBox(
               child: Text(
-                'Mecanismos de acción',
+                'Efectos adversos',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               ),
             ),
@@ -110,7 +164,7 @@ class Medicamentos extends StatelessWidget {
           const ExpansionTile(
             title: SizedBox(
               child: Text(
-                'Efectos adversos',
+                'Contraindicaciones',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               ),
             ),
@@ -146,25 +200,7 @@ class Medicamentos extends StatelessWidget {
           const ExpansionTile(
             title: SizedBox(
               child: Text(
-                'Interacciones medicas',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-            ),
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  'Es un fármaco seguro para tratar una amplia variedad de problemas. Pero si se da en dosis muy altas puede hacer que el niño se ponga muy enfermo.',
-                  style: TextStyle(fontSize: 14.0),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          const ExpansionTile(
-            title: SizedBox(
-              child: Text(
-                'Recomendaciones',
+                'Cuadro básico',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               ),
             ),
