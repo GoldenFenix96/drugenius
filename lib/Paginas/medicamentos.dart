@@ -12,6 +12,7 @@ class Medicamentos extends StatefulWidget {
 
 List<String> images = [];
 List<String> farmacocinetica = [];
+List<Map> cuadro = [];
 
 class _MedicamentosState extends State<Medicamentos> {
   Firebase_services fs = Firebase_services();
@@ -51,6 +52,8 @@ class _MedicamentosState extends State<Medicamentos> {
         presentacion = medicamentoObtenido['presentacion'];
         usoTera = medicamentoObtenido['uso'];
         mecanismos = medicamentoObtenido['mecanismo'];
+        farmacocinetica = medicamentoObtenido['farmaUrls'];
+        cuadro = medicamentoObtenido['cuadroBasico'];
       });
     }
   }
@@ -69,7 +72,7 @@ class _MedicamentosState extends State<Medicamentos> {
         padding: const EdgeInsets.fromLTRB(25.0, 20.0, 25.0, 20.0),
         children: <Widget>[
           Center(
-            child: swiperBox(),
+            child: swiperBoxImagenes(),
           ),
           const SizedBox(height: 20),
           Center(
@@ -269,22 +272,18 @@ class _MedicamentosState extends State<Medicamentos> {
               ),
             ),
             children: <Widget>[
-              ListTile(
-                title: Text(
-                  nombre,
-                  style: TextStyle(fontSize: 14.0),
-                  textAlign: TextAlign.justify,
-                ),
+              Center(
+                child: swiperBoxFarmaco(),
               ),
             ],
-          ),
+          )
         ],
       ),
     );
   }
 }
 
-Widget swiperBox() {
+Widget swiperBoxImagenes() {
   return SizedBox(
       width: double.infinity,
       height: 250.0,
@@ -302,5 +301,23 @@ Widget swiperBox() {
         autoplay: true, // Habilita la reproducción automática
         autoplayDelay:
             3000, // Establece el tiempo de espera entre transiciones (en milisegundos)
+      ));
+}
+
+Widget swiperBoxFarmaco() {
+  return SizedBox(
+      width: double.infinity,
+      height: 250.0,
+      child: Swiper(
+        viewportFraction: 0.8,
+        scale: 0.9,
+        itemBuilder: (BuildContext context, index) {
+          return Image.network(
+            farmacocinetica[index],
+            fit: BoxFit.fill,
+          );
+        },
+        itemCount: images.length,
+        pagination: const SwiperPagination(),
       ));
 }
