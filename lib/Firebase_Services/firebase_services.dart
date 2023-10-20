@@ -236,4 +236,62 @@ class Firebase_services {
       return null; // Manejo de errores
     }
   }
+
+  //Traer datos del medicamento
+  Future<Map<String, dynamic>?> obtenerMedicamento(String documentId) async {
+    try {
+      final medicamentoDoc =
+          await db.collection('Medicamentos').doc(documentId).get();
+
+      if (medicamentoDoc.exists) {
+        final medicamentoData = medicamentoDoc.data() as Map<String, dynamic>;
+
+        // Obtener datos de la subcolección "Cuadro Básico"
+        final cuadroBasicoSnapshot =
+            await medicamentoDoc.reference.collection('Cuadro Básico').get();
+        final cuadroBasicoData = cuadroBasicoSnapshot.docs
+            .map((cuadroDoc) => {
+                  'isChecked': cuadroDoc['isChecked'],
+                  'name': cuadroDoc['name'],
+                })
+            .toList();
+
+        // Obtener datos de la subcolección "Imagenes"
+        final imagenesSnapshot =
+            await medicamentoDoc.reference.collection('Imagenes').get();
+        final imagenUrls = imagenesSnapshot.docs
+            .map((imagenDoc) => imagenDoc['imageUrl'] as String)
+            .toList();
+
+        // Obtener datos de la subcolección "Farmacocinetica"
+        final farmacoSnapshot =
+            await medicamentoDoc.reference.collection('Farmacocinetica').get();
+        final farmacoUrls = farmacoSnapshot.docs
+            .map((farmaDoc) => farmaDoc['imageUrl'] as String)
+            .toList();
+
+        return {
+          'id': medicamentoDoc.id,
+          'nombre': medicamentoData['Nombre'],
+          'otroNombre': medicamentoData['Otro Nombre'],
+          'contra': medicamentoData['Contraindicaciones'],
+          'efectos': medicamentoData['Efectos'],
+          'grupo': medicamentoData['Grupo'],
+          'mecanismo': medicamentoData['Mecanismo de Acción'],
+          'posologia': medicamentoData['Posología'],
+          'presentacion': medicamentoData['Presentación'],
+          'subgrupo': medicamentoData['Subgrupo'],
+          'uso': medicamentoData['Uso Terapeutico'],
+          'cuadroBasico': cuadroBasicoData,
+          'imagenUrls': imagenUrls,
+          'farmaUrls': farmacoUrls,
+        };
+      } else {
+        return null; // Documento no encontrado
+      }
+    } catch (e) {
+      print('Error al obtener el medicamento: $e');
+      return null; // Manejo de errores
+    }
+  }
 }

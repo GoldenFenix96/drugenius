@@ -128,7 +128,8 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Medicamentos(),
+                                builder: (context) =>
+                                    Medicamentos(medicamentoId: id),
                               ),
                             );
                           },

@@ -45,9 +45,9 @@ class _DrugInputState extends State<DrugInput> {
     });
   }
 
-  void setSelectedImages2(List<File?> selectedImages) {
+  void setSelectedImages2(List<File?> selectedImages2) {
     setState(() {
-      farmacocinetica = selectedImages
+      farmacocinetica = selectedImages2
           .map((image) => image?.path ?? '')
           .cast<File>()
           .toList();
@@ -193,10 +193,6 @@ class _DrugInputState extends State<DrugInput> {
     }
 
     validarCheck(selectedCuadros);
-
-    //setSelectedImages(imagenes); // Para imágenes regulares
-    //setSelectedImages2(farmacocinetica); // Para imágenes de farmacocinética
-
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -229,6 +225,11 @@ class _DrugInputState extends State<DrugInput> {
           final imageFile = imagenes[i];
           await fs.uploadImageToStorageAndFirestore(
               resultadoRegistro, imageFile!);
+        }
+
+        for (int i = 0; i < farmacocinetica.length; i++) {
+          final imageFile2 = farmacocinetica[i];
+          await fs.subirFarmacocinetica(resultadoRegistro, imageFile2!);
         }
 
         // Continúa con cualquier otra lógica o navegación necesaria
@@ -446,7 +447,7 @@ class _DrugInputState extends State<DrugInput> {
                 horizontal: 25.0,
               ),
               child: FarmacocineticaPickerWidget(
-                  updateImagenes: updateImagenesFarmacocinetica),
+                  updateFarmaco: updateImagenesFarmacocinetica),
             ),
           ),
         ],
