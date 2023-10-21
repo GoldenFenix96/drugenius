@@ -6,6 +6,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 
 class ListMedicamentos extends StatefulWidget {
+  const ListMedicamentos({super.key});
+
   @override
   _ListMedicamentosState createState() => _ListMedicamentosState();
 }

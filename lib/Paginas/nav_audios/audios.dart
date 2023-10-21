@@ -17,21 +17,19 @@ class _VideosState extends State<Audios> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       backgroundColor: Color.fromARGB(255, 85, 145, 214),
-      elevation: 10,
-        title: Row(
+        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+        elevation: 10,
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               "Lista",
               style: TextStyle(fontSize: 35, color: Colors.black),
             ),
-            
             Text(
               "de",
               style: TextStyle(fontSize: 35, color: Colors.grey),
             ),
-
             Text(
               "Audios",
               style: TextStyle(fontSize: 35, color: Colors.white),
@@ -39,74 +37,101 @@ class _VideosState extends State<Audios> {
           ],
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => VideoAudio()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const VideoAudio()));
           },
         ),
-    ),
-     
-     body: ListView(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: InkWell(
-            onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> AudioManager()));
-                },
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.grey),
-              child: Center(child: Text("Amigos emprendedores ", style: TextStyle(fontSize: 25, color: Colors.white),)),
+      ),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AudioManager()));
+              },
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5), color: Colors.grey),
+                child: const Center(
+                    child: Text(
+                  "Amigos emprendedores ",
+                  style: TextStyle(fontSize: 25, color: Colors.white),
+                )),
+              ),
             ),
           ),
-        ),
-
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: InkWell(
-            onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> AudioManager2()));
-                },
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.grey),
-              child: Center(child: Text("Lagrimas y risas ", style: TextStyle(fontSize: 25, color: Colors.white),)),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AudioManager2()));
+              },
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5), color: Colors.grey),
+                child: const Center(
+                    child: Text(
+                  "Lagrimas y risas ",
+                  style: TextStyle(fontSize: 25, color: Colors.white),
+                )),
+              ),
             ),
           ),
-        ),
-
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: InkWell(
-            onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> AudioManager3()));
-                },
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.grey),
-              child: Center(child: Text("Las dos caras de la moneda", style: TextStyle(fontSize: 25, color: Colors.white),)),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AudioManager3()));
+              },
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5), color: Colors.grey),
+                child: const Center(
+                    child: Text(
+                  "Las dos caras de la moneda",
+                  style: TextStyle(fontSize: 25, color: Colors.white),
+                )),
+              ),
             ),
           ),
-        ),
-
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: InkWell(
-            onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> AudioManager4()));
-                },
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),color: Colors.grey),
-              child: Center(child: Text("La importancia de Farmacologia ", style: TextStyle(fontSize: 25, color: Colors.white),)),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AudioManager4()));
+              },
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5), color: Colors.grey),
+                child: const Center(
+                    child: Text(
+                  "La importancia de Farmacologia ",
+                  style: TextStyle(fontSize: 25, color: Colors.white),
+                )),
+              ),
             ),
           ),
-        ),
-
-      ],
-     ),
+        ],
+      ),
     );
   }
 }
