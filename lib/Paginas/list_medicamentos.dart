@@ -121,7 +121,7 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
                                     fit: BoxFit.cover,
                                   ),
                                 )
-                              : SizedBox
+                              : const SizedBox
                                   .shrink(), // No muestra nada si no hay imagen
                           title: Text(
                             nombre, // Mostrar el nombre del medicamento

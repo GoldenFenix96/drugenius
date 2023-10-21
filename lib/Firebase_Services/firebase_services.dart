@@ -209,25 +209,112 @@ class Firebase_services {
     }
   }
 
+//Listar medicamentos
+  Future<List<Map<String, dynamic>>?> getMedicamentos() async {
+    try {
+      final QuerySnapshot medicamentosQuery =
+          await db.collection('Medicamentos').get();
+      final medicamentos =
+          await Future.wait(medicamentosQuery.docs.map((medicamentoDoc) async {
+        final imagenSnapshot = await medicamentoDoc.reference
+            .collection('Imagenes')
+            .limit(1)
+            .get();
+        String imagenUrl = ''; // URL de la imagen
+        if (imagenSnapshot.docs.isNotEmpty) {
+          imagenUrl = imagenSnapshot.docs[0].get('imageUrl');
+        }
+        return {
+          'id': medicamentoDoc.id,
+          'nombre': medicamentoDoc['Nombre'],
+          'imagenUrl': imagenUrl,
+        };
+      }));
+      return medicamentos;
+    } catch (e) {
+      print('Error al obtener los medicamentos: $e');
+      return null; // Manejo de errores
+    }
+  }
+
+  //Traer datos del medicamento
+  Future<Map<String, dynamic>?> obtenerMedicamento(String documentId) async {
+    try {
+      final medicamentoDoc =
+          await db.collection('Medicamentos').doc(documentId).get();
+
+      if (medicamentoDoc.exists) {
+        final medicamentoData = medicamentoDoc.data() as Map<String, dynamic>;
+
+        // Obtener datos de la subcolección "Cuadro Básico"
+        final cuadroBasicoSnapshot =
+            await medicamentoDoc.reference.collection('Cuadro Básico').get();
+        final cuadroBasicoData = cuadroBasicoSnapshot.docs
+            .map((cuadroDoc) => {
+                  'isChecked': cuadroDoc['isChecked'],
+                  'name': cuadroDoc['name'],
+                })
+            .toList();
+
+        print(cuadroBasicoData);
+        // Obtener datos de la subcolección "Imagenes"
+        final imagenesSnapshot =
+            await medicamentoDoc.reference.collection('Imagenes').get();
+        final imagenUrls = imagenesSnapshot.docs
+            .map((imagenDoc) => imagenDoc['imageUrl'] as String)
+            .toList();
+
+        // Obtener datos de la subcolección "Farmacocinetica"
+        final farmacoSnapshot =
+            await medicamentoDoc.reference.collection('Farmacocinetica').get();
+        final farmacoUrls = farmacoSnapshot.docs
+            .map((farmaDoc) => farmaDoc['imageUrl'] as String)
+            .toList();
+
+        return {
+          'id': medicamentoDoc.id,
+          'nombre': medicamentoData['Nombre'],
+          'otroNombre': medicamentoData['Otro Nombre'],
+          'contra': medicamentoData['Contraindicaciones'],
+          'efectos': medicamentoData['Efectos'],
+          'grupo': medicamentoData['Grupo'],
+          'mecanismo': medicamentoData['Mecanismo de Acción'],
+          'posologia': medicamentoData['Posología'],
+          'presentacion': medicamentoData['Presentación'],
+          'subgrupo': medicamentoData['Subgrupo'],
+          'uso': medicamentoData['Uso Terapeutico'],
+          'cuadroBasico': cuadroBasicoData,
+          'imagenUrls': imagenUrls,
+          'farmaUrls': farmacoUrls,
+        };
+      } else {
+        return null; // Documento no encontrado
+      }
+    } catch (e) {
+      print('Error al obtener el medicamento: $e');
+      return null; // Manejo de errores
+    }
+  }
 
   //Agregar titulo de video
-    Future<String?> addTVideo(
+  Future<String?> addTVideo(
     String nombre,
     //List<Map> cuadroBasico,
-    ) async {
+  ) async {
     try {
       // 1. Agregar el Video a Firestore
       DocumentReference documentReference =
           await db.collection('Nombre de Videos').add({
         'Nombre': nombre,
       });
-       return documentReference.id;
-     } catch (e) {
+      return documentReference.id;
+    } catch (e) {
       print("Ha ocurrido un error al agregar el nombre del video: $e");
       return null;
     }
- }
-      //Agregar Video 
+  }
+
+  //Agregar Video
   Future<void> uploadVideoToStorageAndFirestore(
       String documentId, File videoFile) async {
     try {
@@ -253,6 +340,4 @@ class Firebase_services {
       print("Error al cargar el video: $e");
     }
   }
- 
-
 }
