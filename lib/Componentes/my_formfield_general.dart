@@ -9,7 +9,7 @@ class TextFormFieldGeneral extends StatelessWidget {
   const TextFormFieldGeneral({
     super.key,
     required this.labelTxt,
-    required this.hintText,
+    this.hintText = "",
     required this.onChanged,
     this.icon = Icons.text_format_outlined,
     this.controller,

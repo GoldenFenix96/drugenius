@@ -30,12 +30,26 @@ final TextEditingController usoTeraController = TextEditingController();
 final TextEditingController efectosController = TextEditingController();
 final TextEditingController contraController = TextEditingController();
 final TextEditingController posologiaController = TextEditingController();
-final TextEditingController cuadroController = TextEditingController();
 String? selectedGrupo;
 String? selectedSubGrupo;
 Firebase_services fs = Firebase_services();
 
 class _DrugInputState extends State<DrugInput> {
+  @override
+  void initState() {
+    super.initState();
+    // Limpia el controlador de nombre al iniciar la pantalla
+    nombreController.clear();
+    otroNombreController.clear();
+    nombreController.clear();
+    presentacionController.clear();
+    mecanismosController.clear();
+    usoTeraController.clear();
+    efectosController.clear();
+    contraController.clear();
+    posologiaController.clear();
+  }
+
   void setSelectedImages(List<File?> selectedImages) {
     setState(() {
       imagenes = selectedImages

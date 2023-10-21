@@ -67,15 +67,15 @@ class _EditDrugState extends State<EditDrug> {
       setState(() {
         images = medicamentoObtenido['imagenUrls'];
         nombreController.text = medicamentoObtenido['nombre'];
-        otro = medicamentoObtenido['otroNombre'];
-        contra = medicamentoObtenido['contra'];
-        efectos = medicamentoObtenido['efectos'];
+        otroNombreController.text = medicamentoObtenido['otroNombre'];
+        contraController.text = medicamentoObtenido['contra'];
+        efectosController.text = medicamentoObtenido['efectos'];
         grupo = medicamentoObtenido['grupo'];
         subgrupo = medicamentoObtenido['subgrupo'];
-        posologia = medicamentoObtenido['posologia'];
-        presentacion = medicamentoObtenido['presentacion'];
-        usoTera = medicamentoObtenido['uso'];
-        mecanismos = medicamentoObtenido['mecanismo'];
+        posologiaController.text = medicamentoObtenido['posologia'];
+        presentacionController.text = medicamentoObtenido['presentacion'];
+        usoTeraController.text = medicamentoObtenido['uso'];
+        mecanismosController.text = medicamentoObtenido['mecanismo'];
         farmaco = medicamentoObtenido['farmaUrls'];
         cuadro = medicamentoObtenido['cuadroBasico'];
       });
@@ -434,11 +434,34 @@ class _EditDrugState extends State<EditDrug> {
         controller: nombreController, labelTxt: nombre, onChanged: (value) {});
   }
 
+  _otroNombreMedicamento() {
+    return myTextFieldGeneral(
+      controller: otroNombreController,
+      labelTxt: "Otro nombre",
+      onChanged: (value) {},
+    );
+  }
+
+  _presentacionMedicamento() {
+    return TextFormFieldGeneral(
+      controller: presentacionController,
+      labelTxt: "Presentación del farmáco",
+      onChanged: (value) {},
+    );
+  }
+
+  _contraIndicacionesMedicamento() {
+    return TextFormFieldGeneral(
+      controller: contraController,
+      labelTxt: "Contraindicaciones",
+      onChanged: (value) {},
+    );
+  }
+
   _mecanismosDeAccion() {
     return myTextFieldGeneral(
       controller: mecanismosController,
       labelTxt: "Mecanismos de acción",
-      hintText: "Inhibición de enzimas",
       onChanged: (value) {},
     );
   }
@@ -447,7 +470,6 @@ class _EditDrugState extends State<EditDrug> {
     return TextFormFieldGeneral(
       controller: usoTeraController,
       labelTxt: "Uso terapéutico",
-      hintText: "Ejemplo...",
       onChanged: (value) {},
     );
   }
@@ -456,7 +478,6 @@ class _EditDrugState extends State<EditDrug> {
     return TextFormFieldGeneral(
       controller: efectosController,
       labelTxt: "Efectos adversos",
-      hintText: "Ejemplo...",
       onChanged: (value) {},
     );
   }
@@ -465,7 +486,6 @@ class _EditDrugState extends State<EditDrug> {
     return myTextFieldGeneral(
       controller: posologiaController,
       labelTxt: "Posología",
-      hintText: "Ejemplo...",
       onChanged: (value) {},
     );
   }
@@ -634,34 +654,6 @@ class _EditDrugState extends State<EditDrug> {
           print("selectedSubGrupo: $selectedSubGrupo");
         });
       },
-    );
-  }
-
-  _otroNombreMedicamento() {
-    return myTextFieldGeneral(
-      controller: otroNombreController,
-      labelTxt: "Otro nombre",
-      hintText: "Aspirina",
-      onChanged: (value) {},
-    );
-  }
-
-  _presentacionMedicamento() {
-    return TextFormFieldGeneral(
-      controller: presentacionController,
-      labelTxt: "Presentación del farmáco",
-      hintText: "Tableta  (500mg). Tableta soluble o efervescente (300mg)...",
-      onChanged: (value) {},
-    );
-  }
-
-  _contraIndicacionesMedicamento() {
-    return TextFormFieldGeneral(
-      controller: contraController,
-      labelTxt: "Contraindicaciones",
-      hintText:
-          "Hipersensibilidad al fármaco, úlcera péptica o gastritis activas, hipoprotrombinemia, niños menores de 6 años....",
-      onChanged: (value) {},
     );
   }
 
