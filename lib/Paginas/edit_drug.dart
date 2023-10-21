@@ -11,17 +11,17 @@ import 'package:drugenius/Componentes/my_formfield_general.dart';
 import 'package:drugenius/Componentes/my_dropdown_general.dart';
 
 class EditDrug extends StatefulWidget {
-  const EditDrug({Key? key}) : super(key: key);
+  final String medicamentoId;
+  const EditDrug({Key? key, required this.medicamentoId}) : super(key: key);
 
   @override
   _EditDrugState createState() => _EditDrugState();
 }
 
 List<File?> imagenes = [];
-
 List<File?> farmacocinetica = [];
-
 List<Map> selectedCuadros = [];
+
 final TextEditingController otroNombreController = TextEditingController();
 final TextEditingController nombreController = TextEditingController();
 final TextEditingController presentacionController = TextEditingController();
@@ -31,11 +31,53 @@ final TextEditingController efectosController = TextEditingController();
 final TextEditingController contraController = TextEditingController();
 final TextEditingController posologiaController = TextEditingController();
 final TextEditingController cuadroController = TextEditingController();
+
 String? selectedGrupo;
 String? selectedSubGrupo;
-Firebase_services fs = Firebase_services();
 
 class _EditDrugState extends State<EditDrug> {
+  Firebase_services fs = Firebase_services();
+  List<Map<String, dynamic>> medicamento = [];
+
+  String nombre = '';
+  String otro = '';
+  String contra = '';
+  String efectos = '';
+  String grupo = '';
+  String subgrupo = '';
+  String posologia = '';
+  String presentacion = '';
+  String usoTera = '';
+  String mecanismos = '';
+  @override
+  void initState() {
+    super.initState();
+    // Llama al método para obtener el medicamento que se mostrará
+    obtenerMedicamento();
+  }
+
+  Future<void> obtenerMedicamento() async {
+    final medicamentoObtenido =
+        await fs.obtenerMedicamento(widget.medicamentoId);
+    if (medicamentoObtenido != null) {
+      setState(() {
+        imagenes = medicamentoObtenido['imagenUrls'];
+        nombre = medicamentoObtenido['nombre'];
+        otro = medicamentoObtenido['otroNombre'];
+        contra = medicamentoObtenido['contra'];
+        efectos = medicamentoObtenido['efectos'];
+        grupo = medicamentoObtenido['grupo'];
+        subgrupo = medicamentoObtenido['subgrupo'];
+        posologia = medicamentoObtenido['posologia'];
+        presentacion = medicamentoObtenido['presentacion'];
+        usoTera = medicamentoObtenido['uso'];
+        mecanismos = medicamentoObtenido['mecanismo'];
+        farmacocinetica = medicamentoObtenido['farmaUrls'];
+        selectedCuadros = medicamentoObtenido['cuadroBasico'];
+      });
+    }
+  }
+
   void setSelectedImages(List<File?> selectedImages) {
     setState(() {
       imagenes = selectedImages
@@ -263,7 +305,7 @@ class _EditDrugState extends State<EditDrug> {
         //automaticallyImplyLeading: false,
         foregroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: const Text(
-          "Ingreso de medicamentos",
+          "Editar de medicamento",
           textAlign: TextAlign.center,
         ),
         backgroundColor: const Color.fromARGB(255, 85, 145, 214),
@@ -485,13 +527,13 @@ class _EditDrugState extends State<EditDrug> {
     );
   }
 
-  List<String> grupo = ['AINES'];
+  List<String> grupof = ['AINES'];
 
   _grupoMedicamento() {
     return Column(
       children: [
         MyDropDown(
-          list: grupo,
+          list: grupof,
           hintText: "Seleccione un grupo",
           onChanged: (value) {
             // Actualiza el valor seleccionado en la variable 'selectedGrupo'
@@ -570,7 +612,7 @@ class _EditDrugState extends State<EditDrug> {
 
     if (nuevoGrupo.isNotEmpty) {
       setState(() {
-        grupo.add(nuevoGrupo);
+        grupof.add(nuevoGrupo);
       });
     }
   }

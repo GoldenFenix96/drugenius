@@ -83,10 +83,10 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
                   borderRadius: BorderRadius.circular(10.0),
                   child: Slidable(
                     key: Key(id), // Usa el ID del medicamento como clave
-                    endActionPane: const ActionPane(
+                    endActionPane: ActionPane(
                       motion: ScrollMotion(),
                       children: [
-                        SlidableAction(
+                        const SlidableAction(
                           onPressed: doNothing,
                           backgroundColor: Color(0xFF0392CF),
                           foregroundColor: Colors.white,
@@ -94,7 +94,9 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
                           label: 'Editar',
                         ),
                         SlidableAction(
-                          onPressed: doNothing,
+                          onPressed: (context) {
+                            _editarMedicamento(id);
+                          },
                           backgroundColor: Color(0xFFFE4A49),
                           foregroundColor: Colors.white,
                           icon: Icons.delete,
@@ -109,15 +111,18 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
                       ),
                       child: Center(
                         child: ListTile(
-                          leading: SizedBox(
-                            width: 60,
-                            height: 50,
-                            child: Image.network(
-                              medicamento[
-                                  'imagenUrl'], // Usa la URL de la imagen del medicamento
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                          leading: medicamento['imagenUrl'] != null &&
+                                  medicamento['imagenUrl'].isNotEmpty
+                              ? SizedBox(
+                                  width: 60,
+                                  height: 50,
+                                  child: Image.network(
+                                    medicamento['imagenUrl'],
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              : SizedBox
+                                  .shrink(), // No muestra nada si no hay imagen
                           title: Text(
                             nombre, // Mostrar el nombre del medicamento
                             style: const TextStyle(
@@ -147,8 +152,13 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
         ));
   }
 
-  void _editarMedicamento(String medicamentoId) {
-    // Implementa la lógica para editar el medicamento
+  void _editarMedicamento(String id) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Medicamentos(medicamentoId: id),
+      ),
+    );
   }
 
   void _borrarMedicamento(String medicamentoId) {
