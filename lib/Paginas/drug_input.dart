@@ -507,6 +507,7 @@ class _DrugInputState extends State<DrugInput> {
         MyDropDown(
           list: grupo,
           hintText: "Seleccione un grupo",
+          value: "",
           onChanged: (value) {
             // Actualiza el valor seleccionado en la variable 'selectedGrupo'
             setState(() {
@@ -590,7 +591,7 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   _subgrupoFarmacologico() {
-    List subgrupo = [
+    List<String> subgrupo = [
       'SALICILATOS',
       'DERIV DEL ÁCIDO ACÉTICO',
       'PARAAMINOFEROL',
@@ -599,6 +600,7 @@ class _DrugInputState extends State<DrugInput> {
     return MyDropDown(
       list: subgrupo,
       hintText: "Seleccione un sub-grupo",
+      value: "",
       onChanged: (value) {
         setState(() {
           selectedSubGrupo = value;

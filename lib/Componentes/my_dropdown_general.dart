@@ -8,8 +8,9 @@ class MyDropDown extends StatelessWidget {
   const MyDropDown({
     super.key,
     required this.list,
-    required this.hintText,
-    required this.onChanged, // Actualización en la firma del parámetro
+    this.hintText = "",
+    required this.onChanged,
+    required String value, // Actualización en la firma del parámetro
   });
 
   @override

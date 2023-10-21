@@ -227,6 +227,8 @@ class Firebase_services {
         return {
           'id': medicamentoDoc.id,
           'nombre': medicamentoDoc['Nombre'],
+          'grupo': medicamentoDoc['Grupo'],
+          'subgrupo': medicamentoDoc['Subgrupo'],
           'imagenUrl': imagenUrl,
         };
       }));

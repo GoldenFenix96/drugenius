@@ -77,7 +77,8 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
             final medicamento = medicamentos[index];
             final id = medicamento['id'];
             final nombre = medicamento['nombre'];
-
+            final grupo = medicamento['grupo'];
+            final subgrupo = medicamento['subgrupo'];
             return Column(
               children: [
                 ClipRRect(
@@ -89,7 +90,7 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
                       children: [
                         SlidableAction(
                           onPressed: (context) {
-                            _editarMedicamento(id);
+                            _editarMedicamento(id, grupo, subgrupo);
                           },
                           backgroundColor: const Color(0xFF0392CF),
                           foregroundColor: Colors.white,
@@ -98,7 +99,7 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
                         ),
                         SlidableAction(
                           onPressed: (context) {
-                            _editarMedicamento(id);
+                            _editarMedicamento(id, grupo, subgrupo);
                           },
                           backgroundColor: const Color(0xFFFE4A49),
                           foregroundColor: Colors.white,
@@ -155,11 +156,15 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
         ));
   }
 
-  void _editarMedicamento(String id) {
+  void _editarMedicamento(String id, grupo, subgrupo) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => EditDrug(medicamentoId: id),
+        builder: (context) => EditDrug(
+          medicamentoId: id,
+          grupo: grupo,
+          subgrupo: subgrupo,
+        ),
       ),
     );
   }

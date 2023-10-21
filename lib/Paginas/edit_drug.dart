@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:drugenius/Componentes/farmaco_picker.dart';
 import 'package:drugenius/Componentes/my_checkbpx_general.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
@@ -8,11 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:drugenius/Componentes/my_imagepicker.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
 import 'package:drugenius/Componentes/my_formfield_general.dart';
-import 'package:drugenius/Componentes/my_dropdown_general.dart';
 
 class EditDrug extends StatefulWidget {
   final String medicamentoId;
-  const EditDrug({Key? key, required this.medicamentoId}) : super(key: key);
+  final String grupo;
+  final String subgrupo;
+  const EditDrug(
+      {Key? key,
+      required this.medicamentoId,
+      required this.grupo,
+      required this.subgrupo})
+      : super(key: key);
 
   @override
   _EditDrugState createState() => _EditDrugState();
@@ -36,6 +41,15 @@ final TextEditingController contraController = TextEditingController();
 final TextEditingController posologiaController = TextEditingController();
 final TextEditingController cuadroController = TextEditingController();
 
+String nombre = '';
+String otro = '';
+String contra = '';
+String efectos = '';
+String posologia = '';
+String presentacion = '';
+String usoTera = '';
+String mecanismos = '';
+
 String? selectedGrupo;
 String? selectedSubGrupo;
 
@@ -43,16 +57,6 @@ class _EditDrugState extends State<EditDrug> {
   Firebase_services fs = Firebase_services();
   List<Map<String, dynamic>> medicamento = [];
 
-  String nombre = '';
-  String otro = '';
-  String contra = '';
-  String efectos = '';
-  String grupo = '';
-  String subgrupo = '';
-  String posologia = '';
-  String presentacion = '';
-  String usoTera = '';
-  String mecanismos = '';
   @override
   void initState() {
     super.initState();
@@ -70,8 +74,6 @@ class _EditDrugState extends State<EditDrug> {
         otroNombreController.text = medicamentoObtenido['otroNombre'];
         contraController.text = medicamentoObtenido['contra'];
         efectosController.text = medicamentoObtenido['efectos'];
-        grupo = medicamentoObtenido['grupo'];
-        subgrupo = medicamentoObtenido['subgrupo'];
         posologiaController.text = medicamentoObtenido['posologia'];
         presentacionController.text = medicamentoObtenido['presentacion'];
         usoTeraController.text = medicamentoObtenido['uso'];
@@ -107,10 +109,10 @@ class _EditDrugState extends State<EditDrug> {
     {'name': 'MÉXICO', 'isChecked': true},
   ];
 
-  void validarCheck(List<Map> selectedCuadros) {
-    for (int i = 0; i < selectedCuadros.length; i++) {
-      final nombre = selectedCuadros[i]['name'];
-      final isChecked = selectedCuadros[i]['isChecked'];
+  void validarCheck(List<Map> cuadro) {
+    for (int i = 0; i < cuadro.length; i++) {
+      final nombre = cuadro[i]['name'];
+      final isChecked = cuadro[i]['isChecked'];
 
       if (isChecked) {
         print("Nombre: $nombre, Estado: isChecked");
@@ -358,7 +360,7 @@ class _EditDrugState extends State<EditDrug> {
                   //TXT INPUT
                   _imagenMedicamento(),
                   const SizedBox(height: 15.0),
-                  _grupoMedicamento(),
+                  _grupoFarmacologico(),
                   const SizedBox(height: 15.0),
                   _subgrupoFarmacologico(),
                   const SizedBox(height: 15.0),
@@ -491,78 +493,94 @@ class _EditDrugState extends State<EditDrug> {
   }
 
   _farmacocineticaMedicamento() {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 25.0,
-            ),
-            alignment: Alignment.topLeft,
-            child: const Text(
-              "Farmacocinética",
-            ),
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
           ),
-          const SizedBox(height: 10),
-          Container(
-            child: Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 25.0,
-              ),
-              child: FarmacocineticaPickerWidget(
-                  updateFarmaco: updateImagenesFarmacocinetica),
-            ),
+          alignment: Alignment.topLeft,
+          child: const Text(
+            "Farmacocinética",
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
+          ),
+          child: FarmacocineticaPickerWidget(
+              updateFarmaco: updateImagenesFarmacocinetica),
+        ),
+      ],
     );
   }
 
   _cuadroBasico() {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 25.0,
-            ),
-            alignment: Alignment.topLeft,
-            child: const Text(
-              "Cuadro básico",
-            ),
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
           ),
-          const SizedBox(height: 10),
-          Container(
-            child: MyCheckBox(
-              items: selectedCuadros,
-              onCheckBoxChanged: (items) {
-                setState(() {
-                  selectedCuadros = items;
-                });
-                validarCheck(selectedCuadros);
-              },
-            ),
+          alignment: Alignment.topLeft,
+          child: const Text(
+            "Cuadro básico",
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 10),
+        MyCheckBox(
+          items: cuadro,
+          onCheckBoxChanged: (items) {
+            setState(() {
+              cuadro = items;
+            });
+            validarCheck(cuadro);
+          },
+        ),
+      ],
     );
   }
 
   List<String> grupof = ['AINES'];
 
-  _grupoMedicamento() {
+  Widget _grupoFarmacologico() {
     return Column(
       children: [
-        MyDropDown(
-          list: grupof,
-          hintText: "Seleccione un grupo",
-          onChanged: (value) {
-            // Actualiza el valor seleccionado en la variable 'selectedGrupo'
-            setState(() {
-              selectedGrupo = value;
-              print("selectedGrupo: $selectedGrupo");
-            });
-          },
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
+          ),
+          child: Center(
+            child: DropdownButtonFormField<String>(
+              decoration: const InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 204, 204, 204),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
+                ),
+                fillColor: Color.fromARGB(255, 204, 204, 204),
+                filled: true,
+                prefixIcon: Icon(Icons.text_format_outlined),
+              ),
+              value: widget.grupo, // Establece el valor inicial desde el widget
+              items: grupof.map((name) {
+                return DropdownMenuItem<String>(
+                  value: name,
+                  child: Text(name),
+                );
+              }).toList(),
+              onChanged: (String? value) {
+                setState(() {
+                  selectedGrupo = value;
+                  print("subgrupo seleccionado: $selectedGrupo");
+                });
+              },
+            ),
+          ),
         ),
         const SizedBox(height: 15.0),
         Container(
@@ -638,22 +656,51 @@ class _EditDrugState extends State<EditDrug> {
     }
   }
 
-  _subgrupoFarmacologico() {
-    List subgrupo = [
-      'SALICILATOS',
-      'DERIV DEL ÁCIDO ACÉTICO',
-      'PARAAMINOFEROL',
-      'DERIV DEL ÁCIDO PROPIÓNICO'
-    ];
-    return MyDropDown(
-      list: subgrupo,
-      hintText: "Seleccione un sub-grupo",
-      onChanged: (value) {
-        setState(() {
-          selectedSubGrupo = value;
-          print("selectedSubGrupo: $selectedSubGrupo");
-        });
-      },
+  List<String> subgrup = [
+    'SALICILATOS',
+    'DERIV DEL ÁCIDO ACÉTICO',
+    'PARAAMINOFEROL',
+    'DERIV DEL ÁCIDO PROPIÓNICO'
+  ];
+
+  Widget _subgrupoFarmacologico() {
+    print("Subgrupo de medicamentos: ${widget.subgrupo}");
+
+    // Agregar widget.subgrupo a la lista subgrup si no está presente
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        horizontal: 25.0,
+      ),
+      child: Center(
+        child: DropdownButtonFormField<String>(
+          decoration: const InputDecoration(
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Color.fromARGB(255, 204, 204, 204),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
+            ),
+            fillColor: Color.fromARGB(255, 204, 204, 204),
+            filled: true,
+            prefixIcon: Icon(Icons.text_format_outlined),
+          ),
+          value: widget.subgrupo,
+          items: subgrup.map((name) {
+            return DropdownMenuItem<String>(
+              value: name,
+              child: Text(name),
+            );
+          }).toList(),
+          onChanged: (String? value) {
+            setState(() {
+              selectedSubGrupo = value;
+              print("subgrupo seleccionado: $selectedSubGrupo");
+            });
+          },
+        ),
+      ),
     );
   }
 
