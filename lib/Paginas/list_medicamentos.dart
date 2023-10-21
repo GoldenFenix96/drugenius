@@ -1,5 +1,6 @@
 import 'package:drugenius/Paginas/Nav_Bar.dart';
 import 'package:drugenius/Paginas/drug_input.dart';
+import 'package:drugenius/Paginas/edit_drug.dart';
 import 'package:drugenius/Paginas/medicamentos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -84,11 +85,13 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
                   child: Slidable(
                     key: Key(id), // Usa el ID del medicamento como clave
                     endActionPane: ActionPane(
-                      motion: ScrollMotion(),
+                      motion: const ScrollMotion(),
                       children: [
-                        const SlidableAction(
-                          onPressed: doNothing,
-                          backgroundColor: Color(0xFF0392CF),
+                        SlidableAction(
+                          onPressed: (context) {
+                            _editarMedicamento(id);
+                          },
+                          backgroundColor: const Color(0xFF0392CF),
                           foregroundColor: Colors.white,
                           icon: Icons.save,
                           label: 'Editar',
@@ -97,7 +100,7 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
                           onPressed: (context) {
                             _editarMedicamento(id);
                           },
-                          backgroundColor: Color(0xFFFE4A49),
+                          backgroundColor: const Color(0xFFFE4A49),
                           foregroundColor: Colors.white,
                           icon: Icons.delete,
                           label: 'Borrar',
@@ -156,7 +159,7 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Medicamentos(medicamentoId: id),
+        builder: (context) => EditDrug(medicamentoId: id),
       ),
     );
   }

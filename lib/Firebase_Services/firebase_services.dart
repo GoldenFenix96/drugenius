@@ -299,12 +299,10 @@ class Firebase_services {
   //Agregar titulo de video
   Future<String?> addTVideo(
     String nombre,
-    //List<Map> cuadroBasico,
   ) async {
     try {
       // 1. Agregar el Video a Firestore
-      DocumentReference documentReference =
-          await db.collection('Nombre de Videos').add({
+      DocumentReference documentReference = await db.collection('Videos').add({
         'Nombre': nombre,
       });
       return documentReference.id;
@@ -330,7 +328,7 @@ class Firebase_services {
 
       // Almacenar la URL del video en Firestore
       final cuadroBasicoCollection = FirebaseFirestore.instance
-          .collection('Nombre de Videos')
+          .collection('Videos')
           .doc(documentId)
           .collection('Video');
       await cuadroBasicoCollection.add({

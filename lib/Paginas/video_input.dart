@@ -6,7 +6,6 @@ import 'package:drugenius/Paginas/nav_videos/videos.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 
-
 class VideoInput extends StatefulWidget {
   const VideoInput({super.key});
 
@@ -31,23 +30,22 @@ class _VideoInputState extends State<VideoInput> {
     });
   }
 
-   void validarVideos(List<File> videos) {
+  void validarVideos(List<File> videos) {
     for (int i = 0; i < videos.length; i++) {
       print('Ruta del video $i: ${videos[i].path}');
     }
   }
 
   void updateVideos(List<File?> nuevosVideos) {
-    
     setState(() {
       videos = nuevosVideos;
     });
   }
 
   Future<void> _registrarVideo() async {
-  final nombre = nombreController.text;
+    final nombre = nombreController.text;
 
-  print("Salto de linea para los videos XD");
+    print("Salto de linea para los videos XD");
     validarVideos(videos.whereType<File>().toList());
     print('Nombre: $nombre');
 
@@ -65,9 +63,10 @@ class _VideoInputState extends State<VideoInput> {
 
       // Llama a tu función de registro
       final resultadoRegistro = await fs.addTVideo(
-          nombre,);
+        nombre,
+      );
 
-          if (resultadoRegistro != null) {
+      if (resultadoRegistro != null) {
         // Guardar videos en Firebase Storage y URLs en Firestore
         for (int i = 0; i < videos.length; i++) {
           final videoFile = videos[i];
@@ -98,8 +97,15 @@ class _VideoInputState extends State<VideoInput> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // Limpia el controlador de nombre al iniciar la pantalla
+    nombreController.clear();
+  }
+
+  @override
   Widget build(BuildContext context) {
-     final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -155,9 +161,9 @@ class _VideoInputState extends State<VideoInput> {
                   _videoT(),
                   const SizedBox(height: 15.0),
                   _nombreVideo(),
-                    const SizedBox(height: 15.0),
+                  const SizedBox(height: 15.0),
 
-                    const SizedBox(height: 30.0),
+                  const SizedBox(height: 30.0),
                   //BOTON
                   Container(
                     margin: const EdgeInsets.symmetric(
@@ -200,10 +206,8 @@ class _VideoInputState extends State<VideoInput> {
           ],
         ),
       ),
-
-    ); 
+    );
   }
-
 
   _nombreVideo() {
     return myTextFieldGeneral(
@@ -213,7 +217,7 @@ class _VideoInputState extends State<VideoInput> {
         onChanged: (value) {});
   }
 
-Widget _videoT() {
+  Widget _videoT() {
     return Container(
       child: Column(
         children: [

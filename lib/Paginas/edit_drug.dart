@@ -22,6 +22,10 @@ List<File?> imagenes = [];
 List<File?> farmacocinetica = [];
 List<Map> selectedCuadros = [];
 
+List<String> images = [];
+List<String> farmaco = [];
+List<Map> cuadro = [];
+
 final TextEditingController otroNombreController = TextEditingController();
 final TextEditingController nombreController = TextEditingController();
 final TextEditingController presentacionController = TextEditingController();
@@ -61,8 +65,8 @@ class _EditDrugState extends State<EditDrug> {
         await fs.obtenerMedicamento(widget.medicamentoId);
     if (medicamentoObtenido != null) {
       setState(() {
-        imagenes = medicamentoObtenido['imagenUrls'];
-        nombre = medicamentoObtenido['nombre'];
+        images = medicamentoObtenido['imagenUrls'];
+        nombreController.text = medicamentoObtenido['nombre'];
         otro = medicamentoObtenido['otroNombre'];
         contra = medicamentoObtenido['contra'];
         efectos = medicamentoObtenido['efectos'];
@@ -72,8 +76,8 @@ class _EditDrugState extends State<EditDrug> {
         presentacion = medicamentoObtenido['presentacion'];
         usoTera = medicamentoObtenido['uso'];
         mecanismos = medicamentoObtenido['mecanismo'];
-        farmacocinetica = medicamentoObtenido['farmaUrls'];
-        selectedCuadros = medicamentoObtenido['cuadroBasico'];
+        farmaco = medicamentoObtenido['farmaUrls'];
+        cuadro = medicamentoObtenido['cuadroBasico'];
       });
     }
   }
@@ -427,10 +431,7 @@ class _EditDrugState extends State<EditDrug> {
 
   _nombreMedicamento() {
     return myTextFieldGeneral(
-        controller: nombreController,
-        labelTxt: "Nombre del medicamento",
-        hintText: "Paracetamol",
-        onChanged: (value) {});
+        controller: nombreController, labelTxt: nombre, onChanged: (value) {});
   }
 
   _mecanismosDeAccion() {

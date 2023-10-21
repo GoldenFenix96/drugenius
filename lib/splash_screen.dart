@@ -5,50 +5,6 @@ import 'Paginas/loggin_page.dart';
 
 import 'main.dart';
 
-/*
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key});
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<bool>(
-      future: isUserAuthenticated(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.data == true) {
-            return const DrugeniusMenu(); // Usuario autenticado
-          } else {
-            return const LogginPage(); // Usuario no autenticado
-          }
-        }
-        // Mientras se verifica la autenticación, puedes mostrar un indicador de carga u otra interfaz de usuario.
-        return Container(
-          child: Center(
-            child: Text('hola'),
-          ),
-        );
-      },
-    );
-  }
-
-  // Marca la función como `async`
-  Future<bool> isUserAuthenticated() async {
-    var user = FirebaseAuth.instance.currentUser;
-    if (user == null) {}
-    return user != null;
-  }
-}
-*/
-
-//import 'package:flutter/material.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
-
-void main() {
-  runApp(MaterialApp(
-    home: SplashScreen(),
-  ));
-}
-
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key});
   @override
@@ -58,7 +14,7 @@ class SplashScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // Mientras se verifica la autenticación, muestra un indicador de carga.
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),
