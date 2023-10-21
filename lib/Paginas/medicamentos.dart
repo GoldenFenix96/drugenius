@@ -256,7 +256,10 @@ class _MedicamentosState extends State<Medicamentos> {
             children: <Widget>[
               ListTile(
                 title: Text(
-                  posologia,
+                  cuadro
+                      .where((element) => element['isChecked'] == true)
+                      .map((element) => element['name'])
+                      .join(', '),
                   style: const TextStyle(fontSize: 14.0),
                   textAlign: TextAlign.justify,
                 ),

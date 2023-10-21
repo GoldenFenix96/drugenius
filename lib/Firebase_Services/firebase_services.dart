@@ -256,6 +256,7 @@ class Firebase_services {
                 })
             .toList();
 
+        print(cuadroBasicoData);
         // Obtener datos de la subcolección "Imagenes"
         final imagenesSnapshot =
             await medicamentoDoc.reference.collection('Imagenes').get();
