@@ -198,7 +198,7 @@ void selectedItem(BuildContext context, int index) {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              const ListMedicamentos(), // Reemplaza con la pantalla deseada
+              ListMedicamentos(), // Reemplaza con la pantalla deseada
         ),
       );
       break;

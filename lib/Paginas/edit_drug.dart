@@ -10,11 +10,11 @@ import 'package:drugenius/Componentes/my_textfield_general.dart';
 import 'package:drugenius/Componentes/my_formfield_general.dart';
 import 'package:drugenius/Componentes/my_dropdown_general.dart';
 
-class DrugInput extends StatefulWidget {
-  const DrugInput({Key? key}) : super(key: key);
+class EditDrug extends StatefulWidget {
+  const EditDrug({Key? key}) : super(key: key);
 
   @override
-  _DrugInputState createState() => _DrugInputState();
+  _EditDrugState createState() => _EditDrugState();
 }
 
 List<File?> imagenes = [];
@@ -35,7 +35,7 @@ String? selectedGrupo;
 String? selectedSubGrupo;
 Firebase_services fs = Firebase_services();
 
-class _DrugInputState extends State<DrugInput> {
+class _EditDrugState extends State<EditDrug> {
   void setSelectedImages(List<File?> selectedImages) {
     setState(() {
       imagenes = selectedImages

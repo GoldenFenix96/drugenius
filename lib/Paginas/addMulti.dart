@@ -16,14 +16,14 @@ class _AddMultiState extends State<AddMulti> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 85, 145, 214),
+        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
         elevation: 10,
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               "Cargar",
-              style: TextStyle(fontSize: 33, color: Colors.black),
+              style: TextStyle(fontSize: 30, color: Colors.black),
             ),
             Text(
               " ",
@@ -31,11 +31,11 @@ class _AddMultiState extends State<AddMulti> {
             ),
             Text(
               "Multimedia",
-              style: TextStyle(fontSize: 33, color: Colors.white),
+              style: TextStyle(fontSize: 30, color: Colors.white),
             )
           ],
         ),
-        actions: <Widget>[
+        actions: const <Widget>[
           IconButton(
             icon: Icon(Icons.login),
             onPressed: _add,
@@ -44,10 +44,10 @@ class _AddMultiState extends State<AddMulti> {
         // shape: RoundedRectangleBorder(
         //     borderRadius: BorderRadius.all(Radius.elliptical(20, 20))),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => VideoAudio()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const VideoAudio()));
           },
         ),
       ),
@@ -103,5 +103,5 @@ class _AddMultiState extends State<AddMulti> {
 }
 
 void _add() {
-  print("Agregar Video  u Podcast");
+  print("Agregar Video u Podcast");
 }

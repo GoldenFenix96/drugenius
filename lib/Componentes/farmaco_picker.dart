@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class FarmacocineticaPickerWidget extends StatefulWidget {
-  final Function(List<File?>) updateImagenes;
-  const FarmacocineticaPickerWidget({Key? key, required this.updateImagenes})
+  final Function(List<File?>) updateFarmaco;
+  const FarmacocineticaPickerWidget({Key? key, required this.updateFarmaco})
       : super(key: key);
 
   @override
@@ -29,15 +29,15 @@ class _FarmacocineticaPickerWidgetState
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (returnedImage2 == null) return;
 
-    final List<File?> selectedImages = List.from(_selectedImages2);
-    selectedImages.add(File(returnedImage2.path));
+    final List<File?> selectedImages2 = List.from(_selectedImages2);
+    selectedImages2.add(File(returnedImage2.path));
 
-    widget.updateImagenes(selectedImages);
+    widget.updateFarmaco(selectedImages2);
 
     // Llama a la función para pasar las rutas de las imágenes de vuelta al widget principal
-    _setSelectedImages(selectedImages);
+    _setSelectedImages(selectedImages2);
 
-    widget.updateImagenes(selectedImages);
+    widget.updateFarmaco(selectedImages2);
   }
 
   @override

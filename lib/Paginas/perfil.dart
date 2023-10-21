@@ -18,7 +18,6 @@ TextEditingController _nombreController = TextEditingController();
 TextEditingController _contrasenaController = TextEditingController();
 TextEditingController _contrasenaControllerActual = TextEditingController();
 
-//String? userId = UserStateManager().userId;
 String? userId = FirebaseAuth.instance.currentUser?.uid;
 
 class _Perfil extends State<Perfil> {
