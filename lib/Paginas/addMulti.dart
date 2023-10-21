@@ -1,4 +1,6 @@
+import 'package:drugenius/Paginas/nav_audios/audios.dart';
 import 'package:drugenius/Paginas/video_audio.dart';
+import 'package:drugenius/Paginas/video_input.dart';
 import 'package:flutter/material.dart';
 
 class AddMulti extends StatefulWidget {
@@ -49,6 +51,53 @@ class _AddMultiState extends State<AddMulti> {
           },
         ),
       ),
+       
+       body: Container(
+       
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: GridView(children: [
+              InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> VideoInput()));
+                },
+                child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.red,),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                   
+                    Icon(Icons.video_camera_front, size: 50,color: Colors.white,),
+                    Text("Video",style: TextStyle(fontSize: 30,color: Colors.white),),
+                ],),
+                ),
+              ),
+                InkWell(
+                  onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Audios()));
+                },
+                  child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.green,),
+                              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                   
+                    Icon(Icons.podcasts, size: 50,color: Colors.white,),
+                    Text("Podcast",style: TextStyle(fontSize: 30,color: Colors.white),),
+                              ],),
+                              ),
+                ),    
+           ],
+           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1,mainAxisSpacing: 10, crossAxisSpacing: 10),
+           ),   
+                    
+        ),   
+      ),
+
+
+
+
+
+
+
     );
   }
 }
