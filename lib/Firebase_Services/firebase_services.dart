@@ -208,4 +208,51 @@ class Firebase_services {
       print("Error al cargar la imagen: $e");
     }
   }
+
+
+  //Agregar titulo de video
+    Future<String?> addTVideo(
+    String nombre,
+    //List<Map> cuadroBasico,
+    ) async {
+    try {
+      // 1. Agregar el Video a Firestore
+      DocumentReference documentReference =
+          await db.collection('Nombre de Videos').add({
+        'Nombre': nombre,
+      });
+       return documentReference.id;
+     } catch (e) {
+      print("Ha ocurrido un error al agregar el nombre del video: $e");
+      return null;
+    }
+ }
+      //Agregar Video 
+  Future<void> uploadVideoToStorageAndFirestore(
+      String documentId, File videoFile) async {
+    try {
+      // Subir el video a Firebase Storage
+      final storageReference = FirebaseStorage.instance
+          .ref()
+          .child('$documentId/${DateTime.now()}.mp4');
+      final uploadTask = storageReference.putFile(videoFile);
+      final TaskSnapshot storageTaskSnapshot = await uploadTask;
+
+      // Obtener la URL deL video en Firebase Storage
+      final videoUrl = await storageTaskSnapshot.ref.getDownloadURL();
+
+      // Almacenar la URL del video en Firestore
+      final cuadroBasicoCollection = FirebaseFirestore.instance
+          .collection('Nombre de Videos')
+          .doc(documentId)
+          .collection('Video');
+      await cuadroBasicoCollection.add({
+        'videoUrl': videoUrl,
+      });
+    } catch (e) {
+      print("Error al cargar el video: $e");
+    }
+  }
+ 
+
 }
