@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Componentes/farmaco_picker.dart';
 import 'package:drugenius/Componentes/my_checkbpx_general.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
@@ -705,30 +706,43 @@ class _EditDrugState extends State<EditDrug> {
   }
 
   Widget _imagenMedicamento() {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 25.0,
-            ),
-            alignment: Alignment.topLeft,
-            child: const Text(
-              "Imágen del medicamento",
-            ),
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
           ),
-          const SizedBox(height: 10),
-          Container(
-            child: Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 25.0,
-              ),
-              child: ImagePickerWidget(updateImagenes: updateImagenes),
-            ),
+          alignment: Alignment.topLeft,
+          child: const Text(
+            "Imágenes del medicamento",
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 10),
+        // Swiper to show the images from URLs
+        Container(
+          height: 300, // Set the desired height
+          child: Swiper(
+            loop: false,
+            viewportFraction: 0.8,
+            scale: 0.9,
+            itemCount: images.length,
+            itemBuilder: (context, index) {
+              return Image.network(
+                images[index],
+                fit: BoxFit.cover,
+              );
+            },
+            pagination: const SwiperPagination(),
+            control: const SwiperControl(), // Optional: add controls
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
+          ),
+          child: ImagePickerWidget(updateImagenes: updateImagenes),
+        ),
+      ],
     );
   }
-  // Resto de tu código de funciones _grupoMedicamento(), _subgrupoFarmacologico(), etc.
 }
