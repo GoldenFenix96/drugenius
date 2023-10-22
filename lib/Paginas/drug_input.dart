@@ -433,12 +433,21 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   _posologiaMedicamento() {
+    return TextFormFieldGeneral(
+      controller: posologiaController,
+      labelTxt: "Posología",
+      hintText:
+          "Dosis: Tomar 1 comprimido de 400 mg.\nFrecuencia: Tomar cada 6 horas según sea necesario para el dolor o la fiebre. No tomar más de 4 comprimidos (1600 mg) en un período de 24 horas.\nDuración: No tomar durante más de 7 días sin consultar a un médico.",
+      onChanged: (value) {},
+    );
+    /*
     return myTextFieldGeneral(
       controller: posologiaController,
       labelTxt: "Posología",
       hintText: "Ejemplo...",
       onChanged: (value) {},
     );
+    */
   }
 
   _farmacocineticaMedicamento() {

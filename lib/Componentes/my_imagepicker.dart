@@ -15,6 +15,7 @@ class ImagePickerWidget extends StatefulWidget {
 
 class _ImagePickerWidgetState extends State<ImagePickerWidget> {
   List<File?> _selectedImage = [];
+  int currentIndex = 0;
 
   void _setSelectedImages(List<File?> selectedImages) {
     setState(() {
@@ -57,13 +58,46 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                   viewportFraction: 0.8,
                   scale: 0.9,
                   itemBuilder: (BuildContext context, int index) {
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Image.file(
-                        _selectedImage[index]!,
-                        fit: BoxFit.cover,
+                    return Container(
+                      width: double.infinity,
+                      height: 300.0,
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.file(
+                              _selectedImage[index]!,
+                              width: 300,
+                              height: 300,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _selectedImage.removeAt(index);
+                                });
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.red,
+                                ),
+                                child: Icon(
+                                  Icons.clear,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     );
+                  },
+                  onIndexChanged: (index) {
+                    currentIndex = index;
                   },
                   itemCount: _selectedImage.length,
                   pagination: const SwiperPagination(),
