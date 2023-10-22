@@ -17,6 +17,7 @@ class FarmacocineticaPickerWidget extends StatefulWidget {
 class _FarmacocineticaPickerWidgetState
     extends State<FarmacocineticaPickerWidget> {
   List<File?> _selectedImages2 = [];
+  int currentIndex = 0;
 
   void _setSelectedImages(List<File?> selectedImages2) {
     setState(() {
@@ -30,6 +31,7 @@ class _FarmacocineticaPickerWidgetState
     if (returnedImage2 == null) return;
 
     final List<File?> selectedImages2 = List.from(_selectedImages2);
+
     selectedImages2.add(File(returnedImage2.path));
 
     widget.updateFarmaco(selectedImages2);
@@ -60,13 +62,46 @@ class _FarmacocineticaPickerWidgetState
                   viewportFraction: 0.8,
                   scale: 0.9,
                   itemBuilder: (BuildContext context, int index) {
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Image.file(
-                        _selectedImages2[index]!,
-                        fit: BoxFit.cover,
+                    return Container(
+                      width: double.infinity,
+                      height: 300.0,
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.file(
+                              _selectedImages2[index]!,
+                              width: 300,
+                              height: 300,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _selectedImages2.removeAt(index);
+                                });
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.red,
+                                ),
+                                child: Icon(
+                                  Icons.clear,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     );
+                  },
+                  onIndexChanged: (index) {
+                    currentIndex = index;
                   },
                   itemCount: _selectedImages2.length,
                   pagination: const SwiperPagination(),
