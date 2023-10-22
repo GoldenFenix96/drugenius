@@ -1,4 +1,4 @@
-import 'package:drugenius/Paginas/nav_audios/audios.dart';
+import 'package:drugenius/Paginas/audio_input.dart';
 import 'package:drugenius/Paginas/video_audio.dart';
 import 'package:drugenius/Paginas/video_input.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +73,7 @@ class _AddMultiState extends State<AddMulti> {
               ),
                 InkWell(
                   onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Audios()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> AudioInput()));
                 },
                   child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.green,),
                               child: Column(

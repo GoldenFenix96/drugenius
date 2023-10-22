@@ -73,7 +73,7 @@ class _VideoPickerWidgetState extends State<VideoPickerWidget> {
                   itemCount: _selectedVideo.length,
                   pagination: const SwiperPagination(),
                   control: const SwiperControl(),
-                ),
+                )
               ),
             const SizedBox(height: 15.0),
             SizedBox(
@@ -114,3 +114,19 @@ class _VideoPickerWidgetState extends State<VideoPickerWidget> {
     super.dispose();
   }
 }
+
+ /*child: Swiper(
+                  loop: false,
+                  viewportFraction: 0.8,
+                  scale: 0.9,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: VideoPlayer(_videoController!), // Muestra el video
+                    );
+                  },
+                  itemCount: _selectedVideo.length,
+                  pagination: const SwiperPagination(),
+                  control: const SwiperControl(),
+                ),*/
+                

@@ -340,4 +340,54 @@ class Firebase_services {
       print("Error al cargar el video: $e");
     }
   }
+
+
+  //Agregar titulo de video
+  Future<String?> addTAudio(
+    String nombre,
+    String creador,
+  ) async {
+    try {
+      // 1. Agregar el Video a Firestore
+      DocumentReference documentReference = await db.collection('Audios').add({
+        'Nombre': nombre,
+        'Creador': creador,
+
+      });
+      return documentReference.id;
+    } catch (e) {
+      print("Ha ocurrido un error al agregar el nombre del audio: $e");
+      return null;
+    }
+  }
+
+  //Agregar Video
+  Future<void> uploadAudioToStorageAndFirestore(
+      String documentId, File audioFile) async {
+    try {
+      // Subir el audio a Firebase Storage
+      final storageReference = FirebaseStorage.instance
+          .ref()
+          .child('$documentId/${DateTime.now()}.mp3');
+      final uploadTask = storageReference.putFile(audioFile);
+      final TaskSnapshot storageTaskSnapshot = await uploadTask;
+
+      // Obtener la URL deL audio en Firebase Storage
+      final audioUrl = await storageTaskSnapshot.ref.getDownloadURL();
+
+      // Almacenar la URL del audio en Firestore
+      final cuadroBasicoCollection = FirebaseFirestore.instance
+          .collection('Audios')
+          .doc(documentId)
+          .collection('Audio');
+      await cuadroBasicoCollection.add({
+        'audioUrl': audioUrl,
+      });
+    } catch (e) {
+      print("Error al cargar el audio: $e");
+    }
+  }
+
+
+  
 }
