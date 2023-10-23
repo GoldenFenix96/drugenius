@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
 import 'package:drugenius/Componentes/my_formfield_general.dart';
 
+// ignore: must_be_immutable
 class EditDrug extends StatefulWidget {
   final String medicamentoId;
   String grupo;
@@ -253,15 +254,15 @@ class _EditDrugState extends State<EditDrug> {
           );
         });
 
-    /*try {
+    try {
       // Obtén el contexto antes de entrar al bloque try-catch
       final currentContext = context;
 
       // Llama a tu función de registro
       final resultadoRegistro = await fs.addMedication(
           nombre,
-          selectedGrupo!,
-          selectedSubGrupo!,
+          widget.grupo,
+          widget.subgrupo,
           otroNombre,
           presentacion,
           mecanismos,
@@ -269,7 +270,7 @@ class _EditDrugState extends State<EditDrug> {
           efectos,
           contraindicaciones,
           posologia,
-          selectedCuadros.cast<Map>());
+          cuadro.cast<Map>());
 
       if (resultadoRegistro != null) {
         // Guardar imágenes en Firebase Storage y URLs en Firestore
@@ -303,7 +304,7 @@ class _EditDrugState extends State<EditDrug> {
     } catch (e) {
       print('Error al registrar medicamento: $e');
       // Maneja el error según tus necesidades
-    }*/
+    }
   }
 
   @override
