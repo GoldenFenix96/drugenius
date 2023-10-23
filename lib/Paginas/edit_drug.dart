@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Componentes/farmaco_picker.dart';
 import 'package:drugenius/Componentes/my_checkbpx_general.dart';
+import 'package:drugenius/Componentes/updateimage.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:flutter/material.dart';
@@ -126,6 +127,12 @@ class _EditDrugState extends State<EditDrug> {
   void validarImagenes(List<File> imagenes) {
     for (int i = 0; i < imagenes.length; i++) {
       print('Ruta de la imagen $i: ${imagenes[i].path}');
+    }
+  }
+
+  void checarImagenes(List<String> images) {
+    for (int i = 0; i < images.length; i++) {
+      print('Ruta de la imagen $i: ${images[i]}');
     }
   }
 
@@ -286,7 +293,7 @@ class _EditDrugState extends State<EditDrug> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => ListMedicamentos(),
+            builder: (context) => const ListMedicamentos(),
           ),
         );
       } else {
@@ -718,29 +725,75 @@ class _EditDrugState extends State<EditDrug> {
           ),
         ),
         const SizedBox(height: 10),
-        // Swiper to show the images from URLs
         Container(
-          height: 300, // Set the desired height
+          width: double.infinity,
+          height: 300,
           child: Swiper(
             loop: false,
             viewportFraction: 0.8,
             scale: 0.9,
             itemCount: images.length,
             itemBuilder: (context, index) {
-              return Image.network(
-                images[index],
-                fit: BoxFit.cover,
+              return Container(
+                width: double.infinity,
+                height: 300.0,
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.network(
+                        images[index],
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            // Eliminar la imagen de la lista
+                            images.removeAt(index);
+                            checarImagenes(images);
+                          });
+                        },
+                        child: Container(
+                          // Alto del contenedor del ícono
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color.fromARGB(255, 170, 45, 36),
+                          ),
+                          child: const Icon(
+                            Icons.clear,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
             pagination: const SwiperPagination(),
-            control: const SwiperControl(), // Optional: add controls
+            control: const SwiperControl(),
           ),
         ),
         Container(
           margin: const EdgeInsets.symmetric(
             horizontal: 25.0,
           ),
-          child: ImagePickerWidget(updateImagenes: updateImagenes),
+          child: UpdateImagePickerWidget(
+            updateImagenes: (nuevasImagenes) {
+              setState(() {
+                // Combina las imágenes existentes con las nuevas imágenes
+                imagenes.addAll(nuevasImagenes);
+                // También puedes eliminar duplicados si es necesario
+                imagenes = imagenes.toSet().toList();
+              });
+            },
+            initialImages: imagenes,
+          ),
         ),
       ],
     );

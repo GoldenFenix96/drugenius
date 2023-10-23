@@ -4,23 +4,46 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ImagePickerWidget extends StatefulWidget {
+class UpdateImagePickerWidget extends StatefulWidget {
   final Function(List<File?>) updateImagenes;
-  const ImagePickerWidget({Key? key, required this.updateImagenes})
-      : super(key: key);
+  final List<File?> initialImages;
+
+  const UpdateImagePickerWidget({
+    Key? key,
+    required this.updateImagenes,
+    required this.initialImages,
+  }) : super(key: key);
 
   @override
-  _ImagePickerWidgetState createState() => _ImagePickerWidgetState();
+  _UpdateImagePickerWidgetState createState() =>
+      _UpdateImagePickerWidgetState();
 }
 
-class _ImagePickerWidgetState extends State<ImagePickerWidget> {
-  List<File?> _selectedImage = [];
-  int currentIndex = 0;
+class _UpdateImagePickerWidgetState extends State<UpdateImagePickerWidget> {
+  List<File?> _selectedImages = [];
 
-  void _setSelectedImages(List<File?> selectedImages) {
+  @override
+  void initState() {
+    super.initState();
+    _selectedImages.addAll(widget.initialImages);
+  }
+
+  void _addImages(List<File?> newImages) {
     setState(() {
-      _selectedImage = selectedImages;
+      _selectedImages.addAll(newImages);
     });
+  }
+
+  void _removeImage(int index) {
+    setState(() {
+      if (index >= 0 && index < _selectedImages.length) {
+        _selectedImages.removeAt(index);
+      }
+    });
+  }
+
+  void _updateImages() {
+    widget.updateImagenes(_selectedImages);
   }
 
   Future<void> _pickImageFromGallery() async {
@@ -28,15 +51,11 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (returnedImage == null) return;
 
-    final List<File?> selectedImages = List.from(_selectedImage);
+    final List<File?> selectedImages = List.from(_selectedImages);
     selectedImages.add(File(returnedImage.path));
 
-    widget.updateImagenes(selectedImages);
-
-    // Llama a la función para pasar las rutas de las imágenes de vuelta al widget principal
-    _setSelectedImages(selectedImages);
-
-    widget.updateImagenes(selectedImages);
+    _addImages(selectedImages);
+    _updateImages();
   }
 
   @override
@@ -47,9 +66,9 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            if (_selectedImage.isEmpty)
-              const Text("No se ha seleccionado ninguna imágen"),
-            if (_selectedImage.isNotEmpty)
+            if (_selectedImages.isEmpty)
+              const Text("No se ha seleccionado ninguna imagen"),
+            if (_selectedImages.isNotEmpty)
               Container(
                 width: double.infinity,
                 height: 300.0,
@@ -66,7 +85,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10.0),
                             child: Image.file(
-                              _selectedImage[index]!,
+                              _selectedImages[index]!,
                               width: 300,
                               height: 300,
                               fit: BoxFit.cover,
@@ -76,9 +95,8 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                             alignment: Alignment.topRight,
                             child: GestureDetector(
                               onTap: () {
-                                setState(() {
-                                  _selectedImage.removeAt(index);
-                                });
+                                _removeImage(index);
+                                _updateImages();
                               },
                               child: Container(
                                 decoration: const BoxDecoration(
@@ -96,10 +114,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                       ),
                     );
                   },
-                  onIndexChanged: (index) {
-                    currentIndex = index;
-                  },
-                  itemCount: _selectedImage.length,
+                  itemCount: _selectedImages.length,
                   pagination: const SwiperPagination(),
                   control: const SwiperControl(),
                 ),
@@ -111,19 +126,17 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
               child: ElevatedButton(
                 onPressed: () => _pickImageFromGallery(),
                 child: const Text(
-                  "Agregar imágen",
+                  "Agregar imagen",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.black,
-                    //fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<OutlinedBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Cambia el radio de la esquina para personalizar la forma
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                   backgroundColor: MaterialStateProperty.all<Color>(

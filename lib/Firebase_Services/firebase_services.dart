@@ -341,7 +341,6 @@ class Firebase_services {
     }
   }
 
-
   //Agregar titulo de video
   Future<String?> addTAudio(
     String nombre,
@@ -352,7 +351,6 @@ class Firebase_services {
       DocumentReference documentReference = await db.collection('Audios').add({
         'Nombre': nombre,
         'Creador': creador,
-
       });
       return documentReference.id;
     } catch (e) {
@@ -387,7 +385,4 @@ class Firebase_services {
       print("Error al cargar el audio: $e");
     }
   }
-
-
-  
 }
