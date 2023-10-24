@@ -155,6 +155,59 @@ class Firebase_services {
     }
   }
 
+  Future<void> updateMedication(
+    String medicamentoId, // ID del medicamento que deseas actualizar
+    String nombre,
+    String grupo,
+    String subgrupo,
+    String otroNombre,
+    String presentacion,
+    String mecanismoAccion,
+    String usoTerapeutico,
+    String efectos,
+    String contraindicaciones,
+    String posologia,
+    List<Map> cuadroBasico,
+  ) async {
+    try {
+      // 1. Actualiza el medicamento en Firestore
+      await db.collection('Medicamentos').doc(medicamentoId).update({
+        'Nombre': nombre,
+        'Grupo': grupo,
+        'Subgrupo': subgrupo,
+        'Otro Nombre': otroNombre,
+        'Presentación': presentacion,
+        'Mecanismo de Acción': mecanismoAccion,
+        'Uso Terapeutico': usoTerapeutico,
+        'Efectos': efectos,
+        'Contraindicaciones': contraindicaciones,
+        'Posología': posologia,
+      });
+
+      // 2. Actualiza los datos del cuadro básico en Firestore
+      final cuadroBasicoCollection = db
+          .collection('Medicamentos')
+          .doc(medicamentoId)
+          .collection('Cuadro Básico');
+
+      // 3. Borra los datos anteriores del cuadro básico
+      final querySnapshot = await cuadroBasicoCollection.get();
+      for (final doc in querySnapshot.docs) {
+        await doc.reference.delete();
+      }
+
+      // 4. Almacena los nuevos datos del cuadro básico en Firestore
+      for (int i = 0; i < cuadroBasico.length; i++) {
+        await cuadroBasicoCollection.add({
+          'name': cuadroBasico[i]['name'],
+          'isChecked': cuadroBasico[i]['isChecked'],
+        });
+      }
+    } catch (e) {
+      print("Ha ocurrido un error al actualizar el medicamento: $e");
+    }
+  }
+
   //Agregar imagenes del medicamento
   Future<void> uploadImageToStorageAndFirestore(
       String documentId, File imageFile) async {
@@ -206,6 +259,62 @@ class Firebase_services {
       });
     } catch (e) {
       print("Error al cargar la imagen: $e");
+    }
+  }
+
+  // Actualizar imágenes del medicamento
+  Future<void> updateMedicationImages(
+    String documentId, // ID del medicamento a actualizar
+    List<String> imagesToDelete, // Lista de URLs de imágenes a eliminar
+  ) async {
+    try {
+      final medicamentoDocument = db.collection('Medicamentos').doc(documentId);
+
+      // Eliminar imágenes de Firebase Storage y Firestore
+      final imagenesCollection = medicamentoDocument.collection('Imagenes');
+      for (final imageUrl in imagesToDelete) {
+        // Eliminar la imagen de Firebase Storage
+        final imageReference = FirebaseStorage.instance.refFromURL(imageUrl);
+        await imageReference.delete();
+
+        // Eliminar la imagen de Firestore
+        final querySnapshot = await imagenesCollection
+            .where('imageUrl', isEqualTo: imageUrl)
+            .get();
+        for (final doc in querySnapshot.docs) {
+          await imagenesCollection.doc(doc.id).delete();
+        }
+      }
+    } catch (e) {
+      print("Error al actualizar las imágenes del medicamento: $e");
+    }
+  }
+
+// Actualizar imágenes de farmacocinetica
+  Future<void> updateMedicationFarmacocinetica(
+    String documentId, // ID del medicamento a actualizar
+    List<String> imagesToDelete, // Lista de URLs de imágenes a eliminar
+  ) async {
+    try {
+      final medicamentoDocument = db.collection('Medicamentos').doc(documentId);
+      // Eliminar imágenes de Firebase Storage y Firestore
+      final imagenesCollection =
+          medicamentoDocument.collection('Farmacocinetica');
+      for (final imageUrl in imagesToDelete) {
+        // Eliminar la imagen de Firebase Storage
+        final imageReference = FirebaseStorage.instance.refFromURL(imageUrl);
+        await imageReference.delete();
+
+        // Eliminar la imagen de Firestore
+        final querySnapshot = await imagenesCollection
+            .where('imageUrl', isEqualTo: imageUrl)
+            .get();
+        for (final doc in querySnapshot.docs) {
+          await imagenesCollection.doc(doc.id).delete();
+        }
+      }
+    } catch (e) {
+      print("Error al actualizar las imágenes del medicamento: $e");
     }
   }
 

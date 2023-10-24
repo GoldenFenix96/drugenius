@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Componentes/farmaco_picker.dart';
@@ -30,7 +32,10 @@ List<File?> farmacocinetica = [];
 List<Map> selectedCuadros = [];
 
 List<String> images = [];
+List<List<String>> imagesdelete = [];
+
 List<String> farmaco = [];
+List<List<String>> farmacodelete = [];
 List<Map> cuadro = [];
 
 final TextEditingController otroNombreController = TextEditingController();
@@ -61,6 +66,15 @@ class _EditDrugState extends State<EditDrug> {
     super.initState();
     // Llama al método para obtener el medicamento que se mostrará
     obtenerMedicamento();
+    nombreController.clear();
+    otroNombreController.clear();
+    nombreController.clear();
+    presentacionController.clear();
+    mecanismosController.clear();
+    usoTeraController.clear();
+    efectosController.clear();
+    contraController.clear();
+    posologiaController.clear();
   }
 
   Future<void> obtenerMedicamento() async {
@@ -153,6 +167,12 @@ class _EditDrugState extends State<EditDrug> {
     }
   }
 
+  void checarImagenesBorrar(List<String> imagesdelete) {
+    for (int i = 0; i < imagesdelete.length; i++) {
+      print('Ruta de la imagen borrada $i: ${imagesdelete[i]}');
+    }
+  }
+
   Future<void> _actualizarMedicamento() async {
     final nombre = nombreController.text;
     final otroNombre = otroNombreController.text;
@@ -163,10 +183,12 @@ class _EditDrugState extends State<EditDrug> {
     final efectos = efectosController.text;
     final contraindicaciones = contraController.text;
     final posologia = posologiaController.text;
-    print("Salto de linea para las imagenes de los medicamentos XD");
+    print("Salto de linea para las imagenes de los medicamentos nuevas");
     validarImagenes(imagenes.whereType<File>().toList());
-    print("Salto de linea para las farmacocinetica XD");
+    print("Salto de linea para las farmacocinetica nuevas");
     validarImagenesFarmacocinetica(farmacocinetica.whereType<File>().toList());
+    print("Salto de linea para las farmacocinetica nuevas");
+    checarImagenes(images);
 
     print('Nombre: $nombre');
     print('Otro Nombre: $otroNombre');
@@ -255,11 +277,9 @@ class _EditDrugState extends State<EditDrug> {
         });
 
     try {
-      // Obtén el contexto antes de entrar al bloque try-catch
-      final currentContext = context;
-
-      // Llama a tu función de registro
-      final resultadoRegistro = await fs.addMedication(
+      // Llama a tu función de actualización
+      await fs.updateMedication(
+          widget.medicamentoId,
           nombre,
           widget.grupo,
           widget.subgrupo,
@@ -272,37 +292,50 @@ class _EditDrugState extends State<EditDrug> {
           posologia,
           cuadro.cast<Map>());
 
-      if (resultadoRegistro != null) {
-        // Guardar imágenes en Firebase Storage y URLs en Firestore
+      // Guardar imágenes en Firebase Storage y URLs en Firestore
+      if (imagenes.isNotEmpty) {
         for (int i = 0; i < imagenes.length; i++) {
           final imageFile = imagenes[i];
           await fs.uploadImageToStorageAndFirestore(
-              resultadoRegistro, imageFile!);
+              widget.medicamentoId, imageFile!);
         }
-
+      }
+      if (farmacocinetica.isNotEmpty) {
         for (int i = 0; i < farmacocinetica.length; i++) {
           final imageFile2 = farmacocinetica[i];
-          await fs.subirFarmacocinetica(resultadoRegistro, imageFile2!);
+          await fs.subirFarmacocinetica(widget.medicamentoId, imageFile2!);
         }
-
-        // Continúa con cualquier otra lógica o navegación necesaria
-        Navigator.pop(context);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const ListMedicamentos(),
-          ),
-        );
-      } else {
-        // Registro fallido, muestra un mensaje de error
-        ScaffoldMessenger.of(currentContext).showSnackBar(
-          const SnackBar(
-            content: Text('Ha ocurrido un error al registrar el medicamento.'),
-          ),
-        );
       }
+
+      if (imagesdelete.isNotEmpty) {
+        for (int i = 0; i < imagesdelete.length; i++) {
+          print(
+              "Enlace a borrar: ${imagesdelete[i]}"); // Imprime la URL en la posición i
+          final imageUrls = imagesdelete[i];
+          await fs.updateMedicationImages(widget.medicamentoId, imageUrls);
+        }
+      }
+
+      if (farmacodelete.isNotEmpty) {
+        for (int i = 0; i < farmacodelete.length; i++) {
+          print(
+              "Enlace a borrar: ${farmacodelete[i]}"); // Imprime la URL en la posición i
+          final imageUrls = farmacodelete[i];
+          await fs.updateMedicationFarmacocinetica(
+              widget.medicamentoId, imageUrls);
+        }
+      }
+
+      // Continúa con cualquier otra lógica o navegación necesaria
+      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ListMedicamentos(),
+        ),
+      );
     } catch (e) {
-      print('Error al registrar medicamento: $e');
+      print('Error al actualizar medicamento: $e');
       // Maneja el error según tus necesidades
     }
   }
@@ -373,9 +406,10 @@ class _EditDrugState extends State<EditDrug> {
                                 child: GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      // Eliminar la imagen de la lista
+                                      // Almacena la URL de la imagen en imagesdelete
+                                      imagesdelete.add([images[index]]);
+                                      // Elimina la imagen de la lista
                                       images.removeAt(index);
-                                      checarImagenes(images);
                                     });
                                   },
                                   child: Container(
@@ -482,6 +516,7 @@ class _EditDrugState extends State<EditDrug> {
                                   onTap: () {
                                     setState(() {
                                       // Eliminar la imagen de la lista
+                                      farmacodelete.add([farmaco[index]]);
                                       farmaco.removeAt(index);
                                       checarImagenes(farmaco);
                                     });
@@ -678,7 +713,6 @@ class _EditDrugState extends State<EditDrug> {
               onChanged: (String? value) {
                 setState(() {
                   widget.grupo = value!;
-                  print("Grupo seleccionado: ${widget.subgrupo}");
                 });
               },
             ),
@@ -766,8 +800,6 @@ class _EditDrugState extends State<EditDrug> {
   ];
 
   Widget _subgrupoFarmacologico() {
-    print("Subgrupo de medicamentos: ${widget.subgrupo}");
-
     // Agregar widget.subgrupo a la lista subgrup si no está presente
     return Container(
       margin: const EdgeInsets.symmetric(
@@ -798,7 +830,6 @@ class _EditDrugState extends State<EditDrug> {
           onChanged: (String? value) {
             setState(() {
               widget.subgrupo = value!;
-              print("subgrupo seleccionado: ${widget.subgrupo}");
             });
           },
         ),
