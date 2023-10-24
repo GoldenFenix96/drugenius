@@ -47,7 +47,7 @@ class _AudioInputState extends State<AudioInput> {
     final nombre = nombreController.text;
     final creador = creadorController.text;
 
-    print("Salto de linea para los audios XD");
+    print("Salto de linea para los audios");
     validarAudio(audios.whereType<File>().toList());
     print('Nombre: $nombre');
     print('Creador: $creador');
@@ -60,7 +60,7 @@ class _AudioInputState extends State<AudioInput> {
       );
     }
 
-     if (creador.isEmpty) {
+    if (creador.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Debe ingresar el creador del Podcast'),
@@ -82,7 +82,7 @@ class _AudioInputState extends State<AudioInput> {
         // Guardar audios en Firebase Storage y URLs en Firestore
         for (int i = 0; i < audios.length; i++) {
           final audioFile = audios[i];
-          await fs.uploadVideoToStorageAndFirestore(
+          await fs.uploadAudioToStorageAndFirestore(
               resultadoRegistro, audioFile!);
         }
 
@@ -113,6 +113,7 @@ class _AudioInputState extends State<AudioInput> {
     super.initState();
     // Limpia el controlador de nombre al iniciar la pantalla
     nombreController.clear();
+    creadorController.clear();
   }
 
   @override
@@ -229,7 +230,7 @@ class _AudioInputState extends State<AudioInput> {
         onChanged: (value) {});
   }
 
-   _creadorAudio() {
+  _creadorAudio() {
     return myTextFieldGeneral(
         controller: creadorController,
         labelTxt: "Nombre del creador del audio",

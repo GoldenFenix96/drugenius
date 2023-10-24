@@ -341,7 +341,7 @@ class Firebase_services {
     }
   }
 
-  //Agregar titulo de video
+  //Agregar titulo del podcast
   Future<String?> addTAudio(
     String nombre,
     String creador,
@@ -359,7 +359,7 @@ class Firebase_services {
     }
   }
 
-  //Agregar Video
+  //Agregar podcast
   Future<void> uploadAudioToStorageAndFirestore(
       String documentId, File audioFile) async {
     try {
