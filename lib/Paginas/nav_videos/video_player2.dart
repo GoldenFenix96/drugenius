@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 //import 'package:interfaces_video_podcast/class/desing_example.dart';
 import 'package:video_player/video_player.dart';
 
-
 class VideoPlayerWidget2 extends StatefulWidget {
   const VideoPlayerWidget2({super.key});
 
@@ -12,127 +11,116 @@ class VideoPlayerWidget2 extends StatefulWidget {
 }
 
 class _VideoPlayerWidgetState2 extends State<VideoPlayerWidget2> {
-  late  VideoPlayerController _videoPlayerController2;
+  late VideoPlayerController _videoPlayerController2;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
 
-     _videoPlayerController2 = VideoPlayerController.asset('assets/video/Video1.mp4')..initialize().then((_) {
-      _videoPlayerController2.play();
-      setState(() {
-        
-      });
-     });
-    
-
+    _videoPlayerController2 =
+        VideoPlayerController.asset('assets/video/Video1.mp4')
+          ..initialize().then((_) {
+            _videoPlayerController2.play();
+            setState(() {});
+          });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-       backgroundColor: Color.fromARGB(255, 85, 145, 214),
-        elevation: 10,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text(
-              "Reproductor",
-              style: TextStyle(fontSize: 25, color: Colors.black),
-            ),
-          ],
-        ),
-        actions: <Widget>[
-        ],
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            _videoPlayerController2.dispose();
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Videos()));
-          },
-        ),
-      ),
-
-      body: Center(
-          child: _videoPlayerController2.value.isInitialized ? 
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          //automaticallyImplyLeading: false,
+          foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+          title: Row(
             children: [
-          AspectRatio(
-            aspectRatio: _videoPlayerController2.value.aspectRatio,
-            child: VideoPlayer(_videoPlayerController2)),
-          
-          const Padding(
-            padding: EdgeInsets.all(20),
-          ),
-
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-             ElevatedButton(
-              style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all< Color > (Colors.red),
-              fixedSize: MaterialStateProperty.all< Size >(const Size(70, 70)),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100))
-               )
+              const Text(
+                "Reproductor",
+                textAlign: TextAlign.center,
               ),
-              onPressed: (){
-              _videoPlayerController2.pause();
-             }, 
-             child: const Icon(Icons.pause)
-             ),
-            
-            const Padding(padding: EdgeInsets.all(2)),
-
-             ElevatedButton(
-               style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all< Color > (Colors.green),
-              fixedSize: MaterialStateProperty.all< Size >(const Size(70, 70)),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100))
-               )
-              ),
-              
-              onPressed: (){
-              _videoPlayerController2.play();
-             }, 
-             child: const Icon(Icons.play_arrow)
-             ),
-
-             const Padding(padding: EdgeInsets.all(2)),
-
-              ElevatedButton(
-              style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all< Color > (Colors.yellowAccent),
-              fixedSize: MaterialStateProperty.all< Size >(const Size(70, 70)),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100))
-               )
-              ),
-              onPressed: () {
-              _videoPlayerController2.seekTo(
-                  Duration(
-                  seconds: _videoPlayerController2.value.position.inSeconds + 1
-                )
-              );
-             }, 
-             child: const Icon(Icons.fast_forward)
-             ),
-
-          ],)
-
             ],
-         )   : Container(),
-
-      )
-    );
+          ),
+          backgroundColor: const Color.fromARGB(255, 22, 112, 177),
+          elevation: 0,
+          actions: <Widget>[],
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              dispose();
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Videos()));
+            },
+          ),
+        ),
+        body: Center(
+          child: _videoPlayerController2.value.isInitialized
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AspectRatio(
+                        aspectRatio: _videoPlayerController2.value.aspectRatio,
+                        child: VideoPlayer(_videoPlayerController2)),
+                    const Padding(
+                      padding: EdgeInsets.all(20),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.red),
+                                fixedSize: MaterialStateProperty.all<Size>(
+                                    const Size(70, 70)),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100)))),
+                            onPressed: () {
+                              _videoPlayerController2.pause();
+                            },
+                            child: const Icon(Icons.pause)),
+                        const Padding(padding: EdgeInsets.all(2)),
+                        ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.green),
+                                fixedSize: MaterialStateProperty.all<Size>(
+                                    const Size(70, 70)),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100)))),
+                            onPressed: () {
+                              _videoPlayerController2.play();
+                            },
+                            child: const Icon(Icons.play_arrow)),
+                        const Padding(padding: EdgeInsets.all(2)),
+                        ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.yellowAccent),
+                                fixedSize: MaterialStateProperty.all<Size>(
+                                    const Size(70, 70)),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100)))),
+                            onPressed: () {
+                              _videoPlayerController2.seekTo(Duration(
+                                  seconds: _videoPlayerController2
+                                          .value.position.inSeconds +
+                                      1));
+                            },
+                            child: const Icon(Icons.fast_forward)),
+                      ],
+                    )
+                  ],
+                )
+              : Container(),
+        ));
   }
 }

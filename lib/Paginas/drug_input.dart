@@ -280,7 +280,7 @@ class _DrugInputState extends State<DrugInput> {
           "Ingreso de medicamentos",
           textAlign: TextAlign.center,
         ),
-        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         elevation: 0,
       ),
       body: Container(
@@ -466,9 +466,7 @@ class _DrugInputState extends State<DrugInput> {
           const SizedBox(height: 10),
           Container(
             child: Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 25.0,
-              ),
+              //margin: const EdgeInsets.symmetric(horizontal: 25.0),
               child: FarmacocineticaPickerWidget(
                   updateFarmaco: updateImagenesFarmacocinetica),
             ),
@@ -648,13 +646,11 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   Widget _imagenMedicamento() {
-    return Container(
+    return Center(
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 25.0,
-            ),
+            margin: const EdgeInsets.symmetric(horizontal: 25.0),
             alignment: Alignment.topLeft,
             child: const Text(
               "Imágen del medicamento",
@@ -663,9 +659,7 @@ class _DrugInputState extends State<DrugInput> {
           const SizedBox(height: 10),
           Container(
             child: Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 25.0,
-              ),
+              //margin: const EdgeInsets.symmetric(horizontal: 25.0),
               child: ImagePickerWidget(updateImagenes: updateImagenes),
             ),
           ),

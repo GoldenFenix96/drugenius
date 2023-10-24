@@ -50,7 +50,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
             if (_selectedImage.isEmpty)
               const Text("No se ha seleccionado ninguna imágen"),
             if (_selectedImage.isNotEmpty)
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: 300.0,
                 child: Swiper(
@@ -58,7 +58,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                   viewportFraction: 0.8,
                   scale: 0.9,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
+                    return SizedBox(
                       width: double.infinity,
                       height: 300.0,
                       child: Stack(
@@ -67,8 +67,8 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                             borderRadius: BorderRadius.circular(10.0),
                             child: Image.file(
                               _selectedImage[index]!,
-                              width: 300,
-                              height: 300,
+                              width: double.infinity,
+                              height: double.infinity,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -105,7 +105,8 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                 ),
               ),
             const SizedBox(height: 15.0),
-            SizedBox(
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 25.0),
               width: size.width * 1,
               height: 55.0,
               child: ElevatedButton(

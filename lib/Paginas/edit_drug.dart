@@ -352,7 +352,7 @@ class _EditDrugState extends State<EditDrug> {
           "Editar de medicamento",
           textAlign: TextAlign.center,
         ),
-        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         elevation: 0,
       ),
       body: Container(
@@ -839,7 +839,10 @@ class _EditDrugState extends State<EditDrug> {
           items: subgrup.map((name) {
             return DropdownMenuItem<String>(
               value: name,
-              child: Text(name),
+              child: Text(
+                name,
+                style: TextStyle(fontSize: 15),
+              ),
             );
           }).toList(),
           onChanged: (String? value) {
@@ -890,9 +893,7 @@ class _EditDrugState extends State<EditDrug> {
         ),
         const SizedBox(height: 10),
         Container(
-          margin: const EdgeInsets.symmetric(
-            horizontal: 25.0,
-          ),
+          //margin: const EdgeInsets.symmetric(horizontal: 25.0),
           child: ImagePickerWidget(updateImagenes: updateImagenes),
         ),
       ],

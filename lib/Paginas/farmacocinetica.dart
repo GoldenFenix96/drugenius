@@ -9,7 +9,7 @@ class Farmacocinetica extends StatelessWidget {
       appBar: AppBar(
         title:
             const Text('Farmacocinética', style: TextStyle(color: Colors.red)),
-        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         centerTitle: true,
       ),
       body: Container(

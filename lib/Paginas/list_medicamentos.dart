@@ -40,7 +40,7 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
           title: const Text("Listado de Medicamentos",
               style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
               textAlign: TextAlign.center),
-          backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+          backgroundColor: const Color.fromARGB(255, 22, 112, 177),
           actions: [
             // Agrega un icono de búsqueda en la AppBar
             IconButton(

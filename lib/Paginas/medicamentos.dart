@@ -65,7 +65,7 @@ class _MedicamentosState extends State<Medicamentos> {
         title: const Text("Datos del medicamento",
             style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             textAlign: TextAlign.center),
-        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         foregroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
       body: ListView(

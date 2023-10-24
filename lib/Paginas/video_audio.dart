@@ -23,6 +23,29 @@ class _VideoAudioState extends State<VideoAudio> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        //automaticallyImplyLeading: false,
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+        title: const Text(
+          "Mutimedia",
+          textAlign: TextAlign.center,
+        ),
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.home),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    const DrugeniusMenu(), // Reemplaza con la pantalla deseada
+              ),
+            );
+          },
+        ),
+      ),
+      /*
+      appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 85, 145, 214),
         elevation: 10,
         title: const Row(
@@ -66,6 +89,7 @@ class _VideoAudioState extends State<VideoAudio> {
           },
         ),
       ),
+      */
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(10),

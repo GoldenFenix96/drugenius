@@ -11,7 +11,7 @@ class BlankPage extends StatelessWidget {
         //automaticallyImplyLeading: false,
         foregroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: const Text("Página en construcción"),
-        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
       ),
       body: Container(
         child: Center(

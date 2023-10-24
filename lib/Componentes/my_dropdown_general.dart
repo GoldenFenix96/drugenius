@@ -38,13 +38,14 @@ class MyDropDown extends StatelessWidget {
             hintText,
             style: const TextStyle(
               //fontFamily: 'Montserrat',
+
               fontWeight: FontWeight.normal,
             ),
           ),
           items: list.map((name) {
             return DropdownMenuItem(
               value: name,
-              child: Text(name),
+              child: Text(name, style: TextStyle(fontSize: 15)),
             );
           }).toList(),
           onChanged: (value) {

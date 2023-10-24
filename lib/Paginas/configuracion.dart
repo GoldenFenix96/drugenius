@@ -17,7 +17,7 @@ class Configuracion extends StatelessWidget {
     lightTheme;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         title: Image.network(
           'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png',
           width: 300,
