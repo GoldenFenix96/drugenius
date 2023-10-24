@@ -51,8 +51,11 @@ class _FarmacocineticaPickerWidgetState
           children: [
             const SizedBox(height: 20),
             if (_selectedImages2.isEmpty)
-              const Text(
-                  "No se ha seleccionado ninguna imagen de farmacocinética"),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: const Text(
+                    "No se ha seleccionado ninguna imagen de farmacocinética"),
+              ),
             if (_selectedImages2.isNotEmpty)
               Container(
                 width: double.infinity,
@@ -71,8 +74,8 @@ class _FarmacocineticaPickerWidgetState
                             borderRadius: BorderRadius.circular(10.0),
                             child: Image.file(
                               _selectedImages2[index]!,
-                              width: 300,
-                              height: 300,
+                              width: double.infinity,
+                              height: double.infinity,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -109,7 +112,8 @@ class _FarmacocineticaPickerWidgetState
                 ),
               ),
             const SizedBox(height: 15.0),
-            SizedBox(
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 25.0),
               width: size.width * 1,
               height: 55.0,
               child: ElevatedButton(
@@ -126,6 +130,7 @@ class _FarmacocineticaPickerWidgetState
                 ),
                 child: const Text(
                   "Agregar imagen de farmacocinética",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.black,

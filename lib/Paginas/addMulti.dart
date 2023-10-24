@@ -16,84 +16,91 @@ class _AddMultiState extends State<AddMulti> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
-        elevation: 10,
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        //automaticallyImplyLeading: false,
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+        title: Row(
           children: [
-            Text(
-              "Cargar",
-              style: TextStyle(fontSize: 25, color: Colors.black),
+            const Text(
+              "Cargar multimedia",
+              textAlign: TextAlign.center,
             ),
-            Text(
-              " ",
-              style: TextStyle(fontSize: 20, color: Colors.black),
-            ),
-            Text(
-              "Multimedia",
-              style: TextStyle(fontSize: 25, color: Colors.white),
-            )
           ],
         ),
-        actions: const <Widget>[
-        ],
-        // shape: RoundedRectangleBorder(
-        //     borderRadius: BorderRadius.all(Radius.elliptical(20, 20))),
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
+        elevation: 0,
+        actions: <Widget>[],
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const VideoAudio()));
+            dispose();
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => VideoAudio()));
           },
         ),
       ),
-       
-       body: Container(
-       
+      body: Container(
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: GridView(children: [
+          child: GridView(
+            children: [
               InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> VideoInput()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => VideoInput()));
                 },
-                child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.red,),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                   
-                    Icon(Icons.video_camera_front, size: 50,color: Colors.white,),
-                    Text("Video",style: TextStyle(fontSize: 30,color: Colors.white),),
-                ],),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.red,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.video_camera_front,
+                        size: 50,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "Video",
+                        style: TextStyle(fontSize: 30, color: Colors.white),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-                InkWell(
-                  onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> AudioInput()));
+              InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AudioInput()));
                 },
-                  child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.green,),
-                              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                   
-                    Icon(Icons.podcasts, size: 50,color: Colors.white,),
-                    Text("Podcast",style: TextStyle(fontSize: 30,color: Colors.white),),
-                              ],),
-                              ),
-                ),    
-           ],
-           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1,mainAxisSpacing: 10, crossAxisSpacing: 10),
-           ),   
-                    
-        ),   
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.green,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.podcasts,
+                        size: 50,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "Podcast",
+                        style: TextStyle(fontSize: 30, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1, mainAxisSpacing: 10, crossAxisSpacing: 10),
+          ),
+        ),
       ),
-
-
-
-
-
-
-
     );
   }
 }
