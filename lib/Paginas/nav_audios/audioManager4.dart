@@ -70,11 +70,11 @@ class _FullExampleState extends State<FullExample> {
           children: const [
             Text(
               "Reproductor",
-              style: TextStyle(fontSize: 35, color: Colors.black),
+              style: TextStyle(fontSize: 25, color: Colors.black),
             ),
           Text(
               "Audio",
-              style: TextStyle(fontSize: 35, color: Colors.white),
+              style: TextStyle(fontSize: 25, color: Colors.white),
             ),
           ],
         ),
@@ -83,6 +83,7 @@ class _FullExampleState extends State<FullExample> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
+            dispose();
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Audios()));
           },
@@ -103,7 +104,7 @@ class _FullExampleState extends State<FullExample> {
               const Text(
                 'Episodio 4',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 19,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -111,7 +112,7 @@ class _FullExampleState extends State<FullExample> {
               const Text(
                 'La importancia de Farmacologia ',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 19,
                   fontWeight: FontWeight.bold,
                 ),
               ),

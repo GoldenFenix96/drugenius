@@ -16,16 +16,12 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   @override
   void initState(){
     super.initState();
-
      _videoPlayerController = VideoPlayerController.asset('assets/video/Video2.mp4')..initialize().then((_) {
       _videoPlayerController.play();
-      setState(() {
-        
-      });
+      setState(() {});
      });
-    
-
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +35,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
           children: const [
             Text(
               "Reproductor",
-              style: TextStyle(fontSize: 35, color: Colors.black),
+              style: TextStyle(fontSize: 25, color: Colors.black),
             ),
           ],
         ),
@@ -55,6 +51,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
+            _videoPlayerController.dispose();
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Videos()));
           },
@@ -105,7 +102,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               
               onPressed: (){
               _videoPlayerController.play();
-             }, 
+             },
+
              child: const Icon(Icons.play_arrow)
              ),
 
@@ -123,11 +121,11 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               onPressed: () {
               _videoPlayerController.seekTo(
                   Duration(
-                  seconds: _videoPlayerController.value.position.inSeconds + 1
+                  seconds: _videoPlayerController.value.position.inSeconds + 2
                 )
               );
              }, 
-             child: const Icon(Icons.replay_outlined)
+             child: const Icon(Icons.fast_forward)
              ),
            ],
           )

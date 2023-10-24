@@ -24,15 +24,15 @@ class _VideosState extends State<Audios> {
           children: [
             Text(
               "Lista",
-              style: TextStyle(fontSize: 35, color: Colors.black),
+              style: TextStyle(fontSize: 25, color: Colors.black),
             ),
             Text(
               "de",
-              style: TextStyle(fontSize: 35, color: Colors.grey),
+              style: TextStyle(fontSize: 25, color: Colors.grey),
             ),
             Text(
               "Audios",
-              style: TextStyle(fontSize: 35, color: Colors.white),
+              style: TextStyle(fontSize: 25, color: Colors.white),
             )
           ],
         ),
@@ -62,7 +62,7 @@ class _VideosState extends State<Audios> {
                 child: const Center(
                     child: Text(
                   "Amigos emprendedores ",
-                  style: TextStyle(fontSize: 25, color: Colors.white),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 )),
               ),
             ),
@@ -83,7 +83,7 @@ class _VideosState extends State<Audios> {
                 child: const Center(
                     child: Text(
                   "Lagrimas y risas ",
-                  style: TextStyle(fontSize: 25, color: Colors.white),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 )),
               ),
             ),
@@ -104,7 +104,7 @@ class _VideosState extends State<Audios> {
                 child: const Center(
                     child: Text(
                   "Las dos caras de la moneda",
-                  style: TextStyle(fontSize: 25, color: Colors.white),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 )),
               ),
             ),
@@ -125,7 +125,7 @@ class _VideosState extends State<Audios> {
                 child: const Center(
                     child: Text(
                   "La importancia de Farmacologia ",
-                  style: TextStyle(fontSize: 25, color: Colors.white),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 )),
               ),
             ),

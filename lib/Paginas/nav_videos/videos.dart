@@ -22,15 +22,15 @@ class _VideosState extends State<Videos> {
           children: [
             Text(
               "Lista",
-              style: TextStyle(fontSize: 35, color: Colors.black),
+              style: TextStyle(fontSize: 25, color: Colors.black),
             ),
             Text(
               "de",
-              style: TextStyle(fontSize: 35, color: Colors.grey),
+              style: TextStyle(fontSize: 25, color: Colors.grey),
             ),
             Text(
               "Videos",
-              style: TextStyle(fontSize: 35, color: Colors.white),
+              style: TextStyle(fontSize: 25, color: Colors.white),
             )
           ],
         ),
@@ -60,7 +60,7 @@ class _VideosState extends State<Videos> {
                 child: const Center(
                     child: Text(
                   "Introduccion a Drugenius ",
-                  style: TextStyle(fontSize: 25, color: Colors.white),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 )),
               ),
             ),
@@ -81,7 +81,7 @@ class _VideosState extends State<Videos> {
                 child: const Center(
                     child: Text(
                   "AINES Generalidades ",
-                  style: TextStyle(fontSize: 25, color: Colors.white),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 )),
               ),
             ),

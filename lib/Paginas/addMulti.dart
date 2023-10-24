@@ -23,23 +23,19 @@ class _AddMultiState extends State<AddMulti> {
           children: [
             Text(
               "Cargar",
-              style: TextStyle(fontSize: 30, color: Colors.black),
+              style: TextStyle(fontSize: 25, color: Colors.black),
             ),
             Text(
               " ",
-              style: TextStyle(fontSize: 33, color: Colors.black),
+              style: TextStyle(fontSize: 20, color: Colors.black),
             ),
             Text(
               "Multimedia",
-              style: TextStyle(fontSize: 30, color: Colors.white),
+              style: TextStyle(fontSize: 25, color: Colors.white),
             )
           ],
         ),
         actions: const <Widget>[
-          IconButton(
-            icon: Icon(Icons.login),
-            onPressed: _add,
-          ),
         ],
         // shape: RoundedRectangleBorder(
         //     borderRadius: BorderRadius.all(Radius.elliptical(20, 20))),

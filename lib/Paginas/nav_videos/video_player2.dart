@@ -40,7 +40,7 @@ class _VideoPlayerWidgetState2 extends State<VideoPlayerWidget2> {
           children: const [
             Text(
               "Reproductor",
-              style: TextStyle(fontSize: 35, color: Colors.black),
+              style: TextStyle(fontSize: 25, color: Colors.black),
             ),
           ],
         ),
@@ -49,6 +49,7 @@ class _VideoPlayerWidgetState2 extends State<VideoPlayerWidget2> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
+            _videoPlayerController2.dispose();
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Videos()));
           },
@@ -123,7 +124,7 @@ class _VideoPlayerWidgetState2 extends State<VideoPlayerWidget2> {
                 )
               );
              }, 
-             child: const Icon(Icons.replay_outlined)
+             child: const Icon(Icons.fast_forward)
              ),
 
           ],)

@@ -1,6 +1,5 @@
 //import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Paginas/addMulti.dart';
-import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:drugenius/Paginas/nav_audios/audios.dart';
 import 'package:drugenius/Paginas/nav_videos/videos.dart';
 import 'package:drugenius/main.dart';
@@ -80,7 +79,7 @@ class _VideoAudioState extends State<VideoAudio> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.red,
+                    color: Colors.blueAccent,
                   ),
                   child: const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -101,42 +100,13 @@ class _VideoAudioState extends State<VideoAudio> {
 
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LogginPage()));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.yellow,
-                  ),
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.login,
-                        size: 50,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        "Ingresa",
-                        style: TextStyle(fontSize: 30, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              InkWell(
-                onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const Audios()));
                 },
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.green,
+                    color: Colors.lightBlueAccent,
                   ),
                   child: const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -165,7 +135,7 @@ class _VideoAudioState extends State<VideoAudio> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.grey,
+                    color: Colors.amber,
                   ),
                   child: const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -192,7 +162,7 @@ class _VideoAudioState extends State<VideoAudio> {
               //swiperBox(),
             ],
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, mainAxisSpacing: 10, crossAxisSpacing: 10),
+                crossAxisCount: 1, mainAxisSpacing: 10, crossAxisSpacing: 10),
           ),
         ),
       ),
