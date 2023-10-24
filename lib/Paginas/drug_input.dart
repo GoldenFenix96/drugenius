@@ -560,28 +560,30 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   _agregarGrupo(BuildContext context) async {
-    String nuevoGrupo = await showDialog(
+    TextEditingController textController =
+        TextEditingController(); // Crear un controlador de texto
+
+    await showDialog(
       context: context,
       builder: (BuildContext context) {
-        String nuevoGrupo = ''; // Inicializar con una cadena vacía
         return AlertDialog(
           title: const Text("Agregar nuevo grupo"),
           content: TextField(
-            onChanged: (value) {
-              nuevoGrupo = value;
-            },
+            controller: textController, // Usar el controlador de texto
           ),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pop(context,
-                    ''); // Usar una cadena vacía en caso de cancelación
+                Navigator.pop(context);
               },
               child: const Text("Cancelar"),
             ),
             TextButton(
               onPressed: () {
-                Navigator.pop(context, nuevoGrupo);
+                String nuevoGrupo = textController
+                    .text; // Obtener el valor del controlador de texto
+                Navigator.pop(
+                    context, nuevoGrupo); // Pasar el valor al cerrar el diálogo
               },
               child: const Text("Agregar"),
             ),
@@ -590,9 +592,9 @@ class _DrugInputState extends State<DrugInput> {
       },
     );
 
-    if (nuevoGrupo.isNotEmpty) {
+    if (textController.text.isNotEmpty) {
       setState(() {
-        grupo.add(nuevoGrupo);
+        grupo.add(textController.text);
       });
     }
   }

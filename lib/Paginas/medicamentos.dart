@@ -301,9 +301,12 @@ Widget swiperBoxImagenes() {
         viewportFraction: 0.8,
         scale: 0.9,
         itemBuilder: (BuildContext context, index) {
-          return Image.network(
-            images[index],
-            fit: BoxFit.fill,
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.network(
+              images[index],
+              fit: BoxFit.fill,
+            ),
           );
         },
         itemCount: images.length,
@@ -322,9 +325,12 @@ Widget swiperBoxFarmaco() {
         viewportFraction: 0.8,
         scale: 0.9,
         itemBuilder: (BuildContext context, index) {
-          return Image.network(
-            farmacocinetica[index],
-            fit: BoxFit.fill,
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.network(
+              farmacocinetica[index],
+              fit: BoxFit.fill,
+            ),
           );
         },
         itemCount: images.length,
