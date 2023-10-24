@@ -15,30 +15,25 @@ class _VideosState extends State<Videos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
-        elevation: 10,
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        //automaticallyImplyLeading: false,
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+        title: Row(
           children: [
-            Text(
-              "Lista",
-              style: TextStyle(fontSize: 25, color: Colors.black),
+            const Text(
+              "Lista de videos",
+              textAlign: TextAlign.center,
             ),
-            Text(
-              "de",
-              style: TextStyle(fontSize: 25, color: Colors.grey),
-            ),
-            Text(
-              "Videos",
-              style: TextStyle(fontSize: 25, color: Colors.white),
-            )
           ],
         ),
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
+        elevation: 0,
+        actions: <Widget>[],
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const VideoAudio()));
+            dispose();
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => VideoAudio()));
           },
         ),
       ),

@@ -128,7 +128,7 @@ class _AudioInputState extends State<AudioInput> {
           "Ingreso de Audios",
           textAlign: TextAlign.center,
         ),
-        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         elevation: 0,
       ),
       body: Container(

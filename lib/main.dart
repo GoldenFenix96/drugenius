@@ -47,7 +47,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
       home: Scaffold(
         drawer: const NavBar(),
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+          backgroundColor: const Color.fromARGB(255, 22, 112, 177),
           foregroundColor: const Color.fromARGB(255, 255, 255, 255),
           elevation: 0,
           title: Image.network(

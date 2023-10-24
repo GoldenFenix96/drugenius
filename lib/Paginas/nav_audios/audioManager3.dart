@@ -4,8 +4,6 @@ import 'package:drugenius/Paginas/nav_audios/class/audio_player_manager3.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
-
-
 class AudioManager3 extends StatefulWidget {
   const AudioManager3({Key? key}) : super(key: key);
 
@@ -63,23 +61,19 @@ class _FullExampleState extends State<FullExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      backgroundColor: Color.fromARGB(255, 85, 145, 214),
-        elevation: 10,
+        //automaticallyImplyLeading: false,
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text(
-              "Reproductor",
-              style: TextStyle(fontSize: 25, color: Colors.black),
-            ),
-          Text(
-              "Audio",
-              style: TextStyle(fontSize: 25, color: Colors.white),
+          children: [
+            const Text(
+              "Reproductor de audio",
+              textAlign: TextAlign.center,
             ),
           ],
         ),
-        actions: <Widget>[
-        ],
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
+        elevation: 0,
+        actions: <Widget>[],
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
@@ -89,51 +83,73 @@ class _FullExampleState extends State<FullExample> {
           },
         ),
       ),
-
+      /*
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 85, 145, 214),
+        elevation: 10,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              "Reproductor",
+              style: TextStyle(fontSize: 25, color: Colors.black),
+            ),
+            Text(
+              "Audio",
+              style: TextStyle(fontSize: 25, color: Colors.white),
+            ),
+          ],
+        ),
+        actions: <Widget>[],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            dispose();
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Audios()));
+          },
+        ),
+      ),
+      */
       body: Container(
-      padding: EdgeInsets.all(20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget> [
-       
-       Image.network(
-                  'https://cdn-icons-png.flaticon.com/512/49/49775.png',
-                ),
-
-                const SizedBox(height: 32),
-              const Text(
-                'Episodio 3',
-                style: TextStyle(
-                  fontSize: 19,
-                  fontWeight: FontWeight.bold,
-                ),
+        padding: EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Image.network(
+              'https://cdn-icons-png.flaticon.com/512/49/49775.png',
+            ),
+            const SizedBox(height: 32),
+            const Text(
+              'Episodio 3',
+              style: TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.bold,
               ),
-
-              const Text(
-                'Las dos caras de la moneda',
-                style: TextStyle(
-                  fontSize: 19,
-                  fontWeight: FontWeight.bold,
-                ),
+            ),
+            const Text(
+              'Las dos caras de la moneda',
+              style: TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(
-                height: 4,
-              ),
-              const Text(
-                'Drugenius',
-                style: TextStyle(fontSize: 20),
-              ),
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            const Text(
+              'Drugenius',
+              style: TextStyle(fontSize: 20),
+            ),
             _progressBar(),
             _playButton(),
-       ],
+          ],
+        ),
       ),
-     ),
-
-
-
     );
   }
-StreamBuilder<DurationState> _progressBar() {
+
+  StreamBuilder<DurationState> _progressBar() {
     return StreamBuilder<DurationState>(
       stream: widget.audioPlayerManager.durationState,
       builder: (context, snapshot) {

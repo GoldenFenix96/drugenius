@@ -62,17 +62,20 @@ class _MedicamentosState extends State<Medicamentos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Paracetamol",
+        title: const Text("Datos del medicamento",
             style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             textAlign: TextAlign.center),
-        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         foregroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(25.0, 20.0, 25.0, 20.0),
         children: <Widget>[
-          Center(
-            child: swiperBoxImagenes(),
+          Visibility(
+            visible: images.isNotEmpty,
+            child: Center(
+              child: swiperBoxImagenes(),
+            ),
           ),
           const SizedBox(height: 20),
           Center(
@@ -267,18 +270,22 @@ class _MedicamentosState extends State<Medicamentos> {
             ],
           ),
           const SizedBox(height: 10),
-          ExpansionTile(
-            title: const SizedBox(
-              child: Text(
-                'Farmacocinética',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+          Visibility(
+            visible: farmacocinetica
+                .isNotEmpty, // Condición: muestra si farmacocinetica no está vacío
+            child: ExpansionTile(
+              title: const SizedBox(
+                child: Text(
+                  'Farmacocinética',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                ),
               ),
+              children: <Widget>[
+                Center(
+                  child: swiperBoxFarmaco(),
+                ),
+              ],
             ),
-            children: <Widget>[
-              Center(
-                child: swiperBoxFarmaco(),
-              ),
-            ],
           )
         ],
       ),
@@ -294,9 +301,12 @@ Widget swiperBoxImagenes() {
         viewportFraction: 0.8,
         scale: 0.9,
         itemBuilder: (BuildContext context, index) {
-          return Image.network(
-            images[index],
-            fit: BoxFit.fill,
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.network(
+              images[index],
+              fit: BoxFit.fill,
+            ),
           );
         },
         itemCount: images.length,
@@ -315,9 +325,12 @@ Widget swiperBoxFarmaco() {
         viewportFraction: 0.8,
         scale: 0.9,
         itemBuilder: (BuildContext context, index) {
-          return Image.network(
-            farmacocinetica[index],
-            fit: BoxFit.fill,
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.network(
+              farmacocinetica[index],
+              fit: BoxFit.fill,
+            ),
           );
         },
         itemCount: images.length,

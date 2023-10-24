@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Componentes/farmaco_picker.dart';
@@ -30,7 +32,10 @@ List<File?> farmacocinetica = [];
 List<Map> selectedCuadros = [];
 
 List<String> images = [];
+List<List<String>> imagesdelete = [];
+
 List<String> farmaco = [];
+List<List<String>> farmacodelete = [];
 List<Map> cuadro = [];
 
 final TextEditingController otroNombreController = TextEditingController();
@@ -61,6 +66,15 @@ class _EditDrugState extends State<EditDrug> {
     super.initState();
     // Llama al método para obtener el medicamento que se mostrará
     obtenerMedicamento();
+    nombreController.clear();
+    otroNombreController.clear();
+    nombreController.clear();
+    presentacionController.clear();
+    mecanismosController.clear();
+    usoTeraController.clear();
+    efectosController.clear();
+    contraController.clear();
+    posologiaController.clear();
   }
 
   Future<void> obtenerMedicamento() async {
@@ -153,6 +167,12 @@ class _EditDrugState extends State<EditDrug> {
     }
   }
 
+  void checarImagenesBorrar(List<String> imagesdelete) {
+    for (int i = 0; i < imagesdelete.length; i++) {
+      print('Ruta de la imagen borrada $i: ${imagesdelete[i]}');
+    }
+  }
+
   Future<void> _actualizarMedicamento() async {
     final nombre = nombreController.text;
     final otroNombre = otroNombreController.text;
@@ -163,10 +183,12 @@ class _EditDrugState extends State<EditDrug> {
     final efectos = efectosController.text;
     final contraindicaciones = contraController.text;
     final posologia = posologiaController.text;
-    print("Salto de linea para las imagenes de los medicamentos XD");
+    print("Salto de linea para las imagenes de los medicamentos nuevas");
     validarImagenes(imagenes.whereType<File>().toList());
-    print("Salto de linea para las farmacocinetica XD");
+    print("Salto de linea para las farmacocinetica nuevas");
     validarImagenesFarmacocinetica(farmacocinetica.whereType<File>().toList());
+    print("Salto de linea para las farmacocinetica nuevas");
+    checarImagenes(images);
 
     print('Nombre: $nombre');
     print('Otro Nombre: $otroNombre');
@@ -255,11 +277,9 @@ class _EditDrugState extends State<EditDrug> {
         });
 
     try {
-      // Obtén el contexto antes de entrar al bloque try-catch
-      final currentContext = context;
-
-      // Llama a tu función de registro
-      final resultadoRegistro = await fs.addMedication(
+      // Llama a tu función de actualización
+      await fs.updateMedication(
+          widget.medicamentoId,
           nombre,
           widget.grupo,
           widget.subgrupo,
@@ -272,37 +292,50 @@ class _EditDrugState extends State<EditDrug> {
           posologia,
           cuadro.cast<Map>());
 
-      if (resultadoRegistro != null) {
-        // Guardar imágenes en Firebase Storage y URLs en Firestore
+      // Guardar imágenes en Firebase Storage y URLs en Firestore
+      if (imagenes.isNotEmpty) {
         for (int i = 0; i < imagenes.length; i++) {
           final imageFile = imagenes[i];
           await fs.uploadImageToStorageAndFirestore(
-              resultadoRegistro, imageFile!);
+              widget.medicamentoId, imageFile!);
         }
-
+      }
+      if (farmacocinetica.isNotEmpty) {
         for (int i = 0; i < farmacocinetica.length; i++) {
           final imageFile2 = farmacocinetica[i];
-          await fs.subirFarmacocinetica(resultadoRegistro, imageFile2!);
+          await fs.subirFarmacocinetica(widget.medicamentoId, imageFile2!);
         }
-
-        // Continúa con cualquier otra lógica o navegación necesaria
-        Navigator.pop(context);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const ListMedicamentos(),
-          ),
-        );
-      } else {
-        // Registro fallido, muestra un mensaje de error
-        ScaffoldMessenger.of(currentContext).showSnackBar(
-          const SnackBar(
-            content: Text('Ha ocurrido un error al registrar el medicamento.'),
-          ),
-        );
       }
+
+      if (imagesdelete.isNotEmpty) {
+        for (int i = 0; i < imagesdelete.length; i++) {
+          print(
+              "Enlace a borrar: ${imagesdelete[i]}"); // Imprime la URL en la posición i
+          final imageUrls = imagesdelete[i];
+          await fs.updateMedicationImages(widget.medicamentoId, imageUrls);
+        }
+      }
+
+      if (farmacodelete.isNotEmpty) {
+        for (int i = 0; i < farmacodelete.length; i++) {
+          print(
+              "Enlace a borrar: ${farmacodelete[i]}"); // Imprime la URL en la posición i
+          final imageUrls = farmacodelete[i];
+          await fs.updateMedicationFarmacocinetica(
+              widget.medicamentoId, imageUrls);
+        }
+      }
+
+      // Continúa con cualquier otra lógica o navegación necesaria
+      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ListMedicamentos(),
+        ),
+      );
     } catch (e) {
-      print('Error al registrar medicamento: $e');
+      print('Error al actualizar medicamento: $e');
       // Maneja el error según tus necesidades
     }
   }
@@ -319,7 +352,7 @@ class _EditDrugState extends State<EditDrug> {
           "Editar de medicamento",
           textAlign: TextAlign.center,
         ),
-        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         elevation: 0,
       ),
       body: Container(
@@ -334,71 +367,78 @@ class _EditDrugState extends State<EditDrug> {
             Center(
               child: Column(
                 children: [
-                  const Text(
-                    "Imagenes actuales del medicamento",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        //fontFamily: 'Montserrat',
-                        fontSize: 18.0,
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 15.0),
-                  //TXT DRUG INPUT
-                  SizedBox(
-                    width: size.width * 1,
-                    height: 300,
-                    child: Swiper(
-                      loop: false,
-                      viewportFraction: 0.8,
-                      scale: 0.9,
-                      itemCount: images.length,
-                      itemBuilder: (context, index) {
-                        return SizedBox(
-                          width: double.infinity,
-                          height: 300.0,
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(10.0),
-                                child: Image.network(
-                                  images[index],
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      // Eliminar la imagen de la lista
-                                      images.removeAt(index);
-                                      checarImagenes(images);
-                                    });
-                                  },
-                                  child: Container(
-                                    // Alto del contenedor del ícono
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Color.fromARGB(255, 170, 45, 36),
+                  Visibility(
+                    visible: images
+                        .isNotEmpty, // Condición: muestra si images no está vacío
+                    child: Column(
+                      children: <Widget>[
+                        const Text(
+                          'Imagenes actuales del medicamento',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18.0),
+                        ),
+                        const SizedBox(height: 15.0),
+                        //TXT DRUG INPUT
+                        SizedBox(
+                          width: size.width * 1,
+                          height: 300,
+                          child: Swiper(
+                            loop: false,
+                            viewportFraction: 0.8,
+                            scale: 0.9,
+                            itemCount: images.length,
+                            itemBuilder: (context, index) {
+                              return SizedBox(
+                                width: double.infinity,
+                                height: 300.0,
+                                child: Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      child: Image.network(
+                                        images[index],
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                    child: const Icon(
-                                      Icons.clear,
-                                      color: Colors.white,
+                                    Align(
+                                      alignment: Alignment.topRight,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            // Almacena la URL de la imagen en imagesdelete
+                                            imagesdelete.add([images[index]]);
+                                            // Elimina la imagen de la lista
+                                            images.removeAt(index);
+                                          });
+                                        },
+                                        child: Container(
+                                          // Alto del contenedor del ícono
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Color.fromARGB(
+                                                255, 170, 45, 36),
+                                          ),
+                                          child: const Icon(
+                                            Icons.clear,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              ),
-                            ],
+                              );
+                            },
+                            pagination: const SwiperPagination(),
+                            control: const SwiperControl(),
                           ),
-                        );
-                      },
-                      pagination: const SwiperPagination(),
-                      control: const SwiperControl(),
+                        ),
+                      ],
                     ),
                   ),
+
                   //FIN TXT DRUG INPUT
                   const SizedBox(height: 25.0),
                   //TXT BIENVENIDA
@@ -443,70 +483,80 @@ class _EditDrugState extends State<EditDrug> {
                   _cuadroBasico(),
                   const SizedBox(height: 15.0),
                   //_imagenFarmacocinetica(),
-                  const Text(
-                    "Farmacocinetica del medicamento",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        //fontFamily: 'Montserrat',
-                        fontSize: 18.0,
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 15.0),
-                  SizedBox(
-                    width: size.width * 1,
-                    height: 300,
-                    child: Swiper(
-                      loop: false,
-                      viewportFraction: 0.8,
-                      scale: 0.9,
-                      itemCount: farmaco.length,
-                      itemBuilder: (context, index) {
-                        return SizedBox(
-                          width: double.infinity,
-                          height: 300.0,
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(10.0),
-                                child: Image.network(
-                                  farmaco[index],
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      // Eliminar la imagen de la lista
-                                      farmaco.removeAt(index);
-                                      checarImagenes(farmaco);
-                                    });
-                                  },
-                                  child: Container(
-                                    // Alto del contenedor del ícono
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Color.fromARGB(255, 170, 45, 36),
-                                    ),
-                                    child: const Icon(
-                                      Icons.clear,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                  Visibility(
+                    visible: farmaco.isNotEmpty,
+                    child: Column(
+                      children: <Widget>[
+                        const Text(
+                          "Farmacocinetica del medicamento",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontWeight: FontWeight.bold,
                           ),
-                        );
-                      },
-                      pagination: const SwiperPagination(),
-                      control: const SwiperControl(),
+                        ),
+                        const SizedBox(height: 15.0),
+                        SizedBox(
+                          width: size.width * 1,
+                          height: 300,
+                          child: Swiper(
+                            loop: false,
+                            viewportFraction: 0.8,
+                            scale: 0.9,
+                            itemCount: farmaco.length,
+                            itemBuilder: (context, index) {
+                              return SizedBox(
+                                width: double.infinity,
+                                height: 300.0,
+                                child: Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      child: Image.network(
+                                        farmaco[index],
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.topRight,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            // Eliminar la imagen de la lista
+                                            farmacodelete.add([farmaco[index]]);
+                                            farmaco.removeAt(index);
+                                            checarImagenes(farmaco);
+                                          });
+                                        },
+                                        child: Container(
+                                          // Alto del contenedor del ícono
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Color.fromARGB(
+                                                255, 170, 45, 36),
+                                          ),
+                                          child: const Icon(
+                                            Icons.clear,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            pagination: const SwiperPagination(),
+                            control: const SwiperControl(),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+
                   const SizedBox(height: 15.0),
                   _farmacocineticaMedicamento(),
                   //FIN TXT INPUT
@@ -678,7 +728,6 @@ class _EditDrugState extends State<EditDrug> {
               onChanged: (String? value) {
                 setState(() {
                   widget.grupo = value!;
-                  print("Grupo seleccionado: ${widget.subgrupo}");
                 });
               },
             ),
@@ -766,8 +815,6 @@ class _EditDrugState extends State<EditDrug> {
   ];
 
   Widget _subgrupoFarmacologico() {
-    print("Subgrupo de medicamentos: ${widget.subgrupo}");
-
     // Agregar widget.subgrupo a la lista subgrup si no está presente
     return Container(
       margin: const EdgeInsets.symmetric(
@@ -792,13 +839,15 @@ class _EditDrugState extends State<EditDrug> {
           items: subgrup.map((name) {
             return DropdownMenuItem<String>(
               value: name,
-              child: Text(name),
+              child: Text(
+                name,
+                style: TextStyle(fontSize: 15),
+              ),
             );
           }).toList(),
           onChanged: (String? value) {
             setState(() {
               widget.subgrupo = value!;
-              print("subgrupo seleccionado: ${widget.subgrupo}");
             });
           },
         ),
@@ -844,9 +893,7 @@ class _EditDrugState extends State<EditDrug> {
         ),
         const SizedBox(height: 10),
         Container(
-          margin: const EdgeInsets.symmetric(
-            horizontal: 25.0,
-          ),
+          //margin: const EdgeInsets.symmetric(horizontal: 25.0),
           child: ImagePickerWidget(updateImagenes: updateImagenes),
         ),
       ],

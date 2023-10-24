@@ -129,7 +129,7 @@ class _Perfil extends State<Perfil> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 85, 145, 214),
+          backgroundColor: const Color.fromARGB(255, 22, 112, 177),
           foregroundColor: const Color.fromARGB(255, 255, 255, 255),
           elevation: 0,
           title: Image.network(
