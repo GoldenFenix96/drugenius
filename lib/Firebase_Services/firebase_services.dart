@@ -213,11 +213,6 @@ class Firebase_services {
       // 1. Eliminar el medicamento de Firestore
       await db.collection('Medicamentos').doc(medicamentoId).delete();
 
-      // 2. Eliminar las imágenes del medicamento de Storage
-      final storageReference =
-          FirebaseStorage.instance.ref().child(medicamentoId);
-      await storageReference.delete();
-
       // 3. Eliminar la subcolección "Cuadro Básico" de Firestore
       await db
           .collection('Medicamentos')
@@ -253,6 +248,11 @@ class Firebase_services {
           doc.reference.delete();
         });
       });
+
+      // 2. Eliminar las imágenes del medicamento de Storage
+      final storageReference =
+          FirebaseStorage.instance.ref().child(medicamentoId);
+      await storageReference.delete();
     } catch (e) {
       print("Ha ocurrido un error al eliminar el medicamento: $e");
     }
