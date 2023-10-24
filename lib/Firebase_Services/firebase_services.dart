@@ -208,6 +208,56 @@ class Firebase_services {
     }
   }
 
+  Future<void> deleteMedication(String medicamentoId) async {
+    try {
+      // 1. Eliminar el medicamento de Firestore
+      await db.collection('Medicamentos').doc(medicamentoId).delete();
+
+      // 2. Eliminar las imágenes del medicamento de Storage
+      final storageReference =
+          FirebaseStorage.instance.ref().child(medicamentoId);
+      await storageReference.delete();
+
+      // 3. Eliminar la subcolección "Cuadro Básico" de Firestore
+      await db
+          .collection('Medicamentos')
+          .doc(medicamentoId)
+          .collection('Cuadro Básico')
+          .get()
+          .then((querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          doc.reference.delete();
+        });
+      });
+
+      // 4. Eliminar la subcolección "Farmacocinetica" de Firestore
+      await db
+          .collection('Medicamentos')
+          .doc(medicamentoId)
+          .collection('Farmacocinetica')
+          .get()
+          .then((querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          doc.reference.delete();
+        });
+      });
+
+      // 5. Eliminar la subcolección "Imagenes" de Firestore
+      await db
+          .collection('Medicamentos')
+          .doc(medicamentoId)
+          .collection('Imagenes')
+          .get()
+          .then((querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          doc.reference.delete();
+        });
+      });
+    } catch (e) {
+      print("Ha ocurrido un error al eliminar el medicamento: $e");
+    }
+  }
+
   //Agregar imagenes del medicamento
   Future<void> uploadImageToStorageAndFirestore(
       String documentId, File imageFile) async {

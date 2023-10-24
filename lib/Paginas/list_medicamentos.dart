@@ -99,7 +99,7 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
                         ),
                         SlidableAction(
                           onPressed: (context) {
-                            _editarMedicamento(id, grupo, subgrupo);
+                            _borrarMedicamento(id);
                           },
                           backgroundColor: const Color(0xFFFE4A49),
                           foregroundColor: Colors.white,
@@ -170,7 +170,13 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
   }
 
   void _borrarMedicamento(String medicamentoId) {
-    // Implementa la lógica para borrar el medicamento
+    fs.deleteMedication(medicamentoId).then((_) {
+      // Actualiza la lista de medicamentos después de borrar.
+      obtenerMedicamentos();
+    }).catchError((error) {
+      // Maneja el caso en el que la eliminación falló.
+      print("Error al borrar el medicamento: $error");
+    });
   }
 }
 
