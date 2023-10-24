@@ -24,6 +24,11 @@ class _VideoPlayerWidgetState2 extends State<VideoPlayerWidget2> {
             setState(() {});
           });
   }
+   @override
+  void dispose() {
+    super.dispose();
+    _videoPlayerController2.dispose(); // Aquí detenemos y liberamos los recursos del reproductor.
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +102,25 @@ class _VideoPlayerWidgetState2 extends State<VideoPlayerWidget2> {
                               _videoPlayerController2.play();
                             },
                             child: const Icon(Icons.play_arrow)),
+                            const Padding(padding: EdgeInsets.all(2)),
+                        ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.yellowAccent),
+                                fixedSize: MaterialStateProperty.all<Size>(
+                                    const Size(70, 70)),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100)))),
+                            onPressed: () {
+                              _videoPlayerController2.seekTo(Duration(
+                                  seconds: _videoPlayerController2
+                                          .value.position.inSeconds -
+                                      2));
+                            },
+                            child: const Icon(Icons.fast_rewind)),
                         const Padding(padding: EdgeInsets.all(2)),
                         ElevatedButton(
                             style: ButtonStyle(
@@ -113,7 +137,7 @@ class _VideoPlayerWidgetState2 extends State<VideoPlayerWidget2> {
                               _videoPlayerController2.seekTo(Duration(
                                   seconds: _videoPlayerController2
                                           .value.position.inSeconds +
-                                      1));
+                                      2));
                             },
                             child: const Icon(Icons.fast_forward)),
                       ],

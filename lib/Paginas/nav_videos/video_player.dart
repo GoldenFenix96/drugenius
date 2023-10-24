@@ -22,6 +22,11 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             setState(() {});
           });
   }
+   @override
+  void dispose() {
+    super.dispose();
+    _videoPlayerController.dispose(); // Aquí detenemos y liberamos los recursos del reproductor.
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +133,25 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                               _videoPlayerController.play();
                             },
                             child: const Icon(Icons.play_arrow)),
+                            const Padding(padding: EdgeInsets.all(2)),
+                        ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.yellowAccent),
+                                fixedSize: MaterialStateProperty.all<Size>(
+                                    const Size(70, 70)),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100)))),
+                            onPressed: () {
+                              _videoPlayerController.seekTo(Duration(
+                                  seconds: _videoPlayerController
+                                          .value.position.inSeconds -
+                                      2));
+                            },
+                            child: const Icon(Icons.fast_rewind)),
                         const Padding(padding: EdgeInsets.all(2)),
                         ElevatedButton(
                             style: ButtonStyle(
