@@ -319,21 +319,22 @@ Widget swiperBoxImagenes() {
 
 Widget swiperBoxFarmaco() {
   return SizedBox(
-      width: double.infinity,
-      height: 250.0,
-      child: Swiper(
-        viewportFraction: 0.8,
-        scale: 0.9,
-        itemBuilder: (BuildContext context, index) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(10.0),
-            child: Image.network(
-              farmacocinetica[index],
-              fit: BoxFit.fill,
-            ),
-          );
-        },
-        itemCount: images.length,
-        pagination: const SwiperPagination(),
-      ));
+    width: double.infinity,
+    height: 250.0,
+    child: Swiper(
+      viewportFraction: 0.8,
+      scale: 0.9,
+      itemBuilder: (BuildContext context, index) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Image.network(
+            farmacocinetica[index],
+            fit: BoxFit.fill,
+          ),
+        );
+      },
+      itemCount: farmacocinetica.length, // Usar la longitud de farmacocinetica
+      pagination: const SwiperPagination(),
+    ),
+  );
 }
