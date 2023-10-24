@@ -62,7 +62,7 @@ class _MedicamentosState extends State<Medicamentos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Paracetamol",
+        title: const Text("Datos del medicamento",
             style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             textAlign: TextAlign.center),
         backgroundColor: const Color.fromARGB(255, 85, 145, 214),
@@ -71,8 +71,11 @@ class _MedicamentosState extends State<Medicamentos> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(25.0, 20.0, 25.0, 20.0),
         children: <Widget>[
-          Center(
-            child: swiperBoxImagenes(),
+          Visibility(
+            visible: images.isNotEmpty,
+            child: Center(
+              child: swiperBoxImagenes(),
+            ),
           ),
           const SizedBox(height: 20),
           Center(
@@ -267,18 +270,22 @@ class _MedicamentosState extends State<Medicamentos> {
             ],
           ),
           const SizedBox(height: 10),
-          ExpansionTile(
-            title: const SizedBox(
-              child: Text(
-                'Farmacocinética',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+          Visibility(
+            visible: farmacocinetica
+                .isNotEmpty, // Condición: muestra si farmacocinetica no está vacío
+            child: ExpansionTile(
+              title: const SizedBox(
+                child: Text(
+                  'Farmacocinética',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                ),
               ),
+              children: <Widget>[
+                Center(
+                  child: swiperBoxFarmaco(),
+                ),
+              ],
             ),
-            children: <Widget>[
-              Center(
-                child: swiperBoxFarmaco(),
-              ),
-            ],
           )
         ],
       ),
