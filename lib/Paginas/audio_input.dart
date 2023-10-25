@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:drugenius/Componentes/my_audiopicker.dart';
+import 'package:drugenius/Componentes/my_audiopicker2.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
 import 'package:drugenius/Paginas/nav_audios/audios.dart';
 import 'package:flutter/material.dart';
@@ -257,7 +257,7 @@ class _AudioInputState extends State<AudioInput> {
               margin: const EdgeInsets.symmetric(
                 horizontal: 25.0,
               ),
-              child: AudioPickerWidget(updateAudios: updateAudios),
+              child: AudioPickerWidget2(updateAudios: updateAudios),
             ),
           ),
         ],
