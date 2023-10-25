@@ -541,16 +541,13 @@ void signOut(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     // El cierre de sesión se ha realizado con éxito
     // Puedes realizar acciones aquí
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        // Set the name here
-        settings: RouteSettings(
-          name: "/FisrtPage",
+    Navigator.pop(context);
+    Navigator.pushReplacement<void, void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => const LogginPage(),
         ),
-        builder: (context) => LogginPage(),
-      ),
-    );
+      );
 
     print("Cierre de sesión exitoso");
   } catch (e) {
