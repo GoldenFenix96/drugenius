@@ -86,7 +86,7 @@ class _VideoInputState extends State<VideoInput> {
         // Registro fallido, muestra un mensaje de error
         ScaffoldMessenger.of(currentContext).showSnackBar(
           const SnackBar(
-            content: Text('Ha ocurrido un error al registrar el medicamento.'),
+            content: Text('Ha ocurrido un error al registrar el video.'),
           ),
         );
       }
