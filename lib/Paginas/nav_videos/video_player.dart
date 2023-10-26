@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
-  const VideoPlayerWidget({super.key});
+  final List<String> videoUrls;
+  const VideoPlayerWidget({super.key, required this.videoUrls});
 
   @override
   State<VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
@@ -16,16 +17,18 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   void initState() {
     super.initState();
     _videoPlayerController =
-        VideoPlayerController.asset('assets/video/Video2.mp4')
+        VideoPlayerController.networkUrl(widget.videoUrls[0] as Uri)
           ..initialize().then((_) {
             _videoPlayerController.play();
             setState(() {});
           });
   }
-   @override
+
+  @override
   void dispose() {
     super.dispose();
-    _videoPlayerController.dispose(); // Aquí detenemos y liberamos los recursos del reproductor.
+    _videoPlayerController
+        .dispose(); // Aquí detenemos y liberamos los recursos del reproductor.
   }
 
   @override
@@ -33,11 +36,10 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          //automaticallyImplyLeading: false,
           foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-          title: Row(
+          title: const Row(
             children: [
-              const Text(
+              Text(
                 "Reproductor",
                 textAlign: TextAlign.center,
               ),
@@ -45,49 +47,16 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
           ),
           backgroundColor: const Color.fromARGB(255, 22, 112, 177),
           elevation: 0,
-          actions: <Widget>[],
+          actions: const <Widget>[],
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
               dispose();
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Videos()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Videos()));
             },
           ),
         ),
-        /*
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 85, 145, 214),
-        elevation: 10,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text(
-              "Reproductor",
-              style: TextStyle(fontSize: 25, color: Colors.black),
-            ),
-          ],
-        ),
-        actions: <Widget>[
-        //IconButton(
-        //    icon: Icon(Icons.arrow_right),
-        //    onPressed: () {
-        //      Navigator.push(
-        //          context, MaterialPageRoute(builder: (context) => VideoPlayerWidget2()));
-        //    },
-        //  ),
-        ],
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            _videoPlayerController.dispose();
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Videos()));
-          },
-        ),
-      ),
-      */
-
         body: Center(
           child: _videoPlayerController.value.isInitialized
               ? Column(
@@ -133,7 +102,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                               _videoPlayerController.play();
                             },
                             child: const Icon(Icons.play_arrow)),
-                            const Padding(padding: EdgeInsets.all(2)),
+                        const Padding(padding: EdgeInsets.all(2)),
                         ElevatedButton(
                             style: ButtonStyle(
                                 backgroundColor:
