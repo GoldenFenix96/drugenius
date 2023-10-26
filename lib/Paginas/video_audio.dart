@@ -1,8 +1,8 @@
 //import 'package:card_swiper/card_swiper.dart';
+import 'package:drugenius/Paginas/Nav_Bar.dart';
 import 'package:drugenius/Paginas/addMulti.dart';
 import 'package:drugenius/Paginas/nav_audios/audios.dart';
 import 'package:drugenius/Paginas/nav_videos/videos.dart';
-import 'package:drugenius/main.dart';
 import 'package:flutter/material.dart';
 
 class VideoAudio extends StatefulWidget {
@@ -31,23 +31,14 @@ class _VideoAudioState extends State<VideoAudio> {
         ),
         backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    const DrugeniusMenu(), // Reemplaza con la pantalla deseada
-              ),
-            );
-          },
-        ),
       ),
+      drawer: const NavBar(),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: GridView(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1, mainAxisSpacing: 10, crossAxisSpacing: 10),
             children: [
               InkWell(
                 onTap: () {
@@ -139,8 +130,6 @@ class _VideoAudioState extends State<VideoAudio> {
               //swiperBox(),
               //swiperBox(),
             ],
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1, mainAxisSpacing: 10, crossAxisSpacing: 10),
           ),
         ),
       ),

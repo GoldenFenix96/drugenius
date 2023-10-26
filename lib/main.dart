@@ -105,7 +105,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           _btnPodcastVideos(),
-                          
+
                           // Segundo Container
                           _btnForo(),
                         ],
@@ -119,7 +119,6 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                           _btnEvaluaciones(),
                           // Segundo Container
                           _btnCalculadora(),
-                          
                         ],
                       ),
 
@@ -129,11 +128,13 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           _btnJuegos(),
-                          
+
                           // Segundo Container
                           //_btnFarmacocinetica(),
-                          Container(width: 140,
-      height: 160,)
+                          Container(
+                            width: 140,
+                            height: 160,
+                          )
                         ],
                       ),
                     ],
@@ -200,8 +201,6 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                   ),
                 );
               }),
-          // Texto debajo del primer Container
-          // Espacio entre los contenedores
           const SizedBox(height: 5),
           const Text(
             'Medicamentos',
@@ -392,43 +391,6 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
       ),
     );
   }
-
-  _btnFarmacocinetica() {
-    return Container(
-      color: const Color.fromARGB(0, 255, 255, 255),
-      width: 140,
-      height: 160,
-      child: Column(
-        // Primer Container
-        children: [
-          MyButtonHome(
-              imageNet: 'https://i.ibb.co/MN7LQJZ/Drugs-4320344.png',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const BlankPage(), // Reemplaza con la pantalla deseada
-                  ),
-                );
-              }),
-          // Texto debajo del primer Container
-          // Espacio entre los contenedores
-          const SizedBox(height: 5),
-          const Expanded(
-            child: Text(
-              'Farmacocinética',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 Widget swiperBox() {
@@ -462,80 +424,4 @@ Widget swiperBox() {
           5000, // Establece el tiempo de espera entre transiciones (en milisegundos)
     ),
   );
-
-  /*
-  return SizedBox(
-    width: double.infinity,
-    height: 181.0,
-    child: Swiper(
-      viewportFraction: 1,
-      scale: 1,
-      itemBuilder: (BuildContext context, index) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: ElevatedButton(
-            onPressed: () {
-              // Navegación basada en el índice seleccionado
-              switch (index) {
-                case 0:
-                  // Acción cuando se presiona el botón correspondiente al ítem 0
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const Farmacocinetica(), // Reemplaza con la pantalla deseada
-                    ),
-                  );
-                  break;
-                case 1:
-                  // Acción cuando se presiona el botón correspondiente al ítem 1
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const ListMedicamentos(), // Reemplaza con la pantalla deseada
-                    ),
-                  );
-                  break;
-                case 2:
-                  // Acción cuando se presiona el botón correspondiente al ítem 2
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const ListMedicamentos(), // Reemplaza con la pantalla deseada
-                    ),
-                  );
-                  break;
-                default:
-                  // Acción por defecto o para otros ítems si es necesario
-                  break;
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              maximumSize: Size.fromHeight(100),
-              backgroundColor: const Color.fromARGB(
-                  255, 255, 255, 255), // Color de fondo del botón
-            ),
-            child: Column(
-              children: [
-                Image.network(
-                  images2[index], // URL de la imagen
-                  fit: BoxFit
-                      .cover, // Ajusta la imagen para cubrir todo el espacio disponible
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-      itemCount: images2.length,
-      pagination: const SwiperPagination(),
-
-      autoplay: true, // Habilita la reproducción automática
-      autoplayDelay:
-          5000, // Establece el tiempo de espera entre transiciones (en milisegundos)
-    ),
-  );
-  */
 }

@@ -1,9 +1,8 @@
 //agregacion de generalidades
 // ignore_for_file: prefer_const_constructors, camel_case_types, prefer_interpolation_to_compose_strings, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, library_private_types_in_public_api
 
+import 'package:drugenius/Paginas/Nav_Bar.dart';
 import 'package:flutter/material.dart';
-
-
 
 class generalidades extends StatefulWidget {
   const generalidades({Key? key}) : super(key: key);
@@ -24,7 +23,7 @@ class _generalidadesState extends State<generalidades> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 207, 187, 4),
+        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         title: Text('Generalidades'),
         actions: <Widget>[
           PopupMenuButton<int>(
@@ -56,6 +55,7 @@ class _generalidadesState extends State<generalidades> {
           ),
         ],
       ),
+      drawer: const NavBar(),
       body: _pages[_selectedPageIndex],
     );
   }
@@ -102,10 +102,16 @@ class paginaIntrodFarmacologia extends StatelessWidget {
                 child: Center(
                   child: Wrap(
                     children: [
-                      Image.asset('assets/images/img1.jpeg',
-                          width: 100,
-                          height:
-                              100), // Cambia las dimensiones según tus necesidades
+                      Center(
+                        child: Image.asset(
+                          'assets/images/img1.jpeg',
+                          width: 400,
+                          height: 200,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+
+                      // Cambia las dimensiones según tus necesidades
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
@@ -132,14 +138,20 @@ class paginaIntrodFarmacologia extends StatelessWidget {
                             style: TextStyle(fontSize: 18),
                             textAlign: TextAlign.justify),
                       ),
-                      Image.asset('assets/images/img2.jpeg',
-                          width: 100,
-                          height:
-                              100), // Cambia las dimensiones según tus necesidades
+                      Center(
+                        child: Image.asset(
+                          'assets/images/img2.jpeg',
+                          width: 300,
+                          height: 125,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      // Cambia las dimensiones según tus necesidades
                     ],
                   ),
                 ),
               ),
+              const SizedBox(height: 10),
               Container(
                 child: Center(
                   child: Text(
@@ -238,10 +250,15 @@ class paginaFARMACODINAMIA extends StatelessWidget {
                 child: Center(
                   child: Wrap(
                     children: [
-                      Image.asset('assets/images/img3.jpeg',
-                          width: 100,
-                          height:
-                              100), // Cambia las dimensiones según tus necesidades
+                      Center(
+                        child: Image.asset(
+                          'assets/images/img3.jpeg',
+                          width: 300,
+                          height: 200,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      // Cambia las dimensiones según tus necesidades
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
@@ -289,10 +306,15 @@ class paginaFARMACODINAMIA extends StatelessWidget {
                                   style: TextStyle(fontSize: 18),
                                   textAlign: TextAlign.justify),
                             ),
-                            Image.asset('assets/images/img4.jpeg',
-                                width: 100,
-                                height:
-                                    100), // Cambia las dimensiones según tus necesidades
+                            Center(
+                              child: Image.asset(
+                                'assets/images/img4.jpeg',
+                                width: 150,
+                                height: 150,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            // Cambia las dimensiones según tus necesidades
                           ],
                         ),
                       ),
@@ -308,10 +330,14 @@ class paginaFARMACODINAMIA extends StatelessWidget {
                       child: Center(
                         child: Wrap(
                           children: [
-                            Image.asset('assets/images/img5.jpeg',
-                                width: 100,
-                                height:
-                                    100), // Cambia las dimensiones según tus necesidades
+                            Center(
+                              child: Image.asset(
+                                'assets/images/img5.jpeg',
+                                width: 150,
+                                height: 150,
+                                fit: BoxFit.fill,
+                              ),
+                            ), // Cambia las dimensiones según tus necesidades
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
@@ -399,7 +425,7 @@ class paginaFARMACOCINETICA extends StatelessWidget {
           height: 10,
         ),
         Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0),
           child: Column(
             children: [
               Container(
@@ -421,19 +447,24 @@ class paginaFARMACOCINETICA extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 15.0),
           child: Column(
             children: [
               Container(
                 child: Center(
                   child: Wrap(
                     children: [
-                      Image.asset('assets/images/img6.jpeg',
-                          width: 100,
-                          height:
-                              100), // Cambia las dimensiones según tus necesidades
+                      Center(
+                        child: Image.asset(
+                          'assets/images/img6.jpeg',
+                          width: 200,
+                          height: 200,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
                         child: Text(
                             "El cuerpo humano restringe el acceso a moléculas extrañas; por tanto, para alcanzar su blanco dentro del cuerpo y tener un efecto terapéutico, las moléculas del fármaco deben cruzar una serie de barreras que condicionan el camino hacia su sitio blanco.\n\n"
                             "La comprensión de estos procesos y su interacción, así como el empleo de los principios farmacocinéticos incrementan la probabilidad del éxito terapéutico y reducen la aparición de eventos adversos debidos a los fármacos. \n\n",
@@ -448,7 +479,7 @@ class paginaFARMACOCINETICA extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 15.0),
           child: Column(
             children: [
               Container(
@@ -527,10 +558,14 @@ class paginaCUADROSBASICOS extends StatelessWidget {
                             style: TextStyle(fontSize: 18),
                             textAlign: TextAlign.justify),
                       ),
-                      Image.asset('assets/images/img7.jpeg',
-                          width: 100,
-                          height:
-                              100), // Cambia las dimensiones según tus necesidades
+                      Center(
+                        child: Image.asset(
+                          'assets/images/img7.jpeg',
+                          width: 300,
+                          height: 300,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -556,15 +591,21 @@ class paginaCUADROSBASICOS extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 15.0),
           child: Column(
             children: [
               Container(
                 child: Center(
                   child: Wrap(
                     children: [
-                      Image.asset('assets/images/img8.jpeg',
-                          width: 100, height: 100),
+                      Center(
+                        child: Image.asset(
+                          'assets/images/img8.jpeg',
+                          width: 200,
+                          height: 200,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text(

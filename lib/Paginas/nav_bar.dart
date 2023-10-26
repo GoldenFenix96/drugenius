@@ -5,8 +5,6 @@ import 'package:drugenius/Paginas/blank_page_calculadora.dart';
 import 'package:drugenius/Paginas/blank_page_evaluaciones.dart';
 import 'package:drugenius/Paginas/blank_page_foro.dart';
 import 'package:drugenius/Paginas/blank_page_games.dart';
-import 'package:drugenius/Paginas/configuracion.dart';
-import 'package:drugenius/Paginas/farmacocinetica.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/perfil.dart';
@@ -103,55 +101,41 @@ class _NavBarState extends State<NavBar> {
             icon: Icons.medication_liquid_outlined,
             onClicked: () => selectedItem(context, 2),
           ),
-          /*
-          const SizedBox(height: 10),
-          buildMenuItem(
-            text: "Farmacocinética",
-            icon: Icons.healing_outlined,
-            onClicked: () => selectedItem(context, 3),
-          ),
-          */
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Videos y Podcasts",
             icon: Icons.ondemand_video_outlined,
-            onClicked: () => selectedItem(context, 4),
+            onClicked: () => selectedItem(context, 3),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Evaluaciones",
             icon: Icons.quiz_outlined,
-            onClicked: () => selectedItem(context, 5),
+            onClicked: () => selectedItem(context, 4),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Juegos",
             icon: Icons.sports_esports_outlined,
-            onClicked: () => selectedItem(context, 6),
+            onClicked: () => selectedItem(context, 5),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Calculadora de Dosis",
             icon: Icons.calculate_outlined,
-            onClicked: () => selectedItem(context, 7),
+            onClicked: () => selectedItem(context, 6),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Foro de Discusión",
             icon: Icons.forum_outlined,
-            onClicked: () => selectedItem(context, 8),
+            onClicked: () => selectedItem(context, 7),
           ),
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Perfil",
             icon: Icons.account_circle,
-            onClicked: () => selectedItem(context, 9),
-          ),
-          const SizedBox(height: 10),
-          buildMenuItem(
-            text: "Configuración",
-            icon: Icons.settings,
-            onClicked: () => selectedItem(context, 10),
+            onClicked: () => selectedItem(context, 8),
           ),
         ],
       ),
@@ -208,20 +192,7 @@ void selectedItem(BuildContext context, int index) {
         ),
       );
       break;
-    //Farmacocinética
-    /*
     case 3:
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) =>
-              const Farmacocinetica(), // Reemplaza con la pantalla deseada
-        ),
-      );
-      break;
-      */
-    //Videos y Podcasts
-    case 4:
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -231,7 +202,7 @@ void selectedItem(BuildContext context, int index) {
       );
       break;
     //Evaluaciones
-    case 5:
+    case 4:
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -241,7 +212,7 @@ void selectedItem(BuildContext context, int index) {
       );
       break;
     //Juegos
-    case 6:
+    case 5:
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -251,7 +222,7 @@ void selectedItem(BuildContext context, int index) {
       );
       break;
     //Calculadora de Dosis
-    case 7:
+    case 6:
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -261,7 +232,7 @@ void selectedItem(BuildContext context, int index) {
       );
       break;
     //Foro de Discusión
-    case 8:
+    case 7:
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -271,22 +242,12 @@ void selectedItem(BuildContext context, int index) {
       );
       break;
     //Perfil
-    case 9:
+    case 8:
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) =>
               const Perfil(), // Reemplaza con la pantalla deseada
-        ),
-      );
-      break;
-    //Configuración
-    case 10:
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) =>
-              const Configuracion(), // Reemplaza con la pantalla deseada
         ),
       );
       break;
