@@ -7,7 +7,6 @@ class BlankPageCalculadora extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(255, 215, 135, 0.568),
       extendBodyBehindAppBar: false,
       appBar: AppBar(
         //automaticallyImplyLeading: false,

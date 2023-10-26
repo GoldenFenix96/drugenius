@@ -7,7 +7,6 @@ class BlankPageEvaluaciones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Color.fromRGBO(255, 232, 187, 1),
       extendBodyBehindAppBar: false,
       appBar: AppBar(
         //automaticallyImplyLeading: false,
@@ -16,7 +15,7 @@ class BlankPageEvaluaciones extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 22, 112, 177),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -67,7 +66,7 @@ class BlankPageEvaluaciones extends StatelessWidget {
                     const Color.fromARGB(255, 22, 112, 177),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Volver',
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
