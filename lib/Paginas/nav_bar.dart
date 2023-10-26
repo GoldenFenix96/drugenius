@@ -1,12 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drugenius/Clases/id_usuarios.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
-import 'package:drugenius/Paginas/blank_page.dart';
+import 'package:drugenius/Paginas/blank_page_calculadora.dart';
+import 'package:drugenius/Paginas/blank_page_evaluaciones.dart';
+import 'package:drugenius/Paginas/blank_page_foro.dart';
+import 'package:drugenius/Paginas/blank_page_games.dart';
 import 'package:drugenius/Paginas/configuracion.dart';
 import 'package:drugenius/Paginas/farmacocinetica.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/perfil.dart';
+import 'package:drugenius/Paginas/video_audio.dart';
 import 'package:drugenius/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -99,12 +103,14 @@ class _NavBarState extends State<NavBar> {
             icon: Icons.medication_liquid_outlined,
             onClicked: () => selectedItem(context, 2),
           ),
+          /*
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Farmacocinética",
             icon: Icons.healing_outlined,
             onClicked: () => selectedItem(context, 3),
           ),
+          */
           const SizedBox(height: 10),
           buildMenuItem(
             text: "Videos y Podcasts",
@@ -203,6 +209,7 @@ void selectedItem(BuildContext context, int index) {
       );
       break;
     //Farmacocinética
+    /*
     case 3:
       Navigator.push(
         context,
@@ -212,13 +219,14 @@ void selectedItem(BuildContext context, int index) {
         ),
       );
       break;
+      */
     //Videos y Podcasts
     case 4:
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) =>
-              const BlankPage(), // Reemplaza con la pantalla deseada
+              const VideoAudio(), // Reemplaza con la pantalla deseada
         ),
       );
       break;
@@ -228,7 +236,7 @@ void selectedItem(BuildContext context, int index) {
         context,
         MaterialPageRoute(
           //builder: (context) => Prueba(), // Reemplaza con la pantalla deseada
-          builder: (context) => BlankPage(),
+          builder: (context) => BlankPageEvaluaciones(),
         ),
       );
       break;
@@ -248,7 +256,7 @@ void selectedItem(BuildContext context, int index) {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              const BlankPage(), // Reemplaza con la pantalla deseada
+              const BlankPageCalculadora(), // Reemplaza con la pantalla deseada
         ),
       );
       break;
@@ -258,7 +266,7 @@ void selectedItem(BuildContext context, int index) {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              const BlankPage(), // Reemplaza con la pantalla deseada
+              const BlankPageForo(), // Reemplaza con la pantalla deseada
         ),
       );
       break;
