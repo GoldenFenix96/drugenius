@@ -24,6 +24,7 @@ void main() async {
   );
   runApp(const MaterialApp(
     home: LogginPage(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 

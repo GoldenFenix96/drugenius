@@ -73,7 +73,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                       padding: EdgeInsets.all(20),
                     ),
                     // Aquí se agrega el Slider
-                /*Slider(
+                    /*Slider(
                   value: _videoPlayerController.value.position.inSeconds.toDouble(),
                   min: 0,
                   max: _videoPlayerController.value.duration.inSeconds.toDouble(),
@@ -159,7 +159,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   ],
                 )
               : Container(),
-        )
-      );
+        ));
   }
 }
