@@ -549,7 +549,7 @@ class Firebase_services {
   Future<List<Map<String, dynamic>>?> getVideos() async {
     try {
       final QuerySnapshot medicamentosQuery =
-          await db.collection('Medicamentos').get();
+          await db.collection('Videos').get();
       final medicamentos =
           await Future.wait(medicamentosQuery.docs.map((medicamentoDoc) async {
         final imagenSnapshot = await medicamentoDoc.reference
