@@ -551,10 +551,23 @@ class Firebase_services {
       final QuerySnapshot videosQuery = await db.collection('Videos').get();
       final videos = await Future.wait(videosQuery.docs.map((videoDoc) async {
         final nombre = videoDoc['Nombre'];
+        final videoUrls = <String>[];
+
+        final videoUrlsQuery = await db
+            .collection('Videos')
+            .doc(videoDoc.id)
+            .collection('Video')
+            .get();
+
+        for (final videoUrlDoc in videoUrlsQuery.docs) {
+          final url = videoUrlDoc['videoUrl'];
+          videoUrls.add(url);
+        }
 
         return {
           'id': videoDoc.id,
           'nombre': nombre,
+          'videoUrls': videoUrls,
         };
       }));
       return videos;
@@ -562,24 +575,5 @@ class Firebase_services {
       print('Error al obtener los videos: $e');
       return null; // Manejo de errores
     }
-  }
-
-  // Obtener URL del video por ID
-  Future<String?> getVideoUrlById(String videoId) async {
-    try {
-      final videoRef = db.collection('Videos').doc(videoId);
-      final videoDoc = await videoRef.get();
-      if (videoDoc.exists) {
-        final videoUrlQuery = await videoRef.collection('Video').get();
-        if (videoUrlQuery.docs.isNotEmpty) {
-          // Supongo que solo hay un documento en la subcolección Video
-          final videoUrl = videoUrlQuery.docs.first['videoUrl'];
-          return videoUrl;
-        }
-      }
-    } catch (e) {
-      print('Error al obtener la URL del video: $e');
-    }
-    return null; // Manejo de errores
   }
 }
