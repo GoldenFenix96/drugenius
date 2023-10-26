@@ -7,6 +7,7 @@ import 'package:drugenius/Paginas/farmacocinetica.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/perfil.dart';
+import 'package:drugenius/Paginas/video_audio.dart';
 import 'package:drugenius/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -218,7 +219,7 @@ void selectedItem(BuildContext context, int index) {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              const BlankPage(), // Reemplaza con la pantalla deseada
+              const VideoAudio(), // Reemplaza con la pantalla deseada
         ),
       );
       break;
