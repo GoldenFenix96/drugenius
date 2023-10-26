@@ -23,7 +23,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MaterialApp(
-    home: LogginPage(),
+    home: DrugeniusMenu(),
   ));
 }
 
@@ -157,7 +157,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-            imageNet: 'https://i.ibb.co/74M1Zv2/Generalidades.png',
+            imageNet: 'https://i.ibb.co/RbF9r98/Generalidades-icono.png',
             onPressed: () {
               Navigator.push(
                 context,
@@ -191,7 +191,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-              imageNet: 'https://i.ibb.co/DgQd0Bt/Medicamentos.png',
+              imageNet: 'https://i.ibb.co/C5QYQnc/Medicamentos-icono.png',
               onPressed: () {
                 Navigator.push(
                   context,
@@ -222,7 +222,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-              imageNet: 'https://i.ibb.co/KqMrc9H/Evaluaciones.png',
+              imageNet: 'https://i.ibb.co/k1zSJ8V/Evaluaciones-icono.png',
               onPressed: () {
                 Navigator.push(
                   context,
@@ -255,7 +255,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-            imageNet: 'https://i.ibb.co/tP1Lw7v/Juegos.png',
+            imageNet: 'https://i.ibb.co/J31jbkP/Juegos-icono.png',
             onPressed: () {
               Navigator.push(
                 context,
@@ -289,7 +289,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-            imageNet: 'https://i.ibb.co/gvKB3ky/Microphone-2368447.png',
+            imageNet: 'https://i.ibb.co/Twr8dw8/Videopodcast-icono.png',
             onPressed: () {
               Navigator.push(
                 context,
@@ -327,7 +327,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-              imageNet: 'https://i.ibb.co/NVcvYJ7/charla-3.png',
+              imageNet: 'https://i.ibb.co/0tQdZpr/Foro-icono2.png',
               onPressed: () {
                 Navigator.push(
                   context,
@@ -364,7 +364,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-              imageNet: 'https://i.ibb.co/RBtCRNQ/Calculator-7739181.png',
+              imageNet: 'https://i.ibb.co/NCyS2SK/Calculadora-icono.png',
               onPressed: () {
                 Navigator.push(
                   context,
