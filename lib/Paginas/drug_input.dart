@@ -22,6 +22,8 @@ List<File?> imagenes = [];
 List<File?> farmacocinetica = [];
 
 List<Map> selectedCuadros = [];
+List<String> grupo = [];
+List<String> subgrupo = [];
 final TextEditingController otroNombreController = TextEditingController();
 final TextEditingController nombreController = TextEditingController();
 final TextEditingController presentacionController = TextEditingController();
@@ -48,6 +50,26 @@ class _DrugInputState extends State<DrugInput> {
     efectosController.clear();
     contraController.clear();
     posologiaController.clear();
+    obtenerGrupos();
+    obtenerSubgrupos();
+  }
+
+  Future<void> obtenerGrupos() async {
+    final gruposObtenidos = await fs.getGrupos();
+    if (gruposObtenidos != null) {
+      setState(() {
+        grupo = gruposObtenidos;
+      });
+    }
+  }
+
+  Future<void> obtenerSubgrupos() async {
+    final subgruposObtenidos = await fs.getSubgrupos();
+    if (subgruposObtenidos != null) {
+      setState(() {
+        subgrupo = subgruposObtenidos;
+      });
+    }
   }
 
   void setSelectedImages(List<File?> selectedImages) {
@@ -112,6 +134,14 @@ class _DrugInputState extends State<DrugInput> {
     for (int i = 0; i < farmacocinetica.length; i++) {
       print('Ruta de la imagen $i: ${farmacocinetica[i].path}');
     }
+  }
+
+  Future<void> _registrarGrupo(String grupoFar) async {
+    await fs.addGrupo(grupoFar);
+  }
+
+  Future<void> _registrarSubgrupo(String subgrupoFar) async {
+    await fs.addSubgrupo(subgrupoFar);
   }
 
   Future<void> _registrarMedicamento() async {
@@ -440,14 +470,6 @@ class _DrugInputState extends State<DrugInput> {
           "Dosis: Tomar 1 comprimido de 400 mg.\nFrecuencia: Tomar cada 6 horas según sea necesario para el dolor o la fiebre. No tomar más de 4 comprimidos (1600 mg) en un período de 24 horas.\nDuración: No tomar durante más de 7 días sin consultar a un médico.",
       onChanged: (value) {},
     );
-    /*
-    return myTextFieldGeneral(
-      controller: posologiaController,
-      labelTxt: "Posología",
-      hintText: "Ejemplo...",
-      onChanged: (value) {},
-    );
-    */
   }
 
   _farmacocineticaMedicamento() {
@@ -506,8 +528,6 @@ class _DrugInputState extends State<DrugInput> {
     );
   }
 
-  List<String> grupo = ['AINES'];
-
   _grupoMedicamento() {
     return Column(
       children: [
@@ -559,9 +579,8 @@ class _DrugInputState extends State<DrugInput> {
     );
   }
 
-  _agregarGrupo(BuildContext context) async {
-    TextEditingController textController =
-        TextEditingController(); // Crear un controlador de texto
+  Future<void> _agregarGrupo(BuildContext context) async {
+    TextEditingController textController = TextEditingController();
 
     await showDialog(
       context: context,
@@ -569,7 +588,7 @@ class _DrugInputState extends State<DrugInput> {
         return AlertDialog(
           title: const Text("Agregar nuevo grupo"),
           content: TextField(
-            controller: textController, // Usar el controlador de texto
+            controller: textController,
           ),
           actions: [
             TextButton(
@@ -579,11 +598,14 @@ class _DrugInputState extends State<DrugInput> {
               child: const Text("Cancelar"),
             ),
             TextButton(
-              onPressed: () {
-                String nuevoGrupo = textController
-                    .text; // Obtener el valor del controlador de texto
-                Navigator.pop(
-                    context, nuevoGrupo); // Pasar el valor al cerrar el diálogo
+              onPressed: () async {
+                String nuevoGrupo = textController.text;
+                await _registrarGrupo(nuevoGrupo);
+
+                // Después de agregar el grupo, actualiza la lista de grupos
+                await obtenerGrupos();
+
+                Navigator.pop(context, nuevoGrupo);
               },
               child: const Text("Agregar"),
             ),
@@ -591,30 +613,91 @@ class _DrugInputState extends State<DrugInput> {
         );
       },
     );
-
-    if (textController.text.isNotEmpty) {
-      setState(() {
-        grupo.add(textController.text);
-      });
-    }
   }
 
   _subgrupoFarmacologico() {
-    List<String> subgrupo = [
-      'SALICILATOS',
-      'DERIV DEL ÁCIDO ACÉTICO',
-      'PARAAMINOFEROL',
-      'DERIV DEL ÁCIDO PROPIÓNICO'
-    ];
-    return MyDropDown(
-      list: subgrupo,
-      hintText: "Seleccione un sub-grupo",
-      value: "",
-      onChanged: (value) {
-        setState(() {
-          selectedSubGrupo = value;
-          print("selectedSubGrupo: $selectedSubGrupo");
-        });
+    return Column(
+      children: [
+        MyDropDown(
+          list: subgrupo,
+          hintText: "Seleccione un subgrupo",
+          value: "",
+          onChanged: (value) {
+            // Actualiza el valor seleccionado en la variable 'selectedGrupo'
+            setState(() {
+              selectedSubGrupo = value;
+              print("selectedSubGrupo: $selectedSubGrupo");
+            });
+          },
+        ),
+        const SizedBox(height: 15.0),
+        Container(
+          width: MediaQuery.of(context).size.width * 1,
+          height: 55.0,
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
+          ),
+          child: ElevatedButton(
+            onPressed: () {
+              _agregarSubGrupo(context);
+            },
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all<OutlinedBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              backgroundColor: MaterialStateProperty.all<Color>(
+                const Color.fromARGB(255, 240, 240, 240),
+              ),
+            ),
+            child: const Text(
+              "Agregar otro subgrupo",
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Future<void> _agregarSubGrupo(BuildContext context) async {
+    TextEditingController textController = TextEditingController();
+
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Agregar nuevo subgrupo"),
+          content: TextField(
+            controller: textController,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Cancelar"),
+            ),
+            TextButton(
+              onPressed: () async {
+                String nuevoSubgrupo = textController.text;
+                await _registrarSubgrupo(nuevoSubgrupo);
+
+                // Después de agregar el grupo, actualiza la lista de grupos
+                await obtenerSubgrupos();
+
+                Navigator.pop(context, nuevoSubgrupo);
+              },
+              child: const Text("Agregar"),
+            ),
+          ],
+        );
       },
     );
   }
