@@ -117,9 +117,9 @@ class _FullExampleState extends State<FullExample> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Image.network(
-              'https://cdn-icons-png.flaticon.com/512/49/49775.png',
+              'https://i.ibb.co/YfQmF2P/Dise-o-Podcast.png',
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 40),
             const Text(
               'Episodio 1',
               style: TextStyle(

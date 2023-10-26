@@ -55,7 +55,17 @@ class _VideoInputState extends State<VideoInput> {
           content: Text('Debe ingresar el nombre del Video'),
         ),
       );
+      return; // No continuamos si el nombre está vacío
     }
+
+    
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
 
     try {
       // Obtén el contexto antes de entrar al bloque try-catch
@@ -75,26 +85,35 @@ class _VideoInputState extends State<VideoInput> {
         }
 
         // Continúa con cualquier otra lógica o navegación necesaria
-        Navigator.pop(context);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Videos(),
-          ),
-        );
-      } else {
-        // Registro fallido, muestra un mensaje de error
-        ScaffoldMessenger.of(currentContext).showSnackBar(
-          const SnackBar(
-            content: Text('Ha ocurrido un error al registrar el video.'),
-          ),
-        );
-      }
-    } catch (e) {
-      print('Error al registrar Video: $e');
-      // Maneja el error según tus necesidades
+      Navigator.pop(context);
+
+      // Muestra el mensaje de registro exitoso
+      ScaffoldMessenger.of(currentContext).showSnackBar(
+        const SnackBar(
+          content: Text('Registro exitoso'),
+        ),
+      );
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Videos(),
+        ),
+      );
+    } else {
+      // Registro fallido, muestra un mensaje de error
+      ScaffoldMessenger.of(currentContext).showSnackBar(
+        const SnackBar(
+          content: Text('Ha ocurrido un error al registrar el video.'),
+        ),
+      );
     }
+  } catch (e) {
+    print('Error al registrar video: $e');
+    // Maneja el error según tus necesidades
   }
+}
+
 
   @override
   void initState() {

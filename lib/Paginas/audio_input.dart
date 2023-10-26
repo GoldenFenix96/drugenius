@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:drugenius/Componentes/my_audiopicker2.dart';
+import 'package:drugenius/Componentes/my_audiopicker.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
-import 'package:drugenius/Paginas/nav_audios/audios.dart';
+import 'package:drugenius/Paginas/addMulti.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 
@@ -44,69 +44,87 @@ class _AudioInputState extends State<AudioInput> {
   }
 
   Future<void> _registrarAudio() async {
-    final nombre = nombreController.text;
-    final creador = creadorController.text;
+  final nombre = nombreController.text;
+  final creador = creadorController.text;
 
-    print("Salto de linea para los audios");
-    validarAudio(audios.whereType<File>().toList());
-    print('Nombre: $nombre');
-    print('Creador: $creador');
+  print("Salto de linea para los audios");
+  validarAudio(audios.whereType<File>().toList());
+  print('Nombre: $nombre');
+  print('Creador: $creador');
 
-    if (nombre.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Debe ingresar el nombre del Podcast'),
-        ),
-      );
-    }
-
-    if (creador.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Debe ingresar el creador del Podcast'),
-        ),
-      );
-    }
-
-    try {
-      // Obtén el contexto antes de entrar al bloque try-catch
-      final currentContext = context;
-
-      // Llama a tu función de registro
-      final resultadoRegistro = await fs.addTAudio(
-        nombre,
-        creador,
-      );
-
-      if (resultadoRegistro != null) {
-        // Guardar audios en Firebase Storage y URLs en Firestore
-        for (int i = 0; i < audios.length; i++) {
-          final audioFile = audios[i];
-          await fs.uploadAudioToStorageAndFirestore(
-              resultadoRegistro, audioFile!);
-        }
-
-        // Continúa con cualquier otra lógica o navegación necesaria
-        Navigator.pop(context);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Audios(),
-          ),
-        );
-      } else {
-        // Registro fallido, muestra un mensaje de error
-        ScaffoldMessenger.of(currentContext).showSnackBar(
-          const SnackBar(
-            content: Text('Ha ocurrido un error al registrar el audio.'),
-          ),
-        );
-      }
-    } catch (e) {
-      print('Error al registrar Audio: $e');
-      // Maneja el error según tus necesidades
-    }
+  if (nombre.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Debe ingresar el nombre del Podcast'),
+      ),
+    );
+    return; // No continuamos si el nombre está vacío
   }
+
+  if (creador.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Debe ingresar el creador del Podcast'),
+      ),
+    );
+    return; // No continuamos si el creador está vacío
+  }
+
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      });
+
+  try {
+    // Obtén el contexto antes de entrar al bloque try-catch
+    final currentContext = context;
+
+    // Llama a tu función de registro
+    final resultadoRegistro = await fs.addTAudio(
+      nombre,
+      creador,
+    );
+
+    if (resultadoRegistro != null) {
+      // Guardar audios en Firebase Storage y URLs en Firestore
+      for (int i = 0; i < audios.length; i++) {
+        final audioFile = audios[i];
+        await fs.uploadAudioToStorageAndFirestore(
+            resultadoRegistro, audioFile!);
+      }
+
+      // Continúa con cualquier otra lógica o navegación necesaria
+      Navigator.pop(context);
+
+      // Muestra el mensaje de registro exitoso
+      ScaffoldMessenger.of(currentContext).showSnackBar(
+        const SnackBar(
+          content: Text('Registro exitoso'),
+        ),
+      );
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const AddMulti(),
+        ),
+      );
+    } else {
+      // Registro fallido, muestra un mensaje de error
+      ScaffoldMessenger.of(currentContext).showSnackBar(
+        const SnackBar(
+          content: Text('Ha ocurrido un error al registrar el audio.'),
+        ),
+      );
+    }
+  } catch (e) {
+    print('Error al registrar Audio: $e');
+    // Maneja el error según tus necesidades
+  }
+}
 
   @override
   void initState() {
@@ -257,7 +275,7 @@ class _AudioInputState extends State<AudioInput> {
               margin: const EdgeInsets.symmetric(
                 horizontal: 25.0,
               ),
-              child: AudioPickerWidget2(updateAudios: updateAudios),
+              child: AudioPickerWidget(updateAudios: updateAudios),
             ),
           ),
         ],
@@ -265,3 +283,78 @@ class _AudioInputState extends State<AudioInput> {
     );
   }
 }
+
+/*
+Future<void> _registrarAudio() async {
+    final nombre = nombreController.text;
+    final creador = creadorController.text;
+
+    print("Salto de linea para los audios");
+    validarAudio(audios.whereType<File>().toList());
+    print('Nombre: $nombre');
+    print('Creador: $creador');
+
+    if (nombre.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Debe ingresar el nombre del Podcast'),
+        ),
+      );
+    }
+
+    if (creador.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Debe ingresar el creador del Podcast'),
+        ),
+      );
+    }
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    try {
+      // Obtén el contexto antes de entrar al bloque try-catch
+      final currentContext = context;
+
+      // Llama a tu función de registro
+      final resultadoRegistro = await fs.addTAudio(
+        nombre,
+        creador,
+      );
+
+      if (resultadoRegistro != null) {
+        // Guardar audios en Firebase Storage y URLs en Firestore
+        for (int i = 0; i < audios.length; i++) {
+          final audioFile = audios[i];
+          await fs.uploadAudioToStorageAndFirestore(
+              resultadoRegistro, audioFile!);
+        }
+
+        // Continúa con cualquier otra lógica o navegación necesaria
+        Navigator.pop(context);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Audios(),
+          ),
+        );
+      } else {
+        // Registro fallido, muestra un mensaje de error
+        ScaffoldMessenger.of(currentContext).showSnackBar(
+          const SnackBar(
+            content: Text('Ha ocurrido un error al registrar el audio.'),
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error al registrar Audio: $e');
+      // Maneja el error según tus necesidades
+    }
+  }
+*/

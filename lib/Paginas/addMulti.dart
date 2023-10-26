@@ -51,7 +51,7 @@ class _AddMultiState extends State<AddMulti> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.red,
+                    color: Colors.lightBlue,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +77,7 @@ class _AddMultiState extends State<AddMulti> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.green,
+                    color: Colors.amber,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

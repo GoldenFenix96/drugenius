@@ -72,6 +72,16 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                     const Padding(
                       padding: EdgeInsets.all(20),
                     ),
+                    // Aquí se agrega el Slider
+                /*Slider(
+                  value: _videoPlayerController.value.position.inSeconds.toDouble(),
+                  min: 0,
+                  max: _videoPlayerController.value.duration.inSeconds.toDouble(),
+                  onChanged: (value) {
+                    // Cuando el usuario ajusta el Slider, cambiamos la posición del video
+                    _videoPlayerController.seekTo(Duration(seconds: value.toInt()));
+                  },
+                ),*/
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -149,6 +159,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   ],
                 )
               : Container(),
-        ));
+        )
+      );
   }
 }
