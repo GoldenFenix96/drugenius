@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:drugenius/Componentes/my_audiopicker.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
-import 'package:drugenius/Paginas/nav_audios/audios.dart';
+import 'package:drugenius/Paginas/addMulti.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 
@@ -109,7 +109,7 @@ class _AudioInputState extends State<AudioInput> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const Audios(),
+          builder: (context) => const AddMulti(),
         ),
       );
     } else {
