@@ -54,6 +54,7 @@ class _VideosState extends State<Videos> {
           final id = video['id'];
           final nombre = video['nombre'];
           final videoUrls = video['videoUrls'];
+          
 
           return Column(
             children: [
@@ -64,6 +65,18 @@ class _VideosState extends State<Videos> {
                 ),
                 child: Center(
                   child: ListTile(
+                    leading: video['imagenUrl'] != null &&
+                                  video['imagenUrl'].isNotEmpty
+                              ? SizedBox(
+                                  width: 60,
+                                  height: 50,
+                                  child: Image.network(
+                                    video['imagenUrl'],
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              : const SizedBox
+                                  .shrink(), //
                     title: Text(
                       nombre,
                       style: const TextStyle(

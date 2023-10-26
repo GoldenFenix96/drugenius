@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:drugenius/Componentes/my_imagepicker.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
 import 'package:drugenius/Componentes/my_videopicker.dart';
 import 'package:drugenius/Paginas/nav_videos/videos.dart';
@@ -14,7 +15,7 @@ class VideoInput extends StatefulWidget {
 }
 
 List<File?> videos = [];
-
+List<File?> imagenes = [];
 List<Map> selectedCuadros = [];
 
 final TextEditingController nombreController = TextEditingController();
@@ -42,11 +43,35 @@ class _VideoInputState extends State<VideoInput> {
     });
   }
 
+  void setSelectedImages(List<File?> selectedImages) {
+    setState(() {
+      imagenes = selectedImages
+          .map((image) => image?.path ?? '')
+          .cast<File>()
+          .toList();
+    });
+  }
+
+  void validarImagenes(List<File> imagenes) {
+    for (int i = 0; i < imagenes.length; i++) {
+      print('Ruta de la imagen $i: ${imagenes[i].path}');
+    }
+  }
+
+  void updateImagenes(List<File?> nuevasImagenes) {
+    // Actualiza la lista de imágenes en tu frame principal con las nuevas imágenes
+    setState(() {
+      imagenes = nuevasImagenes;
+    });
+  }
+
   Future<void> _registrarVideo() async {
     final nombre = nombreController.text;
 
     print("Salto de linea para los videos XD");
     validarVideos(videos.whereType<File>().toList());
+    print("Salto de linea para las miniaturas de los videos XD");
+    validarImagenes(imagenes.whereType<File>().toList());
     print('Nombre: $nombre');
 
     if (nombre.isEmpty) {
@@ -82,6 +107,11 @@ class _VideoInputState extends State<VideoInput> {
           final videoFile = videos[i];
           await fs.uploadVideoToStorageAndFirestore(
               resultadoRegistro, videoFile!);
+        }
+        for (int i = 0; i < imagenes.length; i++) {
+          final imageFile = imagenes[i];
+          await fs.uploadImageVideoToStorageAndFirestore(
+              resultadoRegistro, imageFile!);
         }
 
         // Continúa con cualquier otra lógica o navegación necesaria
@@ -179,10 +209,10 @@ class _VideoInputState extends State<VideoInput> {
                   const SizedBox(height: 30.0),
                   _videoT(),
                   const SizedBox(height: 15.0),
+                  _imagenVideo(),
+                  const SizedBox(height: 15.0),
                   _nombreVideo(),
                   const SizedBox(height: 15.0),
-
-                  const SizedBox(height: 30.0),
                   //BOTON
                   Container(
                     margin: const EdgeInsets.symmetric(
@@ -262,4 +292,29 @@ class _VideoInputState extends State<VideoInput> {
       ),
     );
   }
+
+  Widget _imagenVideo() {
+    return Center(
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 25.0),
+            alignment: Alignment.topLeft,
+            child: const Text(
+              "Miniatura del video",
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            child: Container(
+              //margin: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: ImagePickerWidget(updateImagenes: updateImagenes),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  // Resto de tu código de funciones _grupoMedicamento(), _subgrupoFarmacologico(), etc.
 }
+

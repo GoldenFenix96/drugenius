@@ -503,6 +503,62 @@ class Firebase_services {
     }
   }
 
+  //Agregar imagenes del video
+  Future<void> uploadImageVideoToStorageAndFirestore(
+      String documentId, File imageFile) async {
+    try {
+      // Subir la imagen a Firebase Storage
+      final storageReference = FirebaseStorage.instance
+          .ref()
+          .child('$documentId/${DateTime.now()}.png');
+      final uploadTask = storageReference.putFile(imageFile);
+      final TaskSnapshot storageTaskSnapshot = await uploadTask;
+
+      // Obtener la URL de la imagen en Firebase Storage
+      final imageUrl = await storageTaskSnapshot.ref.getDownloadURL();
+
+      // Almacenar la URL de la imagen en Firestore
+      final cuadroBasicoCollection = FirebaseFirestore.instance
+          .collection('Videos')
+          .doc(documentId)
+          .collection('Miniaturas'); // Cambia 'Imagenes' al nombre que desees
+      await cuadroBasicoCollection.add({
+        'imageUrl': imageUrl,
+      });
+    } catch (e) {
+      print("Error al cargar la imagen: $e");
+    }
+  }
+
+  // Actualizar imágenes del video
+  Future<void> updateVideoImages(
+    String documentId, // ID del video a actualizar
+    List<String> imagesToDelete, // Lista de URLs de imágenes a eliminar
+  ) async {
+    try {
+      final medicamentoDocument = db.collection('Videos').doc(documentId);
+
+      // Eliminar imágenes de Firebase Storage y Firestore
+      final imagenesCollection = medicamentoDocument.collection('Miniaturas');
+      for (final imageUrl in imagesToDelete) {
+        // Eliminar la imagen de Firebase Storage
+        final imageReference = FirebaseStorage.instance.refFromURL(imageUrl);
+        await imageReference.delete();
+
+        // Eliminar la imagen de Firestore
+        final querySnapshot = await imagenesCollection
+            .where('imageUrl', isEqualTo: imageUrl)
+            .get();
+        for (final doc in querySnapshot.docs) {
+          await imagenesCollection.doc(doc.id).delete();
+        }
+      }
+      print("Miniatura borrada con exito");
+    } catch (e) {
+      print("Error al actualizar las miniaturas del video: $e");
+    }
+  }
+
   //Agregar titulo del podcast
   Future<String?> addTAudio(
     String nombre,
@@ -555,7 +611,14 @@ class Firebase_services {
       final videos = await Future.wait(videosQuery.docs.map((videoDoc) async {
         final nombre = videoDoc['Nombre'];
         final videoUrls = <String>[];
-
+        final imagenSnapshot = await videoDoc.reference
+            .collection('Miniaturas')
+            .limit(1)
+            .get();
+        String imagenUrl = ''; // URL de la imagen
+        if (imagenSnapshot.docs.isNotEmpty) {
+          imagenUrl = imagenSnapshot.docs[0].get('imageUrl');
+        }
         final videoUrlsQuery = await db
             .collection('Videos')
             .doc(videoDoc.id)
@@ -571,6 +634,7 @@ class Firebase_services {
           'id': videoDoc.id,
           'nombre': nombre,
           'videoUrls': videoUrls,
+          'imagenUrl': imagenUrl,
         };
       }));
       return videos;
