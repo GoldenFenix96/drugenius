@@ -23,8 +23,12 @@ class _generalidadesState extends State<generalidades> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
         backgroundColor: const Color.fromARGB(255, 22, 112, 177),
-        title: Text('Generalidades'),
+        title: Text(
+          'Generalidades',
+          textAlign: TextAlign.center,
+        ),
         actions: <Widget>[
           PopupMenuButton<int>(
             onSelected: (int index) {
