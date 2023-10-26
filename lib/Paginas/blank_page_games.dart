@@ -7,7 +7,7 @@ class BlankPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(255, 215, 135, 0.568),
+      //backgroundColor: Color.fromRGBO(255, 232, 187, 1),
       extendBodyBehindAppBar: false,
       appBar: AppBar(
         //automaticallyImplyLeading: false,
@@ -16,6 +16,17 @@ class BlankPage extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 22, 112, 177),
       ),
       body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromRGBO(255, 255, 255, 1),
+              Color.fromRGBO(253, 200, 66, 0.143),
+            ],
+            stops: [0.1, 0.9],
+          ),
+        ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -56,9 +67,9 @@ class BlankPage extends StatelessWidget {
                     const Color.fromARGB(255, 22, 112, 177),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   'Volver',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               )
             ],

@@ -16,6 +16,17 @@ class BlankPageCalculadora extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 22, 112, 177),
       ),
       body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromRGBO(255, 255, 255, 1),
+              Color.fromRGBO(253, 200, 66, 0.143),
+            ],
+            stops: [0.1, 0.9],
+          ),
+        ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
