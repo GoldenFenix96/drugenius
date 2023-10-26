@@ -66,6 +66,8 @@ class _EditDrugState extends State<EditDrug> {
   void initState() {
     super.initState();
     // Llama al método para obtener el medicamento que se mostrará
+    obtenerGrupos();
+    obtenerSubgrupos();
     obtenerMedicamento();
     nombreController.clear();
     otroNombreController.clear();
@@ -724,7 +726,6 @@ class _EditDrugState extends State<EditDrug> {
   }
 
   Widget _grupoFarmacologico() {
-    obtenerGrupos();
     return Column(
       children: [
         Container(
@@ -835,7 +836,6 @@ class _EditDrugState extends State<EditDrug> {
   }
 
   Widget _subgrupoFarmacologico() {
-    obtenerSubgrupos();
     String selectedValue = widget.subgrupo;
 
     // O alternativamente, podrías establecerlo en el primer elemento de la lista:
