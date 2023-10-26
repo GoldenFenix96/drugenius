@@ -2,6 +2,10 @@
 
 import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Componentes/my_button_general.dart';
+import 'package:drugenius/Paginas/blank_page_calculadora.dart';
+import 'package:drugenius/Paginas/blank_page_evaluaciones.dart';
+import 'package:drugenius/Paginas/blank_page_foro.dart';
+import 'package:drugenius/Paginas/blank_page_games.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/loggin_page.dart';
@@ -11,9 +15,7 @@ import 'package:drugenius/Paginas/Nav_Bar.dart';
 
 //importaciones de FireBase
 import 'package:firebase_core/firebase_core.dart';
-import 'Paginas/blank_page.dart';
 import 'firebase_options.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -102,9 +104,10 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          _btnEvaluaciones(),
+                          _btnPodcastVideos(),
+
                           // Segundo Container
-                          _btnJuegos(),
+                          _btnForo(),
                         ],
                       ),
 
@@ -113,9 +116,9 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          _btnPodcastVideos(),
+                          _btnEvaluaciones(),
                           // Segundo Container
-                          _btnForo(),
+                          _btnCalculadora(),
                         ],
                       ),
 
@@ -124,9 +127,14 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          _btnCalculadora(),
+                          _btnJuegos(),
+
                           // Segundo Container
-                          _btnFarmacocinetica(),
+                          //_btnFarmacocinetica(),
+                          Container(
+                            width: 140,
+                            height: 160,
+                          )
                         ],
                       ),
                     ],
@@ -149,7 +157,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-            imageNet: 'https://i.ibb.co/74M1Zv2/Generalidades.png',
+            imageNet: 'https://i.ibb.co/RbF9r98/Generalidades-icono.png',
             onPressed: () {
               Navigator.push(
                 context,
@@ -183,7 +191,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-              imageNet: 'https://i.ibb.co/DgQd0Bt/Medicamentos.png',
+              imageNet: 'https://i.ibb.co/C5QYQnc/Medicamentos-icono.png',
               onPressed: () {
                 Navigator.push(
                   context,
@@ -193,8 +201,6 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                   ),
                 );
               }),
-          // Texto debajo del primer Container
-          // Espacio entre los contenedores
           const SizedBox(height: 5),
           const Text(
             'Medicamentos',
@@ -216,13 +222,13 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-              imageNet: 'https://i.ibb.co/KqMrc9H/Evaluaciones.png',
+              imageNet: 'https://i.ibb.co/k1zSJ8V/Evaluaciones-icono.png',
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        const BlankPage(), // Reemplaza con la pantalla deseada
+                        const BlankPageEvaluaciones(), // Reemplaza con la pantalla deseada
                   ),
                 );
               }),
@@ -249,7 +255,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-            imageNet: 'https://i.ibb.co/tP1Lw7v/Juegos.png',
+            imageNet: 'https://i.ibb.co/J31jbkP/Juegos-icono.png',
             onPressed: () {
               Navigator.push(
                 context,
@@ -283,7 +289,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-            imageNet: 'https://i.ibb.co/gvKB3ky/Microphone-2368447.png',
+            imageNet: 'https://i.ibb.co/Twr8dw8/Videopodcast-icono.png',
             onPressed: () {
               Navigator.push(
                 context,
@@ -321,13 +327,13 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-              imageNet: 'https://i.ibb.co/NVcvYJ7/charla-3.png',
+              imageNet: 'https://i.ibb.co/0tQdZpr/Foro-icono2.png',
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        const BlankPage(), // Reemplaza con la pantalla deseada
+                        const BlankPageForo(), // Reemplaza con la pantalla deseada
                   ),
                 );
               }),
@@ -358,13 +364,13 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
         // Primer Container
         children: [
           MyButtonHome(
-              imageNet: 'https://i.ibb.co/RBtCRNQ/Calculator-7739181.png',
+              imageNet: 'https://i.ibb.co/NCyS2SK/Calculadora-icono.png',
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        const BlankPage(), // Reemplaza con la pantalla deseada
+                        const BlankPageCalculadora(), // Reemplaza con la pantalla deseada
                   ),
                 );
               }),
@@ -374,43 +380,6 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
           const Expanded(
             child: Text(
               'Calculadora de dosis',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  _btnFarmacocinetica() {
-    return Container(
-      color: const Color.fromARGB(0, 255, 255, 255),
-      width: 140,
-      height: 160,
-      child: Column(
-        // Primer Container
-        children: [
-          MyButtonHome(
-              imageNet: 'https://i.ibb.co/MN7LQJZ/Drugs-4320344.png',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const BlankPage(), // Reemplaza con la pantalla deseada
-                  ),
-                );
-              }),
-          // Texto debajo del primer Container
-          // Espacio entre los contenedores
-          const SizedBox(height: 5),
-          const Expanded(
-            child: Text(
-              'Farmacocinética',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 16,
@@ -455,80 +424,4 @@ Widget swiperBox() {
           5000, // Establece el tiempo de espera entre transiciones (en milisegundos)
     ),
   );
-
-  /*
-  return SizedBox(
-    width: double.infinity,
-    height: 181.0,
-    child: Swiper(
-      viewportFraction: 1,
-      scale: 1,
-      itemBuilder: (BuildContext context, index) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: ElevatedButton(
-            onPressed: () {
-              // Navegación basada en el índice seleccionado
-              switch (index) {
-                case 0:
-                  // Acción cuando se presiona el botón correspondiente al ítem 0
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const Farmacocinetica(), // Reemplaza con la pantalla deseada
-                    ),
-                  );
-                  break;
-                case 1:
-                  // Acción cuando se presiona el botón correspondiente al ítem 1
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const ListMedicamentos(), // Reemplaza con la pantalla deseada
-                    ),
-                  );
-                  break;
-                case 2:
-                  // Acción cuando se presiona el botón correspondiente al ítem 2
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const ListMedicamentos(), // Reemplaza con la pantalla deseada
-                    ),
-                  );
-                  break;
-                default:
-                  // Acción por defecto o para otros ítems si es necesario
-                  break;
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              maximumSize: Size.fromHeight(100),
-              backgroundColor: const Color.fromARGB(
-                  255, 255, 255, 255), // Color de fondo del botón
-            ),
-            child: Column(
-              children: [
-                Image.network(
-                  images2[index], // URL de la imagen
-                  fit: BoxFit
-                      .cover, // Ajusta la imagen para cubrir todo el espacio disponible
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-      itemCount: images2.length,
-      pagination: const SwiperPagination(),
-
-      autoplay: true, // Habilita la reproducción automática
-      autoplayDelay:
-          5000, // Establece el tiempo de espera entre transiciones (en milisegundos)
-    ),
-  );
-  */
 }

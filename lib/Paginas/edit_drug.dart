@@ -37,7 +37,8 @@ List<List<String>> imagesdelete = [];
 List<String> farmaco = [];
 List<List<String>> farmacodelete = [];
 List<Map> cuadro = [];
-
+List<String> grupof = [];
+List<String> subgrupof = [];
 final TextEditingController otroNombreController = TextEditingController();
 final TextEditingController nombreController = TextEditingController();
 final TextEditingController presentacionController = TextEditingController();
@@ -75,6 +76,26 @@ class _EditDrugState extends State<EditDrug> {
     efectosController.clear();
     contraController.clear();
     posologiaController.clear();
+  }
+
+  Future<void> obtenerGrupos() async {
+    final gruposObtenidos = await fs.getGrupos();
+    if (gruposObtenidos != null) {
+      setState(() {
+        grupof = gruposObtenidos;
+        grupof = grupof.toSet().toList(); // Elimina duplicados
+      });
+    }
+  }
+
+  Future<void> obtenerSubgrupos() async {
+    final subgruposObtenidos = await fs.getSubgrupos();
+    if (subgruposObtenidos != null) {
+      setState(() {
+        subgrupof = subgruposObtenidos;
+        subgrupof = subgrupof.toSet().toList(); // Elimina duplicados
+      });
+    }
   }
 
   Future<void> obtenerMedicamento() async {
@@ -171,6 +192,14 @@ class _EditDrugState extends State<EditDrug> {
     for (int i = 0; i < imagesdelete.length; i++) {
       print('Ruta de la imagen borrada $i: ${imagesdelete[i]}');
     }
+  }
+
+  Future<void> _registrarGrupo(String grupoFar) async {
+    await fs.addGrupo(grupoFar);
+  }
+
+  Future<void> _registrarSubgrupo(String subgrupoFar) async {
+    await fs.addSubgrupo(subgrupoFar);
   }
 
   Future<void> _actualizarMedicamento() async {
@@ -694,9 +723,8 @@ class _EditDrugState extends State<EditDrug> {
     );
   }
 
-  List<String> grupof = ['AINES'];
-
   Widget _grupoFarmacologico() {
+    obtenerGrupos();
     return Column(
       children: [
         Container(
@@ -728,6 +756,7 @@ class _EditDrugState extends State<EditDrug> {
               onChanged: (String? value) {
                 setState(() {
                   widget.grupo = value!;
+                  print("selectedSubGrupo: ${widget.grupo}");
                 });
               },
             ),
@@ -769,9 +798,8 @@ class _EditDrugState extends State<EditDrug> {
     );
   }
 
-  _agregarGrupo(BuildContext context) async {
-    TextEditingController textController =
-        TextEditingController(); // Crear un controlador de texto
+  Future<void> _agregarGrupo(BuildContext context) async {
+    TextEditingController textController = TextEditingController();
 
     await showDialog(
       context: context,
@@ -779,7 +807,7 @@ class _EditDrugState extends State<EditDrug> {
         return AlertDialog(
           title: const Text("Agregar nuevo grupo"),
           content: TextField(
-            controller: textController, // Usar el controlador de texto
+            controller: textController,
           ),
           actions: [
             TextButton(
@@ -789,11 +817,14 @@ class _EditDrugState extends State<EditDrug> {
               child: const Text("Cancelar"),
             ),
             TextButton(
-              onPressed: () {
-                String nuevoGrupo = textController
-                    .text; // Obtener el valor del controlador de texto
-                Navigator.pop(
-                    context, nuevoGrupo); // Pasar el valor al cerrar el diálogo
+              onPressed: () async {
+                String nuevoGrupo = textController.text;
+                await _registrarGrupo(nuevoGrupo);
+
+                // Después de agregar el grupo, actualiza la lista de grupos
+                await obtenerGrupos();
+
+                Navigator.pop(context, nuevoGrupo);
               },
               child: const Text("Agregar"),
             ),
@@ -801,59 +832,125 @@ class _EditDrugState extends State<EditDrug> {
         );
       },
     );
-
-    if (textController.text.isNotEmpty) {
-      setState(() {
-        grupof.add(textController.text);
-      });
-    }
   }
 
-  List<String> subgrup = [
-    'SALICILATOS',
-    'DERIV DEL ÁCIDO ACÉTICO',
-    'PARAAMINOFEROL',
-    'DERIV DEL ÁCIDO PROPIÓNICO'
-  ];
-
   Widget _subgrupoFarmacologico() {
-    // Agregar widget.subgrupo a la lista subgrup si no está presente
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 25.0,
-      ),
-      child: Center(
-        child: DropdownButtonFormField<String>(
-          decoration: const InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(255, 204, 204, 204),
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
-            ),
-            fillColor: Color.fromARGB(255, 204, 204, 204),
-            filled: true,
-            prefixIcon: Icon(Icons.text_format_outlined),
+    obtenerSubgrupos();
+    String selectedValue = widget.subgrupo;
+
+    // O alternativamente, podrías establecerlo en el primer elemento de la lista:
+    if (subgrupof.isNotEmpty) {
+      selectedValue = subgrupof[0];
+      // }
+    }
+
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
           ),
-          value: widget.subgrupo,
-          items: subgrup.map((name) {
-            return DropdownMenuItem<String>(
-              value: name,
-              child: Text(
-                name,
-                style: TextStyle(fontSize: 15),
+          child: Center(
+            child: DropdownButtonFormField<String>(
+              decoration: const InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 204, 204, 204),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
+                ),
+                fillColor: Color.fromARGB(255, 204, 204, 204),
+                filled: true,
+                prefixIcon: Icon(Icons.text_format_outlined),
               ),
-            );
-          }).toList(),
-          onChanged: (String? value) {
-            setState(() {
-              widget.subgrupo = value!;
-            });
-          },
+              value: selectedValue,
+              items: subgrupof.map((name) {
+                return DropdownMenuItem<String>(
+                  value: name,
+                  child: Text(name),
+                );
+              }).toList(),
+              onChanged: (String? value) {
+                setState(() {
+                  widget.subgrupo = value ?? "";
+                  print(
+                      "selectedSubGrupo: ${widget.subgrupo}"); // Asignar una cadena vacía en lugar de null si se selecciona null
+                });
+              },
+            ),
+          ),
         ),
-      ),
+        const SizedBox(height: 15.0),
+        Container(
+          width: MediaQuery.of(context).size.width * 1,
+          height: 55.0,
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
+          ),
+          child: ElevatedButton(
+            onPressed: () {
+              _agregarSubGrupo(context);
+            },
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all<OutlinedBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              backgroundColor: MaterialStateProperty.all<Color>(
+                const Color.fromARGB(255, 240, 240, 240),
+              ),
+            ),
+            child: const Text(
+              "Agregar otro subgrupo",
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Future<void> _agregarSubGrupo(BuildContext context) async {
+    TextEditingController textController = TextEditingController();
+
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Agregar nuevo subgrupo"),
+          content: TextField(
+            controller: textController,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Cancelar"),
+            ),
+            TextButton(
+              onPressed: () async {
+                String nuevoSubgrupo = textController.text;
+                await _registrarSubgrupo(nuevoSubgrupo);
+
+                // Después de agregar el grupo, actualiza la lista de grupos
+                await obtenerSubgrupos();
+
+                Navigator.pop(context, nuevoSubgrupo);
+              },
+              child: const Text("Agregar"),
+            ),
+          ],
+        );
+      },
     );
   }
 

@@ -488,11 +488,11 @@ class Firebase_services {
       final videoUrl = await storageTaskSnapshot.ref.getDownloadURL();
 
       // Almacenar la URL del video en Firestore
-      final cuadroBasicoCollection = FirebaseFirestore.instance
+      final videoCollection = FirebaseFirestore.instance
           .collection('Videos')
           .doc(documentId)
           .collection('Video');
-      await cuadroBasicoCollection.add({
+      await videoCollection.add({
         'videoUrl': videoUrl,
       });
     } catch (e) {
@@ -542,6 +542,107 @@ class Firebase_services {
       });
     } catch (e) {
       print("Error al cargar el audio: $e");
+    }
+  }
+
+  //Listar videos
+  Future<List<Map<String, dynamic>>?> getVideos() async {
+    try {
+      final QuerySnapshot videosQuery = await db.collection('Videos').get();
+      final videos = await Future.wait(videosQuery.docs.map((videoDoc) async {
+        final nombre = videoDoc['Nombre'];
+        final videoUrls = <String>[];
+
+        final videoUrlsQuery = await db
+            .collection('Videos')
+            .doc(videoDoc.id)
+            .collection('Video')
+            .get();
+
+        for (final videoUrlDoc in videoUrlsQuery.docs) {
+          final url = videoUrlDoc['videoUrl'];
+          videoUrls.add(url);
+        }
+
+        return {
+          'id': videoDoc.id,
+          'nombre': nombre,
+          'videoUrls': videoUrls,
+        };
+      }));
+      return videos;
+    } catch (e) {
+      print('Error al obtener los videos: $e');
+      return null; // Manejo de errores
+    }
+  }
+
+  //Agregar Grupo
+  Future<String?> addGrupo(
+    String grupo,
+  ) async {
+    try {
+      // 1. Agregar el medicamento a Firestore
+      DocumentReference documentReference = await db.collection('Grupo').add({
+        'Nombre': grupo,
+      });
+
+      return documentReference.id;
+    } catch (e) {
+      print("Ha ocurrido un error al agregar el grupo: $e");
+      return null;
+    }
+  }
+
+  Future<List<String>?> getGrupos() async {
+    try {
+      // Realiza una consulta para obtener todos los documentos de la colección 'Grupo'
+      QuerySnapshot gruposQuery = await db.collection('Grupo').get();
+
+      // Convierte los documentos en una lista de Map
+      List<String> grupos = gruposQuery.docs.map((grupoDoc) {
+        return grupoDoc['Nombre'] as String;
+      }).toList();
+
+      return grupos;
+    } catch (e) {
+      print('Error al obtener los grupos: $e');
+      return null; // Manejo de errores
+    }
+  }
+
+  //Agregar Subgrupo
+  Future<String?> addSubgrupo(
+    String subgrupo,
+  ) async {
+    try {
+      // 1. Agregar el medicamento a Firestore
+      DocumentReference documentReference =
+          await db.collection('Subgrupo').add({
+        'Nombre': subgrupo,
+      });
+
+      return documentReference.id;
+    } catch (e) {
+      print("Ha ocurrido un error al agregar el subgrupo: $e");
+      return null;
+    }
+  }
+
+  Future<List<String>?> getSubgrupos() async {
+    try {
+      // Realiza una consulta para obtener todos los documentos de la colección 'Grupo'
+      QuerySnapshot gruposQuery = await db.collection('Subgrupo').get();
+
+      // Convierte los documentos en una lista de Map
+      List<String> subgrupos = gruposQuery.docs.map((grupoDoc) {
+        return grupoDoc['Nombre'] as String;
+      }).toList();
+
+      return subgrupos;
+    } catch (e) {
+      print('Error al obtener los subgrupos: $e');
+      return null; // Manejo de errores
     }
   }
 }
