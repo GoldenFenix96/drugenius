@@ -548,30 +548,38 @@ class Firebase_services {
   //Listar videos
   Future<List<Map<String, dynamic>>?> getVideos() async {
     try {
-      final QuerySnapshot medicamentosQuery =
-          await db.collection('Videos').get();
-      final medicamentos =
-          await Future.wait(medicamentosQuery.docs.map((medicamentoDoc) async {
-        final imagenSnapshot = await medicamentoDoc.reference
-            .collection('Imagenes')
-            .limit(1)
-            .get();
-        String imagenUrl = ''; // URL de la imagen
-        if (imagenSnapshot.docs.isNotEmpty) {
-          imagenUrl = imagenSnapshot.docs[0].get('imageUrl');
-        }
+      final QuerySnapshot videosQuery = await db.collection('Videos').get();
+      final videos = await Future.wait(videosQuery.docs.map((videoDoc) async {
+        final nombre = videoDoc['Nombre'];
+
         return {
-          'id': medicamentoDoc.id,
-          'nombre': medicamentoDoc['Nombre'],
-          'grupo': medicamentoDoc['Grupo'],
-          'subgrupo': medicamentoDoc['Subgrupo'],
-          'imagenUrl': imagenUrl,
+          'id': videoDoc.id,
+          'nombre': nombre,
         };
       }));
-      return medicamentos;
+      return videos;
     } catch (e) {
-      print('Error al obtener los medicamentos: $e');
+      print('Error al obtener los videos: $e');
       return null; // Manejo de errores
     }
+  }
+
+  // Obtener URL del video por ID
+  Future<String?> getVideoUrlById(String videoId) async {
+    try {
+      final videoRef = db.collection('Videos').doc(videoId);
+      final videoDoc = await videoRef.get();
+      if (videoDoc.exists) {
+        final videoUrlQuery = await videoRef.collection('Video').get();
+        if (videoUrlQuery.docs.isNotEmpty) {
+          // Supongo que solo hay un documento en la subcolección Video
+          final videoUrl = videoUrlQuery.docs.first['videoUrl'];
+          return videoUrl;
+        }
+      }
+    } catch (e) {
+      print('Error al obtener la URL del video: $e');
+    }
+    return null; // Manejo de errores
   }
 }
