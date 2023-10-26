@@ -2,6 +2,10 @@
 
 import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Componentes/my_button_general.dart';
+import 'package:drugenius/Paginas/blank_page_calculadora.dart';
+import 'package:drugenius/Paginas/blank_page_evaluaciones.dart';
+import 'package:drugenius/Paginas/blank_page_foro.dart';
+import 'package:drugenius/Paginas/blank_page_games.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/loggin_page.dart';
@@ -11,7 +15,6 @@ import 'package:drugenius/Paginas/Nav_Bar.dart';
 
 //importaciones de FireBase
 import 'package:firebase_core/firebase_core.dart';
-import 'Paginas/blank_page.dart';
 import 'firebase_options.dart';
 
 
@@ -102,9 +105,10 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          _btnEvaluaciones(),
+                          _btnPodcastVideos(),
+                          
                           // Segundo Container
-                          _btnJuegos(),
+                          _btnForo(),
                         ],
                       ),
 
@@ -113,9 +117,10 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          _btnPodcastVideos(),
+                          _btnEvaluaciones(),
                           // Segundo Container
-                          _btnForo(),
+                          _btnCalculadora(),
+                          
                         ],
                       ),
 
@@ -124,9 +129,12 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          _btnCalculadora(),
+                          _btnJuegos(),
+                          
                           // Segundo Container
-                          _btnFarmacocinetica(),
+                          //_btnFarmacocinetica(),
+                          Container(width: 140,
+      height: 160,)
                         ],
                       ),
                     ],
@@ -222,7 +230,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        const BlankPage(), // Reemplaza con la pantalla deseada
+                        const BlankPageEvaluaciones(), // Reemplaza con la pantalla deseada
                   ),
                 );
               }),
@@ -327,7 +335,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        const BlankPage(), // Reemplaza con la pantalla deseada
+                        const BlankPageForo(), // Reemplaza con la pantalla deseada
                   ),
                 );
               }),
@@ -364,7 +372,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        const BlankPage(), // Reemplaza con la pantalla deseada
+                        const BlankPageCalculadora(), // Reemplaza con la pantalla deseada
                   ),
                 );
               }),
