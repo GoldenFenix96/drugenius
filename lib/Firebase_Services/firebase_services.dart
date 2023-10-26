@@ -544,4 +544,34 @@ class Firebase_services {
       print("Error al cargar el audio: $e");
     }
   }
+
+  //Listar videos
+  Future<List<Map<String, dynamic>>?> getVideos() async {
+    try {
+      final QuerySnapshot medicamentosQuery =
+          await db.collection('Medicamentos').get();
+      final medicamentos =
+          await Future.wait(medicamentosQuery.docs.map((medicamentoDoc) async {
+        final imagenSnapshot = await medicamentoDoc.reference
+            .collection('Imagenes')
+            .limit(1)
+            .get();
+        String imagenUrl = ''; // URL de la imagen
+        if (imagenSnapshot.docs.isNotEmpty) {
+          imagenUrl = imagenSnapshot.docs[0].get('imageUrl');
+        }
+        return {
+          'id': medicamentoDoc.id,
+          'nombre': medicamentoDoc['Nombre'],
+          'grupo': medicamentoDoc['Grupo'],
+          'subgrupo': medicamentoDoc['Subgrupo'],
+          'imagenUrl': imagenUrl,
+        };
+      }));
+      return medicamentos;
+    } catch (e) {
+      print('Error al obtener los medicamentos: $e');
+      return null; // Manejo de errores
+    }
+  }
 }

@@ -44,52 +44,6 @@ class _VideoAudioState extends State<VideoAudio> {
           },
         ),
       ),
-      /*
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 85, 145, 214),
-        elevation: 10,
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Multi",
-              style: TextStyle(fontSize: 35, color: Colors.black),
-            ),
-            Text(
-              "Media",
-              style: TextStyle(fontSize: 35, color: Colors.white),
-            )
-          ],
-        ),
-        //actions: <Widget>[
-        //  IconButton(
-        //    icon: Icon(Icons.),
-        //    onPressed: () {
-        //      Navigator.push(
-        //          context, MaterialPageRoute(builder: (context) => AddMulti()));
-        //    },
-        //   ),
-        //   IconButton(
-        //     icon: Icon(Icons.login),
-        //     onPressed: _add,
-        //   ),
-        // ],
-        // shape: RoundedRectangleBorder(
-        //     borderRadius: BorderRadius.all(Radius.elliptical(20, 20))),
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    const DrugeniusMenu(), // Reemplaza con la pantalla deseada
-              ),
-            );
-          },
-        ),
-      ),
-      */
       body: Container(
         child: Padding(
           padding: const EdgeInsets.all(10),
