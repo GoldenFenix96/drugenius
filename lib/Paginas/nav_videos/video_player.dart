@@ -13,15 +13,19 @@ class VideoPlayerWidget extends StatefulWidget {
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   late VideoPlayerController _videoPlayerController;
 
+  void imprimirURL() {
+    print('URL del Cochino Video: ${widget.videoUrls}');
+  }
+
   @override
   void initState() {
     super.initState();
-    _videoPlayerController =
-        VideoPlayerController.networkUrl(widget.videoUrls[0] as Uri)
-          ..initialize().then((_) {
-            _videoPlayerController.play();
-            setState(() {});
-          });
+    imprimirURL();
+    _videoPlayerController = VideoPlayerController.network(widget.videoUrls[0])
+      ..initialize().then((_) {
+        _videoPlayerController.play();
+        setState(() {});
+      });
   }
 
   @override
