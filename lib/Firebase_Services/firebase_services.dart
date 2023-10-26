@@ -488,11 +488,11 @@ class Firebase_services {
       final videoUrl = await storageTaskSnapshot.ref.getDownloadURL();
 
       // Almacenar la URL del video en Firestore
-      final cuadroBasicoCollection = FirebaseFirestore.instance
+      final videoCollection = FirebaseFirestore.instance
           .collection('Videos')
           .doc(documentId)
           .collection('Video');
-      await cuadroBasicoCollection.add({
+      await videoCollection.add({
         'videoUrl': videoUrl,
       });
     } catch (e) {
