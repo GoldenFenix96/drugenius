@@ -335,6 +335,7 @@ class Firebase_services {
           await imagenesCollection.doc(doc.id).delete();
         }
       }
+      print("Imagen borrada con exito");
     } catch (e) {
       print("Error al actualizar las imágenes del medicamento: $e");
     }
@@ -363,6 +364,7 @@ class Firebase_services {
           await imagenesCollection.doc(doc.id).delete();
         }
       }
+      print("Imagen de farmacocinetica borrada con exito");
     } catch (e) {
       print(
           "Error al actualizar las imágenes de la farmacocinética del medicamento: $e");

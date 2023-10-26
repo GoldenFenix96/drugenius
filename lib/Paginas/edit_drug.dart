@@ -78,6 +78,9 @@ class _EditDrugState extends State<EditDrug> {
     efectosController.clear();
     contraController.clear();
     posologiaController.clear();
+    imagesdelete.clear();
+    farmacodelete.clear();
+    checarImagenes(images);
   }
 
   Future<void> obtenerGrupos() async {
@@ -120,24 +123,6 @@ class _EditDrugState extends State<EditDrug> {
     }
   }
 
-  void setSelectedImages(List<File?> selectedImages) {
-    setState(() {
-      imagenes = selectedImages
-          .map((image) => image?.path ?? '')
-          .cast<File>()
-          .toList();
-    });
-  }
-
-  void setSelectedImages2(List<File?> selectedImages2) {
-    setState(() {
-      farmacocinetica = selectedImages2
-          .map((image) => image?.path ?? '')
-          .cast<File>()
-          .toList();
-    });
-  }
-
   List<Map> selectedCuadros = [
     {'name': 'ESTADOS UNIDOS (FDA)', 'isChecked': false},
     {'name': 'ESPAÑA', 'isChecked': false},
@@ -166,7 +151,7 @@ class _EditDrugState extends State<EditDrug> {
 
   void checarImagenes(List<String> images) {
     for (int i = 0; i < images.length; i++) {
-      print('Ruta de la imagen $i: ${images[i]}');
+      print('Ruta de las imagenes obtenidas $i: ${images[i]}');
     }
   }
 
@@ -175,6 +160,12 @@ class _EditDrugState extends State<EditDrug> {
     setState(() {
       imagenes = nuevasImagenes;
     });
+    // Además, agrega las nuevas imágenes a la lista `images`
+    for (final imageFile in nuevasImagenes) {
+      if (imageFile != null) {
+        images.add(imageFile.path);
+      }
+    }
   }
 
   void updateImagenesFarmacocinetica(List<File?> nuevasFarmacocinetica) {
@@ -324,11 +315,13 @@ class _EditDrugState extends State<EditDrug> {
         }
       }
 
+      // Eliminar imágenes en Firebase Storage y Firestore
       if (imagesdelete.isNotEmpty) {
         for (int i = 0; i < imagesdelete.length; i++) {
           final imageUrls = imagesdelete[i];
           print("Enlace a borrar: ${imageUrls[i]}");
           await fs.updateMedicationImages(widget.medicamentoId, imageUrls);
+          images.remove(imageUrls[i]); // Elimina la URL de images
         }
       }
 
@@ -338,6 +331,7 @@ class _EditDrugState extends State<EditDrug> {
           final imageUrls = farmacodelete[i];
           await fs.updateMedicationFarmacocinetica(
               widget.medicamentoId, imageUrls);
+          farmaco.remove(imageUrls[i]); // Elimina la URL de images
         }
       }
 

@@ -169,8 +169,8 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
     );
   }
 
-  void _borrarMedicamento(String medicamentoId) {
-    fs.deleteMedication(medicamentoId).then((_) {
+  void _borrarMedicamento(String medicamentoId) async {
+    await fs.deleteMedication(medicamentoId).then((_) {
       // Actualiza la lista de medicamentos después de borrar.
       obtenerMedicamentos();
     }).catchError((error) {

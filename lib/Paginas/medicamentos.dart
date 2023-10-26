@@ -34,6 +34,7 @@ class _MedicamentosState extends State<Medicamentos> {
     super.initState();
     // Llama al método para obtener el medicamento que se mostrará
     obtenerMedicamento();
+    checarImagenes(images);
   }
 
   Future<void> obtenerMedicamento() async {
@@ -55,6 +56,12 @@ class _MedicamentosState extends State<Medicamentos> {
         farmacocinetica = medicamentoObtenido['farmaUrls'];
         cuadro = medicamentoObtenido['cuadroBasico'];
       });
+    }
+  }
+
+  void checarImagenes(List<String> images) {
+    for (int i = 0; i < images.length; i++) {
+      print('Ruta de las imagenes obtenidas $i: ${images[i]}');
     }
   }
 
