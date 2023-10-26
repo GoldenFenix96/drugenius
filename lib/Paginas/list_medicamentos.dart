@@ -7,7 +7,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 
 class ListMedicamentos extends StatefulWidget {
-  const ListMedicamentos({super.key});
+  ListMedicamentos({super.key});
 
   @override
   _ListMedicamentosState createState() => _ListMedicamentosState();
@@ -37,7 +37,7 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
     return Scaffold(
         appBar: AppBar(
           foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-          title: const Text("Listado de Medicamentos",
+          title: const Text("Medicamentos",
               style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
               textAlign: TextAlign.center),
           backgroundColor: const Color.fromARGB(255, 22, 112, 177),

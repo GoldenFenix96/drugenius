@@ -214,23 +214,9 @@ class _EditDrugState extends State<EditDrug> {
     final efectos = efectosController.text;
     final contraindicaciones = contraController.text;
     final posologia = posologiaController.text;
-    print("Salto de linea para las imagenes de los medicamentos nuevas");
     validarImagenes(imagenes.whereType<File>().toList());
-    print("Salto de linea para las farmacocinetica nuevas");
     validarImagenesFarmacocinetica(farmacocinetica.whereType<File>().toList());
-    print("Salto de linea para las farmacocinetica nuevas");
     checarImagenes(images);
-
-    print('Nombre: $nombre');
-    print('Otro Nombre: $otroNombre');
-    print('Grupo: ${widget.grupo}');
-    print('Sub grupo: ${widget.subgrupo}');
-    print('Presentacion: $presentacion');
-    print('Mecanismos de Acción: $mecanismos');
-    print('Uso pedagogico: $uso');
-    print('Efectos Adversos: $efectos');
-    print('Contraindicaciones: $contraindicaciones');
-    print('Posología: $posologia');
 
     if (nombre.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -340,17 +326,15 @@ class _EditDrugState extends State<EditDrug> {
 
       if (imagesdelete.isNotEmpty) {
         for (int i = 0; i < imagesdelete.length; i++) {
-          print(
-              "Enlace a borrar: ${imagesdelete[i]}"); // Imprime la URL en la posición i
           final imageUrls = imagesdelete[i];
+          print("Enlace a borrar: ${imageUrls[i]}");
           await fs.updateMedicationImages(widget.medicamentoId, imageUrls);
         }
       }
 
       if (farmacodelete.isNotEmpty) {
         for (int i = 0; i < farmacodelete.length; i++) {
-          print(
-              "Enlace a borrar: ${farmacodelete[i]}"); // Imprime la URL en la posición i
+          // Imprime la URL en la posición i
           final imageUrls = farmacodelete[i];
           await fs.updateMedicationFarmacocinetica(
               widget.medicamentoId, imageUrls);
@@ -362,7 +346,7 @@ class _EditDrugState extends State<EditDrug> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const ListMedicamentos(),
+          builder: (context) => ListMedicamentos(),
         ),
       );
     } catch (e) {

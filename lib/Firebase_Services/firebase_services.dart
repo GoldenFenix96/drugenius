@@ -364,7 +364,8 @@ class Firebase_services {
         }
       }
     } catch (e) {
-      print("Error al actualizar las imágenes del medicamento: $e");
+      print(
+          "Error al actualizar las imágenes de la farmacocinética del medicamento: $e");
     }
   }
 
