@@ -530,42 +530,50 @@ class Firebase_services {
     }
   }
 
-  // Actualizar imágenes del video
-  Future<void> updateVideoImages(
-    String documentId, // ID del video a actualizar
-    List<String> imagesToDelete, // Lista de URLs de imágenes a eliminar
-  ) async {
+  Future<void> deleteVideo(String videoId) async {
     try {
-      final medicamentoDocument = db.collection('Videos').doc(documentId);
+      // 1. Eliminar el medicamento de Firestore
+      await db.collection('Videos').doc(videoId).delete();
 
-      // Eliminar imágenes de Firebase Storage y Firestore
-      final imagenesCollection = medicamentoDocument.collection('Miniaturas');
-      for (final imageUrl in imagesToDelete) {
-        // Eliminar la imagen de Firebase Storage
-        final imageReference = FirebaseStorage.instance.refFromURL(imageUrl);
-        await imageReference.delete();
+      // 3. Eliminar la subcolección "Video" de Firestore
+      await db
+          .collection('Videos')
+          .doc(videoId)
+          .collection('Video')
+          .get()
+          .then((querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          doc.reference.delete();
+        });
+      });
 
-        // Eliminar la imagen de Firestore
-        final querySnapshot = await imagenesCollection
-            .where('imageUrl', isEqualTo: imageUrl)
-            .get();
-        for (final doc in querySnapshot.docs) {
-          await imagenesCollection.doc(doc.id).delete();
-        }
-      }
-      print("Miniatura borrada con exito");
+      // 4. Eliminar la subcolección "Minuaturas" de Firestore
+      await db
+          .collection('Videos')
+          .doc(videoId)
+          .collection('Miniaturas')
+          .get()
+          .then((querySnapshot) {
+        querySnapshot.docs.forEach((doc) {
+          doc.reference.delete();
+        });
+      });
+      // 2. Eliminar los videos y miniaturas del de Storage
+      final storageReference =
+          FirebaseStorage.instance.ref().child(videoId);
+      await storageReference.delete();
     } catch (e) {
-      print("Error al actualizar las miniaturas del video: $e");
+      print("Ha ocurrido un error al eliminar el video: $e");
     }
   }
-
+  
   //Agregar titulo del podcast
   Future<String?> addTAudio(
     String nombre,
     String creador,
   ) async {
     try {
-      // 1. Agregar el Video a Firestore
+      // 1. Agregar el audio a Firestore
       DocumentReference documentReference = await db.collection('Audios').add({
         'Nombre': nombre,
         'Creador': creador,
