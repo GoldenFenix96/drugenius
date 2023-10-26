@@ -17,9 +17,9 @@ class _VideosState extends State<Videos> {
       appBar: AppBar(
         //automaticallyImplyLeading: false,
         foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-        title: Row(
+        title: const Row(
           children: [
-            const Text(
+            Text(
               "Lista de videos",
               textAlign: TextAlign.center,
             ),
@@ -27,13 +27,13 @@ class _VideosState extends State<Videos> {
         ),
         backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         elevation: 0,
-        actions: <Widget>[],
+        actions: const <Widget>[],
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             dispose();
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => VideoAudio()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const VideoAudio()));
           },
         ),
       ),
