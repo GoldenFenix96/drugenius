@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:drugenius/Componentes/my_audiopicker.dart';
+import 'package:drugenius/Componentes/my_audiopicker2.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
 import 'package:drugenius/Paginas/addMulti.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 
 class AudioInput extends StatefulWidget {
-  const AudioInput({super.key});
+   AudioInput({super.key});
 
   @override
   State<AudioInput> createState() => _AudioInputState();
@@ -54,7 +54,7 @@ class _AudioInputState extends State<AudioInput> {
 
   if (nombre.isEmpty) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
+       SnackBar(
         content: Text('Debe ingresar el nombre del Podcast'),
       ),
     );
@@ -63,7 +63,7 @@ class _AudioInputState extends State<AudioInput> {
 
   if (creador.isEmpty) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
+       SnackBar(
         content: Text('Debe ingresar el creador del Podcast'),
       ),
     );
@@ -73,7 +73,7 @@ class _AudioInputState extends State<AudioInput> {
   showDialog(
       context: context,
       builder: (BuildContext context) {
-        return const Center(
+        return  Center(
           child: CircularProgressIndicator(),
         );
       });
@@ -101,7 +101,7 @@ class _AudioInputState extends State<AudioInput> {
 
       // Muestra el mensaje de registro exitoso
       ScaffoldMessenger.of(currentContext).showSnackBar(
-        const SnackBar(
+         SnackBar(
           content: Text('Registro exitoso'),
         ),
       );
@@ -109,13 +109,13 @@ class _AudioInputState extends State<AudioInput> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const AddMulti(),
+          builder: (context) =>  AddMulti(),
         ),
       );
     } else {
       // Registro fallido, muestra un mensaje de error
       ScaffoldMessenger.of(currentContext).showSnackBar(
-        const SnackBar(
+         SnackBar(
           content: Text('Ha ocurrido un error al registrar el audio.'),
         ),
       );
@@ -141,17 +141,17 @@ class _AudioInputState extends State<AudioInput> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         //automaticallyImplyLeading: false,
-        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-        title: const Text(
+        foregroundColor:  Color.fromARGB(255, 255, 255, 255),
+        title:  Text(
           "Ingreso de Audios",
           textAlign: TextAlign.center,
         ),
-        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
+        backgroundColor:  Color.fromARGB(255, 22, 112, 177),
         elevation: 0,
       ),
       body: Container(
         //FONDO
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
           color: Color.fromARGB(255, 255, 253, 244),
         ),
         //FIN FONDO
@@ -160,9 +160,9 @@ class _AudioInputState extends State<AudioInput> {
             Center(
               child: Column(
                 children: [
-                  const SizedBox(height: 25.0),
+                   SizedBox(height: 25.0),
                   //TXT DRUG INPUT
-                  const SizedBox(
+                   SizedBox(
                     height: 150,
                     width: 150,
                     child: Center(
@@ -172,9 +172,9 @@ class _AudioInputState extends State<AudioInput> {
                     ),
                   ),
                   //FIN TXT DRUG INPUT
-                  const SizedBox(height: 25.0),
+                   SizedBox(height: 25.0),
                   //TXT BIENVENIDA
-                  const SizedBox(
+                   SizedBox(
                     child: Center(
                       child: Text(
                         "Rellene los siguientes campos con la información del audio",
@@ -188,16 +188,16 @@ class _AudioInputState extends State<AudioInput> {
                     ),
                   ),
                   //FIN TXT BIENVENIDA
-                  const SizedBox(height: 30.0),
+                   SizedBox(height: 30.0),
                   _audioT(),
-                  const SizedBox(height: 15.0),
+                   SizedBox(height: 15.0),
                   _nombreAudio(),
-                  const SizedBox(height: 15.0),
+                   SizedBox(height: 15.0),
                   _creadorAudio(),
-                  const SizedBox(height: 30.0),
+                   SizedBox(height: 30.0),
                   //BOTON
                   Container(
-                    margin: const EdgeInsets.symmetric(
+                    margin:  EdgeInsets.symmetric(
                       horizontal: 25.0,
                     ),
                     child: SizedBox(
@@ -214,10 +214,10 @@ class _AudioInputState extends State<AudioInput> {
                             ),
                           ),
                           backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color.fromRGBO(253, 200, 66, 1),
+                             Color.fromRGBO(253, 200, 66, 1),
                           ),
                         ),
-                        child: const Text(
+                        child:  Text(
                           "Guardar audio",
                           style: TextStyle(
                             fontSize: 18,
@@ -230,7 +230,7 @@ class _AudioInputState extends State<AudioInput> {
                     ),
                   ),
                   //FIN BOTON
-                  const SizedBox(height: 15.0),
+                   SizedBox(height: 15.0),
                 ],
               ),
             ),
@@ -261,21 +261,21 @@ class _AudioInputState extends State<AudioInput> {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(
+            margin: EdgeInsets.symmetric(
               horizontal: 25.0,
             ),
             alignment: Alignment.topLeft,
-            child: const Text(
+            child:  Text(
               "Audio",
             ),
           ),
-          const SizedBox(height: 10),
+           SizedBox(height: 10),
           Container(
             child: Container(
-              margin: const EdgeInsets.symmetric(
+              margin:  EdgeInsets.symmetric(
                 horizontal: 25.0,
               ),
-              child: AudioPickerWidget(updateAudios: updateAudios),
+              child: AudioPickerWidget2(updateAudios: updateAudios),
             ),
           ),
         ],
@@ -296,7 +296,7 @@ Future<void> _registrarAudio() async {
 
     if (nombre.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+         SnackBar(
           content: Text('Debe ingresar el nombre del Podcast'),
         ),
       );
@@ -304,7 +304,7 @@ Future<void> _registrarAudio() async {
 
     if (creador.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+         SnackBar(
           content: Text('Debe ingresar el creador del Podcast'),
         ),
       );
@@ -313,7 +313,7 @@ Future<void> _registrarAudio() async {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return const Center(
+          return  Center(
             child: CircularProgressIndicator(),
           );
         });
@@ -341,13 +341,13 @@ Future<void> _registrarAudio() async {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const Audios(),
+            builder: (context) =>  Audios(),
           ),
         );
       } else {
         // Registro fallido, muestra un mensaje de error
         ScaffoldMessenger.of(currentContext).showSnackBar(
-          const SnackBar(
+           SnackBar(
             content: Text('Ha ocurrido un error al registrar el audio.'),
           ),
         );
