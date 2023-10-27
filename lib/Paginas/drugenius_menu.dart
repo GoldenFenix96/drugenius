@@ -1,4 +1,3 @@
-import 'package:card_swiper/card_swiper.dart';
 import 'package:drugenius/Componentes/my_button_general.dart';
 import 'package:drugenius/Paginas/blank_page_calculadora.dart';
 import 'package:drugenius/Paginas/blank_page_evaluaciones.dart';
@@ -10,6 +9,7 @@ import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/video_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Paginas/Nav_Bar.dart';
+import 'package:page_transition/page_transition.dart';
 
 class DrugeniusMenu extends StatefulWidget {
   const DrugeniusMenu({super.key});
@@ -144,15 +144,12 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
             imageNet: 'https://i.ibb.co/RbF9r98/Generalidades-icono.png',
             onPressed: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const generalidades(), // Reemplaza con la pantalla deseada
-                ),
-              );
+                  context,
+                  PageTransition(
+                      child: const generalidades(),
+                      type: PageTransitionType.bottomToTop));
             },
           ),
-          // Texto debajo del primer Container
           // Espacio entre los contenedores
           const SizedBox(height: 5),
           const Text(
@@ -178,12 +175,10 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
               imageNet: 'https://i.ibb.co/C5QYQnc/Medicamentos-icono.png',
               onPressed: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const ListMedicamentos(), // Reemplaza con la pantalla deseada
-                  ),
-                );
+                    context,
+                    PageTransition(
+                        child: const ListMedicamentos(),
+                        type: PageTransitionType.bottomToTop));
               }),
           const SizedBox(height: 5),
           const Text(
@@ -209,12 +204,10 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
               imageNet: 'https://i.ibb.co/k1zSJ8V/Evaluaciones-icono.png',
               onPressed: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const BlankPageEvaluaciones(), // Reemplaza con la pantalla deseada
-                  ),
-                );
+                    context,
+                    PageTransition(
+                        child: const BlankPageEvaluaciones(),
+                        type: PageTransitionType.bottomToTop));
               }),
           // Texto debajo del primer Container
           // Espacio entre los contenedores
@@ -242,12 +235,10 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
             imageNet: 'https://i.ibb.co/J31jbkP/Juegos-icono.png',
             onPressed: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const BlankPage(), // Reemplaza con la pantalla deseada
-                ),
-              );
+                  context,
+                  PageTransition(
+                      child: const BlankPage(),
+                      type: PageTransitionType.bottomToTop));
             },
           ),
           // Texto debajo del primer Container
@@ -276,12 +267,10 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
             imageNet: 'https://i.ibb.co/Twr8dw8/Videopodcast-icono.png',
             onPressed: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      const VideoAudio(), // Reemplaza con la pantalla deseada
-                ),
-              );
+                  context,
+                  PageTransition(
+                      child: const VideoAudio(),
+                      type: PageTransitionType.bottomToTop));
             },
           ),
           // Texto debajo del primer Container
@@ -314,12 +303,10 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
               imageNet: 'https://i.ibb.co/0tQdZpr/Foro-icono2.png',
               onPressed: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const BlankPageForo(), // Reemplaza con la pantalla deseada
-                  ),
-                );
+                    context,
+                    PageTransition(
+                        child: const BlankPageForo(),
+                        type: PageTransitionType.bottomToTop));
               }),
           // Texto debajo del primer Container
           // Espacio entre los contenedores
@@ -351,12 +338,10 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
               imageNet: 'https://i.ibb.co/NCyS2SK/Calculadora-icono.png',
               onPressed: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const BlankPageCalculadora(), // Reemplaza con la pantalla deseada
-                  ),
-                );
+                    context,
+                    PageTransition(
+                        child: const BlankPageCalculadora(),
+                        type: PageTransitionType.bottomToTop));
               }),
           // Texto debajo del primer Container
           // Espacio entre los contenedores
@@ -375,37 +360,4 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
       ),
     );
   }
-}
-
-Widget swiperBox() {
-  return SizedBox(
-    width: double.infinity,
-    height: 181.0,
-    child: Swiper(
-      viewportFraction: 1,
-      scale: 1,
-      itemBuilder: (BuildContext context, index) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: Image.network(
-                  images2[index], // URL de la imagen
-                  fit: BoxFit
-                      .cover, // Ajusta la imagen para cubrir todo el espacio disponible
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-      itemCount: images2.length,
-      pagination: const SwiperPagination(),
-
-      autoplay: true, // Habilita la reproducción automática
-      autoplayDelay:
-          5000, // Establece el tiempo de espera entre transiciones (en milisegundos)
-    ),
-  );
 }
