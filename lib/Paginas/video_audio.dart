@@ -26,7 +26,7 @@ class _VideoAudioState extends State<VideoAudio> {
         //automaticallyImplyLeading: false,
         foregroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: const Text(
-          "Mutimedia",
+          "Multimedia",
           textAlign: TextAlign.center,
         ),
         backgroundColor: const Color.fromARGB(255, 22, 112, 177),
@@ -65,7 +65,6 @@ class _VideoAudioState extends State<VideoAudio> {
                 ),
               ),
             ),
-
             InkWell(
               onTap: () {
                 Navigator.push(context,
@@ -92,7 +91,6 @@ class _VideoAudioState extends State<VideoAudio> {
                 ),
               ),
             ),
-
             InkWell(
               onTap: () {
                 Navigator.push(context,
@@ -123,9 +121,6 @@ class _VideoAudioState extends State<VideoAudio> {
                 ),
               ),
             ),
-
-            //swiperBox(),
-            //swiperBox(),
           ],
         ),
       ),
