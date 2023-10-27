@@ -74,16 +74,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                     const Padding(
                       padding: EdgeInsets.all(20),
                     ),
-                    // Aquí se agrega el Slider
-                    /*Slider(
-                  value: _videoPlayerController.value.position.inSeconds.toDouble(),
-                  min: 0,
-                  max: _videoPlayerController.value.duration.inSeconds.toDouble(),
-                  onChanged: (value) {
-                    // Cuando el usuario ajusta el Slider, cambiamos la posición del video
-                    _videoPlayerController.seekTo(Duration(seconds: value.toInt()));
-                  },
-                ),*/
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -91,7 +81,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                             style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.red),
+                                  const Color.fromARGB(255, 22, 112, 177),
+                                ),
                                 fixedSize: MaterialStateProperty.all<Size>(
                                     const Size(70, 70)),
                                 shape: MaterialStateProperty.all(
@@ -107,7 +98,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                             style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.green),
+                                  const Color.fromARGB(255, 22, 112, 177),
+                                ),
                                 fixedSize: MaterialStateProperty.all<Size>(
                                     const Size(70, 70)),
                                 shape: MaterialStateProperty.all(
@@ -123,7 +115,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                             style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.yellowAccent),
+                                  const Color.fromARGB(255, 22, 112, 177),
+                                ),
                                 fixedSize: MaterialStateProperty.all<Size>(
                                     const Size(70, 70)),
                                 shape: MaterialStateProperty.all(
@@ -142,7 +135,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                             style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.yellowAccent),
+                                  const Color.fromARGB(255, 22, 112, 177),
+                                ),
                                 fixedSize: MaterialStateProperty.all<Size>(
                                     const Size(70, 70)),
                                 shape: MaterialStateProperty.all(
