@@ -7,12 +7,10 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  if (Firebase.apps.isEmpty) {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-  }
+  await Firebase.initializeApp(
+    name: "Drugenius",
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(const MaterialApp(
     home: LogginPage(),
