@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,7 @@ class RecoverPassword extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        foregroundColor: Color.fromARGB(255, 0, 0, 0),
+        foregroundColor: const Color.fromARGB(255, 0, 0, 0),
         title: const Center(child: Text("")),
         backgroundColor: const Color.fromARGB(0, 255, 255, 255),
         elevation: 0,

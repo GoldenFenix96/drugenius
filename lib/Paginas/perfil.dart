@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drugenius/Clases/id_usuarios.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
@@ -425,113 +427,104 @@ class _Perfil extends State<Perfil> {
   }
 
   _textfieldNombre() {
-    return Container(
-      child: TextField(
-        decoration: const InputDecoration(
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              borderSide: BorderSide(
-                color: Color.fromARGB(255, 204, 204, 204),
-              )),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
-          fillColor: Color.fromARGB(144, 255, 255, 255),
-          filled: true,
-          prefixIcon: Icon(Icons.person_outlined),
-          labelStyle: TextStyle(
-            color: Color.fromARGB(255, 33, 33, 33),
-            fontWeight: FontWeight.bold,
-          ),
+    return TextField(
+      decoration: const InputDecoration(
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            borderSide: BorderSide(
+              color: Color.fromARGB(255, 204, 204, 204),
+            )),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
+        fillColor: Color.fromARGB(144, 255, 255, 255),
+        filled: true,
+        prefixIcon: Icon(Icons.person_outlined),
+        labelStyle: TextStyle(
+          color: Color.fromARGB(255, 33, 33, 33),
+          fontWeight: FontWeight.bold,
         ),
-        keyboardType: TextInputType.text,
-        obscureText: false,
-        controller:
-            _nombreController, // Utiliza el controlador _nombreController
       ),
+      keyboardType: TextInputType.text,
+      obscureText: false,
+      controller: _nombreController, // Utiliza el controlador _nombreController
     );
   }
 
   _textfieldCorreo() {
-    return Container(
-      child: TextField(
-        decoration: const InputDecoration(
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              borderSide: BorderSide(
-                color: Color.fromARGB(255, 204, 204, 204),
-              )),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
-          fillColor: Color.fromARGB(95, 255, 255, 255),
-          filled: true,
-          prefixIcon: Icon(Icons.email_outlined),
-          labelStyle: TextStyle(
-            color: Color.fromARGB(255, 33, 33, 33),
-            fontWeight: FontWeight.bold,
-          ),
+    return TextField(
+      decoration: const InputDecoration(
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            borderSide: BorderSide(
+              color: Color.fromARGB(255, 204, 204, 204),
+            )),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
+        fillColor: Color.fromARGB(95, 255, 255, 255),
+        filled: true,
+        prefixIcon: Icon(Icons.email_outlined),
+        labelStyle: TextStyle(
+          color: Color.fromARGB(255, 33, 33, 33),
+          fontWeight: FontWeight.bold,
         ),
-        keyboardType: TextInputType.emailAddress,
-        readOnly: true,
-        //enabled: false,
-        obscureText: false,
-        controller: _correoController,
       ),
+      keyboardType: TextInputType.emailAddress,
+      readOnly: true,
+      //enabled: false,
+      obscureText: false,
+      controller: _correoController,
     );
   }
 
   _textfieldPassword() {
-    return Container(
-      child: TextField(
-        decoration: const InputDecoration(
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              borderSide: BorderSide(
-                color: Color.fromARGB(255, 204, 204, 204),
-              )),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
-          fillColor: Color.fromARGB(144, 255, 255, 255),
-          filled: true,
-          prefixIcon: Icon(Icons.lock_outline_rounded),
-          labelStyle: TextStyle(
-            color: Color.fromARGB(255, 33, 33, 33),
-            fontWeight: FontWeight.bold,
-          ),
+    return TextField(
+      decoration: const InputDecoration(
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            borderSide: BorderSide(
+              color: Color.fromARGB(255, 204, 204, 204),
+            )),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
+        fillColor: Color.fromARGB(144, 255, 255, 255),
+        filled: true,
+        prefixIcon: Icon(Icons.lock_outline_rounded),
+        labelStyle: TextStyle(
+          color: Color.fromARGB(255, 33, 33, 33),
+          fontWeight: FontWeight.bold,
         ),
-        keyboardType: TextInputType.visiblePassword,
-        obscureText: true,
-        controller: _contrasenaController,
       ),
+      keyboardType: TextInputType.visiblePassword,
+      obscureText: true,
+      controller: _contrasenaController,
     );
   }
 
   _textfieldPasswordActual() {
-    return Container(
-      child: TextField(
-        decoration: const InputDecoration(
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              borderSide: BorderSide(
-                color: Color.fromARGB(255, 204, 204, 204),
-              )),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
-          fillColor: Color.fromARGB(144, 255, 255, 255),
-          filled: true,
-          prefixIcon: Icon(Icons.lock_outline_rounded),
-          labelStyle: TextStyle(
-            color: Color.fromARGB(255, 33, 33, 33),
-            fontWeight: FontWeight.bold,
-          ),
+    return TextField(
+      decoration: const InputDecoration(
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            borderSide: BorderSide(
+              color: Color.fromARGB(255, 204, 204, 204),
+            )),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0))),
+        fillColor: Color.fromARGB(144, 255, 255, 255),
+        filled: true,
+        prefixIcon: Icon(Icons.lock_outline_rounded),
+        labelStyle: TextStyle(
+          color: Color.fromARGB(255, 33, 33, 33),
+          fontWeight: FontWeight.bold,
         ),
-        keyboardType: TextInputType.visiblePassword,
-        obscureText: true,
-        controller: _contrasenaControllerActual,
       ),
+      keyboardType: TextInputType.visiblePassword,
+      obscureText: true,
+      controller: _contrasenaControllerActual,
     );
   }
 }
@@ -543,11 +536,11 @@ void signOut(BuildContext context) async {
     // Puedes realizar acciones aquí
     Navigator.pop(context);
     Navigator.pushReplacement<void, void>(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => const LogginPage(),
-        ),
-      );
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => const LogginPage(),
+      ),
+    );
 
     print("Cierre de sesión exitoso");
   } catch (e) {

@@ -132,7 +132,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
 
                           // Segundo Container
                           //_btnFarmacocinetica(),
-                          Container(
+                          const SizedBox(
                             width: 140,
                             height: 160,
                           )
@@ -198,7 +198,7 @@ class _DrugeniusMenuState extends State<DrugeniusMenu> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        ListMedicamentos(), // Reemplaza con la pantalla deseada
+                        const ListMedicamentos(), // Reemplaza con la pantalla deseada
                   ),
                 );
               }),

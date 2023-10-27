@@ -131,51 +131,8 @@ class _VideosState extends State<Videos> {
       obtenerVideos();
     }).catchError((error) {
       // Maneja el caso en el que la eliminación falló.
+      // ignore: avoid_print
       print("Error al borrar el Video: $error");
     });
   }
 }
-
-/*
-Container(
-                height: 70,
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 237, 237, 237),
-                ),
-                child: Center(
-                  child: ListTile(
-                    leading: video['imagenUrl'] != null &&
-                                  video['imagenUrl'].isNotEmpty
-                              ? SizedBox(
-                                  width: 60,
-                                  height: 50,
-                                  child: Image.network(
-                                    video['imagenUrl'],
-                                    fit: BoxFit.cover,
-                                  ),
-                                )
-                              : const SizedBox
-                                  .shrink(), //
-                    title: Text(
-                      nombre,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
-                        color: Colors.black,
-                      ),
-                    ),
-                    onTap: () {
-                      // Navegar a la pantalla de reproducción de video
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              VideoPlayerWidget(videoUrls: videoUrls),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-*/
-

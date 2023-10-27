@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class MyButtonHome extends StatelessWidget {
   final String imageNet;
   final VoidCallback onPressed;
-  const MyButtonHome({required this.imageNet, required this.onPressed});
+  const MyButtonHome(
+      {super.key, required this.imageNet, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class MyButtonHome extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
         ),
 
-        backgroundColor: Color.fromARGB(255, 252, 248, 192),
+        backgroundColor: const Color.fromARGB(255, 252, 248, 192),
         // Establece la forma circular
         padding: const EdgeInsets.all(0),
         //elevation: 10,

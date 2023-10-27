@@ -1,9 +1,12 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+// ignore: camel_case_types
 class Firebase_services {
   FirebaseFirestore db = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -54,7 +57,6 @@ class Firebase_services {
           email: email, password: password);
       return credential.user;
     } catch (e) {
-      // ignore: avoid_print
       print("Ha ocurrido un error");
     }
     return null;
@@ -220,9 +222,9 @@ class Firebase_services {
           .collection('Cuadro Básico')
           .get()
           .then((querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
+        for (var doc in querySnapshot.docs) {
           doc.reference.delete();
-        });
+        }
       });
 
       // 4. Eliminar la subcolección "Farmacocinetica" de Firestore
@@ -232,9 +234,9 @@ class Firebase_services {
           .collection('Farmacocinetica')
           .get()
           .then((querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
+        for (var doc in querySnapshot.docs) {
           doc.reference.delete();
-        });
+        }
       });
 
       // 5. Eliminar la subcolección "Imagenes" de Firestore
@@ -244,9 +246,9 @@ class Firebase_services {
           .collection('Imagenes')
           .get()
           .then((querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
+        for (var doc in querySnapshot.docs) {
           doc.reference.delete();
-        });
+        }
       });
 
       // 2. Eliminar las imágenes del medicamento de Storage
@@ -542,9 +544,9 @@ class Firebase_services {
           .collection('Video')
           .get()
           .then((querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
+        for (var doc in querySnapshot.docs) {
           doc.reference.delete();
-        });
+        }
       });
 
       // 4. Eliminar la subcolección "Minuaturas" de Firestore
@@ -554,9 +556,9 @@ class Firebase_services {
           .collection('Miniaturas')
           .get()
           .then((querySnapshot) {
-        querySnapshot.docs.forEach((doc) {
+        for (var doc in querySnapshot.docs) {
           doc.reference.delete();
-        });
+        }
       });
       // 2. Eliminar los videos y miniaturas del de Storage
       final storageReference = FirebaseStorage.instance.ref().child(videoId);

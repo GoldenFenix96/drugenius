@@ -19,9 +19,9 @@ class _VideosState extends State<Audios> {
       appBar: AppBar(
         //automaticallyImplyLeading: false,
         foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-        title: Row(
+        title: const Row(
           children: [
-            const Text(
+            Text(
               "Reproductor de audio",
               textAlign: TextAlign.center,
             ),
@@ -29,13 +29,13 @@ class _VideosState extends State<Audios> {
         ),
         backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         elevation: 0,
-        actions: <Widget>[],
+        actions: const <Widget>[],
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             dispose();
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => VideoAudio()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const VideoAudio()));
           },
         ),
       ),
@@ -43,7 +43,6 @@ class _VideosState extends State<Audios> {
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
-            
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -54,29 +53,32 @@ class _VideosState extends State<Audios> {
               child: Container(
                 height: 50,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5), color: Colors.lightBlue),
-               child: Row( // Cambio hecho aquí
-               mainAxisAlignment: MainAxisAlignment.start,
-               children: [
-               // Imagen
-               Image.network(
-               'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // Reemplaza con la ruta de tu imagen
-                height: double.infinity,
-                width: 100.0,
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.lightBlue),
+                child: Row(
+                  // Cambio hecho aquí
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // Imagen
+                    Image.network(
+                      'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // Reemplaza con la ruta de tu imagen
+                      height: double.infinity,
+                      width: 100.0,
+                    ),
+                    const SizedBox(
+                        width: 10.0), // Espacio entre la imagen y el texto
+                    // Texto
+                    const Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Amigos emprendedores",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 10.0), // Espacio entre la imagen y el texto
-                // Texto
-               Expanded(
-               child: Align(
-               alignment: Alignment.centerLeft,
-               child: Text(
-                "Amigos emprendedores",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-            ),
-          ),
-        ],
-      ),
               ),
             ),
           ),
@@ -92,30 +94,32 @@ class _VideosState extends State<Audios> {
               child: Container(
                 height: 50,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5), color: Colors.lightBlue
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.lightBlue),
+                child: Row(
+                  // Cambio hecho aquí
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // Imagen
+                    Image.network(
+                      'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // Reemplaza con la ruta de tu imagen
+                      height: double.infinity,
+                      width: 100.0,
                     ),
-                child: Row( // Cambio hecho aquí
-               mainAxisAlignment: MainAxisAlignment.start,
-               children: [
-               // Imagen
-               Image.network(
-               'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // Reemplaza con la ruta de tu imagen
-                height: double.infinity,
-                width: 100.0,
+                    const SizedBox(
+                        width: 10.0), // Espacio entre la imagen y el texto
+                    // Texto
+                    const Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Lagrimas y risas",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 10.0), // Espacio entre la imagen y el texto
-                // Texto
-               Expanded(
-               child: Align(
-               alignment: Alignment.centerLeft,
-               child: Text(
-                "Lagrimas y risas",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-            ),
-          ),
-        ],
-      ),
               ),
             ),
           ),
@@ -131,30 +135,32 @@ class _VideosState extends State<Audios> {
               child: Container(
                 height: 50,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5), color: Colors.lightBlue
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.lightBlue),
+                child: Row(
+                  // Cambio hecho aquí
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // Imagen
+                    Image.network(
+                      'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // Reemplaza con la ruta de tu imagen
+                      height: double.infinity,
+                      width: 100.0,
                     ),
-               child: Row( // Cambio hecho aquí
-               mainAxisAlignment: MainAxisAlignment.start,
-               children: [
-               // Imagen
-               Image.network(
-               'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // Reemplaza con la ruta de tu imagen
-                height: double.infinity,
-                width: 100.0,
+                    const SizedBox(
+                        width: 10.0), // Espacio entre la imagen y el texto
+                    // Texto
+                    const Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Dos caras de la moneda",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 10.0), // Espacio entre la imagen y el texto
-                // Texto
-               Expanded(
-               child: Align(
-               alignment: Alignment.centerLeft,
-               child: Text(
-                "Dos caras de la moneda",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-            ),
-          ),
-        ],
-      ),
               ),
             ),
           ),
@@ -170,30 +176,32 @@ class _VideosState extends State<Audios> {
               child: Container(
                 height: 50,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5), color: Colors.lightBlue
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.lightBlue),
+                child: Row(
+                  // Cambio hecho aquí
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // Imagen
+                    Image.network(
+                      'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // Reemplaza con la ruta de tu imagen
+                      height: double.infinity,
+                      width: 100.0,
                     ),
-                child: Row( // Cambio hecho aquí
-               mainAxisAlignment: MainAxisAlignment.start,
-               children: [
-               // Imagen
-               Image.network(
-               'https://i.ibb.co/0FZPjNw/Logo-Drugenius.png', // Reemplaza con la ruta de tu imagen
-                height: double.infinity,
-                width: 100.0,
+                    const SizedBox(
+                        width: 10.0), // Espacio entre la imagen y el texto
+                    // Texto
+                    const Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Importancia de farmacologia",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 10.0), // Espacio entre la imagen y el texto
-                // Texto
-               Expanded(
-               child: Align(
-               alignment: Alignment.centerLeft,
-               child: Text(
-                "Importancia de farmacologia",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-            ),
-          ),
-        ],
-      ),
               ),
             ),
           ),
@@ -202,129 +210,3 @@ class _VideosState extends State<Audios> {
     );
   }
 }
-
-/*
- body: ListView(
-        body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AudioManager()));
-              },
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5), color: Colors.grey,
-                    image: DecorationImage(
-                    image: NetworkImage('https://i.ibb.co/0FZPjNw/Logo-Drugenius.png'), 
-                    fit: BoxFit.scaleDown, 
-                    alignment: Alignment.topLeft,
-                     ),
-                    ),
-                child: Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                "Amigos emprendedores",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-                   ),
-                 ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AudioManager2()));
-              },
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5), color: Colors.grey,
-                    image: DecorationImage(
-                    image: NetworkImage('https://i.ibb.co/0FZPjNw/Logo-Drugenius.png'), 
-                    fit: BoxFit.scaleDown, 
-                    alignment: Alignment.topLeft,
-                     ),
-                    ),
-                child: Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                "Lagrimas y risas",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-                   ),
-                 ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AudioManager3()));
-              },
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5), color: Colors.grey,
-                    image: DecorationImage(
-                    image: NetworkImage('https://i.ibb.co/0FZPjNw/Logo-Drugenius.png'), 
-                    fit: BoxFit.scaleDown, 
-                    alignment: Alignment.topLeft,
-                     ),
-                    ),
-               child: Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                "Dos caras de la moneda",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-                   ),
-                 ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AudioManager4()));
-              },
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5), color: Colors.grey,
-                    image: DecorationImage(
-                    image: NetworkImage('https://i.ibb.co/0FZPjNw/Logo-Drugenius.png'), 
-                    fit: BoxFit.scaleDown, 
-                    alignment: Alignment.topLeft,
-                     ),
-                    ),
-                child: Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                "Importancia de farmacologia",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-                   ),
-                 ),
-              ),
-            ),
-          ),
-        ],
-      ),
-
-*/

@@ -14,6 +14,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   late VideoPlayerController _videoPlayerController;
 
   void imprimirURL() {
+    // ignore: avoid_print
     print('URL del Cochino Video: ${widget.videoUrls}');
   }
 
@@ -21,6 +22,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   void initState() {
     super.initState();
     imprimirURL();
+    // ignore: deprecated_member_use
     _videoPlayerController = VideoPlayerController.network(widget.videoUrls[0])
       ..initialize().then((_) {
         _videoPlayerController.play();

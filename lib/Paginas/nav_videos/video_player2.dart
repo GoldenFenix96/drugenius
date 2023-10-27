@@ -24,10 +24,12 @@ class _VideoPlayerWidgetState2 extends State<VideoPlayerWidget2> {
             setState(() {});
           });
   }
-   @override
+
+  @override
   void dispose() {
     super.dispose();
-    _videoPlayerController2.dispose(); // Aquí detenemos y liberamos los recursos del reproductor.
+    _videoPlayerController2
+        .dispose(); // Aquí detenemos y liberamos los recursos del reproductor.
   }
 
   @override
@@ -37,9 +39,9 @@ class _VideoPlayerWidgetState2 extends State<VideoPlayerWidget2> {
         appBar: AppBar(
           //automaticallyImplyLeading: false,
           foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-          title: Row(
+          title: const Row(
             children: [
-              const Text(
+              Text(
                 "Reproductor",
                 textAlign: TextAlign.center,
               ),
@@ -47,13 +49,13 @@ class _VideoPlayerWidgetState2 extends State<VideoPlayerWidget2> {
           ),
           backgroundColor: const Color.fromARGB(255, 22, 112, 177),
           elevation: 0,
-          actions: <Widget>[],
+          actions: const <Widget>[],
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
               dispose();
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Videos()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Videos()));
             },
           ),
         ),
@@ -102,7 +104,7 @@ class _VideoPlayerWidgetState2 extends State<VideoPlayerWidget2> {
                               _videoPlayerController2.play();
                             },
                             child: const Icon(Icons.play_arrow)),
-                            const Padding(padding: EdgeInsets.all(2)),
+                        const Padding(padding: EdgeInsets.all(2)),
                         ElevatedButton(
                             style: ButtonStyle(
                                 backgroundColor:

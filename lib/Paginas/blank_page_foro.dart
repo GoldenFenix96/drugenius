@@ -16,7 +16,7 @@ class BlankPageForo extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 22, 112, 177),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -67,7 +67,7 @@ class BlankPageForo extends StatelessWidget {
                     const Color.fromARGB(255, 22, 112, 177),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Volver',
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),

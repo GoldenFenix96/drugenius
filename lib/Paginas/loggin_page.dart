@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:drugenius/Clases/id_usuarios.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,7 +8,6 @@ import 'package:drugenius/Paginas/register_page.dart';
 import 'package:drugenius/Paginas/recover_password.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
 import 'package:drugenius/main.dart';
-import 'package:flutter/services.dart';
 
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
@@ -267,7 +268,6 @@ class LogginPage extends StatelessWidget {
     if (user != null) {
       Navigator.pop(context);
       UserStateManager().userId = user.uid; // Guarda el ID del usuario
-      print("Inicio de sesión exitoso");
       Navigator.pushReplacement<void, void>(
         context,
         MaterialPageRoute<void>(

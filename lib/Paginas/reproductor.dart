@@ -51,7 +51,7 @@ class _DesingExampleState extends State<DesingExample> {
   }
 
   Widget swiper(RealtimePlayingInfos realtimePlayingInfos) {
-    return Container(
+    return SizedBox(
       width: screenWidth,
       height: screenHeight * 0.45,
       child: Swiper(

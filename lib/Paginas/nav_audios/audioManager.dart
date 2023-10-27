@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:drugenius/Paginas/nav_audios/audios.dart';
 import 'package:drugenius/Paginas/nav_audios/class/audio_player_manager.dart';
@@ -58,14 +60,15 @@ class _FullExampleState extends State<FullExample> {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         //automaticallyImplyLeading: false,
         foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-        title: Row(
+        title: const Row(
           children: [
-            const Text(
+            Text(
               "Reproductor de audio",
               textAlign: TextAlign.center,
             ),
@@ -73,46 +76,18 @@ class _FullExampleState extends State<FullExample> {
         ),
         backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         elevation: 0,
-        actions: <Widget>[],
+        actions: const <Widget>[],
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             dispose();
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Audios()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Audios()));
           },
         ),
       ),
-      /*
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
-        elevation: 10,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text(
-              "Reproductor",
-              style: TextStyle(fontSize: 25, color: Colors.black),
-            ),
-            Text(
-              "Audio",
-              style: TextStyle(fontSize: 25, color: Colors.white),
-            ),
-          ],
-        ),
-        actions: <Widget>[],
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            dispose();
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Audios()));
-          },
-        ),
-      ),
-      */
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[

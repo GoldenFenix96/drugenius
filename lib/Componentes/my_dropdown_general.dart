@@ -45,7 +45,7 @@ class MyDropDown extends StatelessWidget {
           items: list.map((name) {
             return DropdownMenuItem(
               value: name,
-              child: Text(name, style: TextStyle(fontSize: 15)),
+              child: Text(name, style: const TextStyle(fontSize: 15)),
             );
           }).toList(),
           onChanged: (value) {

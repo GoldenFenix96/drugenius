@@ -11,7 +11,7 @@ class VideoPickerWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  _VideoPickerWidgetState createState() => _VideoPickerWidgetState();
+  State<VideoPickerWidget> createState() => _VideoPickerWidgetState();
 }
 
 class _VideoPickerWidgetState extends State<VideoPickerWidget> {
@@ -49,15 +49,14 @@ class _VideoPickerWidgetState extends State<VideoPickerWidget> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Container(
-      child: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            if (_selectedVideo.isEmpty)
-              const Text("No se ha seleccionado ningún video"),
-            if (_selectedVideo.isNotEmpty)
-              SizedBox(
+    return Center(
+      child: Column(
+        children: [
+          const SizedBox(height: 20),
+          if (_selectedVideo.isEmpty)
+            const Text("No se ha seleccionado ningún video"),
+          if (_selectedVideo.isNotEmpty)
+            SizedBox(
                 width: double.infinity,
                 height: 300.0,
                 child: Swiper(
@@ -73,37 +72,35 @@ class _VideoPickerWidgetState extends State<VideoPickerWidget> {
                   itemCount: _selectedVideo.length,
                   pagination: const SwiperPagination(),
                   control: const SwiperControl(),
-                )
-              ),
-            const SizedBox(height: 15.0),
-            SizedBox(
-              width: size.width * 1,
-              height: 55.0,
-              child: ElevatedButton(
-                onPressed: () => _pickVideoFromGallery(),
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<OutlinedBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color.fromARGB(255, 240, 240, 240),
+                )),
+          const SizedBox(height: 15.0),
+          SizedBox(
+            width: size.width * 1,
+            height: 55.0,
+            child: ElevatedButton(
+              onPressed: () => _pickVideoFromGallery(),
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
-                child: const Text(
-                  "Video",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                  ),
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  const Color.fromARGB(255, 240, 240, 240),
+                ),
+              ),
+              child: const Text(
+                "Video",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-          ],
-        ),
+          ),
+          const SizedBox(height: 20),
+        ],
       ),
     );
   }

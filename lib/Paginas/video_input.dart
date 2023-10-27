@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:drugenius/Componentes/my_imagepicker.dart';
@@ -83,7 +85,6 @@ class _VideoInputState extends State<VideoInput> {
       return; // No continuamos si el nombre está vacío
     }
 
-    
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -115,35 +116,34 @@ class _VideoInputState extends State<VideoInput> {
         }
 
         // Continúa con cualquier otra lógica o navegación necesaria
-      Navigator.pop(context);
+        Navigator.pop(context);
 
-      // Muestra el mensaje de registro exitoso
-      ScaffoldMessenger.of(currentContext).showSnackBar(
-        const SnackBar(
-          content: Text('Registro exitoso'),
-        ),
-      );
+        // Muestra el mensaje de registro exitoso
+        ScaffoldMessenger.of(currentContext).showSnackBar(
+          const SnackBar(
+            content: Text('Registro exitoso'),
+          ),
+        );
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const Videos(),
-        ),
-      );
-    } else {
-      // Registro fallido, muestra un mensaje de error
-      ScaffoldMessenger.of(currentContext).showSnackBar(
-        const SnackBar(
-          content: Text('Ha ocurrido un error al registrar el video.'),
-        ),
-      );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Videos(),
+          ),
+        );
+      } else {
+        // Registro fallido, muestra un mensaje de error
+        ScaffoldMessenger.of(currentContext).showSnackBar(
+          const SnackBar(
+            content: Text('Ha ocurrido un error al registrar el video.'),
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error al registrar video: $e');
+      // Maneja el error según tus necesidades
     }
-  } catch (e) {
-    print('Error al registrar video: $e');
-    // Maneja el error según tus necesidades
   }
-}
-
 
   @override
   void initState() {
@@ -267,29 +267,25 @@ class _VideoInputState extends State<VideoInput> {
   }
 
   Widget _videoT() {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 25.0,
-            ),
-            alignment: Alignment.topLeft,
-            child: const Text(
-              "Video",
-            ),
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
           ),
-          const SizedBox(height: 10),
-          Container(
-            child: Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 25.0,
-              ),
-              child: VideoPickerWidget(updateVideos: updateVideos),
-            ),
+          alignment: Alignment.topLeft,
+          child: const Text(
+            "Video",
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
+          ),
+          child: VideoPickerWidget(updateVideos: updateVideos),
+        ),
+      ],
     );
   }
 
@@ -305,16 +301,9 @@ class _VideoInputState extends State<VideoInput> {
             ),
           ),
           const SizedBox(height: 10),
-          Container(
-            child: Container(
-              //margin: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: ImagePickerWidget(updateImagenes: updateImagenes),
-            ),
-          ),
+          ImagePickerWidget(updateImagenes: updateImagenes),
         ],
       ),
     );
   }
-  // Resto de tu código de funciones _grupoMedicamento(), _subgrupoFarmacologico(), etc.
 }
-

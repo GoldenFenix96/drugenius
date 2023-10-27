@@ -24,7 +24,7 @@ class EditDrug extends StatefulWidget {
       : super(key: key);
 
   @override
-  _EditDrugState createState() => _EditDrugState();
+  State<EditDrug> createState() => _EditDrugState();
 }
 
 List<File?> imagenes = [];
@@ -80,7 +80,6 @@ class _EditDrugState extends State<EditDrug> {
     posologiaController.clear();
     imagesdelete.clear();
     farmacodelete.clear();
-    checarImagenes(images);
   }
 
   Future<void> obtenerGrupos() async {
@@ -130,31 +129,6 @@ class _EditDrugState extends State<EditDrug> {
     {'name': 'MÉXICO', 'isChecked': true},
   ];
 
-  void validarCheck(List<Map> cuadro) {
-    for (int i = 0; i < cuadro.length; i++) {
-      final nombre = cuadro[i]['name'];
-      final isChecked = cuadro[i]['isChecked'];
-
-      if (isChecked) {
-        print("Nombre: $nombre, Estado: isChecked");
-      } else {
-        print("Nombre: $nombre, Estado: no isChecked");
-      }
-    }
-  }
-
-  void validarImagenes(List<File> imagenes) {
-    for (int i = 0; i < imagenes.length; i++) {
-      print('Ruta de la imagen $i: ${imagenes[i].path}');
-    }
-  }
-
-  void checarImagenes(List<String> images) {
-    for (int i = 0; i < images.length; i++) {
-      print('Ruta de las imagenes obtenidas $i: ${images[i]}');
-    }
-  }
-
   void updateImagenes(List<File?> nuevasImagenes) {
     // Actualiza la lista de imágenes en tu frame principal con las nuevas imágenes
     setState(() {
@@ -175,18 +149,6 @@ class _EditDrugState extends State<EditDrug> {
     });
   }
 
-  void validarImagenesFarmacocinetica(List<File> farmacocinetica) {
-    for (int i = 0; i < farmacocinetica.length; i++) {
-      print('Ruta de la imagen $i: ${farmacocinetica[i].path}');
-    }
-  }
-
-  void checarImagenesBorrar(List<String> imagesdelete) {
-    for (int i = 0; i < imagesdelete.length; i++) {
-      print('Ruta de la imagen borrada $i: ${imagesdelete[i]}');
-    }
-  }
-
   Future<void> _registrarGrupo(String grupoFar) async {
     await fs.addGrupo(grupoFar);
   }
@@ -205,9 +167,6 @@ class _EditDrugState extends State<EditDrug> {
     final efectos = efectosController.text;
     final contraindicaciones = contraController.text;
     final posologia = posologiaController.text;
-    validarImagenes(imagenes.whereType<File>().toList());
-    validarImagenesFarmacocinetica(farmacocinetica.whereType<File>().toList());
-    checarImagenes(images);
 
     if (nombre.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -275,7 +234,6 @@ class _EditDrugState extends State<EditDrug> {
       }
     }
 
-    validarCheck(cuadro);
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -319,7 +277,6 @@ class _EditDrugState extends State<EditDrug> {
       if (imagesdelete.isNotEmpty) {
         for (int i = 0; i < imagesdelete.length; i++) {
           final imageUrls = imagesdelete[i];
-          print("Enlace a borrar: ${imageUrls[i]}");
           await fs.updateMedicationImages(widget.medicamentoId, imageUrls);
           images.remove(imageUrls[i]); // Elimina la URL de images
         }
@@ -340,10 +297,11 @@ class _EditDrugState extends State<EditDrug> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => ListMedicamentos(),
+          builder: (context) => const ListMedicamentos(),
         ),
       );
     } catch (e) {
+      // ignore: avoid_print
       print('Error al actualizar medicamento: $e');
       // Maneja el error según tus necesidades
     }
@@ -537,7 +495,6 @@ class _EditDrugState extends State<EditDrug> {
                                             // Eliminar la imagen de la lista
                                             farmacodelete.add([farmaco[index]]);
                                             farmaco.removeAt(index);
-                                            checarImagenes(farmaco);
                                           });
                                         },
                                         child: Container(
@@ -696,7 +653,6 @@ class _EditDrugState extends State<EditDrug> {
             setState(() {
               cuadro = items;
             });
-            validarCheck(cuadro);
           },
         ),
       ],
@@ -735,7 +691,6 @@ class _EditDrugState extends State<EditDrug> {
               onChanged: (String? value) {
                 setState(() {
                   widget.grupo = value!;
-                  print("selectedSubGrupo: ${widget.grupo}");
                 });
               },
             ),
@@ -853,8 +808,7 @@ class _EditDrugState extends State<EditDrug> {
               onChanged: (String? value) {
                 setState(() {
                   widget.subgrupo = value ?? "";
-                  print(
-                      "selectedSubGrupo: ${widget.subgrupo}"); // Asignar una cadena vacía en lugar de null si se selecciona null
+                  // Asignar una cadena vacía en lugar de null si se selecciona null
                 });
               },
             ),
@@ -969,10 +923,7 @@ class _EditDrugState extends State<EditDrug> {
           ),
         ),
         const SizedBox(height: 10),
-        Container(
-          //margin: const EdgeInsets.symmetric(horizontal: 25.0),
-          child: ImagePickerWidget(updateImagenes: updateImagenes),
-        ),
+        ImagePickerWidget(updateImagenes: updateImagenes),
       ],
     );
   }

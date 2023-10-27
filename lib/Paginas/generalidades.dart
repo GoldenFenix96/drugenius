@@ -907,10 +907,10 @@ class paginaCUADROSBASICOS extends StatelessWidget {
               Container(
                 child: Center(
                   child: Text(
-                    "•	AEMPS. (2022, May 10). Medicamentos\nestratégicos.www.aemps.gob.es. https://www.aemps.gob.es/medicamentos-de-uso-humano/medicamentos-estrategicos/ \n\n" +
-                        "•	IMSS. (2018). Cuadro Básico de Medicamentos. http://www.imss.gob.mx/sites/all/statics/pdf/cuadros-basicos/CBM.pdf\n\n" +
-                        "•	OMS. (2021). EML-Electronic Essential Medicines List. Essentialmeds.org. https://list.essentialmeds.org/\n\n" +
-                        "U. S FOOD AND DRUGS ADMINISTRATION. Medication Guides. Bases de Datos de Medicamentos. Retrieved from https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=medguide.page&utm_campaign=SBIA%3A%20FDA%20Launches%20New%20Medication%20Guide%20Database&utm_medium=email&utm_source=Eloqua ",
+                    "•	AEMPS. (2022, May 10). Medicamentos\nestratégicos.www.aemps.gob.es. https://www.aemps.gob.es/medicamentos-de-uso-humano/medicamentos-estrategicos/ \n\n"
+                    "•	IMSS. (2018). Cuadro Básico de Medicamentos. http://www.imss.gob.mx/sites/all/statics/pdf/cuadros-basicos/CBM.pdf\n\n"
+                    "•	OMS. (2021). EML-Electronic Essential Medicines List. Essentialmeds.org. https://list.essentialmeds.org/\n\n"
+                    "U. S FOOD AND DRUGS ADMINISTRATION. Medication Guides. Bases de Datos de Medicamentos. Retrieved from https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=medguide.page&utm_campaign=SBIA%3A%20FDA%20Launches%20New%20Medication%20Guide%20Database&utm_medium=email&utm_source=Eloqua ",
                     style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.justify,
                   ),

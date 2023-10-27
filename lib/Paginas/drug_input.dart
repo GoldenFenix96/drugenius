@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print
+
 import 'dart:io';
 
 import 'package:drugenius/Componentes/farmaco_picker.dart';
@@ -14,7 +16,7 @@ class DrugInput extends StatefulWidget {
   const DrugInput({Key? key}) : super(key: key);
 
   @override
-  _DrugInputState createState() => _DrugInputState();
+  State<DrugInput> createState() => _DrugInputState();
 }
 
 List<File?> imagenes = [];
@@ -72,49 +74,12 @@ class _DrugInputState extends State<DrugInput> {
     }
   }
 
-  void setSelectedImages(List<File?> selectedImages) {
-    setState(() {
-      imagenes = selectedImages
-          .map((image) => image?.path ?? '')
-          .cast<File>()
-          .toList();
-    });
-  }
-
-  void setSelectedImages2(List<File?> selectedImages2) {
-    setState(() {
-      farmacocinetica = selectedImages2
-          .map((image) => image?.path ?? '')
-          .cast<File>()
-          .toList();
-    });
-  }
-
   List<Map> selectedCuadros = [
     {'name': 'ESTADOS UNIDOS (FDA)', 'isChecked': false},
     {'name': 'ESPAÑA', 'isChecked': false},
     {'name': 'OMS', 'isChecked': false},
     {'name': 'MÉXICO', 'isChecked': true},
   ];
-
-  void validarCheck(List<Map> selectedCuadros) {
-    for (int i = 0; i < selectedCuadros.length; i++) {
-      final nombre = selectedCuadros[i]['name'];
-      final isChecked = selectedCuadros[i]['isChecked'];
-
-      if (isChecked) {
-        print("Nombre: $nombre, Estado: isChecked");
-      } else {
-        print("Nombre: $nombre, Estado: no isChecked");
-      }
-    }
-  }
-
-  void validarImagenes(List<File> imagenes) {
-    for (int i = 0; i < imagenes.length; i++) {
-      print('Ruta de la imagen $i: ${imagenes[i].path}');
-    }
-  }
 
   void updateImagenes(List<File?> nuevasImagenes) {
     // Actualiza la lista de imágenes en tu frame principal con las nuevas imágenes
@@ -128,12 +93,6 @@ class _DrugInputState extends State<DrugInput> {
     setState(() {
       farmacocinetica = nuevasFarmacocinetica;
     });
-  }
-
-  void validarImagenesFarmacocinetica(List<File> farmacocinetica) {
-    for (int i = 0; i < farmacocinetica.length; i++) {
-      print('Ruta de la imagen $i: ${farmacocinetica[i].path}');
-    }
   }
 
   Future<void> _registrarGrupo(String grupoFar) async {
@@ -154,21 +113,6 @@ class _DrugInputState extends State<DrugInput> {
     final efectos = efectosController.text;
     final contraindicaciones = contraController.text;
     final posologia = posologiaController.text;
-    print("Salto de linea para las imagenes de los medicamentos XD");
-    validarImagenes(imagenes.whereType<File>().toList());
-    print("Salto de linea para las farmacocinetica XD");
-    validarImagenesFarmacocinetica(farmacocinetica.whereType<File>().toList());
-
-    print('Nombre: $nombre');
-    print('Otro Nombre: $otroNombre');
-    print('Grupo: $selectedGrupo');
-    print('Sub grupo: $selectedSubGrupo');
-    print('Presentacion: $presentacion');
-    print('Mecanismos de Acción: $mecanismos');
-    print('Uso pedagogico: $uso');
-    print('Efectos Adversos: $efectos');
-    print('Contraindicaciones: $contraindicaciones');
-    print('Posología: $posologia');
 
     if (nombre.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -235,8 +179,6 @@ class _DrugInputState extends State<DrugInput> {
         }
       }
     }
-
-    validarCheck(selectedCuadros);
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -281,7 +223,7 @@ class _DrugInputState extends State<DrugInput> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => ListMedicamentos(),
+            builder: (context) => const ListMedicamentos(),
           ),
         );
       } else {
@@ -473,58 +415,46 @@ class _DrugInputState extends State<DrugInput> {
   }
 
   _farmacocineticaMedicamento() {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 25.0,
-            ),
-            alignment: Alignment.topLeft,
-            child: const Text(
-              "Farmacocinética",
-            ),
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
           ),
-          const SizedBox(height: 10),
-          Container(
-            child: Container(
-              //margin: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: FarmacocineticaPickerWidget(
-                  updateFarmaco: updateImagenesFarmacocinetica),
-            ),
+          alignment: Alignment.topLeft,
+          child: const Text(
+            "Farmacocinética",
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 10),
+        FarmacocineticaPickerWidget(
+            updateFarmaco: updateImagenesFarmacocinetica),
+      ],
     );
   }
 
   _cuadroBasico() {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 25.0,
-            ),
-            alignment: Alignment.topLeft,
-            child: const Text(
-              "Cuadro básico",
-            ),
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 25.0,
           ),
-          const SizedBox(height: 10),
-          Container(
-            child: MyCheckBox(
-              items: selectedCuadros,
-              onCheckBoxChanged: (items) {
-                setState(() {
-                  selectedCuadros = items;
-                });
-                validarCheck(selectedCuadros);
-              },
-            ),
+          alignment: Alignment.topLeft,
+          child: const Text(
+            "Cuadro básico",
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 10),
+        MyCheckBox(
+          items: selectedCuadros,
+          onCheckBoxChanged: (items) {
+            setState(() {
+              selectedCuadros = items;
+            });
+          },
+        ),
+      ],
     );
   }
 
@@ -742,12 +672,7 @@ class _DrugInputState extends State<DrugInput> {
             ),
           ),
           const SizedBox(height: 10),
-          Container(
-            child: Container(
-              //margin: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: ImagePickerWidget(updateImagenes: updateImagenes),
-            ),
-          ),
+          ImagePickerWidget(updateImagenes: updateImagenes),
         ],
       ),
     );

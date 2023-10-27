@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 import 'package:drugenius/Paginas/loggin_page.dart';
 import 'package:flutter/material.dart';
@@ -57,10 +59,6 @@ class _RegisterPageState extends State<RegisterPage> {
           );
         });
 
-    print('Nombre: $nombre');
-    print('Contraseña: $password');
-    print('Email: $email');
-
     try {
       //Navigator.pop(context);
       // Obtén el contexto antes de entrar al bloque try-catch
@@ -85,6 +83,7 @@ class _RegisterPageState extends State<RegisterPage> {
       }
       return true;
     } catch (e) {
+      // ignore: avoid_print
       print('Error al registrar usuario: $e');
       // Maneja el error según tus necesidades
       return false;

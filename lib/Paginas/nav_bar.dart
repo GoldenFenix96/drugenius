@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drugenius/Clases/id_usuarios.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
@@ -188,7 +190,7 @@ void selectedItem(BuildContext context, int index) {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              ListMedicamentos(), // Reemplaza con la pantalla deseada
+              const ListMedicamentos(), // Reemplaza con la pantalla deseada
         ),
       );
       break;
@@ -208,7 +210,7 @@ void selectedItem(BuildContext context, int index) {
         context,
         MaterialPageRoute(
           //builder: (context) => Prueba(), // Reemplaza con la pantalla deseada
-          builder: (context) => BlankPageEvaluaciones(),
+          builder: (context) => const BlankPageEvaluaciones(),
         ),
       );
       break;

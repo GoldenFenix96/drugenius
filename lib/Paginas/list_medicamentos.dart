@@ -7,10 +7,10 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
 
 class ListMedicamentos extends StatefulWidget {
-  ListMedicamentos({super.key});
+  const ListMedicamentos({super.key});
 
   @override
-  _ListMedicamentosState createState() => _ListMedicamentosState();
+  State<ListMedicamentos> createState() => _ListMedicamentosState();
 }
 
 class _ListMedicamentosState extends State<ListMedicamentos> {
@@ -181,6 +181,7 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
       obtenerMedicamentos();
     }).catchError((error) {
       // Maneja el caso en el que la eliminación falló.
+      // ignore: avoid_print
       print("Error al borrar el medicamento: $error");
     });
   }

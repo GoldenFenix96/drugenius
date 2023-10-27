@@ -4,11 +4,12 @@ class MyCheckBox extends StatefulWidget {
   final List<Map> items;
   final Function(List<Map>) onCheckBoxChanged;
 
-  MyCheckBox({required this.items, required this.onCheckBoxChanged, Key? key})
+  const MyCheckBox(
+      {required this.items, required this.onCheckBoxChanged, Key? key})
       : super(key: key);
 
   @override
-  _MyCheckBoxState createState() => _MyCheckBoxState();
+  State<MyCheckBox> createState() => _MyCheckBoxState();
 }
 
 class _MyCheckBoxState extends State<MyCheckBox> {
