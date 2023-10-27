@@ -54,7 +54,7 @@ class _AudioPickerWidgetState2 extends State<AudioPickerWidget2> {
             SizedBox(
               // Set a maximum height for the ListView
               height:
-                  size.height * 0.3, // Use 30% of screen height as an example
+                  size.height * 0.1, // Use 30% of screen height as an example
               child: ListView.builder(
                 itemCount: _selectedAudio.length,
                 itemBuilder: (context, index) => ListTile(
