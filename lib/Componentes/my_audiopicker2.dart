@@ -51,18 +51,22 @@ class _AudioPickerWidgetState2 extends State<AudioPickerWidget2> {
           if (_selectedAudio.isEmpty)
             const Text("No has seleccionado algun audio"),
           if (_selectedAudio.isNotEmpty)
-            ListView.builder(
-              itemCount: _selectedAudio.length,
-              itemBuilder: (context, index) => ListTile(
-                title: Text(_selectedAudio[index]!
-                    .path
-                    .split('/')
-                    .last), // Display audio filename
-                // Add an icon or a widget to play the audio
-                trailing: const Icon(Icons.play_arrow),
-                onTap: () {
-                  _playAudio(_selectedAudio[index]);
-                },
+          Container(
+              // Set a maximum height for the ListView
+              height: size.height * 0.3, // Use 30% of screen height as an example
+              child: ListView.builder(
+                itemCount: _selectedAudio.length,
+                itemBuilder: (context, index) => ListTile(
+                  title: Text(_selectedAudio[index]!
+                      .path
+                      .split('/')
+                      .last), // Display audio filename
+                  // Add an icon or a widget to play the audio
+                  trailing: const Icon(Icons.play_arrow),
+                  onTap: () {
+                    _playAudio(_selectedAudio[index]);
+                  },
+                ),
               ),
             ),
           const SizedBox(height: 15.0),
@@ -97,3 +101,20 @@ class _AudioPickerWidgetState2 extends State<AudioPickerWidget2> {
     );
   }
 }
+
+/*
+ListView.builder(
+              itemCount: _selectedAudio.length,
+              itemBuilder: (context, index) => ListTile(
+                title: Text(_selectedAudio[index]!
+                    .path
+                    .split('/')
+                    .last), // Display audio filename
+                // Add an icon or a widget to play the audio
+                trailing: const Icon(Icons.play_arrow),
+                onTap: () {
+                  _playAudio(_selectedAudio[index]);
+                },
+              ),
+            ),
+*/
