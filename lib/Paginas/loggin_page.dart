@@ -2,12 +2,12 @@
 
 import 'package:drugenius/Clases/id_usuarios.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
+import 'package:drugenius/Paginas/drugenius_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Paginas/register_page.dart';
 import 'package:drugenius/Paginas/recover_password.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
-import 'package:drugenius/main.dart';
 
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();

@@ -1,4 +1,4 @@
-import 'package:drugenius/main.dart';
+import 'package:drugenius/Paginas/drugenius_menu.dart';
 import 'package:flutter/material.dart';
 
 class BlankPageForo extends StatelessWidget {

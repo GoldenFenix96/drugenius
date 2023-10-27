@@ -7,11 +7,11 @@ import 'package:drugenius/Paginas/blank_page_calculadora.dart';
 import 'package:drugenius/Paginas/blank_page_evaluaciones.dart';
 import 'package:drugenius/Paginas/blank_page_foro.dart';
 import 'package:drugenius/Paginas/blank_page_games.dart';
+import 'package:drugenius/Paginas/drugenius_menu.dart';
 import 'package:drugenius/Paginas/generalidades.dart';
 import 'package:drugenius/Paginas/list_medicamentos.dart';
 import 'package:drugenius/Paginas/perfil.dart';
 import 'package:drugenius/Paginas/video_audio.dart';
-import 'package:drugenius/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

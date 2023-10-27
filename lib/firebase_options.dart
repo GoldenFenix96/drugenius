@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,16 +49,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyA5PmkOqC7a8iwJmh3p6IzLeISRWgQPMbI',
-    appId: '1:767810510644:web:e1e4aac9162a5d78250f61',
-    messagingSenderId: '767810510644',
-    projectId: 'drugenius-44d32',
-    authDomain: 'drugenius-44d32.firebaseapp.com',
-    storageBucket: 'drugenius-44d32.appspot.com',
-    measurementId: 'G-1JNJF32FEB',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDjwq_QjjSt0jgLGfzqPWHNwv-oE3uzFXQ',
     appId: '1:767810510644:android:f8d8cc159f8d5e57250f61',
@@ -68,14 +64,5 @@ class DefaultFirebaseOptions {
     projectId: 'drugenius-44d32',
     storageBucket: 'drugenius-44d32.appspot.com',
     iosBundleId: 'com.example.drugenius',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAs9pJ45XFjB0VllrXUX8_EIiOM-GejQKU',
-    appId: '1:767810510644:ios:a93ae5f9410bdfe6250f61',
-    messagingSenderId: '767810510644',
-    projectId: 'drugenius-44d32',
-    storageBucket: 'drugenius-44d32.appspot.com',
-    iosBundleId: 'com.example.drugenius.RunnerTests',
   );
 }
