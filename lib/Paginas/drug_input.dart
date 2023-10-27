@@ -11,6 +11,7 @@ import 'package:drugenius/Componentes/my_imagepicker.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
 import 'package:drugenius/Componentes/my_formfield_general.dart';
 import 'package:drugenius/Componentes/my_dropdown_general.dart';
+import 'package:page_transition/page_transition.dart';
 
 class DrugInput extends StatefulWidget {
   const DrugInput({Key? key}) : super(key: key);
@@ -221,11 +222,10 @@ class _DrugInputState extends State<DrugInput> {
         // Continúa con cualquier otra lógica o navegación necesaria
         Navigator.pop(context);
         Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const ListMedicamentos(),
-          ),
-        );
+            context,
+            PageTransition(
+                child: const ListMedicamentos(),
+                type: PageTransitionType.rightToLeft));
       } else {
         // Registro fallido, muestra un mensaje de error
         ScaffoldMessenger.of(currentContext).showSnackBar(

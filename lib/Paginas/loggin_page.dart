@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:drugenius/Paginas/register_page.dart';
 import 'package:drugenius/Paginas/recover_password.dart';
 import 'package:drugenius/Componentes/my_textfield_general.dart';
+import 'package:page_transition/page_transition.dart';
 
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
@@ -268,13 +269,12 @@ class LogginPage extends StatelessWidget {
     if (user != null) {
       Navigator.pop(context);
       UserStateManager().userId = user.uid; // Guarda el ID del usuario
-      Navigator.pushReplacement<void, void>(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => const DrugeniusMenu(),
-        ),
-      );
-      //Navigator.popUntil(context, ModalRoute.withName('/DrugeniusMenu'));
+      Navigator.push(
+          context,
+          PageTransition(
+              child: const DrugeniusMenu(),
+              type: PageTransitionType.size,
+              alignment: Alignment.center));
     } else {
       Navigator.pop(context);
       showDialog(

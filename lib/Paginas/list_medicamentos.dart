@@ -5,6 +5,7 @@ import 'package:drugenius/Paginas/medicamentos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ListMedicamentos extends StatefulWidget {
   const ListMedicamentos({super.key});
@@ -59,12 +60,12 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
               icon: const Icon(Icons.add),
               onPressed: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const DrugInput(), // Reemplaza con la pantalla deseada
-                  ),
-                );
+                    context,
+                    PageTransition(
+                        child: const DrugInput(),
+                        type: PageTransitionType.fade,
+                        duration: const Duration(seconds: 1),
+                        reverseDuration: const Duration(seconds: 1)));
               },
             ),
             IconButton(
@@ -167,15 +168,16 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
 
   void _editarMedicamento(String id, grupo, subgrupo) {
     Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => EditDrug(
-          medicamentoId: id,
-          grupo: grupo,
-          subgrupo: subgrupo,
-        ),
-      ),
-    );
+        context,
+        PageTransition(
+            child: EditDrug(
+              medicamentoId: id,
+              grupo: grupo,
+              subgrupo: subgrupo,
+            ),
+            type: PageTransitionType.fade,
+            duration: const Duration(seconds: 1),
+            reverseDuration: const Duration(seconds: 1)));
   }
 
   void _borrarMedicamento(String medicamentoId) async {
