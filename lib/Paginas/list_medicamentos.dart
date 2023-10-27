@@ -33,12 +33,15 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
   }
 
   void _verDetallesMedicamento(String id) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Medicamentos(medicamentoId: id),
-      ),
-    );
+    Navigator.of(context).push(PageRouteBuilder(
+        transitionDuration: const Duration(seconds: 1),
+        reverseTransitionDuration: const Duration(seconds: 1),
+        pageBuilder: (context, animation, _) {
+          return FadeTransition(
+            opacity: animation,
+            child: Medicamentos(medicamentoId: id),
+          );
+        }));
   }
 
   @override

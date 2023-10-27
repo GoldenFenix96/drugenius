@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   card_swiper : ^3.0.0
+  page_transition: "^2.1.0"
   carousel_slider: ^4.2.1
   google_fonts: ^6.1.0
   image_picker: ^0.8.6

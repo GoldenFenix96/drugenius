@@ -61,235 +61,235 @@ class _MedicamentosState extends State<Medicamentos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Datos del medicamento",
-            style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-            textAlign: TextAlign.center),
-        backgroundColor: const Color.fromARGB(255, 22, 112, 177),
-        foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(25.0, 20.0, 25.0, 20.0),
-        children: <Widget>[
-          Visibility(
-            visible: images.isNotEmpty,
-            child: Center(
-              child: swiperBoxImagenes(),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Center(
-              child: SizedBox(
-            child: Text(nombre,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30.0,
-                    color: Colors.black)),
-          )),
-          const SizedBox(height: 20),
-          ExpansionTile(
-            title: const SizedBox(
-              child: Text(
-                'Otros Nombres',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+        appBar: AppBar(
+          title: const Text("Datos del medicamento",
+              style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+              textAlign: TextAlign.center),
+          backgroundColor: const Color.fromARGB(255, 22, 112, 177),
+          foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+        ),
+        body: ListView(
+          padding: const EdgeInsets.fromLTRB(25.0, 20.0, 25.0, 20.0),
+          children: <Widget>[
+            Visibility(
+              visible: images.isNotEmpty,
+              child: Center(
+                child: swiperBoxImagenes(),
               ),
             ),
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  otro,
-                  style: const TextStyle(fontSize: 14.0),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          ExpansionTile(
-            title: const SizedBox(
-              child: Text(
-                'Grupo',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-            ),
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  grupo,
-                  style: const TextStyle(fontSize: 14.0),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          ExpansionTile(
-            title: const SizedBox(
-              child: Text(
-                'Sub grupo',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-            ),
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  subgrupo,
-                  style: const TextStyle(fontSize: 14.0),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          ExpansionTile(
-            title: const SizedBox(
-              child: Text(
-                'Presentación del fármaco',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-            ),
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  presentacion,
-                  style: const TextStyle(fontSize: 14.0),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          ExpansionTile(
-            title: const SizedBox(
-              child: Text(
-                'Mecanismo de acción',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-            ),
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  mecanismos,
-                  style: const TextStyle(fontSize: 14.0),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          ExpansionTile(
-            title: const SizedBox(
-              child: Text(
-                'Uso terapéutico',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-            ),
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  usoTera,
-                  style: const TextStyle(fontSize: 14.0),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          ExpansionTile(
-            title: const SizedBox(
-              child: Text(
-                'Efectos adversos',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-            ),
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  efectos,
-                  style: const TextStyle(fontSize: 14.0),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          ExpansionTile(
-            title: const SizedBox(
-              child: Text(
-                'Contraindicaciones',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-            ),
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  contra,
-                  style: const TextStyle(fontSize: 14.0),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          ExpansionTile(
-            title: const SizedBox(
-              child: Text(
-                'Posología',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-            ),
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  posologia,
-                  style: const TextStyle(fontSize: 14.0),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          ExpansionTile(
-            title: const SizedBox(
-              child: Text(
-                'Cuadro básico',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-              ),
-            ),
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  cuadro
-                      .where((element) => element['isChecked'] == true)
-                      .map((element) => element['name'])
-                      .join(', '),
-                  style: const TextStyle(fontSize: 14.0),
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Visibility(
-            visible: farmacocinetica
-                .isNotEmpty, // Condición: muestra si farmacocinetica no está vacío
-            child: ExpansionTile(
+            const SizedBox(height: 20),
+            Center(
+                child: SizedBox(
+              child: Text(nombre,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30.0,
+                      color: Colors.black)),
+            )),
+            const SizedBox(height: 20),
+            ExpansionTile(
               title: const SizedBox(
                 child: Text(
-                  'Farmacocinética',
+                  'Otros Nombres',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
                 ),
               ),
               children: <Widget>[
-                Center(
-                  child: swiperBoxFarmaco(),
+                ListTile(
+                  title: Text(
+                    otro,
+                    style: const TextStyle(fontSize: 14.0),
+                    textAlign: TextAlign.justify,
+                  ),
                 ),
               ],
             ),
-          )
-        ],
-      ),
-    );
+            const SizedBox(height: 10),
+            ExpansionTile(
+              title: const SizedBox(
+                child: Text(
+                  'Grupo',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                ),
+              ),
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    grupo,
+                    style: const TextStyle(fontSize: 14.0),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ExpansionTile(
+              title: const SizedBox(
+                child: Text(
+                  'Sub grupo',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                ),
+              ),
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    subgrupo,
+                    style: const TextStyle(fontSize: 14.0),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ExpansionTile(
+              title: const SizedBox(
+                child: Text(
+                  'Presentación del fármaco',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                ),
+              ),
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    presentacion,
+                    style: const TextStyle(fontSize: 14.0),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ExpansionTile(
+              title: const SizedBox(
+                child: Text(
+                  'Mecanismo de acción',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                ),
+              ),
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    mecanismos,
+                    style: const TextStyle(fontSize: 14.0),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ExpansionTile(
+              title: const SizedBox(
+                child: Text(
+                  'Uso terapéutico',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                ),
+              ),
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    usoTera,
+                    style: const TextStyle(fontSize: 14.0),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ExpansionTile(
+              title: const SizedBox(
+                child: Text(
+                  'Efectos adversos',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                ),
+              ),
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    efectos,
+                    style: const TextStyle(fontSize: 14.0),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ExpansionTile(
+              title: const SizedBox(
+                child: Text(
+                  'Contraindicaciones',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                ),
+              ),
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    contra,
+                    style: const TextStyle(fontSize: 14.0),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ExpansionTile(
+              title: const SizedBox(
+                child: Text(
+                  'Posología',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                ),
+              ),
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    posologia,
+                    style: const TextStyle(fontSize: 14.0),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ExpansionTile(
+              title: const SizedBox(
+                child: Text(
+                  'Cuadro básico',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                ),
+              ),
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    cuadro
+                        .where((element) => element['isChecked'] == true)
+                        .map((element) => element['name'])
+                        .join(', '),
+                    style: const TextStyle(fontSize: 14.0),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Visibility(
+              visible: farmacocinetica
+                  .isNotEmpty, // Condición: muestra si farmacocinetica no está vacío
+              child: ExpansionTile(
+                title: const SizedBox(
+                  child: Text(
+                    'Farmacocinética',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                  ),
+                ),
+                children: <Widget>[
+                  Center(
+                    child: swiperBoxFarmaco(),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ));
   }
 }
 
