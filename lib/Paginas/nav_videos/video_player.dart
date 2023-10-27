@@ -1,5 +1,6 @@
 import 'package:drugenius/Paginas/nav_videos/videos.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
@@ -58,8 +59,11 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
               dispose();
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Videos()));
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: const Videos(),
+                      type: PageTransitionType.leftToRight));
             },
           ),
         ),

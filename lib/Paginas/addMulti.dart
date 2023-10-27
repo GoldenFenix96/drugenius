@@ -4,6 +4,7 @@ import 'package:drugenius/Paginas/audio_input.dart';
 import 'package:drugenius/Paginas/video_audio.dart';
 import 'package:drugenius/Paginas/video_input.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class AddMulti extends StatefulWidget {
   const AddMulti({super.key});
@@ -35,8 +36,11 @@ class _AddMultiState extends State<AddMulti> {
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             dispose();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const VideoAudio()));
+            Navigator.push(
+                context,
+                PageTransition(
+                    child: const VideoAudio(),
+                    type: PageTransitionType.leftToRight));
           },
         ),
       ),
@@ -50,8 +54,9 @@ class _AddMultiState extends State<AddMulti> {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const VideoInput()));
+                    PageTransition(
+                        child: const VideoInput(),
+                        type: PageTransitionType.rightToLeft));
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -78,8 +83,9 @@ class _AddMultiState extends State<AddMulti> {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const AudioInput()));
+                    PageTransition(
+                        child: const AudioInput(),
+                        type: PageTransitionType.rightToLeft));
               },
               child: Container(
                 decoration: BoxDecoration(

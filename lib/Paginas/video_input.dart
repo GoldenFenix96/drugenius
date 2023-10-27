@@ -8,6 +8,7 @@ import 'package:drugenius/Componentes/my_videopicker.dart';
 import 'package:drugenius/Paginas/nav_videos/videos.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
+import 'package:page_transition/page_transition.dart';
 
 class VideoInput extends StatefulWidget {
   const VideoInput({super.key});
@@ -126,11 +127,9 @@ class _VideoInputState extends State<VideoInput> {
         );
 
         Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Videos(),
-          ),
-        );
+            context,
+            PageTransition(
+                child: const Videos(), type: PageTransitionType.rightToLeft));
       } else {
         // Registro fallido, muestra un mensaje de error
         ScaffoldMessenger.of(currentContext).showSnackBar(

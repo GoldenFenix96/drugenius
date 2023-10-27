@@ -3,6 +3,7 @@ import 'package:drugenius/Paginas/nav_videos/video_player.dart';
 import 'package:drugenius/Paginas/video_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Videos extends StatefulWidget {
   const Videos({super.key});
@@ -41,8 +42,11 @@ class _VideosState extends State<Videos> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const VideoAudio()));
+            Navigator.push(
+                context,
+                PageTransition(
+                    child: const VideoAudio(),
+                    type: PageTransitionType.leftToRight));
           },
         ),
       ),
@@ -105,12 +109,11 @@ class _VideosState extends State<Videos> {
                         ),
                         onTap: () {
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  VideoPlayerWidget(videoUrls: videoUrls),
-                            ),
-                          );
+                              context,
+                              PageTransition(
+                                  child:
+                                      VideoPlayerWidget(videoUrls: videoUrls),
+                                  type: PageTransitionType.rightToLeft));
                         },
                       ),
                     ),

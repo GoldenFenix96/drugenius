@@ -4,6 +4,7 @@ import 'package:drugenius/Paginas/nav_audios/audioManager3.dart';
 import 'package:drugenius/Paginas/nav_audios/audioManager4.dart';
 import 'package:drugenius/Paginas/video_audio.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Audios extends StatefulWidget {
   const Audios({super.key});
@@ -34,8 +35,11 @@ class _VideosState extends State<Audios> {
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             dispose();
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const VideoAudio()));
+            Navigator.push(
+                context,
+                PageTransition(
+                    child: const VideoAudio(),
+                    type: PageTransitionType.leftToRight));
           },
         ),
       ),
@@ -47,8 +51,9 @@ class _VideosState extends State<Audios> {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const AudioManager()));
+                    PageTransition(
+                        child: const AudioManager(),
+                        type: PageTransitionType.rightToLeft));
               },
               child: Container(
                 height: 50,
@@ -88,8 +93,9 @@ class _VideosState extends State<Audios> {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const AudioManager2()));
+                    PageTransition(
+                        child: const AudioManager2(),
+                        type: PageTransitionType.rightToLeft));
               },
               child: Container(
                 height: 50,
@@ -129,8 +135,9 @@ class _VideosState extends State<Audios> {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const AudioManager3()));
+                    PageTransition(
+                        child: const AudioManager3(),
+                        type: PageTransitionType.rightToLeft));
               },
               child: Container(
                 height: 50,
@@ -170,8 +177,9 @@ class _VideosState extends State<Audios> {
               onTap: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const AudioManager4()));
+                    PageTransition(
+                        child: const AudioManager4(),
+                        type: PageTransitionType.rightToLeft));
               },
               child: Container(
                 height: 50,

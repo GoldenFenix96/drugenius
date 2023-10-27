@@ -4,6 +4,7 @@ import 'package:drugenius/Paginas/addMulti.dart';
 import 'package:drugenius/Paginas/nav_audios/audios.dart';
 import 'package:drugenius/Paginas/nav_videos/videos.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class VideoAudio extends StatefulWidget {
   const VideoAudio({super.key});
@@ -41,8 +42,11 @@ class _VideoAudioState extends State<VideoAudio> {
           children: [
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Videos()));
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: const Videos(),
+                        type: PageTransitionType.rightToLeft));
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -67,8 +71,11 @@ class _VideoAudioState extends State<VideoAudio> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Audios()));
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: const Audios(),
+                        type: PageTransitionType.rightToLeft));
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -93,8 +100,11 @@ class _VideoAudioState extends State<VideoAudio> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const AddMulti()));
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: const AddMulti(),
+                        type: PageTransitionType.rightToLeft));
               },
               child: Container(
                 decoration: BoxDecoration(

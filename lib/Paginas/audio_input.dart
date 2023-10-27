@@ -7,6 +7,7 @@ import 'package:drugenius/Componentes/my_textfield_general.dart';
 import 'package:drugenius/Paginas/addMulti.dart';
 import 'package:flutter/material.dart';
 import 'package:drugenius/Firebase_Services/firebase_services.dart';
+import 'package:page_transition/page_transition.dart';
 
 class AudioInput extends StatefulWidget {
   const AudioInput({super.key});
@@ -98,11 +99,9 @@ class _AudioInputState extends State<AudioInput> {
         );
 
         Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const AddMulti(),
-          ),
-        );
+            context,
+            PageTransition(
+                child: const AddMulti(), type: PageTransitionType.leftToRight));
       } else {
         // Registro fallido, muestra un mensaje de error
         ScaffoldMessenger.of(currentContext).showSnackBar(
@@ -139,6 +138,18 @@ class _AudioInputState extends State<AudioInput> {
         ),
         backgroundColor: const Color.fromARGB(255, 22, 112, 177),
         elevation: 0,
+        actions: const <Widget>[],
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            dispose();
+            Navigator.push(
+                context,
+                PageTransition(
+                    child: const AddMulti(),
+                    type: PageTransitionType.leftToRight));
+          },
+        ),
       ),
       body: Container(
         //FONDO
