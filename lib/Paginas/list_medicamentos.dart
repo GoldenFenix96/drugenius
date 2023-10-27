@@ -32,6 +32,15 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
     }
   }
 
+  void _verDetallesMedicamento(String id) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Medicamentos(medicamentoId: id),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +71,10 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
                 // Aquí puedes implementar la lógica para manejar la búsqueda.
                 showSearch(
                   context: context,
-                  delegate: CustomSearchDelegate(),
+                  delegate: CustomSearchDelegate(
+                    medicamentos,
+                    _verDetallesMedicamento,
+                  ),
                 );
               },
             ),
@@ -136,13 +148,7 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
                             ),
                           ),
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    Medicamentos(medicamentoId: id),
-                              ),
-                            );
+                            _verDetallesMedicamento(id);
                           },
                         ),
                       ),
@@ -180,15 +186,11 @@ class _ListMedicamentosState extends State<ListMedicamentos> {
   }
 }
 
-void doNothing(BuildContext context) {}
-
 class CustomSearchDelegate extends SearchDelegate {
-  List<String> searchTerms = [
-    "Paracetamol",
-    "Omeprazol",
-    "Diclofenaco",
-    "Senosidos"
-  ];
+  final List<Map<String, dynamic>> medicamentos;
+  final Function(String) onMedicamentoSelected;
+
+  CustomSearchDelegate(this.medicamentos, this.onMedicamentoSelected);
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -214,18 +216,21 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var med in searchTerms) {
-      if (med.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(med);
-      }
-    }
+    final searchResults = medicamentos.where((medicamento) {
+      final nombre = medicamento['nombre'].toLowerCase();
+      return nombre.contains(query.toLowerCase());
+    }).toList();
+
     return ListView.builder(
-      itemCount: matchQuery.length,
+      itemCount: searchResults.length,
       itemBuilder: (context, index) {
-        var result = matchQuery[index];
+        final result = searchResults[index];
+        final id = result['id'];
         return ListTile(
-          title: Text(result),
+          title: Text(result['nombre']),
+          onTap: () {
+            onMedicamentoSelected(id);
+          },
         );
       },
     );
@@ -233,19 +238,23 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var med in searchTerms) {
-      if (med.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(med);
-      }
-    }
+    final searchResults = medicamentos.where((medicamento) {
+      final nombre = medicamento['nombre'].toLowerCase();
+      return nombre.contains(query.toLowerCase());
+    }).toList();
+
     return ListView.builder(
-        itemCount: matchQuery.length,
-        itemBuilder: (context, index) {
-          var result = matchQuery[index];
-          return ListTile(
-            title: Text(result),
-          );
-        });
+      itemCount: searchResults.length,
+      itemBuilder: (context, index) {
+        final result = searchResults[index];
+        final id = result['id'];
+        return ListTile(
+          title: Text(result['nombre']),
+          onTap: () {
+            onMedicamentoSelected(id);
+          },
+        );
+      },
+    );
   }
 }

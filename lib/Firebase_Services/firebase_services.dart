@@ -518,11 +518,11 @@ class Firebase_services {
       final imageUrl = await storageTaskSnapshot.ref.getDownloadURL();
 
       // Almacenar la URL de la imagen en Firestore
-      final cuadroBasicoCollection = FirebaseFirestore.instance
+      final imageCollection = FirebaseFirestore.instance
           .collection('Videos')
           .doc(documentId)
           .collection('Miniaturas'); // Cambia 'Imagenes' al nombre que desees
-      await cuadroBasicoCollection.add({
+      await imageCollection.add({
         'imageUrl': imageUrl,
       });
     } catch (e) {
@@ -559,14 +559,13 @@ class Firebase_services {
         });
       });
       // 2. Eliminar los videos y miniaturas del de Storage
-      final storageReference =
-          FirebaseStorage.instance.ref().child(videoId);
+      final storageReference = FirebaseStorage.instance.ref().child(videoId);
       await storageReference.delete();
     } catch (e) {
       print("Ha ocurrido un error al eliminar el video: $e");
     }
   }
-  
+
   //Agregar titulo del podcast
   Future<String?> addTAudio(
     String nombre,
@@ -619,10 +618,8 @@ class Firebase_services {
       final videos = await Future.wait(videosQuery.docs.map((videoDoc) async {
         final nombre = videoDoc['Nombre'];
         final videoUrls = <String>[];
-        final imagenSnapshot = await videoDoc.reference
-            .collection('Miniaturas')
-            .limit(1)
-            .get();
+        final imagenSnapshot =
+            await videoDoc.reference.collection('Miniaturas').limit(1).get();
         String imagenUrl = ''; // URL de la imagen
         if (imagenSnapshot.docs.isNotEmpty) {
           imagenUrl = imagenSnapshot.docs[0].get('imageUrl');

@@ -55,69 +55,68 @@ class _VideosState extends State<Videos> {
           final id = video['id'];
           final nombre = video['nombre'];
           final videoUrls = video['videoUrls'];
-          
+          final imagen = video['imagenUrl'];
 
           return Column(
             children: [
-             ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: Slidable(
-                    key: Key(id), // Usa el ID del medicamento como clave
-                    endActionPane: ActionPane(
-                      motion: const ScrollMotion(),
-                      children: [
-                        SlidableAction(
-                          onPressed: (context) {
-                            _borrarVideo(id);
-                          },
-                          backgroundColor: const Color(0xFFFE4A49),
-                          foregroundColor: Colors.white,
-                          icon: Icons.delete,
-                          label: 'Borrar',
-                        ),
-                      ],
-                    ),
-                    child: Container(
-                      height: 70,
-                      decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 237, 237, 237),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Slidable(
+                  key: Key(id), // Usa el ID del medicamento como clave
+                  endActionPane: ActionPane(
+                    motion: const ScrollMotion(),
+                    children: [
+                      SlidableAction(
+                        onPressed: (context) {
+                          _borrarVideo(id);
+                        },
+                        backgroundColor: const Color(0xFFFE4A49),
+                        foregroundColor: Colors.white,
+                        icon: Icons.delete,
+                        label: 'Borrar',
                       ),
-                      child: Center(
-                        child: ListTile(
-                          leading: video['imagenUrl'] != null &&
-                                  video['imagenUrl'].isNotEmpty
-                              ? SizedBox(
-                                  width: 60,
-                                  height: 50,
-                                  child: Image.network(
-                                    video['imagenUrl'],
-                                    fit: BoxFit.cover,
-                                  ),
-                                )
-                              : const SizedBox
-                                  .shrink(), // No muestra nada si no hay imagen
-                          title: Text(
-                            nombre, // Mostrar el nombre del medicamento
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0,
-                              color: Colors.black,
-                            ),
+                    ],
+                  ),
+                  child: Container(
+                    height: 70,
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 237, 237, 237),
+                    ),
+                    child: Center(
+                      child: ListTile(
+                        leading: imagen != null && imagen.isNotEmpty
+                            ? SizedBox(
+                                width: 60,
+                                height: 50,
+                                child: Image.network(
+                                  imagen,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : const SizedBox
+                                .shrink(), // No muestra nada si no hay imagen
+                        title: Text(
+                          nombre, // Mostrar el nombre del medicamento
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                            color: Colors.black,
                           ),
-                          onTap: () {
-                        Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              VideoPlayerWidget(videoUrls: videoUrls),
-                            ),
-                           );
-                          },
                         ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  VideoPlayerWidget(videoUrls: videoUrls),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
                 ),
+              ),
               const SizedBox(height: 20.0),
             ],
           );
@@ -126,7 +125,7 @@ class _VideosState extends State<Videos> {
     );
   }
 
-    void _borrarVideo(String videoId) async {
+  void _borrarVideo(String videoId) async {
     await fs.deleteVideo(videoId).then((_) {
       // Actualiza la lista de videos después de borrar.
       obtenerVideos();
