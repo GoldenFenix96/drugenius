@@ -20,7 +20,7 @@ TextEditingController _nombreController = TextEditingController();
 TextEditingController _contrasenaController = TextEditingController();
 TextEditingController _contrasenaControllerActual = TextEditingController();
 
-String? userId = FirebaseAuth.instance.currentUser?.uid;
+String? userId = UserStateManager().userId;
 
 class _Perfil extends State<Perfil> {
   Firebase_services fs = Firebase_services();
@@ -33,6 +33,10 @@ class _Perfil extends State<Perfil> {
   void initState() {
     super.initState();
     cargarDatosUsuario();
+    _correoController.clear();
+    _nombreController.clear();
+    _contrasenaController.clear();
+    _contrasenaControllerActual;
   }
 
   Future<void> cargarDatosUsuario() async {
@@ -283,7 +287,7 @@ class _Perfil extends State<Perfil> {
                                             builder: (BuildContext context) =>
                                                 AlertDialog(
                                                     title: const Text(
-                                                        '¿Desea actaualizar sus datos?'),
+                                                        '¿Desea actualizar sus datos?'),
                                                     content: const Text(
                                                         'Sus datos actuales se modificarán.'),
                                                     actions: <Widget>[
